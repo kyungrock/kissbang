@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="./" />
+    <title>출장마사지 - 마사지가가 | 전국 출장마사지 업체 예약 플랫폼</title>
+
+    <!-- SEO 메타 태그 -->
+    <meta
+      name="description"
+      content="출장마사지 - 마사지가가에서 전국 출장마사지 업체를 한눈에! 아로마출장마사지, 타이출장마사지, 스웨디시출장마사지, 1인샵출장마사지, 왁싱출장마사지까지. 지역별 최저가 출장마사지 업체를 찾아보세요."
+    />
+    <meta
+      name="keywords"
+      content="출장마사지, 아로마출장마사지, 타이출장마사지, 스웨디시출장마사지, 1인샵출장마사지, 왁싱출장마사지, 출장마사지예약, 마사지가가, 최저가출장마사지, 서울출장마사지, 부산출장마사지, 제주출장마사지"
+    />
+    <meta name="author" content="마사지가가" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph 메타 태그 -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="출장마사지 - 마사지가가 | 전국 출장마사지 업체 예약 플랫폼"
+    />
+    <meta
+      property="og:description"
+      content="출장마사지 - 마사지가가에서 전국 출장마사지 업체를 한눈에! 아로마출장마사지, 타이출장마사지, 스웨디시출장마사지, 1인샵출장마사지, 왁싱출장마사지까지. 지역별 최저가 출장마사지 업체를 찾아보세요."
+    />
+    <meta property="og:url" content="https://yourdomain.com/outcall.html" />
+    <meta property="og:site_name" content="마사지가가" />
+
+    <!-- Twitter 메타 태그 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="출장마사지 - 마사지가가 | 전국 출장마사지 업체 예약 플랫폼"
+    />
+    <meta
+      name="twitter:description"
+      content="출장마사지 - 마사지가가에서 전국 출장마사지 업체를 한눈에! 아로마출장마사지, 타이출장마사지, 스웨디시출장마사지, 1인샵출장마사지, 왁싱출장마사지까지. 지역별 최저가 출장마사지 업체를 찾아보세요."
+    />
+
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- 폰트 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <!-- 스타일시트 -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- JSON-LD 구조화 데이터 -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "마사지가가",
+        "description": "출장마사지 - 전국 출장마사지 업체 예약 플랫폼",
+        "url": "https://yourdomain.com/outcall.html",
+        "telephone": "+82-10-0000-0000",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "KR"
+        },
+        "serviceArea": {
+          "@type": "Country",
+          "name": "대한민국"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "출장마사지 서비스",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "아로마출장마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "타이출장마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "스웨디시출장마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "1인샵출장마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "왁싱출장마사지"
+              }
+            }
+          ]
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- 헤더 -->
+    <header class="header">
+      <div class="header-content">
+        <div
+          class="logo"
+          onclick="window.location.href='index.html'"
+          style="cursor: pointer"
+        >
+          <i class="fas fa-spa"></i>
+          마사지가가
+        </div>
+        <div class="search-toggle" id="searchToggle">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- 검색 섹션 -->
+    <section class="search-section">
+      <div class="search-container">
+        <!-- 통합 검색창 -->
+        <div class="search-box main-search">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            id="mainSearchInput"
+            class="search-input"
+            placeholder="지역, 지하철역, 업체명으로 검색하세요"
+          />
+          <button id="mainSearchBtn" class="search-btn-small">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+
+        <!-- 지역별 검색 -->
+        <div class="location-search">
+          <div class="search-box">
+            <i class="fas fa-map-marker-alt"></i>
+            <select id="regionSelect" class="search-select">
+              <option value="">지역을 선택하세요</option>
+            </select>
+          </div>
+          <div class="search-box">
+            <i class="fas fa-building"></i>
+            <select id="districtSelect" class="search-select">
+              <option value="">구를 선택하세요</option>
+            </select>
+          </div>
+          <div class="search-divider"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 필터 섹션 -->
+    <section class="filter-section">
+      <div class="filter-container">
+        <button class="filter-btn" data-filter="all">전체</button>
+        <button class="filter-btn" data-filter="massage">마사지</button>
+        <button class="filter-btn" data-filter="outcall">출장마사지</button>
+        <div class="type-filter-dropdown">
+          <button class="filter-btn type-filter-btn" id="typeFilterBtn">
+            테마보기
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="type-dropdown-menu" id="typeDropdownMenu">
+            <div class="type-dropdown-item" data-type="swedish">스웨디시</div>
+            <div class="type-dropdown-item" data-type="thai">타이마사지</div>
+            <div class="type-dropdown-item" data-type="aroma">아로마마사지</div>
+            <div class="type-dropdown-item" data-type="waxing">왁싱</div>
+            <div class="type-dropdown-item" data-type="chinese">중국마사지</div>
+            <div class="type-dropdown-item" data-type="foot">발마사지</div>
+          </div>
+        </div>
+        <button class="info-btn" onclick="openRelatedInfoModal(event)">
+          관련정보
+        </button>
+      </div>
+    </section>
+
+    <!-- 국가별 마사지 필터 -->
+    <section
+      class="country-filter-section"
+      id="massageCountryFilterSection"
+      style="display: none"
+    >
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 국가별 출장마사지 필터 -->
+    <section
+      class="country-filter-section"
+      id="outcallCountryFilterSection"
+      style="display: none"
+    >
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 출장마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 테마별 필터 섹션 -->
+    <section
+      class="theme-filter-section"
+      id="themeFilterSection"
+      style="display: none"
+    >
+      <div class="theme-filter-container">
+        <h3 class="theme-filter-title">테마별 마사지</h3>
+        <div class="theme-boxes">
+          <div class="theme-box active" data-theme="all">
+            <span class="theme-name">전체</span>
+          </div>
+          <div class="theme-box" data-theme="swedish">
+            <span class="theme-name">스웨디시</span>
+          </div>
+          <div class="theme-box" data-theme="thai">
+            <span class="theme-name">타이마사지</span>
+          </div>
+          <div class="theme-box" data-theme="aroma">
+            <span class="theme-name">아로마마사지</span>
+          </div>
+          <div class="theme-box" data-theme="waxing">
+            <span class="theme-name">왁싱</span>
+          </div>
+          <div class="theme-box" data-theme="chinese">
+            <span class="theme-name">중국마사지</span>
+          </div>
+          <div class="theme-box" data-theme="foot">
+            <span class="theme-name">발마사지</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 업체 목록 -->
+    <main class="main-content">
+      <div class="results-header">
+        <h1 id="resultsTitle">출장마사지 업체</h1>
+        <span id="resultsCount" class="results-count">총 0개</span>
+      </div>
+
+      <div id="massageList" class="massage-list">
+        <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
+      </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#" class="footer-link" onclick="openAboutModal(event)"
+            >회사소개</a
+          >
+          <span class="footer-divider">|</span>
+          <a href="#" class="footer-link" onclick="openTermsModal(event)"
+            >이용약관</a
+          >
+          <span class="footer-divider">|</span>
+          <a href="#" class="footer-link" onclick="openDetailsModal(event)"
+            >출장마사지정보</a
+          >
+        </div>
+        <div class="footer-info">
+          <p>상호명 : 마사지가가</p>
+          <p>
+            고객센터 :
+            <a href="tel:010-2246-3693" class="footer-phone">010-2246-3693</a>
+          </p>
+          <p>운영시간 : 24시간 (연중무휴)</p>
+          <p class="footer-copyright">
+            © 2024 마사지가가. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 회사소개 모달 -->
+    <div id="aboutModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>회사소개</h2>
+          <button class="modal-close" onclick="closeModal('aboutModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>마사지가가 소개</h3>
+            <p>
+              마사지가가는 전국 출장마사지 업체 정보를 제공하는 플랫폼입니다.
+              고객들이 원하는 출장마사지 서비스를 쉽고 빠르게 찾을 수 있도록
+              도와드립니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 이용약관 모달 -->
+    <div id="termsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>이용약관 (Terms of Service)</h2>
+          <button class="modal-close" onclick="closeModal('termsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>제 1 조 (목적)</h3>
+            <p>
+              본 약관은 마사지가가(이하 "회사")가 제공하는 출장마사지 업체 정보
+              서비스(이하 "서비스")의 이용과 관련하여 회사와 이용자 간의 권리,
+              의무 및 책임사항을 규정함을 목적으로 합니다.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 2 조 (정의)</h3>
+            <ul>
+              <li>
+                "서비스"란 회사가 제공하는 출장마사지 업체 정보 조회, 검색, 예약
+                중개 등의 서비스를 의미합니다.
+              </li>
+              <li>
+                "이용자"란 서비스에 접속하여 본 약관에 따라 서비스를 이용하는
+                회원 및 비회원을 의미합니다.
+              </li>
+              <li>"업체"란 서비스에 등록된 출장마사지 업체를 의미합니다.</li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 3 조 (약관의 효력 및 변경)</h3>
+            <ul>
+              <li>본 약관은 이용자가 동의함으로써 효력을 발생합니다.</li>
+              <li>
+                회사는 필요에 따라 본 약관을 변경할 수 있으며, 변경된 약관은
+                서비스 내 공지사항을 통해 공지합니다.
+              </li>
+              <li>
+                변경된 약관에 동의하지 않는 경우, 이용자는 서비스 이용을 중단할
+                수 있습니다.
+              </li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 4 조 (서비스의 제공)</h3>
+            <ul>
+              <li>출장마사지 업체 정보 제공</li>
+              <li>지역별, 타입별 업체 검색 및 필터링</li>
+              <li>업체 상세 정보 및 리뷰 제공</li>
+              <li>업체 예약 중개 서비스</li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 5 조 (이용자의 의무)</h3>
+            <ul>
+              <li>
+                이용자는 서비스를 이용할 때 다음 행위를 하여서는 안 됩니다.
+              </li>
+              <li>타인의 정보를 도용하거나 부정하게 사용하는 행위</li>
+              <li>서비스의 안정적 운영을 방해하는 행위</li>
+              <li>불법적이거나 부적절한 콘텐츠를 게시하는 행위</li>
+              <li>기타 관련 법령을 위반하는 행위</li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 6 조 (개인정보 보호)</h3>
+            <ul>
+              <li>
+                회사는 이용자의 개인정보를 보호하기 위해 개인정보보호법에 따라
+                관리합니다.
+              </li>
+              <li>
+                회사는 이용자의 개인정보를 본 약관에 명시된 목적 외의 용도로
+                사용하지 않습니다.
+              </li>
+              <li>
+                회사는 불법적인 콘텐츠 및 부적절한 정보가 유통되지 않도록 관리할
+                책임이 있습니다.
+              </li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 7 조 (책임의 한계)</h3>
+            <ul>
+              <li>
+                회사는 업소의 실제 서비스(출장마사지 시술 등)에 대해 직접적인
+                책임을 지지 않습니다.
+              </li>
+              <li>
+                이용자와 업소 간에 발생한 문제는 당사자 간의 협의로 해결함을
+                원칙으로 합니다.
+              </li>
+              <li>회사는 플랫폼을 통한 정보 제공과 중개 역할에 국한합니다.</li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 8 조 (서비스의 중단)</h3>
+            <ul>
+              <li>
+                회사는 시스템 점검, 서버 증설 및 교체, 네트워크 불안정 등의
+                경우에 서비스를 일시적으로 중단할 수 있습니다.
+              </li>
+              <li>
+                회사는 천재지변, 전쟁, 파업, 정부의 규제 등 불가항력적 사유가
+                발생한 경우 서비스를 중단할 수 있습니다.
+              </li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 9 조 (준거법 및 관할)</h3>
+            <p>
+              본 약관에 명시되지 않은 사항은 관계 법령 및 상관례에 따르며,
+              서비스 이용과 관련하여 분쟁이 발생할 경우 회사 본사 소재지를
+              관할하는 법원을 제1심 관할 법원으로 합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 상세정보 모달 -->
+    <div id="detailsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>상세정보</h2>
+          <button class="modal-close" onclick="closeModal('detailsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>출장마사지 - 마사지가가 전국 출장마사지 예약의 중심</h3>
+            <p>
+              마사지가가는 최고의 <strong>출장마사지</strong> 플랫폼으로,
+              <strong>아로마출장마사지</strong>,
+              <strong>타이출장마사지</strong>,
+              <strong>스웨디시출장마사지</strong>,
+              <strong>1인샵출장마사지</strong>,
+              <strong>왁싱출장마사지</strong> 등 다양한 출장마사지 서비스를
+              지역별로 간편하게 예약할 수 있습니다.
+            </p>
+            <p>
+              마사지가가는 고객의 편의를 위해 엄선된 출장마사지 업체를 제공하며,
+              최저가 보장과 실시간 예약 시스템으로 편리함을 더합니다.
+              <strong>서울출장마사지</strong>에서는 프리미엄
+              <strong>스웨디시출장마사지</strong>와
+              <strong>아로마출장마사지</strong>를,
+              <strong>부산출장마사지</strong>에서는 전통
+              <strong>타이출장마사지</strong>와
+              <strong>왁싱출장마사지</strong> 서비스를 만나보세요. 여행 중
+              힐링이 필요하다면 <strong>제주출장마사지</strong>에서 특별한
+              <strong>1인샵출장마사지</strong> 경험을 즐길 수 있습니다.
+            </p>
+            <p>
+              지금 마사지가가에서 당신에게 맞는
+              <strong>출장마사지</strong> 서비스를 찾아 지역에 맞게 예약하세요.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h3>편리한 출장마사지 서비스</h3>
+            <p>
+              바쁜 일상 속에서 <strong>출장마사지</strong>는 원하는 장소에서
+              편안하게 받을 수 있는 최적의 방법입니다. 마사지가가를 통해 서울,
+              부산, 제주 등 지역별 <strong>아로마출장마사지</strong>와
+              <strong>스웨디시출장마사지</strong>를 찾아 편안한 휴식을
+              즐겨보세요.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h3>이용 안내</h3>
+            <p>
+              본 서비스는 정보 제공 목적으로만 사용되며, 실제 서비스 이용 시에는
+              각 업소의 이용약관을 확인하시기 바랍니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // 페이지 로드 시 출장마사지 필터 활성화
+      document.addEventListener('DOMContentLoaded', function () {
+        // 출장마사지 필터 버튼 활성화
+        const outcallFilterBtn = document.querySelector(
+          '[data-filter="outcall"]'
+        );
+        if (outcallFilterBtn) {
+          // 모든 필터 버튼에서 active 클래스 제거
+          document.querySelectorAll('.filter-btn').forEach((btn) => {
+            btn.classList.remove('active');
+          });
+          // 출장마사지 필터 버튼에 active 클래스 추가
+          outcallFilterBtn.classList.add('active');
+
+          // 현재 필터를 'outcall'로 설정
+          if (typeof currentFilter !== 'undefined') {
+            currentFilter = 'outcall';
+          }
+
+          // 출장마사지 업체만 필터링하여 표시
+          if (typeof displayFilteredResults === 'function') {
+            displayFilteredResults();
+          }
+
+          // resultsTitle을 "출장마사지 업체"로 업데이트
+          const resultsTitle = document.getElementById('resultsTitle');
+          if (resultsTitle) {
+            resultsTitle.textContent = '출장마사지 업체';
+          }
+        }
+      });
+    </script>
+
+    <!-- 관련정보 모달 -->
+    <div id="relatedInfoModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>관련정보</h2>
+          <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- 1. 업체 후기 작성 -->
+          <div class="terms-section">
+            <h3>📝 출장마사지 업체 사용기 작성</h3>
+            <p>
+              <strong>출장마사지 업체</strong>에서의 특별한 경험을 공유해주세요.
+              여러분의 생생한 사용기는 다른 분들이 <strong>출장마사지 업체</strong>를 선택하는 데 실질적인 도움이 되며, 
+              <strong>출장마사지 업체</strong>의 서비스 개선을 위한 소중한 자료가 됩니다. 
+              <strong>출장마사지 업체</strong>의 신뢰성과 고객 만족도 증진을 위해 
+              여러분의 진솔한 경험을 공유해 주시기 바랍니다.
+            </p>
+            
+            <div class="info-highlight">
+              <h4>📋 사용기 작성 가이드</h4>
+              <ul>
+                <li><strong>실제 이용 경험:</strong> <strong>출장마사지 업체</strong>를 실제로 이용한 후 솔직한 경험을 바탕으로 작성해주세요</li>
+                <li><strong>구체적 서술:</strong> <strong>출장마사지 업체</strong>의 시설 환경, 서비스 품질, 관리사 친절도, 가격 대비 만족도 등을 상세히 서술해주세요</li>
+                <li><strong>건전한 내용:</strong> <strong>출장마사지 업체</strong>에 대한 건전하고 건설적인 사용기 작성을 부탁드리며, 허위 정보나 비방은 금지됩니다</li>
+                <li><strong>개인정보 보호:</strong> 개인정보나 민감한 정보는 포함하지 말아주세요</li>
+                <li><strong>정확한 정보:</strong> <strong>출장마사지 업체</strong>의 가격, 영업시간, 위치 등 정확한 정보만 기재해주세요</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>⭐ 사용기에 포함하면 좋은 내용</h4>
+              <ul>
+                <li><strong>이용한 서비스:</strong> <strong>출장마사지 업체</strong>에서 제공하는 스웨디시, 타이마사지, 아로마마사지 등 구체적인 서비스명</li>
+                <li><strong>관리사 정보:</strong> <strong>출장마사지 업체</strong> 관리사의 친절도, 전문성, 시술 능력에 대한 평가</li>
+                <li><strong>시설 환경:</strong> <strong>출장마사지 업체</strong>의 청결도, 분위기, 편의시설, 주차 가능 여부 등</li>
+                <li><strong>가격 정보:</strong> <strong>출장마사지 업체</strong>에서 이용한 서비스의 가격과 가격 대비 만족도</li>
+                <li><strong>재방문 의향:</strong> <strong>출장마사지 업체</strong>를 다시 이용하고 싶은지에 대한 의견</li>
+                <li><strong>추천 여부:</strong> <strong>출장마사지 업체</strong>를 다른 사람에게 추천할 수 있는지에 대한 평가</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>💬 실제 고객 사용기</h4>
+              <div class="review-stories">
+                <div class="review-story">
+                  <h6>🌟 "만성 목 어깨 통증이 완전히 사라졌어요" - 김○○님</h6>
+                  <p>"5년째 사무직으로 일하면서 목과 어깨 통증으로 고생했는데, 출장마사지 업체에서 추천해준 스웨디시 마사지를 받고 나서 정말 많이 좋아졌어요. 관리사분이 정말 전문적으로 진단해주시고, 제 상태에 맞는 맞춤 시술을 해주셔서 감사했습니다. 이제 주 1회씩 꾸준히 받고 있어요."</p>
+                </div>
+
+                <div class="review-story">
+                  <h6>🌙 "불면증이 크게 개선되었습니다" - 이○○님</h6>
+                  <p>"새벽 2시까지 잠들지 못하는 불면증으로 고생했는데, 출장마사지 업체에서 아로마 마사지를 받고 나서 수면의 질이 정말 좋아졌어요. 라벤더 향이 너무 좋고, 관리사분의 부드러운 손길이 마음까지 편안하게 해주었습니다. 이제 일주일에 한 번씩 받고 있어요."</p>
+                </div>
+
+                <div class="review-story">
+                  <h6>🏃‍♀️ "운동 후 회복에 최고예요" - 최○○님</h6>
+                  <p>"헬스장에서 운동하고 나서 근육통이 심했는데, 출장마사지 업체에서 타이 마사지를 받고 나서 정말 많이 좋아졌어요. 특히 스트레칭과 압박을 동시에 받으니까 근육이 부드럽게 풀리는 게 느껴졌어요. 이제 운동 후 필수로 받고 있습니다!"</p>
+                </div>
+
+                <div class="review-story">
+                  <h6>👩‍💼 "직장 스트레스 완전 해소" - 정○○님</h6>
+                  <p>"프로젝트 마감으로 스트레스가 극에 달했을 때 출장마사지 업체에서 개인 맞춤 마사지를 받았는데, 정말 천국 같았어요. 관리사분이 제 상태를 정확히 파악해서 집중적으로 시술해주셔서 온몸이 가벼워졌어요. 재방문 확정입니다!"</p>
+                </div>
+
+                <div class="review-story">
+                  <h6>💪 "만성 허리통증 해결" - 강○○님</h6>
+                  <p>"5년째 허리디스크로 고생했는데, 출장마사지 업체에서 중국 마사지의 경락 치료를 받고 나서 정말 많이 좋아졌어요. 관리사분이 정확한 압박점을 찾아서 시술해주셔서 처음에는 아팠지만 나중에는 정말 시원했어요. 한의학의 위력을 실감했습니다."</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="notice-box">
+              <p>
+                <strong>📢 사용기 정책 안내:</strong> 
+                <strong>출장마사지 업체</strong>에 대한 허위 정보, 광고성 내용, 타인 비방, 개인정보 노출 등의 부적절한 사용기는 
+                사전 통보 없이 삭제될 수 있습니다. <strong>출장마사지 업체</strong>의 모든 사용기는 
+                서비스 품질 향상을 위해 검토 후 게시됩니다.
+              </p>
+            </div>
+          </div>
+
+          <!-- 2. H1 대한 소개 (상품) -->
+          <div class="terms-section">
+            <h3>🏆 출장마사지 업체 - 전문 출장 마사지 서비스</h3>
+            <p>
+              <strong>출장마사지 업체</strong>는 전국 각지의 엄선된 출장 마사지 업소들을 
+              한 곳에서 찾을 수 있는 대한민국 최고의 전문 출장 마사지 플랫폼입니다.
+              서울, 부산, 제주, 대구, 광주, 대전 등 전국 주요 도시의 
+              신뢰할 수 있는 출장마사지 업체들을 지역별, 서비스별로 쉽게 검색하고 
+              편리하게 예약할 수 있는 원스톱 서비스를 제공합니다.
+            </p>
+            
+            <div class="service-categories">
+              <h4>🌟 제공 서비스 종류 및 상세 안내</h4>
+              <div class="service-grid">
+                <div class="service-item">
+                  <i class="fas fa-spa"></i>
+                  <span>스웨디시 마사지</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-leaf"></i>
+                  <span>아로마 마사지</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-hands"></i>
+                  <span>타이 마사지</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-home"></i>
+                  <span>1인샵</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-sparkles"></i>
+                  <span>왁싱 서비스</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-heart"></i>
+                  <span>발 마사지</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-yin-yang"></i>
+                  <span>중국 마사지</span>
+                </div>
+              </div>
+
+              <div class="service-details">
+                <div class="service-detail-item">
+                  <h5>🧘‍♀️ 스웨디시 마사지</h5>
+                  <p>스웨덴에서 유래된 클래식한 마사지 기법으로, 혈액순환 개선과 근육 긴장 완화에 효과적입니다. 부드럽고 리듬감 있는 스트로크로 전신의 피로를 완화하며, 스트레스 해소와 수면 개선에 도움이 됩니다. 60분~120분 과정으로 제공되며, 특히 사무직 직장인과 운동 후 피로 회복을 원하는 분들에게 인기입니다.</p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>🌿 아로마 마사지</h5>
+                  <p>천연 에센셜 오일을 활용한 향기로운 마사지로, 감각적이고 치유적인 경험을 제공합니다. 라벤더, 로즈마리, 유칼립투스 등 다양한 향으로 기분 전환과 심신 안정을 도모합니다. 피부 보습과 향기 요법의 효과를 동시에 누릴 수 있으며, 특별한 날이나 스트레스가 많은 시기에 추천하는 프리미엄 서비스입니다.</p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>🙏 타이 마사지</h5>
+                  <p>태국 전통 마사지 기법으로, 압박과 스트레칭을 결합한 독특한 방식입니다. 에너지 라인을 따라 압박점을 자극하여 몸의 균형을 맞추고, 관절 가동 범위를 넓혀 유연성을 향상시킵니다. 옷을 입은 채로 받는 것이 특징이며, 깊은 근육까지 효과적으로 이완시켜 만성 통증 완화에 탁월한 효과를 보입니다.</p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>🏠 1인샵 마사지</h5>
+                  <p>개인 공간에서 프라이빗하게 받는 마사지로, 높은 수준의 개인 맞춤 서비스를 제공합니다. 관리사와의 일대일 상담을 통해 개인의 상태와 요구사항에 맞는 맞춤형 시술을 받을 수 있습니다. 조용하고 편안한 분위기에서 집중적인 케어를 받을 수 있어, 깊은 휴식과 힐링을 원하는 분들에게 최적의 선택입니다.</p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>✨ 왁싱 서비스</h5>
+                  <p>천연 왁스를 이용한 모발 제거 서비스로, 깔끔하고 오래 지속되는 효과를 제공합니다. 다리, 팔, 겨드랑이, 얼굴 등 신체 전반에 걸쳐 서비스를 제공하며, 전문 교육을 받은 관리사가 안전하고 정확하게 시술합니다. 모공 축소와 피부 탄력 개선에도 도움이 되며, 특히 여름철 해변가 휴가를 앞둔 분들에게 인기입니다.</p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>🦶 발 마사지</h5>
+                  <p>발의 반사 구역을 자극하여 전신 건강을 증진시키는 전문 마사지입니다. 발바닥의 각 부위가 몸의 다른 기관과 연결되어 있다는 반사학 이론을 바탕으로, 발 마사지를 통해 전신의 혈액순환을 개선하고 각종 통증을 완화합니다. 하루 종일 서 있거나 걸어다니는 직업을 가진 분들에게 특히 효과적입니다.</p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>☯️ 중국 마사지</h5>
+                  <p>중의학의 경락 이론을 바탕으로 한 전통 중국 마사지로, 기(氣)의 흐름을 원활하게 하여 건강을 증진시킵니다. 지압과 마사지를 결합하여 몸의 균형을 맞추고, 면역력 강화와 체질 개선에 도움이 됩니다. 특히 만성 피로, 소화 불량, 불면증 등의 증상 완화에 효과적이며, 전통 한의학의 지혜가 담긴 치유 서비스입니다.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🎯 출장마사지 업체만의 특별한 장점</h4>
+              <ul>
+                <li><strong>전국 네트워크:</strong> 서울부터 제주까지 전국 주요 도시의 인증된 출장마사지 업체 보유</li>
+                <li><strong>엄격한 심사:</strong> 자격증 보유, 위생 관리, 고객 만족도 등 다각도 심사를 통한 업체 선별</li>
+                <li><strong>실시간 예약:</strong> 24시간 언제든지 편리한 온라인 예약 시스템</li>
+                <li><strong>투명한 정보:</strong> 정확한 가격, 영업시간, 위치 정보 및 실제 고객 후기 제공</li>
+                <li><strong>다양한 선택:</strong> 지역별, 가격대별, 서비스별 맞춤 검색 및 추천</li>
+                <li><strong>고객 보호:</strong> 안전하고 신뢰할 수 있는 출장마사지 업체만을 엄선하여 제공</li>
+              </ul>
+            </div>
+
+            <p>
+              <strong>출장마사지 업체</strong>는 단순한 정보 제공을 넘어서, 
+              고객과 업체 모두에게 가치 있는 플랫폼이 되고자 합니다. 
+              고객에게는 최적의 출장 마사지 서비스를 찾을 수 있는 편의를, 
+              업체에게는 신뢰할 수 있는 홍보 채널을 제공하여 
+              건강한 출장 마사지 생태계를 구축하고 있습니다.
+            </p>
+          </div>
+
+          <!-- 3. 관리사 소개 -->
+          <div class="terms-section">
+            <h3>👩‍⚕️ 전문 관리사 소개 - 자격과 경험을 갖춘 프로페셔널</h3>
+            <p>
+              <strong>출장마사지 업체</strong>에 등록된 모든 관리사는 
+              엄격한 자격 심사를 통과한 전문가들입니다. 
+              국가 자격증 보유부터 지속적인 교육 이수까지, 
+              고품질 출장 마사지 서비스를 제공하기 위한 모든 조건을 갖춘 
+              프로페셔널 관리사들만이 고객에게 서비스를 제공합니다.
+            </p>
+            
+            <div class="therapist-info">
+              <h4>📜 관리사 자격 요건 및 심사 기준</h4>
+              <ul>
+                <li><strong>국가 자격증 보유:</strong> 마사지사 자격증, 안마사 면허, 물리치료사 면허 등 관련 자격증 필수 보유</li>
+                <li><strong>전문 교육 이수:</strong> 체계적인 마사지 기법 교육, 해부학, 생리학 등 이론 교육 완료</li>
+                <li><strong>실무 경험:</strong> 최소 2년 이상의 실무 경험과 월 100회 이상의 시술 경험 보유</li>
+                <li><strong>건강 검진:</strong> 정기적인 건강 검진 및 위생 관리 교육 이수, 전염병 검사 통과</li>
+                <li><strong>서비스 교육:</strong> 고객 응대 매너, 서비스 마인드, 갈등 해결 교육 이수</li>
+                <li><strong>기술 평가:</strong> 실제 시술 능력 평가 및 고객 만족도 조사를 통한 지속적 모니터링</li>
+                <li><strong>윤리 교육:</strong> 직업 윤리, 개인정보 보호, 성희롱 예방 교육 필수 이수</li>
+              </ul>
+              
+              <h4>🎖️ 관리사 서비스 특징 및 장점</h4>
+              <ul>
+                <li><strong>맞춤형 서비스:</strong> 고객의 개인 상태, 선호도, 건강 상태에 따른 개인별 맞춤형 마사지 제공</li>
+                <li><strong>전문적 시술:</strong> 과학적 근거에 기반한 안전하고 효과적인 마사지 기법 적용</li>
+                <li><strong>친절한 응대:</strong> 고객 중심의 친절하고 세심한 서비스로 편안한 분위기 조성</li>
+                <li><strong>위생 관리:</strong> 철저한 위생 관리와 청결한 시설 환경으로 안전한 서비스 제공</li>
+                <li><strong>지속적 발전:</strong> 정기적인 교육 참여와 기술 향상을 통한 서비스 품질 지속 개선</li>
+                <li><strong>고객 만족:</strong> 고객 피드백 반영과 지속적인 개선을 통한 높은 고객 만족도 유지</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>💼 관리사 교육 및 인증 시스템</h4>
+              <ul>
+                <li><strong>신규 교육:</strong> 신규 등록 시 40시간 이상의 기초 교육 및 실습 과정 필수 이수</li>
+                <li><strong>정기 교육:</strong> 분기별 전문 교육 및 최신 기법 습득을 위한 지속적 교육 참여</li>
+                <li><strong>자격 갱신:</strong> 2년마다 자격 갱신 심사를 통한 지속적인 자격 유지</li>
+                <li><strong>평가 시스템:</strong> 고객 평가, 동료 평가, 관리자 평가를 통한 종합적 평가</li>
+                <li><strong>인센티브:</strong> 우수 관리사에 대한 인센티브 및 추가 교육 기회 제공</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 4. 약속 책임 소개 -->
+          <div class="terms-section">
+            <h3>⚖️ 약속과 책임 - 고객과 업체를 위한 명확한 기준</h3>
+            <p>
+              <strong>출장마사지 업체</strong>는 고객과 업체 모두의 안전과 권익을 보호하기 위해 
+              명확한 약속과 책임 범위를 설정하고 운영하고 있습니다.
+              플랫폼으로서의 역할과 한계를 투명하게 공개하여 
+              모든 이용자가 안심하고 서비스를 이용할 수 있도록 
+              최선을 다하고 있습니다.
+            </p>
+            
+            <div class="responsibility-info">
+              <h4>📋 플랫폼 책임 범위 및 약속</h4>
+              <div class="responsibility-item">
+                <h5>✅ 출장마사지 업체가 제공하는 서비스</h5>
+                <ul>
+                  <li><strong>정보 제공 서비스:</strong> 업체 정보, 가격, 영업시간, 위치 등 정확한 정보 제공</li>
+                  <li><strong>검색 및 매칭:</strong> 지역별, 서비스별, 가격대별 맞춤 검색 및 추천 서비스</li>
+                  <li><strong>예약 중개:</strong> 고객과 업체 간의 원활한 예약 연결 및 관리 서비스</li>
+                  <li><strong>후기 시스템:</strong> 투명하고 신뢰할 수 있는 고객 후기 및 평점 시스템 운영</li>
+                  <li><strong>업체 관리:</strong> 등록 업체의 지속적 모니터링 및 품질 관리</li>
+                  <li><strong>고객 지원:</strong> 24시간 고객 상담 및 문의 처리 서비스</li>
+                  <li><strong>보안 관리:</strong> 개인정보 보호 및 안전한 결제 시스템 운영</li>
+                </ul>
+              </div>
+              
+              <div class="responsibility-item">
+                <h5>⚠️ 출장마사지 업체의 책임 제한 사항</h5>
+                <ul>
+                  <li><strong>시술 품질:</strong> 실제 출장 마사지 시술의 품질, 효과, 결과에 대한 직접적 책임 제외</li>
+                  <li><strong>개별 계약:</strong> 업체와 고객 간의 개별 계약 조건, 가격 변동, 서비스 변경 등</li>
+                  <li><strong>업체 운영:</strong> 각 업체의 독립적인 영업 정책, 인사 관리, 시설 운영 등</li>
+                  <li><strong>외부 요인:</strong> 천재지변, 시스템 점검, 통신 장애 등 불가피한 상황</li>
+                  <li><strong>제3자 서비스:</strong> 외부 결제 시스템, 통신 서비스 등 제3자 서비스 관련 문제</li>
+                  <li><strong>개인적 분쟁:</strong> 고객과 업체 간의 개인적 분쟁이나 의견 차이</li>
+                </ul>
+              </div>
+              
+              <div class="responsibility-item">
+                <h5>🤝 분쟁 해결 및 고객 보호 시스템</h5>
+                <ul>
+                  <li><strong>1차 협의:</strong> 업체와 고객 간의 직접적인 대화와 협의를 최우선으로 권장</li>
+                  <li><strong>중재 지원:</strong> 필요시 출장마사지 업체의 중재를 통한 공정한 해결 방안 모색</li>
+                  <li><strong>신고 시스템:</strong> 부적절한 업체나 서비스에 대한 신고 및 피드백 시스템 운영</li>
+                  <li><strong>정보 수정:</strong> 부정확한 정보나 부적절한 내용의 즉시 수정 및 삭제</li>
+                  <li><strong>업체 관리:</strong> 지속적인 위반 시 업체 등록 취소 및 서비스 제한</li>
+                  <li><strong>고객 보상:</strong> 플랫폼의 실수로 인한 고객 피해에 대한 적절한 보상</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="notice-box">
+              <p>
+                <strong>📢 중요 약속 및 안내사항:</strong> 
+                출장마사지 업체는 정보 제공 및 중개 서비스에 한정되며, 
+                실제 출장 마사지 서비스 이용 시에는 각 업체의 이용약관과 정책을 
+                반드시 확인하시기 바랍니다. 고객의 안전과 만족을 위해 
+                지속적으로 서비스 품질을 개선하고 있으며, 
+                모든 이용자의 의견과 피드백을 소중히 받아들입니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

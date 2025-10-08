@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>울산마사지 추천 - 울산 마사지 업체 모음 | 마사지가가</title>
+    
+    <meta name="description" content="울산마사지 추천 업체 정보. 울산 전 지역 마사지샵 가격, 위치, 리뷰 정보. 울산 최고의 마사지를 마사지가가에서 찾아보세요.">
+    <meta name="keywords" content="울산마사지, 울산건마, 울산스웨디시, 울산1인샵, 울산아로마, 마사지가가">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://massagegaga.com/ulsan-massage.html">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="울산마사지 추천 - 울산 마사지 업체 모음 | 마사지가가">
+    <meta property="og:url" content="https://massagegaga.com/ulsan-massage.html">
+    <meta property="og:site_name" content="마사지가가">
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <i class="fas fa-spa"></i>
+                마사지가가
+            </h1>
+            <div class="search-toggle" id="searchToggle">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- 검색 섹션 -->
+    <section class="search-section">
+        <div class="search-container">
+            <div class="search-box main-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="mainSearchInput" class="search-input" placeholder="지역, 지하철역, 업체명으로 검색하세요">
+                <button id="mainSearchBtn" class="search-btn-small">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div class="location-search">
+                <div class="search-box">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <select id="regionSelect" class="search-select">
+                        <option value="">지역을 선택하세요</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-building"></i>
+                    <select id="districtSelect" class="search-select">
+                        <option value="">구를 선택하세요</option>
+                    </select>
+                </div>
+                <button id="searchBtn" class="search-btn">
+                    <i class="fas fa-search"></i>
+                    검색
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="filter-section">
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">전체</button>
+            <button class="filter-btn" data-filter="massage">마사지</button>
+            <button class="filter-btn" data-filter="outcall">출장마사지</button>
+            <button class="filter-btn" data-filter="waxing">왁싱</button>
+        </div>
+    </section>
+
+    <!-- 국가별 마사지 필터 -->
+    <section class="country-filter-section" id="massageCountryFilterSection" style="display: none;">
+        <div class="country-filter-container">
+            <h3 class="country-filter-title">국가별 마사지</h3>
+            <div class="country-boxes">
+                <div class="country-box active" data-country="overall">
+                    <span class="country-name">전체</span>
+                </div>
+                <div class="country-box" data-country="korea">
+                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국" class="country-flag" 
+                         onerror="this.onerror=null; this.style.display='none';" loading="lazy">
+                    <span class="country-name">한국</span>
+                </div>
+                <div class="country-box" data-country="thai">
+                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/태국.jpg" alt="태국" class="country-flag" 
+                         onerror="this.onerror=null; this.style.display='none';" loading="lazy">
+                    <span class="country-name">태국</span>
+                </div>
+                <div class="country-box" data-country="china">
+                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg" alt="중국" class="country-flag" 
+                         onerror="this.onerror=null; this.style.display='none';" loading="lazy">
+                    <span class="country-name">중국</span>
+                </div>
+                <div class="country-box" data-country="russia">
+                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/러시아-1.jpg" alt="러시아" class="country-flag" 
+                         onerror="this.onerror=null; this.style.display='none';" loading="lazy">
+                    <span class="country-name">러시아</span>
+                </div>
+                <div class="country-box" data-country="japan">
+                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" alt="일본" class="country-flag" 
+                         onerror="this.onerror=null; this.style.display='none';" loading="lazy">
+                    <span class="country-name">일본</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 국가별 출장마사지 필터 -->
+    <section class="country-filter-section" id="outcallCountryFilterSection" style="display: none;">
+        <div class="country-filter-container">
+            <h3 class="country-filter-title">국가별 출장마사지</h3>
+            <div class="country-boxes">
+                <div class="country-box active" data-country="overall">
+                    <span class="country-name">전체</span>
+                </div>
+                <div class="country-box" data-country="korea">
+                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국" class="country-flag" 
+                         onerror="this.onerror=null; this.style.display='none';" loading="lazy">
+                    <span class="country-name">한국</span>
+                </div>
+                <div class="country-box" data-country="thai">
+                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/태국.jpg" alt="태국" class="country-flag" 
+                         onerror="this.onerror=null; this.style.display='none';" loading="lazy">
+                    <span class="country-name">태국</span>
+                </div>
+                <div class="country-box" data-country="china">
+                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg" alt="중국" class="country-flag" 
+                         onerror="this.onerror=null; this.style.display='none';" loading="lazy">
+                    <span class="country-name">중국</span>
+                </div>
+                <div class="country-box" data-country="russia">
+                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/러시아-1.jpg" alt="러시아" class="country-flag" 
+                         onerror="this.onerror=null; this.style.display='none';" loading="lazy">
+                    <span class="country-name">러시아</span>
+                </div>
+                <div class="country-box" data-country="japan">
+                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" alt="일본" class="country-flag" 
+                         onerror="this.onerror=null; this.style.display='none';" loading="lazy">
+                    <span class="country-name">일본</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 업체 목록 -->
+    <main class="main-content">
+        <div class="results-header">
+            <h2 id="resultsTitle">울산마사지 전체 업체</h2>
+            <span id="resultsCount" class="results-count">총 0개</span>
+        </div>
+        
+        <div id="massageList" class="massage-list">
+            <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" class="footer-link" onclick="openAboutModal(event)">회사소개</a>
+                <span class="footer-divider">|</span>
+                <a href="#" class="footer-link" onclick="openTermsModal(event)">이용약관</a>
+            </div>
+            <div class="footer-info">
+                <p>상호명 : 마사지가가</p>
+                <p>고객센터 : <a href="tel:010-2246-3693" class="footer-phone">010-2246-3693</a> <a href="tel:010-2246-3693" class="footer-contact-btn">[ 입점 문의 ]</a></p>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 마사지가가. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 회사소개 모달 -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>회사소개 (About Us)</h2>
+                <button class="modal-close" onclick="closeModal('aboutModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>마사지가가</strong>는 전국 어디서든 믿을 수 있는 마사지 정보를 쉽고 빠르게 찾을 수 있도록 만들어진 <strong>전국 마사지 플랫폼</strong>입니다.</p>
+                
+                <p>저희는 단순히 업체 정보를 나열하는 것이 아니라, <strong>이용자 중심의 편리한 검색 시스템</strong>과 <strong>투명한 정보 제공</strong>을 통해 고객과 업소 모두가 만족할 수 있는 건강한 플랫폼 생태계를 만들고자 합니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 이용약관 모달 -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>이용약관 (Terms of Service)</h2>
+                <button class="modal-close" onclick="closeModal('termsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="terms-section">
+                    <h3>제 1 조 (목적)</h3>
+                    <p>이 약관은 "마사지가가"(이하 "회사"라 함)가 제공하는 마사지 관련 정보 플랫폼 서비스(이하 "서비스")의 이용조건 및 절차, 회사와 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 페이지 로드 시 울산 지역 자동 선택
+        document.addEventListener('DOMContentLoaded', function() {
+            // 지역 선택을 "울산"로 설정
+            const regionSelect = document.getElementById('regionSelect');
+            if (regionSelect) {
+                regionSelect.value = '울산';
+                
+                // 구 옵션 업데이트
+                if (typeof updateDistrictOptions === 'function') {
+                    updateDistrictOptions('울산');
+                }
+                
+                // 전역 변수 설정
+                if (typeof currentRegion !== 'undefined') {
+                    currentRegion = '울산';
+                }
+            }
+            
+            // displayFilteredResults()를 사용하여 필터 로직 적용
+            if (typeof displayFilteredResults === 'function') {
+                displayFilteredResults();
+            } else {
+                // 폴백: 울산 지역 업체만 필터링하여 표시
+                const shops = massageShops.filter(shop => shop.region === '울산');
+                displayMassageShops(shops);
+                updateResultsHeader('울산마사지 전체 업체', shops.length);
+            }
+        });
+    </script>
+</body>
+</html>

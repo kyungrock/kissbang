@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>업체 관리 - 마사지가가</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .admin-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .admin-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .admin-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+
+      .tab-btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        background: #f8f9fa;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .tab-btn.active {
+        background: #667eea;
+        color: white;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .form-section {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+
+      .btn-primary {
+        background: #667eea;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #5a6fd8;
+      }
+
+      .btn-success {
+        background: #28a745;
+        color: white;
+      }
+
+      .btn-danger {
+        background: #dc3545;
+        color: white;
+      }
+
+      .course-item {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #e9ecef;
+      }
+
+      .course-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .remove-btn {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .shops-list {
+        display: grid;
+        gap: 20px;
+      }
+
+      .shop-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e9ecef;
+      }
+
+      .shop-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+      }
+
+      .shop-actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .status-badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .status-active {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .status-inactive {
+        background: #f8d7da;
+        color: #721c24;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-container">
+      <div class="admin-header">
+        <h1>🏢 업체 관리 시스템</h1>
+        <p>마사지가가 업체 등록 및 관리</p>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="tab-btn active" onclick="showTab('add')">
+          업체 등록
+        </button>
+        <button class="tab-btn" onclick="showTab('list')">업체 목록</button>
+        <button class="tab-btn" onclick="showTab('stats')">통계</button>
+      </div>
+
+      <!-- 업체 등록 탭 -->
+      <div id="add-tab" class="tab-content active">
+        <form id="shopForm" class="form-section">
+          <h2>새 업체 등록</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">업체명 *</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="type">업체 유형 *</label>
+              <select id="type" name="type" required>
+                <option value="">선택하세요</option>
+                <option value="korean">한국 마사지</option>
+                <option value="thai">태국 마사지</option>
+                <option value="foot">발마사지</option>
+                <option value="spa">스파</option>
+                <option value="outcall">출장마사지</option>
+                <option value="waxing">왁싱</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="region">지역 *</label>
+              <select id="region" name="region" required>
+                <option value="">선택하세요</option>
+                <option value="서울">서울</option>
+                <option value="부산">부산</option>
+                <option value="대구">대구</option>
+                <option value="인천">인천</option>
+                <option value="광주">광주</option>
+                <option value="대전">대전</option>
+                <option value="울산">울산</option>
+                <option value="세종">세종</option>
+                <option value="경기">경기</option>
+                <option value="강원">강원</option>
+                <option value="충북">충북</option>
+                <option value="충남">충남</option>
+                <option value="전북">전북</option>
+                <option value="전남">전남</option>
+                <option value="경북">경북</option>
+                <option value="경남">경남</option>
+                <option value="제주">제주</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="district">구/시 *</label>
+              <input type="text" id="district" name="district" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">주소 *</label>
+            <input type="text" id="address" name="address" required />
+          </div>
+
+          <div class="form-group">
+            <label for="detailAddress">상세주소</label>
+            <input type="text" id="detailAddress" name="detailAddress" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">전화번호 *</label>
+              <input type="text" id="phone" name="phone" required />
+            </div>
+            <div class="form-group">
+              <label for="price">최저가 *</label>
+              <input
+                type="text"
+                id="price"
+                name="price"
+                placeholder="예: 80,000원~"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="operatingHours">운영시간</label>
+            <input
+              type="text"
+              id="operatingHours"
+              name="operatingHours"
+              placeholder="예: 10:00 - 22:00"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="description">업체 설명</label>
+            <textarea id="description" name="description" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="image">이미지 URL</label>
+            <input type="url" id="image" name="image" />
+          </div>
+
+          <div class="form-group">
+            <label for="services">서비스 (쉼표로 구분)</label>
+            <input
+              type="text"
+              id="services"
+              name="services"
+              placeholder="예: 스웨디시, 아로마, 발마사지"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="features">특징 (쉼표로 구분)</label>
+            <input
+              type="text"
+              id="features"
+              name="features"
+              placeholder="예: 주차 가능, 개인실, 24시간"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="tags">태그 (쉼표로 구분)</label>
+            <input
+              type="text"
+              id="tags"
+              name="tags"
+              placeholder="예: 강남구, 스웨디시, 아로마"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="coordinates">좌표 (위도, 경도)</label>
+            <div class="form-row">
+              <input
+                type="number"
+                id="latitude"
+                name="latitude"
+                step="any"
+                placeholder="위도"
+              />
+              <input
+                type="number"
+                id="longitude"
+                name="longitude"
+                step="any"
+                placeholder="경도"
+              />
+            </div>
+          </div>
+
+          <!-- 코스 섹션 -->
+          <div class="form-group">
+            <label>코스 정보</label>
+            <div id="coursesContainer">
+              <div class="course-item">
+                <div class="course-header">
+                  <h4>코스 1</h4>
+                  <button
+                    type="button"
+                    class="remove-btn"
+                    onclick="removeCourse(this)"
+                  >
+                    삭제
+                  </button>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>카테고리</label>
+                    <input
+                      type="text"
+                      name="courseCategory"
+                      placeholder="예: 스웨디시 프로그램"
+                    />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>코스명</label>
+                    <input
+                      type="text"
+                      name="courseName"
+                      placeholder="예: A코스"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>가격</label>
+                    <input
+                      type="text"
+                      name="coursePrice"
+                      placeholder="예: 80,000원"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>시간</label>
+                    <input
+                      type="text"
+                      name="courseDuration"
+                      placeholder="예: 60분"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>설명</label>
+                  <input
+                    type="text"
+                    name="courseDescription"
+                    placeholder="예: 스웨디시 + 아로마"
+                  />
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addCourse()">
+              코스 추가
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label for="staffInfo">관리사 정보</label>
+            <textarea
+              id="staffInfo"
+              name="staffInfo"
+              rows="2"
+              placeholder="예: 소율(24), 제니(20), 연우(25)"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-success">업체 등록</button>
+        </form>
+      </div>
+
+      <!-- 업체 목록 탭 -->
+      <div id="list-tab" class="tab-content">
+        <div class="form-section">
+          <h2>업체 목록</h2>
+          <div id="shopsList" class="shops-list">
+            <!-- 업체 목록이 여기에 동적으로 생성됩니다 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 통계 탭 -->
+      <div id="stats-tab" class="tab-content">
+        <div class="form-section">
+          <h2>통계 정보</h2>
+          <div id="statsInfo">
+            <!-- 통계 정보가 여기에 동적으로 생성됩니다 -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="shop-manager.js"></script>
+    <script>
+      const shopManager = new ShopManager();
+      let courseCount = 1;
+
+      // 탭 전환
+      function showTab(tabName) {
+        // 모든 탭 숨기기
+        document.querySelectorAll('.tab-content').forEach((tab) => {
+          tab.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach((btn) => {
+          btn.classList.remove('active');
+        });
+
+        // 선택된 탭 보이기
+        document.getElementById(tabName + '-tab').classList.add('active');
+        event.target.classList.add('active');
+
+        // 탭별 데이터 로드
+        if (tabName === 'list') {
+          loadShopsList();
+        } else if (tabName === 'stats') {
+          loadStats();
+        }
+      }
+
+      // 코스 추가
+      function addCourse() {
+        courseCount++;
+        const container = document.getElementById('coursesContainer');
+        const courseDiv = document.createElement('div');
+        courseDiv.className = 'course-item';
+        courseDiv.innerHTML = `
+                <div class="course-header">
+                    <h4>코스 ${courseCount}</h4>
+                    <button type="button" class="remove-btn" onclick="removeCourse(this)">삭제</button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>카테고리</label>
+                        <input type="text" name="courseCategory" placeholder="예: 스웨디시 프로그램">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>코스명</label>
+                        <input type="text" name="courseName" placeholder="예: A코스">
+                    </div>
+                    <div class="form-group">
+                        <label>가격</label>
+                        <input type="text" name="coursePrice" placeholder="예: 80,000원">
+                    </div>
+                    <div class="form-group">
+                        <label>시간</label>
+                        <input type="text" name="courseDuration" placeholder="예: 60분">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>설명</label>
+                    <input type="text" name="courseDescription" placeholder="예: 스웨디시 + 아로마">
+                </div>
+            `;
+        container.appendChild(courseDiv);
+      }
+
+      // 코스 삭제
+      function removeCourse(button) {
+        button.closest('.course-item').remove();
+      }
+
+      // 폼 제출
+      document
+        .getElementById('shopForm')
+        .addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+          const shopData = {};
+
+          // 기본 정보
+          for (let [key, value] of formData.entries()) {
+            if (key.startsWith('course')) return; // 코스 정보는 별도 처리
+            shopData[key] = value;
+          }
+
+          // 배열 필드 처리
+          shopData.services = shopData.services
+            ? shopData.services.split(',').map((s) => s.trim())
+            : [];
+          shopData.features = shopData.features
+            ? shopData.features.split(',').map((s) => s.trim())
+            : [];
+          shopData.tags = shopData.tags
+            ? shopData.tags.split(',').map((s) => s.trim())
+            : [];
+
+          // 좌표 처리
+          if (shopData.latitude && shopData.longitude) {
+            shopData.coordinates = {
+              latitude: parseFloat(shopData.latitude),
+              longitude: parseFloat(shopData.longitude),
+            };
+            delete shopData.latitude;
+            delete shopData.longitude;
+          }
+
+          // 코스 정보 수집
+          const courses = [];
+          const courseItems = document.querySelectorAll('.course-item');
+          courseItems.forEach((item) => {
+            const category = item.querySelector(
+              'input[name="courseCategory"]'
+            ).value;
+            const name = item.querySelector('input[name="courseName"]').value;
+            const price = item.querySelector('input[name="coursePrice"]').value;
+            const duration = item.querySelector(
+              'input[name="courseDuration"]'
+            ).value;
+            const description = item.querySelector(
+              'input[name="courseDescription"]'
+            ).value;
+
+            if (name && price && duration) {
+              const existingCategory = courses.find(
+                (c) => c.category === category
+              );
+              if (existingCategory) {
+                existingCategory.items.push({
+                  name,
+                  price,
+                  duration,
+                  description,
+                });
+              } else {
+                courses.push({
+                  category: category || '기본 코스',
+                  items: [{ name, price, duration, description }],
+                });
+              }
+            }
+          });
+
+          shopData.courses = courses;
+
+          try {
+            shopManager.validateShopData(shopData);
+            const addedShop = shopManager.addShop(shopData);
+            alert('업체가 성공적으로 등록되었습니다!');
+            this.reset();
+            courseCount = 1;
+            document.getElementById('coursesContainer').innerHTML = `
+                    <div class="course-item">
+                        <div class="course-header">
+                            <h4>코스 1</h4>
+                            <button type="button" class="remove-btn" onclick="removeCourse(this)">삭제</button>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>카테고리</label>
+                                <input type="text" name="courseCategory" placeholder="예: 스웨디시 프로그램">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>코스명</label>
+                                <input type="text" name="courseName" placeholder="예: A코스">
+                            </div>
+                            <div class="form-group">
+                                <label>가격</label>
+                                <input type="text" name="coursePrice" placeholder="예: 80,000원">
+                            </div>
+                            <div class="form-group">
+                                <label>시간</label>
+                                <input type="text" name="courseDuration" placeholder="예: 60분">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>설명</label>
+                            <input type="text" name="courseDescription" placeholder="예: 스웨디시 + 아로마">
+                        </div>
+                    </div>
+                `;
+          } catch (error) {
+            alert('오류: ' + error.message);
+          }
+        });
+
+      // 업체 목록 로드
+      function loadShopsList() {
+        const shopsList = document.getElementById('shopsList');
+        const shops = shopManager.shops;
+
+        if (shops.length === 0) {
+          shopsList.innerHTML = '<p>등록된 업체가 없습니다.</p>';
+          return;
+        }
+
+        shopsList.innerHTML = shops
+          .map(
+            (shop) => `
+                <div class="shop-card">
+                    <div class="shop-header">
+                        <div>
+                            <h3>${shop.name}</h3>
+                            <p>${shop.region} ${shop.district} | ${
+              shop.type
+            }</p>
+                        </div>
+                        <div>
+                            <span class="status-badge status-${shop.status}">${
+              shop.status === 'active' ? '활성' : '비활성'
+            }</span>
+                        </div>
+                    </div>
+                    <p><strong>주소:</strong> ${shop.address}</p>
+                    <p><strong>전화:</strong> ${shop.phone}</p>
+                    <p><strong>가격:</strong> ${shop.price}</p>
+                    <p><strong>평점:</strong> ${shop.rating}/5 (${
+              shop.reviewCount
+            }개 리뷰)</p>
+                    <div class="shop-actions">
+                        <button class="btn btn-primary" onclick="editShop('${
+                          shop.id
+                        }')">수정</button>
+                        <button class="btn btn-danger" onclick="deleteShop('${
+                          shop.id
+                        }')">삭제</button>
+                    </div>
+                </div>
+            `
+          )
+          .join('');
+      }
+
+      // 통계 로드
+      function loadStats() {
+        const statsInfo = document.getElementById('statsInfo');
+        const stats = shopManager.getStatistics();
+
+        statsInfo.innerHTML = `
+                <div class="form-row">
+                    <div class="form-group">
+                        <h3>총 업체 수</h3>
+                        <p style="font-size: 2rem; color: #667eea; margin: 0;">${
+                          stats.totalShops
+                        }</p>
+                    </div>
+                    <div class="form-group">
+                        <h3>지역 수</h3>
+                        <p style="font-size: 2rem; color: #667eea; margin: 0;">${
+                          stats.regions
+                        }</p>
+                    </div>
+                    <div class="form-group">
+                        <h3>업체 유형 수</h3>
+                        <p style="font-size: 2rem; color: #667eea; margin: 0;">${
+                          stats.types
+                        }</p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <h3>평균 평점</h3>
+                        <p style="font-size: 2rem; color: #667eea; margin: 0;">${
+                          stats.averageRating
+                        }</p>
+                    </div>
+                    <div class="form-group">
+                        <h3>총 리뷰 수</h3>
+                        <p style="font-size: 2rem; color: #667eea; margin: 0;">${
+                          stats.totalReviews
+                        }</p>
+                    </div>
+                    <div class="form-group">
+                        <h3>마지막 업데이트</h3>
+                        <p style="font-size: 1rem; color: #666; margin: 0;">${new Date(
+                          stats.lastUpdated
+                        ).toLocaleString()}</p>
+                    </div>
+                </div>
+            `;
+      }
+
+      // 업체 수정
+      function editShop(shopId) {
+        alert('업체 수정 기능은 개발 중입니다.');
+      }
+
+      // 업체 삭제
+      function deleteShop(shopId) {
+        if (confirm('정말로 이 업체를 삭제하시겠습니까?')) {
+          try {
+            shopManager.deleteShop(shopId);
+            loadShopsList();
+            alert('업체가 삭제되었습니다.');
+          } catch (error) {
+            alert('오류: ' + error.message);
+          }
+        }
+      }
+
+      // 페이지 로드 시 초기화
+      document.addEventListener('DOMContentLoaded', function () {
+        shopManager.loadShops().then(() => {
+          console.log('업체 관리 시스템 초기화 완료');
+        });
+      });
+    </script>
+  </body>
+</html>
