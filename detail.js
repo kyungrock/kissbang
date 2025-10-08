@@ -61,6 +61,236 @@ function denyAge() {
   window.location.href = 'https://www.google.com';
 }
 
+// 인증 탭 전환
+function switchVerificationTab(tabName) {
+  // 모든 탭 버튼 비활성화
+  const tabs = document.querySelectorAll('.verification-tab');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  
+  // 모든 인증 콘텐츠 숨기기
+  const contents = document.querySelectorAll('.verification-content');
+  contents.forEach(content => content.classList.remove('active'));
+  
+  // 선택된 탭 활성화
+  const selectedTab = Array.from(tabs).find(tab => {
+    const tabText = tab.textContent.trim();
+    if (tabName === 'simple' && tabText === '간편인증') return true;
+    if (tabName === 'phone' && tabText === '휴대폰') return true;
+    if (tabName === 'jumin' && tabText === '주민번호') return true;
+    return false;
+  });
+  
+  if (selectedTab) {
+    selectedTab.classList.add('active');
+  }
+  
+  // 선택된 콘텐츠 표시
+  const contentMap = {
+    'simple': 'simpleVerification',
+    'phone': 'phoneVerification',
+    'jumin': 'juminVerification'
+  };
+  
+  const selectedContent = document.getElementById(contentMap[tabName]);
+  if (selectedContent) {
+    selectedContent.classList.add('active');
+  }
+}
+
+// 휴대폰 번호 포맷팅
+function formatPhoneNumber(input) {
+  let value = input.value.replace(/[^0-9]/g, '');
+  
+  if (value.length <= 3) {
+    input.value = value;
+  } else if (value.length <= 7) {
+    input.value = value.slice(0, 3) + '-' + value.slice(3);
+  } else {
+    input.value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+  }
+}
+
+// 인증번호 발송 (데모용 - 실제 SMS는 발송되지 않음)
+let verificationTimer;
+let correctCode;
+
+function sendVerificationCode() {
+  const phoneNumber = document.getElementById('phoneNumber').value;
+  const phoneError = document.getElementById('phoneError');
+  
+  // 휴대폰 번호 유효성 검사
+  const phoneRegex = /^010-\d{4}-\d{4}$/;
+  if (!phoneRegex.test(phoneNumber)) {
+    phoneError.textContent = '올바른 휴대폰 번호를 입력해주세요. (010-0000-0000)';
+    phoneError.classList.add('show');
+    return;
+  }
+  
+  phoneError.classList.remove('show');
+  
+  // 인증번호 생성 (6자리 랜덤)
+  correctCode = Math.floor(100000 + Math.random() * 900000).toString();
+  
+  // 실제 운영 시에는 여기서 백엔드 API 호출
+  // await fetch('/api/send-verification-code', { ... });
+  
+  // 데모용: 콘솔에 인증번호 표시
+  console.log('인증번호:', correctCode);
+  alert(`[데모] 인증번호가 발송되었습니다.\n데모 인증번호: ${correctCode}\n\n* 실제 서비스에서는 SMS로 발송됩니다.`);
+  
+  // 인증번호 입력 필드 표시
+  document.getElementById('verificationCodeGroup').style.display = 'block';
+  document.getElementById('phoneVerifyBtn').style.display = 'block';
+  
+  // 타이머 시작 (3분)
+  startTimer(180);
+}
+
+// 타이머 시작
+function startTimer(seconds) {
+  const timerElement = document.getElementById('timer');
+  let remainingTime = seconds;
+  
+  // 기존 타이머 클리어
+  if (verificationTimer) {
+    clearInterval(verificationTimer);
+  }
+  
+  verificationTimer = setInterval(() => {
+    const minutes = Math.floor(remainingTime / 60);
+    const secs = remainingTime % 60;
+    
+    timerElement.textContent = `${minutes}:${secs.toString().padStart(2, '0')}`;
+    
+    if (remainingTime <= 0) {
+      clearInterval(verificationTimer);
+      timerElement.textContent = '인증시간이 만료되었습니다.';
+      correctCode = null;
+    }
+    
+    remainingTime--;
+  }, 1000);
+}
+
+// 휴대폰 인증 완료
+function verifyPhoneCode() {
+  const inputCode = document.getElementById('verificationCode').value;
+  const codeError = document.getElementById('codeError');
+  
+  if (!inputCode) {
+    codeError.textContent = '인증번호를 입력해주세요.';
+    codeError.classList.add('show');
+    return;
+  }
+  
+  if (inputCode !== correctCode) {
+    codeError.textContent = '인증번호가 일치하지 않습니다.';
+    codeError.classList.add('show');
+    return;
+  }
+  
+  // 인증 성공
+  codeError.classList.remove('show');
+  clearInterval(verificationTimer);
+  
+  alert('휴대폰 인증이 완료되었습니다!');
+  confirmAge();
+}
+
+// 주민번호 앞자리 체크 (생년월일 검증)
+function checkJuminFront(input) {
+  const juminError = document.getElementById('juminError');
+  
+  if (input.value.length === 6) {
+    // 생년월일 유효성 검사
+    const year = parseInt(input.value.substring(0, 2));
+    const month = parseInt(input.value.substring(2, 4));
+    const day = parseInt(input.value.substring(4, 6));
+    
+    if (month < 1 || month > 12) {
+      juminError.textContent = '올바른 월을 입력해주세요. (01-12)';
+      juminError.classList.add('show');
+      return;
+    }
+    
+    if (day < 1 || day > 31) {
+      juminError.textContent = '올바른 일을 입력해주세요. (01-31)';
+      juminError.classList.add('show');
+      return;
+    }
+    
+    juminError.classList.remove('show');
+  }
+}
+
+// 주민번호 인증
+function verifyJumin() {
+  const juminFront = document.getElementById('juminFront').value;
+  const juminBack = document.getElementById('juminBack').value;
+  const juminError = document.getElementById('juminError');
+  
+  // 앞자리 검증
+  if (juminFront.length !== 6) {
+    juminError.textContent = '생년월일 6자리를 입력해주세요.';
+    juminError.classList.add('show');
+    return;
+  }
+  
+  // 뒷자리 첫 번째 숫자 검증
+  if (juminBack.length !== 1) {
+    juminError.textContent = '주민등록번호 뒷자리 첫 번째 숫자를 입력해주세요.';
+    juminError.classList.add('show');
+    return;
+  }
+  
+  // 성별 숫자 검증 (1, 2, 3, 4만 허용)
+  const genderDigit = parseInt(juminBack);
+  if (![1, 2, 3, 4].includes(genderDigit)) {
+    juminError.textContent = '올바른 주민등록번호 뒷자리를 입력해주세요.';
+    juminError.classList.add('show');
+    return;
+  }
+  
+  // 생년월일로 만 19세 이상 확인
+  const year = parseInt(juminFront.substring(0, 2));
+  const month = parseInt(juminFront.substring(2, 4));
+  const day = parseInt(juminFront.substring(4, 6));
+  
+  // 세기 판별 (1, 2: 1900년대, 3, 4: 2000년대)
+  let fullYear;
+  if (genderDigit === 1 || genderDigit === 2) {
+    fullYear = 1900 + year;
+  } else {
+    fullYear = 2000 + year;
+  }
+  
+  // 만 19세 확인
+  const birthDate = new Date(fullYear, month - 1, day);
+  const today = new Date();
+  const age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  const dayDiff = today.getDate() - birthDate.getDate();
+  
+  let actualAge = age;
+  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    actualAge--;
+  }
+  
+  if (actualAge < 19) {
+    juminError.textContent = '만 19세 미만은 이용할 수 없습니다.';
+    juminError.classList.add('show');
+    setTimeout(() => {
+      denyAge();
+    }, 1500);
+    return;
+  }
+  
+  // 인증 성공
+  juminError.classList.remove('show');
+  alert('주민번호 인증이 완료되었습니다!');
+  confirmAge();
+}
+
 // 로딩 상태 관리
 let isPageLoaded = false;
 

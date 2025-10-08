@@ -2894,6 +2894,182 @@ body {
   line-height: 1.4;
 }
 
+/* 인증 탭 스타일 */
+.verification-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 5px;
+}
+
+.verification-tab {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 25px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.verification-tab.active {
+  background: white;
+  color: #667eea;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+.verification-content {
+  display: none;
+}
+
+.verification-content.active {
+  display: block;
+}
+
+/* 휴대폰 인증 스타일 */
+.phone-verification-form,
+.jumin-verification-form {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.form-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.form-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: white;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.form-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.send-code-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  background: white;
+  color: #667eea;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.send-code-btn:hover {
+  background: #f0f4ff;
+  transform: scale(1.05);
+}
+
+.send-code-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.timer {
+  color: #ff6b9d;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.info-text {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+/* 주민번호 입력 스타일 */
+.jumin-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jumin-input {
+  width: 120px;
+  text-align: center;
+}
+
+.jumin-separator {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.jumin-input-back {
+  width: 40px;
+  text-align: center;
+}
+
+.jumin-masked {
+  flex: 1;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.jumin-dot {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+}
+
+/* 에러 메시지 */
+.error-message {
+  color: #ff6b9d;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  text-align: left;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+}
+
 /* 모바일 반응형 */
 @media (max-width: 480px) {
   .age-verification-content {
@@ -2915,6 +3091,25 @@ body {
   .age-btn {
     padding: 12px 24px;
     font-size: 1rem;
+  }
+
+  .verification-tab {
+    font-size: 0.75rem;
+    padding: 8px 10px;
+  }
+
+  .form-input {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  .send-code-btn {
+    font-size: 0.8rem;
+    padding: 10px 15px;
+  }
+
+  .jumin-input {
+    width: 100px;
   }
 }
 

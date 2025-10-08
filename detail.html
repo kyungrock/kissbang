@@ -47,23 +47,134 @@
         <h2 class="age-verification-title">성인 인증</h2>
         <p class="age-verification-description">
           본 사이트는 성인(만 19세 이상)만 이용 가능합니다.<br>
-          귀하의 연령을 확인해주시기 바랍니다.
+          아래 방법 중 하나를 선택하여 인증해주세요.
         </p>
-        <div class="age-verification-warning">
-          <i class="fas fa-exclamation-triangle"></i>
-          청소년 보호법에 의거하여 만 19세 미만의 청소년은<br>
-          본 사이트를 이용할 수 없습니다.
-        </div>
-        <div class="age-verification-buttons">
-          <button class="age-btn age-btn-confirm" onclick="confirmAge()">
-            <i class="fas fa-check-circle"></i>
-            <span>만 19세 이상입니다</span>
+        
+        <!-- 인증 방법 탭 -->
+        <div class="verification-tabs">
+          <button class="verification-tab active" onclick="switchVerificationTab('simple')">
+            간편인증
           </button>
-          <button class="age-btn age-btn-deny" onclick="denyAge()">
-            <i class="fas fa-times-circle"></i>
-            <span>만 19세 미만입니다</span>
+          <button class="verification-tab" onclick="switchVerificationTab('phone')">
+            휴대폰
+          </button>
+          <button class="verification-tab" onclick="switchVerificationTab('jumin')">
+            주민번호
           </button>
         </div>
+
+        <!-- 간편 인증 -->
+        <div id="simpleVerification" class="verification-content active">
+          <div class="age-verification-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            청소년 보호법에 의거하여 만 19세 미만의 청소년은<br>
+            본 사이트를 이용할 수 없습니다.
+          </div>
+          <div class="age-verification-buttons">
+            <button class="age-btn age-btn-confirm" onclick="confirmAge()">
+              <i class="fas fa-check-circle"></i>
+              <span>만 19세 이상입니다</span>
+            </button>
+            <button class="age-btn age-btn-deny" onclick="denyAge()">
+              <i class="fas fa-times-circle"></i>
+              <span>만 19세 미만입니다</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 휴대폰 인증 -->
+        <div id="phoneVerification" class="verification-content">
+          <form class="phone-verification-form" onsubmit="return false;">
+            <div class="form-group">
+              <label class="form-label">휴대폰 번호</label>
+              <div class="form-input-group">
+                <input 
+                  type="tel" 
+                  id="phoneNumber" 
+                  class="form-input" 
+                  placeholder="010-0000-0000"
+                  maxlength="13"
+                  oninput="formatPhoneNumber(this)"
+                >
+                <button type="button" class="send-code-btn" onclick="sendVerificationCode()">
+                  인증번호 발송
+                </button>
+              </div>
+              <div id="phoneError" class="error-message"></div>
+            </div>
+            
+            <div class="form-group" id="verificationCodeGroup" style="display: none;">
+              <label class="form-label">인증번호</label>
+              <div class="form-input-group">
+                <input 
+                  type="text" 
+                  id="verificationCode" 
+                  class="form-input" 
+                  placeholder="인증번호 6자리"
+                  maxlength="6"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                >
+              </div>
+              <div id="timer" class="timer"></div>
+              <div id="codeError" class="error-message"></div>
+            </div>
+
+            <button type="button" class="age-btn age-btn-confirm" onclick="verifyPhoneCode()" id="phoneVerifyBtn" style="display: none;">
+              <i class="fas fa-check-circle"></i>
+              <span>인증 완료</span>
+            </button>
+          </form>
+          <p class="info-text">
+            휴대폰 인증 시 본인 명의의 휴대폰으로만 인증 가능합니다.
+          </p>
+        </div>
+
+        <!-- 주민번호 인증 -->
+        <div id="juminVerification" class="verification-content">
+          <form class="jumin-verification-form" onsubmit="return false;">
+            <div class="form-group">
+              <label class="form-label">주민등록번호</label>
+              <div class="jumin-input-group">
+                <input 
+                  type="text" 
+                  id="juminFront" 
+                  class="form-input jumin-input" 
+                  placeholder="생년월일 6자리"
+                  maxlength="6"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, ''); checkJuminFront(this)"
+                >
+                <span class="jumin-separator">-</span>
+                <input 
+                  type="password" 
+                  id="juminBack" 
+                  class="form-input jumin-input-back" 
+                  placeholder="●"
+                  maxlength="1"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                >
+                <div class="jumin-masked">
+                  <span class="jumin-dot"></span>
+                  <span class="jumin-dot"></span>
+                  <span class="jumin-dot"></span>
+                  <span class="jumin-dot"></span>
+                  <span class="jumin-dot"></span>
+                  <span class="jumin-dot"></span>
+                </div>
+              </div>
+              <div id="juminError" class="error-message"></div>
+            </div>
+
+            <button type="button" class="age-btn age-btn-confirm" onclick="verifyJumin()">
+              <i class="fas fa-check-circle"></i>
+              <span>인증 완료</span>
+            </button>
+          </form>
+          <p class="info-text">
+            주민등록번호는 안전하게 암호화되어 저장되며,<br>
+            본인 인증 용도로만 사용됩니다.
+          </p>
+        </div>
+
         <div class="age-verification-footer">
           본 인증은 청소년 보호를 위한 것으로,<br>
           허위 인증 시 관련 법령에 따라 처벌받을 수 있습니다.
