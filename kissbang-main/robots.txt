@@ -1,0 +1,26 @@
+# robots.txt for massagegaga.com
+# 모든 검색엔진 크롤러에게 사이트 공개
+
+User-agent: *
+Allow: /
+
+# 관리자 페이지는 크롤링 차단
+Disallow: /admin.html
+
+# 생성 스크립트 파일은 크롤링 차단
+Disallow: /generate-pages.js
+Disallow: /shop-manager.js
+
+# JSON 데이터 파일은 크롤링 차단
+Disallow: /shops.json
+
+# README 파일은 크롤링 차단
+Disallow: /README.md
+Disallow: /SHOP_MANAGEMENT_README.md
+
+# 사이트맵 위치
+Sitemap: https://massagegaga.com/sitemap.xml
+
+# 크롤링 지연 시간 (선택사항)
+# Crawl-delay: 1
+
