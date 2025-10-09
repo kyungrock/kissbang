@@ -3,8 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>업체 관리 - 마사지가가</title>
+    <title>관리자 페이지 - 마사지가가</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
       .admin-container {
         max-width: 1200px;
@@ -18,13 +22,69 @@
         padding: 30px;
         border-radius: 12px;
         margin-bottom: 30px;
-        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header-left {
+        flex: 1;
+      }
+
+      .header-left h1 {
+        margin: 0 0 10px 0;
+      }
+
+      .header-left p {
+        margin: 0;
+        opacity: 0.9;
+      }
+
+      .header-right {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .user-info {
+        text-align: right;
+      }
+
+      .user-name {
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      .user-role {
+        font-size: 12px;
+        opacity: 0.8;
+      }
+
+      .btn-logout {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+      }
+
+      .btn-logout:hover {
+        background: white;
+        color: #667eea;
       }
 
       .admin-tabs {
         display: flex;
         gap: 10px;
         margin-bottom: 30px;
+        flex-wrap: wrap;
       }
 
       .tab-btn {
@@ -185,21 +245,81 @@
         background: #f8d7da;
         color: #721c24;
       }
+
+      .image-preview-container {
+        margin-top: 10px;
+        display: none;
+      }
+
+      .image-preview-container.show {
+        display: block;
+      }
+
+      .preview-image {
+        width: 200px;
+        height: 150px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 2px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-insert-image {
+        background: #28a745;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .btn-insert-image:hover {
+        background: #218838;
+      }
     </style>
   </head>
   <body>
     <div class="admin-container">
       <div class="admin-header">
-        <h1>🏢 업체 관리 시스템</h1>
-        <p>마사지가가 업체 등록 및 관리</p>
+        <div class="header-left">
+          <h1><i class="fas fa-tachometer-alt"></i> 관리자 대시보드</h1>
+          <p>마사지가가 업체 및 회원 관리 시스템</p>
+        </div>
+        <div class="header-right">
+          <div class="user-info">
+            <div class="user-name" id="currentUserName">관리자</div>
+            <div class="user-role" id="currentUserRole">Administrator</div>
+          </div>
+          <button class="btn-logout" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> 로그아웃
+          </button>
+        </div>
       </div>
 
       <div class="admin-tabs">
         <button class="tab-btn active" onclick="showTab('add')">
-          업체 등록
+          <i class="fas fa-plus-circle"></i> 업체 등록
         </button>
-        <button class="tab-btn" onclick="showTab('list')">업체 목록</button>
-        <button class="tab-btn" onclick="showTab('stats')">통계</button>
+        <button class="tab-btn" onclick="showTab('list')">
+          <i class="fas fa-list"></i> 업체 목록
+        </button>
+        <button class="tab-btn" onclick="showTab('stats')">
+          <i class="fas fa-chart-bar"></i> 통계
+        </button>
+        <button
+          class="tab-btn"
+          onclick="window.location.href='users-management.html'"
+        >
+          <i class="fas fa-users"></i> 회원 관리
+        </button>
+        <button class="tab-btn" onclick="window.location.href='index.html'">
+          <i class="fas fa-home"></i> 홈으로
+        </button>
       </div>
 
       <!-- 업체 등록 탭 -->
@@ -229,8 +349,13 @@
           <div class="form-row">
             <div class="form-group">
               <label for="region">지역 *</label>
-              <select id="region" name="region" required>
-                <option value="">선택하세요</option>
+              <select
+                id="region"
+                name="region"
+                required
+                onchange="updateDistricts()"
+              >
+                <option value="">지역을 선택하세요</option>
                 <option value="서울">서울</option>
                 <option value="부산">부산</option>
                 <option value="대구">대구</option>
@@ -252,7 +377,14 @@
             </div>
             <div class="form-group">
               <label for="district">구/시 *</label>
-              <input type="text" id="district" name="district" required />
+              <select
+                id="district"
+                name="district"
+                required
+                style="opacity: 0.5"
+              >
+                <option value="">먼저 지역을 선택하세요</option>
+              </select>
             </div>
           </div>
 
@@ -300,7 +432,26 @@
 
           <div class="form-group">
             <label for="image">이미지 URL</label>
-            <input type="url" id="image" name="image" />
+            <input
+              type="url"
+              id="image"
+              name="image"
+              placeholder="https://i.imgur.com/yourimage.jpg"
+            />
+            <button
+              type="button"
+              class="btn-insert-image"
+              onclick="previewImage()"
+            >
+              <i class="fas fa-eye"></i> 미리보기
+            </button>
+            <div id="imagePreviewContainer" class="image-preview-container">
+              <img
+                id="previewImage"
+                class="preview-image"
+                alt="이미지 미리보기"
+              />
+            </div>
           </div>
 
           <div class="form-group">
@@ -454,10 +605,404 @@
       </div>
     </div>
 
+    <script src="auth-manager.js"></script>
     <script src="shop-manager.js"></script>
     <script>
+      // 권한 확인
+      if (!authManager.isAdmin()) {
+        alert('관리자 권한이 필요합니다.');
+        window.location.href = 'login.html';
+      }
+
+      // 현재 사용자 정보 표시
+      const currentUser = authManager.getCurrentUser();
+      if (currentUser) {
+        document.getElementById('currentUserName').textContent =
+          currentUser.name;
+        document.getElementById('currentUserRole').textContent =
+          currentUser.role === 'admin' ? 'Administrator' : 'User';
+      }
+
+      // 로그아웃 함수
+      function logout() {
+        if (confirm('로그아웃 하시겠습니까?')) {
+          authManager.logout();
+          window.location.href = 'login.html';
+        }
+      }
+
       const shopManager = new ShopManager();
       let courseCount = 1;
+
+      // 지역별 구/시 데이터
+      const districtData = {
+        서울: [
+          '강남구',
+          '강동구',
+          '강북구',
+          '강서구',
+          '관악구',
+          '광진구',
+          '구로구',
+          '금천구',
+          '노원구',
+          '도봉구',
+          '동대문구',
+          '동작구',
+          '마포구',
+          '서대문구',
+          '서초구',
+          '성동구',
+          '성북구',
+          '송파구',
+          '양천구',
+          '영등포구',
+          '용산구',
+          '은평구',
+          '종로구',
+          '중구',
+          '중랑구',
+        ],
+        부산: [
+          '중구',
+          '서구',
+          '동구',
+          '영도구',
+          '부산진구',
+          '동래구',
+          '남구',
+          '북구',
+          '해운대구',
+          '사하구',
+          '금정구',
+          '강서구',
+          '연제구',
+          '수영구',
+          '사상구',
+          '기장군',
+        ],
+        대구: [
+          '중구',
+          '동구',
+          '서구',
+          '남구',
+          '북구',
+          '수성구',
+          '달서구',
+          '달성군',
+        ],
+        인천: [
+          '중구',
+          '동구',
+          '미추홀구',
+          '연수구',
+          '남동구',
+          '부평구',
+          '계양구',
+          '서구',
+          '강화군',
+          '옹진군',
+        ],
+        광주: ['동구', '서구', '남구', '북구', '광산구'],
+        대전: ['동구', '중구', '서구', '유성구', '대덕구'],
+        울산: ['중구', '남구', '동구', '북구', '울주군'],
+        세종: ['세종특별자치시'],
+        경기: [
+          '수원시',
+          '성남시',
+          '의정부시',
+          '안양시',
+          '부천시',
+          '광명시',
+          '평택시',
+          '과천시',
+          '오산시',
+          '시흥시',
+          '군포시',
+          '의왕시',
+          '하남시',
+          '용인시',
+          '파주시',
+          '이천시',
+          '안성시',
+          '김포시',
+          '화성시',
+          '광주시',
+          '여주시',
+          '양평군',
+          '고양시',
+          '동두천시',
+          '가평군',
+          '연천군',
+        ],
+        강원: [
+          '춘천시',
+          '원주시',
+          '강릉시',
+          '동해시',
+          '태백시',
+          '속초시',
+          '삼척시',
+          '홍천군',
+          '횡성군',
+          '영월군',
+          '평창군',
+          '정선군',
+          '철원군',
+          '화천군',
+          '양구군',
+          '인제군',
+          '고성군',
+          '양양군',
+        ],
+        충북: [
+          '청주시',
+          '충주시',
+          '제천시',
+          '보은군',
+          '옥천군',
+          '영동군',
+          '증평군',
+          '진천군',
+          '괴산군',
+          '음성군',
+          '단양군',
+        ],
+        충남: [
+          '천안시',
+          '공주시',
+          '보령시',
+          '아산시',
+          '서산시',
+          '논산시',
+          '계룡시',
+          '당진시',
+          '금산군',
+          '부여군',
+          '서천군',
+          '청양군',
+          '홍성군',
+          '예산군',
+          '태안군',
+        ],
+        전북: [
+          '전주시',
+          '군산시',
+          '익산시',
+          '정읍시',
+          '남원시',
+          '김제시',
+          '완주군',
+          '진안군',
+          '무주군',
+          '장수군',
+          '임실군',
+          '순창군',
+          '고창군',
+          '부안군',
+        ],
+        전남: [
+          '목포시',
+          '여수시',
+          '순천시',
+          '나주시',
+          '광양시',
+          '담양군',
+          '곡성군',
+          '구례군',
+          '고흥군',
+          '보성군',
+          '화순군',
+          '장흥군',
+          '강진군',
+          '해남군',
+          '영암군',
+          '무안군',
+          '함평군',
+          '영광군',
+          '장성군',
+          '완도군',
+          '진도군',
+          '신안군',
+        ],
+        경북: [
+          '포항시',
+          '경주시',
+          '김천시',
+          '안동시',
+          '구미시',
+          '영주시',
+          '영천시',
+          '상주시',
+          '문경시',
+          '경산시',
+          '군위군',
+          '의성군',
+          '청송군',
+          '영양군',
+          '영덕군',
+          '청도군',
+          '고령군',
+          '성주군',
+          '칠곡군',
+          '예천군',
+          '봉화군',
+          '울진군',
+          '울릉군',
+        ],
+        경남: [
+          '창원시',
+          '진주시',
+          '통영시',
+          '사천시',
+          '김해시',
+          '밀양시',
+          '거제시',
+          '양산시',
+          '의령군',
+          '함안군',
+          '창녕군',
+          '고성군',
+          '남해군',
+          '하동군',
+          '산청군',
+          '함양군',
+          '거창군',
+          '합천군',
+        ],
+        제주: ['제주시', '서귀포시'],
+      };
+
+      // 지역 선택 시 구/시 업데이트 함수
+      function updateDistricts() {
+        console.log('========================================');
+        console.log('🎯 updateDistricts() 함수 호출됨!');
+        console.log('========================================');
+
+        const regionSelect = document.getElementById('region');
+        const districtSelect = document.getElementById('district');
+
+        if (!regionSelect || !districtSelect) {
+          console.error('❌ 요소를 찾을 수 없습니다!');
+          return;
+        }
+
+        const selectedRegion = regionSelect.value;
+        console.log('📍 선택된 지역:', selectedRegion);
+
+        // 구/시 초기화
+        districtSelect.innerHTML =
+          '<option value="">구/시를 선택하세요</option>';
+
+        if (!selectedRegion) {
+          districtSelect.style.opacity = '0.5';
+          console.log('⏹ 지역이 선택되지 않음 - 구/시 비활성화');
+          return;
+        }
+
+        if (districtData[selectedRegion]) {
+          const districts = districtData[selectedRegion];
+          console.log(
+            '✅ ' + selectedRegion + ' 데이터:',
+            districts.length + '개 구/시'
+          );
+          console.log('첫 5개:', districts.slice(0, 5));
+
+          // 구/시 옵션 추가
+          for (let i = 0; i < districts.length; i++) {
+            const district = districts[i];
+            const option = document.createElement('option');
+            option.value = district;
+            option.textContent = district;
+            districtSelect.appendChild(option);
+          }
+
+          // 드롭다운 활성화
+          districtSelect.style.opacity = '1';
+          districtSelect.style.cursor = 'pointer';
+
+          console.log('✅ 드롭다운 활성화 완료!');
+          console.log('총 옵션 수:', districtSelect.options.length);
+          console.log('========================================');
+
+          // 성공 알림 토스트
+          const toast = document.createElement('div');
+          toast.style.cssText =
+            'position: fixed; top: 80px; right: 20px; background: #28a745; color: white; padding: 15px 20px; border-radius: 8px; z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-weight: 600;';
+          toast.textContent =
+            '✅ ' +
+            selectedRegion +
+            ' - ' +
+            districts.length +
+            '개 구/시 로드됨';
+          document.body.appendChild(toast);
+          setTimeout(function () {
+            toast.remove();
+          }, 2000);
+        } else {
+          console.error('❌ ' + selectedRegion + ' 데이터를 찾을 수 없습니다!');
+          districtSelect.style.opacity = '0.5';
+        }
+      }
+
+      // 페이지 로드 후 테스트 함수
+      window.testDistrict = function () {
+        const districtSelect = document.getElementById('district');
+        console.log('=== 테스트 시작 ===');
+        console.log('districtSelect:', districtSelect);
+        console.log('disabled:', districtSelect.disabled);
+        console.log('옵션 수:', districtSelect.options.length);
+        console.log('style:', districtSelect.style.cssText);
+
+        // 서울 데이터로 테스트
+        districtSelect.innerHTML =
+          '<option value="">구/시를 선택하세요</option>';
+        const testData = ['강남구', '강동구', '강북구', '강서구', '관악구'];
+        testData.forEach(function (district) {
+          const option = document.createElement('option');
+          option.value = district;
+          option.textContent = district;
+          districtSelect.appendChild(option);
+        });
+
+        // 강제로 활성화
+        districtSelect.disabled = false;
+        districtSelect.removeAttribute('disabled');
+        districtSelect.style.opacity = '1';
+        districtSelect.style.pointerEvents = 'auto';
+        districtSelect.style.cursor = 'pointer';
+        districtSelect.style.backgroundColor = '#fff';
+
+        alert(
+          '테스트: 구/시 드롭다운에 5개 옵션 추가하고 활성화 완료!\n이제 클릭해보세요!'
+        );
+      };
+
+      // 이미지 미리보기 함수
+      function previewImage() {
+        const imageUrl = document.getElementById('image').value.trim();
+        const previewContainer = document.getElementById(
+          'imagePreviewContainer'
+        );
+        const previewImg = document.getElementById('previewImage');
+
+        if (!imageUrl) {
+          alert('이미지 URL을 입력하세요.');
+          return;
+        }
+
+        previewImg.src = imageUrl;
+        previewContainer.classList.add('show');
+
+        previewImg.onerror = function () {
+          alert('이미지를 불러올 수 없습니다. URL을 확인하세요.');
+          previewContainer.classList.remove('show');
+        };
+
+        previewImg.onload = function () {
+          alert('이미지 미리보기가 표시되었습니다.');
+        };
+      }
 
       // 탭 전환
       function showTab(tabName) {
@@ -488,36 +1033,47 @@
         const courseDiv = document.createElement('div');
         courseDiv.className = 'course-item';
         courseDiv.innerHTML = `
-                <div class="course-header">
-                    <h4>코스 ${courseCount}</h4>
-                    <button type="button" class="remove-btn" onclick="removeCourse(this)">삭제</button>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>카테고리</label>
-                        <input type="text" name="courseCategory" placeholder="예: 스웨디시 프로그램">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>코스명</label>
-                        <input type="text" name="courseName" placeholder="예: A코스">
-                    </div>
-                    <div class="form-group">
-                        <label>가격</label>
-                        <input type="text" name="coursePrice" placeholder="예: 80,000원">
-                    </div>
-                    <div class="form-group">
-                        <label>시간</label>
-                        <input type="text" name="courseDuration" placeholder="예: 60분">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>설명</label>
-                    <input type="text" name="courseDescription" placeholder="예: 스웨디시 + 아로마">
-                </div>
-            `;
+          <div class="course-header">
+            <h4>코스 ${courseCount}</h4>
+            <button type="button" class="remove-btn" onclick="removeCourse(this)">삭제</button>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>카테고리</label>
+              <input type="text" name="courseCategory" placeholder="예: 스웨디시 프로그램">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>코스명</label>
+              <input type="text" name="courseName" placeholder="예: A코스">
+            </div>
+            <div class="form-group">
+              <label>가격</label>
+              <input type="text" name="coursePrice" placeholder="예: 80,000원">
+            </div>
+            <div class="form-group">
+              <label>시간</label>
+              <input type="text" name="courseDuration" placeholder="예: 60분">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>설명</label>
+            <input type="text" name="courseDescription" placeholder="예: 스웨디시 + 아로마">
+          </div>
+        `;
         container.appendChild(courseDiv);
+
+        // 코스 추가 완료 알림
+        const btn = event.target;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> 추가됨';
+        btn.disabled = true;
+
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }, 1000);
       }
 
       // 코스 삭제
@@ -758,9 +1314,67 @@
 
       // 페이지 로드 시 초기화
       document.addEventListener('DOMContentLoaded', function () {
+        console.log('🚀 페이지 초기화 완료');
+
+        // 업체 관리 시스템 초기화
         shopManager.loadShops().then(() => {
-          console.log('업체 관리 시스템 초기화 완료');
+          console.log('✅ 업체 데이터 로드 완료');
         });
+
+        // === 지역/구시 선택 이벤트 리스너 ===
+        console.log('🔧 지역/구시 이벤트 리스너 등록 시작');
+
+        const regionSelect = document.getElementById('region');
+        const districtSelect = document.getElementById('district');
+
+        console.log('regionSelect 요소:', regionSelect);
+        console.log('districtSelect 요소:', districtSelect);
+
+        if (regionSelect && districtSelect) {
+          // change 이벤트 리스너 등록
+          regionSelect.addEventListener('change', function () {
+            console.log('🎯 지역 change 이벤트 발생!');
+            console.log('선택된 값:', this.value);
+            updateDistricts();
+          });
+
+          // 테스트: 클릭 이벤트도 등록
+          regionSelect.addEventListener('click', function () {
+            console.log('🖱️ 지역 클릭됨');
+          });
+
+          console.log('✅ 지역/구시 선택 이벤트 등록 완료');
+        } else {
+          console.error('❌ 요소를 찾을 수 없습니다!');
+          console.error('regionSelect:', regionSelect);
+          console.error('districtSelect:', districtSelect);
+        }
+
+        // 이미지 미리보기
+        const imageInput = document.getElementById('image');
+        if (imageInput) {
+          imageInput.addEventListener('input', function () {
+            const imageUrl = this.value.trim();
+            const previewContainer = document.getElementById(
+              'imagePreviewContainer'
+            );
+            const previewImg = document.getElementById('previewImage');
+
+            if (
+              imageUrl &&
+              (imageUrl.startsWith('http://') ||
+                imageUrl.startsWith('https://'))
+            ) {
+              previewImg.src = imageUrl;
+              previewContainer.classList.add('show');
+              previewImg.onerror = function () {
+                previewContainer.classList.remove('show');
+              };
+            } else {
+              previewContainer.classList.remove('show');
+            }
+          });
+        }
       });
     </script>
   </body>
