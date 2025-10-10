@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": "admin-001",
+      "username": "admin",
+      "email": "admin@kissbang.com",
+      "password": "$2a$10$rG3h7QX5VqN5ZX5X5X5X5OeKxXHXGxXxXxXxXxXxXxXxXxXxXx",
+      "role": "admin",
+      "name": "관리자",
+      "phone": "010-0000-0000",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "isActive": true,
+      "lastLogin": null
+    }
+  ]
+}
