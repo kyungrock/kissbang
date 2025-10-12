@@ -1,0 +1,438 @@
+<!-- 햄버거 메뉴 스타일 -->
+<style>
+  .hamburger-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+
+  .hamburger-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  /* 사이드 메뉴 */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 350px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 10000;
+    overflow-y: auto;
+  }
+
+  .side-menu.active {
+    right: 0;
+  }
+
+  .side-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 9999;
+  }
+
+  .side-menu-overlay.active {
+    display: block;
+  }
+
+  .side-menu-header {
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .side-menu-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .side-menu-user {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .side-menu-user.logged-out {
+    text-align: center;
+  }
+
+  .side-menu-user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .side-menu-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .side-menu-user-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .side-menu-user-details p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .side-menu-section {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .side-menu-section-title {
+    padding: 0 20px 10px 20px;
+    font-size: 12px;
+    color: #999;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .side-menu-item {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.3s;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .side-menu-item:hover {
+    background: #f8f9fa;
+  }
+
+  .side-menu-item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .side-menu-item i {
+    width: 20px;
+    color: #667eea;
+  }
+
+  .auth-buttons-menu {
+    display: flex;
+    gap: 10px;
+  }
+
+  .auth-btn-menu {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .auth-btn-login {
+    background: #667eea;
+    color: white;
+  }
+
+  .auth-btn-logout {
+    background: #dc3545;
+    color: white;
+  }
+
+  .mypage-info {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 20px;
+  }
+
+  .mypage-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .mypage-info-label {
+    color: #666;
+    font-weight: 600;
+  }
+
+  .mypage-info-value {
+    color: #333;
+  }
+</style>
+
+<!-- 햄버거 메뉴 오버레이 -->
+<div class="side-menu-overlay" id="sideMenuOverlay" onclick="toggleSideMenu()"></div>
+
+<!-- 사이드 메뉴 -->
+<div class="side-menu" id="sideMenu">
+  <!-- 메뉴 헤더 -->
+  <div class="side-menu-header">
+    <h2 style="margin: 0; font-size: 20px;">
+      <i class="fas fa-spa"></i> 메뉴
+    </h2>
+    <button class="side-menu-close" onclick="toggleSideMenu()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- 사용자 정보 (로그인 전) -->
+  <div class="side-menu-user logged-out" id="sideMenuUserLoggedOut">
+    <p style="color: #666; margin-bottom: 15px;">로그인이 필요합니다</p>
+    <div class="auth-buttons-menu">
+      <button class="auth-btn-menu auth-btn-login" onclick="window.location.href='login.html'">
+        <i class="fas fa-sign-in-alt"></i> 로그인
+      </button>
+    </div>
+  </div>
+
+  <!-- 사용자 정보 (로그인 후) -->
+  <div class="side-menu-user" id="sideMenuUserLoggedIn" style="display: none;">
+    <div class="side-menu-user-info">
+      <div class="side-menu-avatar" id="sideMenuAvatar">U</div>
+      <div class="side-menu-user-details">
+        <h3 id="sideMenuUserName">사용자</h3>
+        <p id="sideMenuUserId">@user</p>
+      </div>
+    </div>
+    <button class="auth-btn-menu auth-btn-logout" onclick="logoutMenu()" style="width: 100%;">
+      <i class="fas fa-sign-out-alt"></i> 로그아웃
+    </button>
+  </div>
+
+  <!-- 마이페이지 -->
+  <div class="side-menu-section" id="myPageSection" style="display: none;">
+    <div class="side-menu-section-title">※ 마이페이지</div>
+    <div class="side-menu-item" onclick="toggleMyPageInfo()">
+      <div class="side-menu-item-left">
+        <i class="fas fa-user"></i>
+        <span>내 정보</span>
+      </div>
+      <i class="fas fa-chevron-down" id="myPageChevron"></i>
+    </div>
+    <div id="myPageInfo" style="display: none;">
+      <div class="mypage-info">
+        <div class="mypage-info-row">
+          <span class="mypage-info-label">닉네임</span>
+          <span class="mypage-info-value" id="infoNickname">-</span>
+        </div>
+        <div class="mypage-info-row">
+          <span class="mypage-info-label">아이디</span>
+          <span class="mypage-info-value" id="infoUsername">-</span>
+        </div>
+        <div class="mypage-info-row">
+          <span class="mypage-info-label">E-Mail</span>
+          <span class="mypage-info-value" id="infoEmail">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 관심업체 -->
+  <div class="side-menu-section" id="favoriteSection" style="display: none;">
+    <div class="side-menu-section-title">※ 관심업체</div>
+    <div class="side-menu-item" onclick="showFavorites()">
+      <div class="side-menu-item-left">
+        <i class="fas fa-heart"></i>
+        <span>관심업체 보기</span>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <!-- 키스포유 -->
+  <div class="side-menu-section">
+    <div class="side-menu-section-title">※ 키스포유</div>
+    <div class="side-menu-item" onclick="showNotice()">
+      <div class="side-menu-item-left">
+        <i class="fas fa-bullhorn"></i>
+        <span>공지사항</span>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="side-menu-item" onclick="showEvent()">
+      <div class="side-menu-item-left">
+        <i class="fas fa-gift"></i>
+        <span>이벤트</span>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <!-- 커뮤니티 -->
+  <div class="side-menu-section">
+    <div class="side-menu-section-title">※ 커뮤니티</div>
+    <div class="side-menu-item" onclick="showReviews()">
+      <div class="side-menu-item-left">
+        <i class="fas fa-star"></i>
+        <span>방문후기</span>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="side-menu-item" onclick="showFreeBoard()">
+      <div class="side-menu-item-left">
+        <i class="fas fa-comments"></i>
+        <span>자유게시판</span>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <!-- 제휴문의 -->
+  <div class="side-menu-section">
+    <div class="side-menu-section-title">※ 제휴문의</div>
+    <div class="side-menu-item" onclick="showPartnershipForm()">
+      <div class="side-menu-item-left">
+        <i class="fas fa-handshake"></i>
+        <span>제휴문의</span>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+</div>
+
+<script>
+// 사이드 메뉴 토글
+function toggleSideMenu() {
+  const menu = document.getElementById('sideMenu');
+  const overlay = document.getElementById('sideMenuOverlay');
+  menu.classList.toggle('active');
+  overlay.classList.toggle('active');
+  
+  // 메뉴 열릴 때 사용자 정보 업데이트
+  if (menu.classList.contains('active')) {
+    updateSideMenuUser();
+  }
+}
+
+// 사용자 정보 업데이트
+function updateSideMenuUser() {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const loggedInSection = document.getElementById('sideMenuUserLoggedIn');
+  const loggedOutSection = document.getElementById('sideMenuUserLoggedOut');
+  const myPageSection = document.getElementById('myPageSection');
+  const favoriteSection = document.getElementById('favoriteSection');
+  
+  if (currentUser) {
+    // 로그인 상태
+    loggedInSection.style.display = 'block';
+    loggedOutSection.style.display = 'none';
+    myPageSection.style.display = 'block';
+    favoriteSection.style.display = 'block';
+    
+    // 사용자 정보 표시
+    document.getElementById('sideMenuUserName').textContent = currentUser.name;
+    document.getElementById('sideMenuUserId').textContent = '@' + currentUser.username;
+    document.getElementById('sideMenuAvatar').textContent = currentUser.name.charAt(0);
+    
+    // 마이페이지 정보
+    document.getElementById('infoNickname').textContent = currentUser.name;
+    document.getElementById('infoUsername').textContent = currentUser.username;
+    document.getElementById('infoEmail').textContent = currentUser.email;
+  } else {
+    // 로그아웃 상태
+    loggedInSection.style.display = 'none';
+    loggedOutSection.style.display = 'block';
+    myPageSection.style.display = 'none';
+    favoriteSection.style.display = 'none';
+  }
+}
+
+// 로그아웃
+function logoutMenu() {
+  if (confirm('로그아웃 하시겠습니까?')) {
+    localStorage.removeItem('currentUser');
+    alert('로그아웃되었습니다.');
+    toggleSideMenu();
+    window.location.reload();
+  }
+}
+
+// 마이페이지 정보 토글
+function toggleMyPageInfo() {
+  const info = document.getElementById('myPageInfo');
+  const chevron = document.getElementById('myPageChevron');
+  
+  if (info.style.display === 'none' || info.style.display === '') {
+    info.style.display = 'block';
+    chevron.className = 'fas fa-chevron-up';
+  } else {
+    info.style.display = 'none';
+    chevron.className = 'fas fa-chevron-down';
+  }
+}
+
+// 관심업체 보기
+function showFavorites() {
+  alert('관심업체 기능은 준비 중입니다.');
+  // TODO: 관심업체 페이지로 이동
+}
+
+// 공지사항
+function showNotice() {
+  alert('공지사항 기능은 준비 중입니다.');
+  // TODO: 공지사항 페이지로 이동
+}
+
+// 이벤트
+function showEvent() {
+  alert('이벤트 기능은 준비 중입니다.');
+  // TODO: 이벤트 페이지로 이동
+}
+
+// 방문후기
+function showReviews() {
+  alert('방문후기 기능은 준비 중입니다.');
+  // TODO: 방문후기 페이지로 이동
+}
+
+// 자유게시판
+function showFreeBoard() {
+  alert('자유게시판 기능은 준비 중입니다.');
+  // TODO: 자유게시판 페이지로 이동
+}
+
+// 제휴문의 폼 표시
+function showPartnershipForm() {
+  alert('제휴문의 폼이 곧 표시됩니다.');
+  // TODO: 제휴문의 폼 모달 열기
+}
+</script>
+
