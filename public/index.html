@@ -83,7 +83,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
-    
+
     <!-- 햄버거 메뉴 스타일 -->
     <style>
       .hamburger-btn {
@@ -1742,14 +1742,14 @@
       }
 
       // ========== 햄버거 메뉴 함수들 ==========
-      
+
       // 사이드 메뉴 토글
       function toggleSideMenu() {
         const menu = document.getElementById('sideMenu');
         const overlay = document.getElementById('sideMenuOverlay');
         menu.classList.toggle('active');
         overlay.classList.toggle('active');
-        
+
         // 메뉴 열릴 때 사용자 정보 업데이트
         if (menu.classList.contains('active')) {
           updateSideMenuUser();
@@ -1758,27 +1758,36 @@
 
       // 사용자 정보 업데이트
       function updateSideMenuUser() {
-        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        const currentUser = JSON.parse(
+          localStorage.getItem('currentUser') || 'null'
+        );
         const loggedInSection = document.getElementById('sideMenuUserLoggedIn');
-        const loggedOutSection = document.getElementById('sideMenuUserLoggedOut');
+        const loggedOutSection = document.getElementById(
+          'sideMenuUserLoggedOut'
+        );
         const myPageSection = document.getElementById('myPageSection');
         const favoriteSection = document.getElementById('favoriteSection');
-        
+
         if (currentUser) {
           // 로그인 상태
           loggedInSection.style.display = 'block';
           loggedOutSection.style.display = 'none';
           myPageSection.style.display = 'block';
           favoriteSection.style.display = 'block';
-          
+
           // 사용자 정보 표시
-          document.getElementById('sideMenuUserName').textContent = currentUser.name;
-          document.getElementById('sideMenuUserId').textContent = '@' + currentUser.username;
-          document.getElementById('sideMenuAvatar').textContent = currentUser.name.charAt(0);
-          
+          document.getElementById('sideMenuUserName').textContent =
+            currentUser.name;
+          document.getElementById('sideMenuUserId').textContent =
+            '@' + currentUser.username;
+          document.getElementById('sideMenuAvatar').textContent =
+            currentUser.name.charAt(0);
+
           // 마이페이지 정보
-          document.getElementById('infoNickname').textContent = currentUser.name;
-          document.getElementById('infoUsername').textContent = currentUser.username;
+          document.getElementById('infoNickname').textContent =
+            currentUser.name;
+          document.getElementById('infoUsername').textContent =
+            currentUser.username;
           document.getElementById('infoEmail').textContent = currentUser.email;
         } else {
           // 로그아웃 상태
@@ -1803,7 +1812,7 @@
       function toggleMyPageInfo() {
         const info = document.getElementById('myPageInfo');
         const chevron = document.getElementById('myPageChevron');
-        
+
         if (info.style.display === 'none' || info.style.display === '') {
           info.style.display = 'block';
           chevron.className = 'fas fa-chevron-up';
@@ -1821,8 +1830,7 @@
 
       // 공지사항
       function showNotice() {
-        alert('공지사항 기능은 준비 중입니다.');
-        toggleSideMenu();
+        window.location.href = 'notice.html';
       }
 
       // 이벤트
@@ -1851,13 +1859,19 @@
     </script>
 
     <!-- 햄버거 메뉴 오버레이 -->
-    <div class="side-menu-overlay" id="sideMenuOverlay" onclick="toggleSideMenu()"></div>
+    <div
+      class="side-menu-overlay"
+      id="sideMenuOverlay"
+      onclick="toggleSideMenu()"
+    ></div>
 
     <!-- 사이드 메뉴 -->
     <div class="side-menu" id="sideMenu">
       <!-- 메뉴 헤더 -->
       <div class="side-menu-header">
-        <h2 style="margin: 0; font-size: 20px"><i class="fas fa-spa"></i> 메뉴</h2>
+        <h2 style="margin: 0; font-size: 20px">
+          <i class="fas fa-spa"></i> 메뉴
+        </h2>
         <button class="side-menu-close" onclick="toggleSideMenu()">
           <i class="fas fa-times"></i>
         </button>
@@ -1867,14 +1881,21 @@
       <div class="side-menu-user logged-out" id="sideMenuUserLoggedOut">
         <p style="color: #666; margin-bottom: 15px">로그인이 필요합니다</p>
         <div class="auth-buttons-menu">
-          <button class="auth-btn-menu auth-btn-login" onclick="window.location.href='login.html'">
+          <button
+            class="auth-btn-menu auth-btn-login"
+            onclick="window.location.href='login.html'"
+          >
             <i class="fas fa-sign-in-alt"></i> 로그인
           </button>
         </div>
       </div>
 
       <!-- 사용자 정보 (로그인 후) -->
-      <div class="side-menu-user" id="sideMenuUserLoggedIn" style="display: none">
+      <div
+        class="side-menu-user"
+        id="sideMenuUserLoggedIn"
+        style="display: none"
+      >
         <div class="side-menu-user-info">
           <div class="side-menu-avatar" id="sideMenuAvatar">U</div>
           <div class="side-menu-user-details">
@@ -1882,7 +1903,11 @@
             <p id="sideMenuUserId">@user</p>
           </div>
         </div>
-        <button class="auth-btn-menu auth-btn-logout" onclick="logoutMenu()" style="width: 100%">
+        <button
+          class="auth-btn-menu auth-btn-logout"
+          onclick="logoutMenu()"
+          style="width: 100%"
+        >
           <i class="fas fa-sign-out-alt"></i> 로그아웃
         </button>
       </div>
