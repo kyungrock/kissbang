@@ -64,7 +64,7 @@ class ApiAuthManager {
   loginLocalStorage(username, password) {
     try {
       console.log('🔑 로그인 시도:', username);
-      
+
       // 전역 저장소와 로컬 저장소 모두 확인
       const globalKey = 'kissbang_global_users';
       const globalUsers = JSON.parse(localStorage.getItem(globalKey) || '[]');
@@ -77,18 +77,44 @@ class ApiAuthManager {
       const uniqueUsers = Array.from(
         new Map(allUsers.map((u) => [u.username, u])).values()
       );
-      
-      console.log('👥 전체 사용자 수:', uniqueUsers.length);
-      console.log('📋 사용자 목록:', uniqueUsers.map(u => u.username).join(', '));
 
-      const user = uniqueUsers.find(
-        (u) =>
-          (u.username === username || u.email === username) &&
-          u.isActive &&
-          u.password === password
+      console.log('👥 전체 사용자 수:', uniqueUsers.length);
+      console.log(
+        '📋 사용자 목록:',
+        uniqueUsers.map((u) => u.username).join(', ')
       );
 
+      // 디버깅: 입력된 비밀번호 확인 (개발용)
+      console.log('🔐 입력한 비밀번호 길이:', password.length);
+      
+      // 사용자 찾기 - 단계별로 확인
+      let user = uniqueUsers.find((u) => u.username === username || u.email === username);
+      
       if (user) {
+        console.log('👤 사용자 찾음:', user.username);
+        console.log('🔒 저장된 비밀번호:', user.password);
+        console.log('🔑 입력한 비밀번호:', password);
+        console.log('✔️ 비밀번호 일치?', user.password === password);
+        console.log('✔️ 활성 상태?', user.isActive);
+        
+        // 비밀번호 확인
+        if (user.password !== password) {
+          console.log('❌ 비밀번호 불일치');
+          return {
+            success: false,
+            error: '비밀번호가 일치하지 않습니다.',
+          };
+        }
+        
+        // 활성 상태 확인
+        if (!user.isActive) {
+          console.log('❌ 비활성 계정');
+          return {
+            success: false,
+            error: '비활성화된 계정입니다.',
+          };
+        }
+        
         console.log('✅ 로그인 성공:', user.username);
         user.lastLogin = new Date().toISOString();
 
@@ -145,15 +171,17 @@ class ApiAuthManager {
   registerLocalStorage(userData) {
     try {
       console.log('📝 회원가입 시도:', userData.username);
-      
+
       // 전역 사용자 저장소 사용 (모든 기기에서 접근 가능하도록 시도)
       const globalKey = 'kissbang_global_users';
       let users = JSON.parse(localStorage.getItem(globalKey) || '[]');
-      
+
       // kissbang_users도 확인
-      const localUsers = JSON.parse(localStorage.getItem('kissbang_users') || '[]');
+      const localUsers = JSON.parse(
+        localStorage.getItem('kissbang_users') || '[]'
+      );
       users = [...users, ...localUsers];
-      
+
       // 중복 제거
       users = Array.from(new Map(users.map((u) => [u.username, u])).values());
 
@@ -187,14 +215,14 @@ class ApiAuthManager {
       // 두 곳에 모두 저장
       localStorage.setItem(globalKey, JSON.stringify(users));
       localStorage.setItem('kissbang_users', JSON.stringify(users));
-      
+
       // 자동 로그인
       localStorage.setItem('currentUser', JSON.stringify(newUser));
       localStorage.setItem(
         'kissbang_session',
         JSON.stringify({ userId: newUser.id, loginTime: Date.now() })
       );
-      
+
       console.log('✅ 회원가입 성공:', newUser.username);
       console.log('✅ 전체 사용자 수:', users.length);
 
@@ -270,7 +298,7 @@ class ApiAuthManager {
     );
 
     // admin 계정이 없으면 추가
-    if (!uniqueUsers.find(u => u.username === 'admin')) {
+    if (!uniqueUsers.find((u) => u.username === 'admin')) {
       const adminUser = {
         id: 'admin-001',
         username: 'admin',
