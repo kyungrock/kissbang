@@ -63,6 +63,8 @@ class ApiAuthManager {
   // localStorage 폴백 로그인
   loginLocalStorage(username, password) {
     try {
+      console.log('🔑 로그인 시도:', username);
+      
       // 전역 저장소와 로컬 저장소 모두 확인
       const globalKey = 'kissbang_global_users';
       const globalUsers = JSON.parse(localStorage.getItem(globalKey) || '[]');
@@ -75,6 +77,9 @@ class ApiAuthManager {
       const uniqueUsers = Array.from(
         new Map(allUsers.map((u) => [u.username, u])).values()
       );
+      
+      console.log('👥 전체 사용자 수:', uniqueUsers.length);
+      console.log('📋 사용자 목록:', uniqueUsers.map(u => u.username).join(', '));
 
       const user = uniqueUsers.find(
         (u) =>
@@ -84,6 +89,7 @@ class ApiAuthManager {
       );
 
       if (user) {
+        console.log('✅ 로그인 성공:', user.username);
         user.lastLogin = new Date().toISOString();
 
         // 양쪽에 모두 저장
@@ -98,11 +104,13 @@ class ApiAuthManager {
         return { success: true, user: user };
       }
 
+      console.log('❌ 로그인 실패: 사용자를 찾을 수 없음');
       return {
         success: false,
         error: '사용자를 찾을 수 없거나 비밀번호가 일치하지 않습니다.',
       };
     } catch (error) {
+      console.error('❌ 로그인 오류:', error);
       return { success: false, error: '로그인 처리 중 오류가 발생했습니다.' };
     }
   }
@@ -136,15 +144,26 @@ class ApiAuthManager {
   // localStorage 폴백 회원가입
   registerLocalStorage(userData) {
     try {
+      console.log('📝 회원가입 시도:', userData.username);
+      
       // 전역 사용자 저장소 사용 (모든 기기에서 접근 가능하도록 시도)
       const globalKey = 'kissbang_global_users';
-      const users = JSON.parse(localStorage.getItem(globalKey) || '[]');
+      let users = JSON.parse(localStorage.getItem(globalKey) || '[]');
+      
+      // kissbang_users도 확인
+      const localUsers = JSON.parse(localStorage.getItem('kissbang_users') || '[]');
+      users = [...users, ...localUsers];
+      
+      // 중복 제거
+      users = Array.from(new Map(users.map((u) => [u.username, u])).values());
 
       // 중복 확인
       if (users.find((u) => u.username === userData.username)) {
+        console.log('❌ 중복된 아이디:', userData.username);
         return { success: false, error: '이미 사용 중인 아이디입니다.' };
       }
       if (users.find((u) => u.email === userData.email)) {
+        console.log('❌ 중복된 이메일:', userData.email);
         return { success: false, error: '이미 사용 중인 이메일입니다.' };
       }
 
@@ -160,7 +179,7 @@ class ApiAuthManager {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         isActive: true,
-        lastLogin: null,
+        lastLogin: new Date().toISOString(),
       };
 
       users.push(newUser);
@@ -168,9 +187,20 @@ class ApiAuthManager {
       // 두 곳에 모두 저장
       localStorage.setItem(globalKey, JSON.stringify(users));
       localStorage.setItem('kissbang_users', JSON.stringify(users));
+      
+      // 자동 로그인
+      localStorage.setItem('currentUser', JSON.stringify(newUser));
+      localStorage.setItem(
+        'kissbang_session',
+        JSON.stringify({ userId: newUser.id, loginTime: Date.now() })
+      );
+      
+      console.log('✅ 회원가입 성공:', newUser.username);
+      console.log('✅ 전체 사용자 수:', users.length);
 
       return { success: true, user: newUser };
     } catch (error) {
+      console.error('회원가입 오류:', error);
       return { success: false, error: '회원가입 처리 중 오류가 발생했습니다.' };
     }
   }
@@ -238,6 +268,25 @@ class ApiAuthManager {
     const uniqueUsers = Array.from(
       new Map(allUsers.map((u) => [u.username, u])).values()
     );
+
+    // admin 계정이 없으면 추가
+    if (!uniqueUsers.find(u => u.username === 'admin')) {
+      const adminUser = {
+        id: 'admin-001',
+        username: 'admin',
+        email: 'admin@kissbang.com',
+        password: 'admin123!',
+        role: 'admin',
+        name: '관리자',
+        phone: '010-0000-0000',
+        profileImage: '',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        isActive: true,
+        lastLogin: null,
+      };
+      uniqueUsers.push(adminUser);
+    }
 
     // 병합된 데이터를 다시 저장
     if (uniqueUsers.length > 0) {
