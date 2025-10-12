@@ -63,8 +63,20 @@ class ApiAuthManager {
   // localStorage 폴백 로그인
   loginLocalStorage(username, password) {
     try {
-      const users = JSON.parse(localStorage.getItem('kissbang_users') || '[]');
-      const user = users.find(
+      // 전역 저장소와 로컬 저장소 모두 확인
+      const globalKey = 'kissbang_global_users';
+      const globalUsers = JSON.parse(localStorage.getItem(globalKey) || '[]');
+      const localUsers = JSON.parse(
+        localStorage.getItem('kissbang_users') || '[]'
+      );
+
+      // 두 저장소를 합치기
+      const allUsers = [...globalUsers, ...localUsers];
+      const uniqueUsers = Array.from(
+        new Map(allUsers.map((u) => [u.username, u])).values()
+      );
+
+      const user = uniqueUsers.find(
         (u) =>
           (u.username === username || u.email === username) &&
           u.isActive &&
@@ -73,7 +85,10 @@ class ApiAuthManager {
 
       if (user) {
         user.lastLogin = new Date().toISOString();
-        localStorage.setItem('kissbang_users', JSON.stringify(users));
+
+        // 양쪽에 모두 저장
+        localStorage.setItem(globalKey, JSON.stringify(uniqueUsers));
+        localStorage.setItem('kissbang_users', JSON.stringify(uniqueUsers));
         localStorage.setItem('currentUser', JSON.stringify(user));
         localStorage.setItem(
           'kissbang_session',
@@ -83,7 +98,10 @@ class ApiAuthManager {
         return { success: true, user: user };
       }
 
-      return { success: false, error: '사용자를 찾을 수 없습니다.' };
+      return {
+        success: false,
+        error: '사용자를 찾을 수 없거나 비밀번호가 일치하지 않습니다.',
+      };
     } catch (error) {
       return { success: false, error: '로그인 처리 중 오류가 발생했습니다.' };
     }
@@ -118,7 +136,9 @@ class ApiAuthManager {
   // localStorage 폴백 회원가입
   registerLocalStorage(userData) {
     try {
-      const users = JSON.parse(localStorage.getItem('kissbang_users') || '[]');
+      // 전역 사용자 저장소 사용 (모든 기기에서 접근 가능하도록 시도)
+      const globalKey = 'kissbang_global_users';
+      const users = JSON.parse(localStorage.getItem(globalKey) || '[]');
 
       // 중복 확인
       if (users.find((u) => u.username === userData.username)) {
@@ -144,6 +164,9 @@ class ApiAuthManager {
       };
 
       users.push(newUser);
+
+      // 두 곳에 모두 저장
+      localStorage.setItem(globalKey, JSON.stringify(users));
       localStorage.setItem('kissbang_users', JSON.stringify(users));
 
       return { success: true, user: newUser };
@@ -203,7 +226,26 @@ class ApiAuthManager {
 
   // 하위 호환성을 위한 기존 메서드들
   getAllUsers() {
-    return JSON.parse(localStorage.getItem('kissbang_users') || '[]');
+    // 전역 저장소와 로컬 저장소 병합
+    const globalKey = 'kissbang_global_users';
+    const globalUsers = JSON.parse(localStorage.getItem(globalKey) || '[]');
+    const localUsers = JSON.parse(
+      localStorage.getItem('kissbang_users') || '[]'
+    );
+
+    // 중복 제거하며 병합
+    const allUsers = [...globalUsers, ...localUsers];
+    const uniqueUsers = Array.from(
+      new Map(allUsers.map((u) => [u.username, u])).values()
+    );
+
+    // 병합된 데이터를 다시 저장
+    if (uniqueUsers.length > 0) {
+      localStorage.setItem(globalKey, JSON.stringify(uniqueUsers));
+      localStorage.setItem('kissbang_users', JSON.stringify(uniqueUsers));
+    }
+
+    return uniqueUsers;
   }
 
   updateUser(userId, updates) {
@@ -214,7 +256,11 @@ class ApiAuthManager {
       throw new Error('사용자를 찾을 수 없습니다.');
     }
 
-    users[userIndex] = { ...users[userIndex], ...updates, updatedAt: new Date().toISOString() };
+    users[userIndex] = {
+      ...users[userIndex],
+      ...updates,
+      updatedAt: new Date().toISOString(),
+    };
     localStorage.setItem('kissbang_users', JSON.stringify(users));
 
     // 현재 사용자 업데이트
@@ -265,4 +311,3 @@ const authManager = new ApiAuthManager();
 
 // 하위 호환성을 위해 전역으로 노출
 window.authManager = authManager;
-

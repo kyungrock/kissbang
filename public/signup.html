@@ -186,7 +186,7 @@
         border-radius: 50%;
         object-fit: cover;
         border: 3px solid #667eea;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
 
       .password-strength {
@@ -539,7 +539,7 @@
           </div>
           <div class="help-text">프로필 사진 URL을 입력하세요 (선택사항)</div>
           <div id="imagePreview" class="image-preview">
-            <img id="previewImg" class="preview-img" alt="미리보기">
+            <img id="previewImg" class="preview-img" alt="미리보기" />
           </div>
         </div>
 
@@ -694,15 +694,15 @@
       const imagePreview = document.getElementById('imagePreview');
       const previewImg = document.getElementById('previewImg');
 
-      profileImageInput.addEventListener('input', function() {
+      profileImageInput.addEventListener('input', function () {
         const url = this.value.trim();
-        
+
         if (url) {
           previewImg.src = url;
           imagePreview.classList.add('show');
-          
+
           // 이미지 로드 에러 처리
-          previewImg.onerror = function() {
+          previewImg.onerror = function () {
             imagePreview.classList.remove('show');
           };
         } else {
