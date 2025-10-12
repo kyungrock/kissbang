@@ -386,6 +386,12 @@
 
     <script src="api-auth.js"></script>
     <script>
+      // authManager 초기화
+      (async function() {
+        await authManager.init();
+        console.log('✅ AuthManager 초기화 완료');
+      })();
+
       // 비밀번호 표시/숨김 토글
       const passwordToggle = document.getElementById('passwordToggle');
       const passwordInput = document.getElementById('password');
@@ -405,8 +411,10 @@
       loginForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        const username = document.getElementById('username').value;
+        const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
+
+        console.log('📝 폼 제출 - 아이디:', username, '비밀번호 길이:', password.length);
 
         // 에러 메시지 초기화
         errorMessage.classList.remove('show');
@@ -414,6 +422,8 @@
 
         // 로그인 시도 (await 추가)
         const result = await authManager.login(username, password);
+        
+        console.log('📊 로그인 결과:', result);
 
         if (result.success) {
           successMessage.textContent = '로그인 성공! 잠시 후 이동합니다...';

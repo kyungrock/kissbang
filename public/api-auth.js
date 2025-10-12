@@ -3,12 +3,21 @@ class ApiAuthManager {
   constructor() {
     this.apiUrl = window.location.origin;
     this.currentUser = null;
-    this.init();
+    this.initialized = false;
+    // 초기화는 나중에 수동으로
   }
 
   // 초기화
   async init() {
-    await this.checkSession();
+    if (this.initialized) return;
+    
+    try {
+      await this.checkSession();
+      this.initialized = true;
+    } catch (error) {
+      console.error('초기화 실패:', error);
+      this.initialized = true; // 실패해도 계속 진행
+    }
   }
 
   // 세션 확인 (쿠키 기반)
