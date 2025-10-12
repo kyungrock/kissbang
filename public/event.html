@@ -268,7 +268,7 @@
       </div>
     </div>
 
-    <script src="auth-manager.js"></script>
+    <script src="api-auth.js"></script>
     <script>
       // 이벤트 데이터
       let events = JSON.parse(localStorage.getItem('events') || '[]');
@@ -283,7 +283,9 @@
             content:
               '🎉 신규 회원 가입 이벤트\n\n지금 키스포유에 가입하시면:\n- 첫 예약 시 10% 할인 쿠폰\n- 포인트 1,000P 즉시 지급\n- 프리미엄 회원 1개월 무료 체험\n\n많은 참여 바랍니다!',
             startDate: new Date().toISOString(),
-            endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+            endDate: new Date(
+              Date.now() + 30 * 24 * 60 * 60 * 1000
+            ).toISOString(),
             status: 'active',
           },
           {
@@ -292,8 +294,12 @@
             description: '친구에게 추천하고 리워드를 받으세요!',
             content:
               '💝 친구 추천 이벤트\n\n제휴 업체를 추천해주시면:\n- 추천인: 5,000P 적립\n- 신규 가입자: 3,000P 적립\n\n무제한 추천 가능합니다!',
-            startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-            endDate: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString(),
+            startDate: new Date(
+              Date.now() - 7 * 24 * 60 * 60 * 1000
+            ).toISOString(),
+            endDate: new Date(
+              Date.now() + 60 * 24 * 60 * 60 * 1000
+            ).toISOString(),
             status: 'active',
           },
           {
@@ -302,8 +308,12 @@
             description: '방문 후기를 남기고 포인트를 받으세요!',
             content:
               '⭐ 리뷰 이벤트\n\n방문 후기를 작성하시면:\n- 사진 포함 후기: 2,000P\n- 일반 후기: 1,000P\n\n매달 베스트 리뷰 선정 시 특별 상품 증정!',
-            startDate: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
-            endDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
+            startDate: new Date(
+              Date.now() - 14 * 24 * 60 * 60 * 1000
+            ).toISOString(),
+            endDate: new Date(
+              Date.now() + 90 * 24 * 60 * 60 * 1000
+            ).toISOString(),
             status: 'active',
           },
         ];
@@ -356,9 +366,9 @@
                 <div class="event-description">${event.description}</div>
                 <div class="event-period">
                   <i class="fas fa-calendar"></i>
-                  ${startDate.toLocaleDateString('ko-KR')} ~ ${endDate.toLocaleDateString(
-              'ko-KR'
-            )}
+                  ${startDate.toLocaleDateString(
+                    'ko-KR'
+                  )} ~ ${endDate.toLocaleDateString('ko-KR')}
                 </div>
               </div>
             </div>
@@ -378,9 +388,9 @@
         const detailHtml = `
           <div class="event-detail-period">
             <i class="fas fa-calendar-alt"></i>
-            ${startDate.toLocaleDateString('ko-KR')} ~ ${endDate.toLocaleDateString(
-          'ko-KR'
-        )}
+            ${startDate.toLocaleDateString(
+              'ko-KR'
+            )} ~ ${endDate.toLocaleDateString('ko-KR')}
           </div>
           <div class="event-detail-content">${event.content}</div>
         `;
@@ -407,4 +417,3 @@
     </script>
   </body>
 </html>
-

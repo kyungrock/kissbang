@@ -424,9 +424,7 @@
             <!-- 상세 내용 -->
           </div>
           <div class="comment-section">
-            <h3 class="comment-title">
-              <i class="fas fa-comments"></i> 댓글
-            </h3>
+            <h3 class="comment-title"><i class="fas fa-comments"></i> 댓글</h3>
             <div class="comment-list" id="commentList">
               <!-- 댓글 목록 -->
             </div>
@@ -446,7 +444,7 @@
       </div>
     </div>
 
-    <script src="auth-manager.js"></script>
+    <script src="api-auth.js"></script>
     <script>
       // 게시글 데이터
       let posts = JSON.parse(localStorage.getItem('freeboard') || '[]');
@@ -478,7 +476,8 @@
           {
             id: Date.now() + 3,
             title: '처음 이용해봤는데 좋네요',
-            content: '사이트 디자인도 깔끔하고 정보도 많아서 좋습니다.\n앞으로 자주 이용할 것 같아요!',
+            content:
+              '사이트 디자인도 깔끔하고 정보도 많아서 좋습니다.\n앞으로 자주 이용할 것 같아요!',
             author: '박지훈',
             date: new Date(Date.now() - 172800000).toISOString(),
             views: 18,
@@ -531,7 +530,9 @@
                   'ko-KR'
                 )}</span>
                 <span><i class="fas fa-eye"></i> ${post.views}</span>
-                <span><i class="fas fa-comment"></i> ${post.comments.length}</span>
+                <span><i class="fas fa-comment"></i> ${
+                  post.comments.length
+                }</span>
               </div>
             </div>
           `;
@@ -557,8 +558,8 @@
             <div class="post-detail-meta">
               <span><i class="fas fa-user"></i> ${post.author}</span>
               <span><i class="fas fa-calendar"></i> ${date.toLocaleDateString(
-          'ko-KR'
-        )}</span>
+                'ko-KR'
+              )}</span>
               <span><i class="fas fa-eye"></i> ${post.views}</span>
             </div>
           </div>
@@ -583,7 +584,8 @@
         const list = document.getElementById('commentList');
 
         if (comments.length === 0) {
-          list.innerHTML = '<p style="color: #999; text-align: center;">첫 댓글을 남겨보세요!</p>';
+          list.innerHTML =
+            '<p style="color: #999; text-align: center;">첫 댓글을 남겨보세요!</p>';
           return;
         }
 
@@ -594,7 +596,9 @@
             <div class="comment-item">
               <div class="comment-header">
                 <span class="comment-author">${comment.author}</span>
-                <span class="comment-date">${date.toLocaleDateString('ko-KR')}</span>
+                <span class="comment-date">${date.toLocaleDateString(
+                  'ko-KR'
+                )}</span>
               </div>
               <div class="comment-content">${comment.content}</div>
             </div>
@@ -709,4 +713,3 @@
     </script>
   </body>
 </html>
-
