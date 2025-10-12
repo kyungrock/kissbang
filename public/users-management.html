@@ -463,7 +463,7 @@
         border-radius: 50%;
         object-fit: cover;
         border: 3px solid #667eea;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
 
       .btn-primary {
@@ -640,8 +640,16 @@
                 id="editProfileImage"
                 placeholder="https://i.imgur.com/yourimage.jpg"
               />
-              <div id="imagePreviewModal" class="image-preview-modal" style="display: none;">
-                <img id="previewImgModal" class="preview-img-modal" alt="미리보기">
+              <div
+                id="imagePreviewModal"
+                class="image-preview-modal"
+                style="display: none"
+              >
+                <img
+                  id="previewImgModal"
+                  class="preview-img-modal"
+                  alt="미리보기"
+                />
               </div>
             </div>
 
@@ -767,7 +775,7 @@
         filteredUsers.forEach((user) => {
           const initial = user.name.charAt(0);
           const joinDate = new Date(user.createdAt).toLocaleDateString('ko-KR');
-          
+
           // 프로필 이미지 표시 로직 개선
           let avatarContent;
           if (user.profileImage && user.profileImage.trim() !== '') {
@@ -791,11 +799,19 @@
             <td>${user.phone}</td>
             <td>
               <span class="badge ${
-                user.role === 'admin' ? 'badge-admin' : 
-                user.role === 'dealer' ? 'badge-dealer' : 'badge-user'
+                user.role === 'admin'
+                  ? 'badge-admin'
+                  : user.role === 'dealer'
+                  ? 'badge-dealer'
+                  : 'badge-user'
               }">
-                ${user.role === 'admin' ? '관리자' : 
-                  user.role === 'dealer' ? '대리점' : '일반회원'}
+                ${
+                  user.role === 'admin'
+                    ? '관리자'
+                    : user.role === 'dealer'
+                    ? '대리점'
+                    : '일반회원'
+                }
               </span>
             </td>
             <td>
@@ -937,14 +953,14 @@
       const previewImgModal = document.getElementById('previewImgModal');
 
       if (editProfileImageInput) {
-        editProfileImageInput.addEventListener('input', function() {
+        editProfileImageInput.addEventListener('input', function () {
           const url = this.value.trim();
-          
+
           if (url) {
             previewImgModal.src = url;
             imagePreviewModal.style.display = 'block';
-            
-            previewImgModal.onerror = function() {
+
+            previewImgModal.onerror = function () {
               imagePreviewModal.style.display = 'none';
             };
           } else {

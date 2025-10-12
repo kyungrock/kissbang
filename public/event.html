@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이벤트 - 키스포유</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f6fa;
+      }
+
+      .event-header {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .back-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid white;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
+
+      .back-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .event-header h1 {
+        margin: 0;
+        font-size: 24px;
+        flex: 1;
+      }
+
+      .event-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .event-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 20px;
+      }
+
+      .event-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+      }
+
+      .event-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .event-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 48px;
+      }
+
+      .event-content {
+        padding: 20px;
+      }
+
+      .event-badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .badge-active {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .badge-ended {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .event-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .event-description {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 15px;
+        line-height: 1.6;
+      }
+
+      .event-period {
+        font-size: 14px;
+        color: #999;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .empty-state {
+        padding: 60px 20px;
+        text-align: center;
+        color: #666;
+        background: white;
+        border-radius: 12px;
+      }
+
+      .empty-state i {
+        font-size: 64px;
+        color: #ddd;
+        margin-bottom: 20px;
+      }
+
+      /* 모달 */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 12px;
+        max-width: 800px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-header {
+        padding: 20px 30px;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        border-radius: 12px 12px 0 0;
+      }
+
+      .modal-header h2 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: white;
+        transition: opacity 0.3s;
+      }
+
+      .modal-close:hover {
+        opacity: 0.8;
+      }
+
+      .modal-body {
+        padding: 30px;
+      }
+
+      .event-detail-content {
+        line-height: 1.8;
+        font-size: 16px;
+        color: #333;
+        white-space: pre-wrap;
+      }
+
+      .event-detail-period {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        color: #f5576c;
+      }
+
+      @media (max-width: 768px) {
+        .event-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div class="event-header">
+      <button class="back-btn" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h1><i class="fas fa-gift"></i> 이벤트</h1>
+    </div>
+
+    <!-- 컨테이너 -->
+    <div class="event-container">
+      <div class="event-grid" id="eventGrid">
+        <!-- 이벤트 카드가 여기 표시됩니다 -->
+      </div>
+    </div>
+
+    <!-- 이벤트 상세 모달 -->
+    <div class="modal" id="eventModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="eventModalTitle">이벤트</h2>
+          <button class="modal-close" onclick="closeEventModal()">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="eventDetail">
+            <!-- 상세 내용이 여기 표시됩니다 -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="auth-manager.js"></script>
+    <script>
+      // 이벤트 데이터
+      let events = JSON.parse(localStorage.getItem('events') || '[]');
+
+      // 초기 샘플 데이터
+      if (events.length === 0) {
+        events = [
+          {
+            id: Date.now() + 1,
+            title: '신규 회원 가입 이벤트',
+            description: '지금 가입하고 특별한 혜택을 받아보세요!',
+            content:
+              '🎉 신규 회원 가입 이벤트\n\n지금 키스포유에 가입하시면:\n- 첫 예약 시 10% 할인 쿠폰\n- 포인트 1,000P 즉시 지급\n- 프리미엄 회원 1개월 무료 체험\n\n많은 참여 바랍니다!',
+            startDate: new Date().toISOString(),
+            endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+            status: 'active',
+          },
+          {
+            id: Date.now() + 2,
+            title: '제휴 업체 추천 이벤트',
+            description: '친구에게 추천하고 리워드를 받으세요!',
+            content:
+              '💝 친구 추천 이벤트\n\n제휴 업체를 추천해주시면:\n- 추천인: 5,000P 적립\n- 신규 가입자: 3,000P 적립\n\n무제한 추천 가능합니다!',
+            startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+            endDate: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString(),
+            status: 'active',
+          },
+          {
+            id: Date.now() + 3,
+            title: '리뷰 작성 이벤트',
+            description: '방문 후기를 남기고 포인트를 받으세요!',
+            content:
+              '⭐ 리뷰 이벤트\n\n방문 후기를 작성하시면:\n- 사진 포함 후기: 2,000P\n- 일반 후기: 1,000P\n\n매달 베스트 리뷰 선정 시 특별 상품 증정!',
+            startDate: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+            endDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
+            status: 'active',
+          },
+        ];
+        saveEvents();
+      }
+
+      // 이벤트 저장
+      function saveEvents() {
+        localStorage.setItem('events', JSON.stringify(events));
+      }
+
+      // 이벤트 목록 렌더링
+      function renderEvents() {
+        const grid = document.getElementById('eventGrid');
+
+        if (events.length === 0) {
+          grid.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-gift"></i>
+              <h3>진행 중인 이벤트가 없습니다</h3>
+              <p>곧 새로운 이벤트가 진행될 예정입니다.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // 최신순 정렬
+        const sortedEvents = [...events].sort(
+          (a, b) => new Date(b.startDate) - new Date(a.startDate)
+        );
+
+        grid.innerHTML = sortedEvents
+          .map((event) => {
+            const startDate = new Date(event.startDate);
+            const endDate = new Date(event.endDate);
+            const isActive = Date.now() < endDate.getTime();
+
+            return `
+            <div class="event-card" onclick="viewEvent(${event.id})">
+              <div class="event-image">
+                <i class="fas fa-gift"></i>
+              </div>
+              <div class="event-content">
+                <span class="event-badge ${
+                  isActive ? 'badge-active' : 'badge-ended'
+                }">
+                  ${isActive ? '진행중' : '종료'}
+                </span>
+                <div class="event-title">${event.title}</div>
+                <div class="event-description">${event.description}</div>
+                <div class="event-period">
+                  <i class="fas fa-calendar"></i>
+                  ${startDate.toLocaleDateString('ko-KR')} ~ ${endDate.toLocaleDateString(
+              'ko-KR'
+            )}
+                </div>
+              </div>
+            </div>
+          `;
+          })
+          .join('');
+      }
+
+      // 이벤트 상세보기
+      function viewEvent(id) {
+        const event = events.find((e) => e.id === id);
+        if (!event) return;
+
+        const startDate = new Date(event.startDate);
+        const endDate = new Date(event.endDate);
+
+        const detailHtml = `
+          <div class="event-detail-period">
+            <i class="fas fa-calendar-alt"></i>
+            ${startDate.toLocaleDateString('ko-KR')} ~ ${endDate.toLocaleDateString(
+          'ko-KR'
+        )}
+          </div>
+          <div class="event-detail-content">${event.content}</div>
+        `;
+
+        document.getElementById('eventModalTitle').textContent = event.title;
+        document.getElementById('eventDetail').innerHTML = detailHtml;
+        document.getElementById('eventModal').classList.add('active');
+      }
+
+      // 모달 닫기
+      function closeEventModal() {
+        document.getElementById('eventModal').classList.remove('active');
+      }
+
+      // 모달 배경 클릭 시 닫기
+      window.addEventListener('click', function (e) {
+        if (e.target.classList.contains('modal')) {
+          e.target.classList.remove('active');
+        }
+      });
+
+      // 초기화
+      renderEvents();
+    </script>
+  </body>
+</html>
+

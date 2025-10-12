@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['via.placeholder.com', 'images.unsplash.com', 'xn--z69au6wh5golr.com'],
+    domains: [
+      'via.placeholder.com',
+      'images.unsplash.com',
+      'xn--z69au6wh5golr.com',
+    ],
   },
   env: {
     MONGODB_URI: process.env.MONGODB_URI,
@@ -17,9 +21,8 @@ const nextConfig = {
         destination: '/index.html',
         permanent: false,
       },
-    ]
+    ];
   },
-}
+};
 
-module.exports = nextConfig
-
+module.exports = nextConfig;

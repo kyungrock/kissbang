@@ -199,15 +199,17 @@
 </style>
 
 <!-- 햄버거 메뉴 오버레이 -->
-<div class="side-menu-overlay" id="sideMenuOverlay" onclick="toggleSideMenu()"></div>
+<div
+  class="side-menu-overlay"
+  id="sideMenuOverlay"
+  onclick="toggleSideMenu()"
+></div>
 
 <!-- 사이드 메뉴 -->
 <div class="side-menu" id="sideMenu">
   <!-- 메뉴 헤더 -->
   <div class="side-menu-header">
-    <h2 style="margin: 0; font-size: 20px;">
-      <i class="fas fa-spa"></i> 메뉴
-    </h2>
+    <h2 style="margin: 0; font-size: 20px"><i class="fas fa-spa"></i> 메뉴</h2>
     <button class="side-menu-close" onclick="toggleSideMenu()">
       <i class="fas fa-times"></i>
     </button>
@@ -215,16 +217,19 @@
 
   <!-- 사용자 정보 (로그인 전) -->
   <div class="side-menu-user logged-out" id="sideMenuUserLoggedOut">
-    <p style="color: #666; margin-bottom: 15px;">로그인이 필요합니다</p>
+    <p style="color: #666; margin-bottom: 15px">로그인이 필요합니다</p>
     <div class="auth-buttons-menu">
-      <button class="auth-btn-menu auth-btn-login" onclick="window.location.href='login.html'">
+      <button
+        class="auth-btn-menu auth-btn-login"
+        onclick="window.location.href='login.html'"
+      >
         <i class="fas fa-sign-in-alt"></i> 로그인
       </button>
     </div>
   </div>
 
   <!-- 사용자 정보 (로그인 후) -->
-  <div class="side-menu-user" id="sideMenuUserLoggedIn" style="display: none;">
+  <div class="side-menu-user" id="sideMenuUserLoggedIn" style="display: none">
     <div class="side-menu-user-info">
       <div class="side-menu-avatar" id="sideMenuAvatar">U</div>
       <div class="side-menu-user-details">
@@ -232,13 +237,17 @@
         <p id="sideMenuUserId">@user</p>
       </div>
     </div>
-    <button class="auth-btn-menu auth-btn-logout" onclick="logoutMenu()" style="width: 100%;">
+    <button
+      class="auth-btn-menu auth-btn-logout"
+      onclick="logoutMenu()"
+      style="width: 100%"
+    >
       <i class="fas fa-sign-out-alt"></i> 로그아웃
     </button>
   </div>
 
   <!-- 마이페이지 -->
-  <div class="side-menu-section" id="myPageSection" style="display: none;">
+  <div class="side-menu-section" id="myPageSection" style="display: none">
     <div class="side-menu-section-title">※ 마이페이지</div>
     <div class="side-menu-item" onclick="toggleMyPageInfo()">
       <div class="side-menu-item-left">
@@ -247,7 +256,7 @@
       </div>
       <i class="fas fa-chevron-down" id="myPageChevron"></i>
     </div>
-    <div id="myPageInfo" style="display: none;">
+    <div id="myPageInfo" style="display: none">
       <div class="mypage-info">
         <div class="mypage-info-row">
           <span class="mypage-info-label">닉네임</span>
@@ -266,7 +275,7 @@
   </div>
 
   <!-- 관심업체 -->
-  <div class="side-menu-section" id="favoriteSection" style="display: none;">
+  <div class="side-menu-section" id="favoriteSection" style="display: none">
     <div class="side-menu-section-title">※ 관심업체</div>
     <div class="side-menu-item" onclick="showFavorites()">
       <div class="side-menu-item-left">
@@ -329,110 +338,113 @@
 </div>
 
 <script>
-// 사이드 메뉴 토글
-function toggleSideMenu() {
-  const menu = document.getElementById('sideMenu');
-  const overlay = document.getElementById('sideMenuOverlay');
-  menu.classList.toggle('active');
-  overlay.classList.toggle('active');
-  
-  // 메뉴 열릴 때 사용자 정보 업데이트
-  if (menu.classList.contains('active')) {
-    updateSideMenuUser();
+  // 사이드 메뉴 토글
+  function toggleSideMenu() {
+    const menu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('sideMenuOverlay');
+    menu.classList.toggle('active');
+    overlay.classList.toggle('active');
+
+    // 메뉴 열릴 때 사용자 정보 업데이트
+    if (menu.classList.contains('active')) {
+      updateSideMenuUser();
+    }
   }
-}
 
-// 사용자 정보 업데이트
-function updateSideMenuUser() {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  const loggedInSection = document.getElementById('sideMenuUserLoggedIn');
-  const loggedOutSection = document.getElementById('sideMenuUserLoggedOut');
-  const myPageSection = document.getElementById('myPageSection');
-  const favoriteSection = document.getElementById('favoriteSection');
-  
-  if (currentUser) {
-    // 로그인 상태
-    loggedInSection.style.display = 'block';
-    loggedOutSection.style.display = 'none';
-    myPageSection.style.display = 'block';
-    favoriteSection.style.display = 'block';
-    
-    // 사용자 정보 표시
-    document.getElementById('sideMenuUserName').textContent = currentUser.name;
-    document.getElementById('sideMenuUserId').textContent = '@' + currentUser.username;
-    document.getElementById('sideMenuAvatar').textContent = currentUser.name.charAt(0);
-    
-    // 마이페이지 정보
-    document.getElementById('infoNickname').textContent = currentUser.name;
-    document.getElementById('infoUsername').textContent = currentUser.username;
-    document.getElementById('infoEmail').textContent = currentUser.email;
-  } else {
-    // 로그아웃 상태
-    loggedInSection.style.display = 'none';
-    loggedOutSection.style.display = 'block';
-    myPageSection.style.display = 'none';
-    favoriteSection.style.display = 'none';
+  // 사용자 정보 업데이트
+  function updateSideMenuUser() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const loggedInSection = document.getElementById('sideMenuUserLoggedIn');
+    const loggedOutSection = document.getElementById('sideMenuUserLoggedOut');
+    const myPageSection = document.getElementById('myPageSection');
+    const favoriteSection = document.getElementById('favoriteSection');
+
+    if (currentUser) {
+      // 로그인 상태
+      loggedInSection.style.display = 'block';
+      loggedOutSection.style.display = 'none';
+      myPageSection.style.display = 'block';
+      favoriteSection.style.display = 'block';
+
+      // 사용자 정보 표시
+      document.getElementById('sideMenuUserName').textContent =
+        currentUser.name;
+      document.getElementById('sideMenuUserId').textContent =
+        '@' + currentUser.username;
+      document.getElementById('sideMenuAvatar').textContent =
+        currentUser.name.charAt(0);
+
+      // 마이페이지 정보
+      document.getElementById('infoNickname').textContent = currentUser.name;
+      document.getElementById('infoUsername').textContent =
+        currentUser.username;
+      document.getElementById('infoEmail').textContent = currentUser.email;
+    } else {
+      // 로그아웃 상태
+      loggedInSection.style.display = 'none';
+      loggedOutSection.style.display = 'block';
+      myPageSection.style.display = 'none';
+      favoriteSection.style.display = 'none';
+    }
   }
-}
 
-// 로그아웃
-function logoutMenu() {
-  if (confirm('로그아웃 하시겠습니까?')) {
-    localStorage.removeItem('currentUser');
-    alert('로그아웃되었습니다.');
-    toggleSideMenu();
-    window.location.reload();
+  // 로그아웃
+  function logoutMenu() {
+    if (confirm('로그아웃 하시겠습니까?')) {
+      localStorage.removeItem('currentUser');
+      alert('로그아웃되었습니다.');
+      toggleSideMenu();
+      window.location.reload();
+    }
   }
-}
 
-// 마이페이지 정보 토글
-function toggleMyPageInfo() {
-  const info = document.getElementById('myPageInfo');
-  const chevron = document.getElementById('myPageChevron');
-  
-  if (info.style.display === 'none' || info.style.display === '') {
-    info.style.display = 'block';
-    chevron.className = 'fas fa-chevron-up';
-  } else {
-    info.style.display = 'none';
-    chevron.className = 'fas fa-chevron-down';
+  // 마이페이지 정보 토글
+  function toggleMyPageInfo() {
+    const info = document.getElementById('myPageInfo');
+    const chevron = document.getElementById('myPageChevron');
+
+    if (info.style.display === 'none' || info.style.display === '') {
+      info.style.display = 'block';
+      chevron.className = 'fas fa-chevron-up';
+    } else {
+      info.style.display = 'none';
+      chevron.className = 'fas fa-chevron-down';
+    }
   }
-}
 
-// 관심업체 보기
-function showFavorites() {
-  alert('관심업체 기능은 준비 중입니다.');
-  // TODO: 관심업체 페이지로 이동
-}
+  // 관심업체 보기
+  function showFavorites() {
+    alert('관심업체 기능은 준비 중입니다.');
+    // TODO: 관심업체 페이지로 이동
+  }
 
-// 공지사항
-function showNotice() {
-  alert('공지사항 기능은 준비 중입니다.');
-  // TODO: 공지사항 페이지로 이동
-}
+  // 공지사항
+  function showNotice() {
+    alert('공지사항 기능은 준비 중입니다.');
+    // TODO: 공지사항 페이지로 이동
+  }
 
-// 이벤트
-function showEvent() {
-  alert('이벤트 기능은 준비 중입니다.');
-  // TODO: 이벤트 페이지로 이동
-}
+  // 이벤트
+  function showEvent() {
+    alert('이벤트 기능은 준비 중입니다.');
+    // TODO: 이벤트 페이지로 이동
+  }
 
-// 방문후기
-function showReviews() {
-  alert('방문후기 기능은 준비 중입니다.');
-  // TODO: 방문후기 페이지로 이동
-}
+  // 방문후기
+  function showReviews() {
+    alert('방문후기 기능은 준비 중입니다.');
+    // TODO: 방문후기 페이지로 이동
+  }
 
-// 자유게시판
-function showFreeBoard() {
-  alert('자유게시판 기능은 준비 중입니다.');
-  // TODO: 자유게시판 페이지로 이동
-}
+  // 자유게시판
+  function showFreeBoard() {
+    alert('자유게시판 기능은 준비 중입니다.');
+    // TODO: 자유게시판 페이지로 이동
+  }
 
-// 제휴문의 폼 표시
-function showPartnershipForm() {
-  alert('제휴문의 폼이 곧 표시됩니다.');
-  // TODO: 제휴문의 폼 모달 열기
-}
+  // 제휴문의 폼 표시
+  function showPartnershipForm() {
+    alert('제휴문의 폼이 곧 표시됩니다.');
+    // TODO: 제휴문의 폼 모달 열기
+  }
 </script>
-

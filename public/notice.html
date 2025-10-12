@@ -1,604 +1,649 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>공지사항 - 키스포유</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f5f6fa;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공지사항 - 키스포유</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f6fa;
+      }
 
-    .notice-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
+      .notice-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-    .back-btn {
-      background: rgba(255,255,255,0.2);
-      border: 1px solid white;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-    }
+      .back-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid white;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
 
-    .back-btn:hover {
-      background: rgba(255,255,255,0.3);
-    }
+      .back-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
 
-    .notice-header h1 {
-      margin: 0;
-      font-size: 24px;
-      flex: 1;
-    }
-
-    .notice-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .notice-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-
-    .stat-card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .stat-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      color: white;
-    }
-
-    .stat-icon.blue {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-
-    .stat-icon.green {
-      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-    }
-
-    .stat-content h3 {
-      margin: 0 0 5px 0;
-      font-size: 14px;
-      color: #666;
-    }
-
-    .stat-content p {
-      margin: 0;
-      font-size: 24px;
-      font-weight: 700;
-      color: #333;
-    }
-
-    .notice-actions {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .search-box {
-      display: flex;
-      gap: 10px;
-      flex: 1;
-      min-width: 250px;
-    }
-
-    .search-input {
-      flex: 1;
-      padding: 10px 15px;
-      border: 2px solid #e9ecef;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: #667eea;
-    }
-
-    .btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-    }
-
-    .btn-secondary {
-      background: #f8f9fa;
-      color: #333;
-      border: 1px solid #dee2e6;
-    }
-
-    .btn-secondary:hover {
-      background: #e9ecef;
-    }
-
-    .notice-list {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-
-    .notice-item {
-      border-bottom: 1px solid #f0f0f0;
-      padding: 20px;
-      cursor: pointer;
-      transition: background 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .notice-item:hover {
-      background: #f8f9fa;
-    }
-
-    .notice-item:last-child {
-      border-bottom: none;
-    }
-
-    .notice-badge {
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .badge-important {
-      background: #fee;
-      color: #c33;
-    }
-
-    .badge-new {
-      background: #e3f2fd;
-      color: #1976d2;
-    }
-
-    .badge-event {
-      background: #fff3cd;
-      color: #856404;
-    }
-
-    .notice-content {
-      flex: 1;
-    }
-
-    .notice-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .notice-meta {
-      font-size: 14px;
-      color: #666;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .notice-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 18px;
-    }
-
-    .empty-state {
-      padding: 60px 20px;
-      text-align: center;
-      color: #666;
-    }
-
-    .empty-state i {
-      font-size: 64px;
-      color: #ddd;
-      margin-bottom: 20px;
-    }
-
-    .empty-state h3 {
-      margin: 0 0 10px 0;
-      color: #333;
-    }
-
-    /* 모달 */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal.active {
-      display: flex;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 12px;
-      max-width: 800px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .modal-header {
-      padding: 20px 30px;
-      border-bottom: 1px solid #e9ecef;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-header h2 {
-      margin: 0;
-      font-size: 20px;
-      color: #333;
-    }
-
-    .modal-close {
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: #999;
-      transition: color 0.3s;
-    }
-
-    .modal-close:hover {
-      color: #333;
-    }
-
-    .modal-body {
-      padding: 30px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #333;
-      font-size: 14px;
-    }
-
-    .form-input, .form-textarea, .form-select {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #e9ecef;
-      border-radius: 8px;
-      font-size: 14px;
-      box-sizing: border-box;
-      font-family: inherit;
-    }
-
-    .form-input:focus, .form-textarea:focus, .form-select:focus {
-      outline: none;
-      border-color: #667eea;
-    }
-
-    .form-textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    .notice-detail {
-      line-height: 1.8;
-    }
-
-    .notice-detail-header {
-      padding-bottom: 20px;
-      border-bottom: 2px solid #f0f0f0;
-      margin-bottom: 30px;
-    }
-
-    .notice-detail-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: #333;
-      margin-bottom: 15px;
-    }
-
-    .notice-detail-meta {
-      display: flex;
-      gap: 20px;
-      font-size: 14px;
-      color: #666;
-    }
-
-    .notice-detail-content {
-      font-size: 16px;
-      color: #333;
-      white-space: pre-wrap;
-    }
-
-    @media (max-width: 768px) {
       .notice-header h1 {
-        font-size: 20px;
+        margin: 0;
+        font-size: 24px;
+        flex: 1;
+      }
+
+      .notice-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
       }
 
       .notice-stats {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: white;
+      }
+
+      .stat-icon.blue {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .stat-icon.green {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      }
+
+      .stat-content h3 {
+        margin: 0 0 5px 0;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .stat-content p {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
       }
 
       .notice-actions {
-        flex-direction: column;
-        align-items: stretch;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
       }
 
       .search-box {
-        width: 100%;
+        display: flex;
+        gap: 10px;
+        flex: 1;
+        min-width: 250px;
       }
-    }
-  </style>
-</head>
-<body>
-  <!-- 헤더 -->
-  <div class="notice-header">
-    <button class="back-btn" onclick="window.history.back()">
-      <i class="fas fa-arrow-left"></i>
-    </button>
-    <h1><i class="fas fa-bullhorn"></i> 공지사항</h1>
-  </div>
 
-  <!-- 컨테이너 -->
-  <div class="notice-container">
-    <!-- 통계 -->
-    <div class="notice-stats">
-      <div class="stat-card">
-        <div class="stat-icon blue">
-          <i class="fas fa-bullhorn"></i>
-        </div>
-        <div class="stat-content">
-          <h3>전체 공지</h3>
-          <p id="totalNotices">0</p>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon green">
-          <i class="fas fa-star"></i>
-        </div>
-        <div class="stat-content">
-          <h3>중요 공지</h3>
-          <p id="importantNotices">0</p>
-        </div>
-      </div>
+      .search-input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-secondary {
+        background: #f8f9fa;
+        color: #333;
+        border: 1px solid #dee2e6;
+      }
+
+      .btn-secondary:hover {
+        background: #e9ecef;
+      }
+
+      .notice-list {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .notice-item {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 20px;
+        cursor: pointer;
+        transition: background 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .notice-item:hover {
+        background: #f8f9fa;
+      }
+
+      .notice-item:last-child {
+        border-bottom: none;
+      }
+
+      .notice-badge {
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .badge-important {
+        background: #fee;
+        color: #c33;
+      }
+
+      .badge-new {
+        background: #e3f2fd;
+        color: #1976d2;
+      }
+
+      .badge-event {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .notice-content {
+        flex: 1;
+      }
+
+      .notice-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .notice-meta {
+        font-size: 14px;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .notice-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 18px;
+      }
+
+      .empty-state {
+        padding: 60px 20px;
+        text-align: center;
+        color: #666;
+      }
+
+      .empty-state i {
+        font-size: 64px;
+        color: #ddd;
+        margin-bottom: 20px;
+      }
+
+      .empty-state h3 {
+        margin: 0 0 10px 0;
+        color: #333;
+      }
+
+      /* 모달 */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 12px;
+        max-width: 800px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-header {
+        padding: 20px 30px;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-header h2 {
+        margin: 0;
+        font-size: 20px;
+        color: #333;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #999;
+        transition: color 0.3s;
+      }
+
+      .modal-close:hover {
+        color: #333;
+      }
+
+      .modal-body {
+        padding: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+        font-size: 14px;
+      }
+
+      .form-input,
+      .form-textarea,
+      .form-select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 14px;
+        box-sizing: border-box;
+        font-family: inherit;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus,
+      .form-select:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .form-textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .notice-detail {
+        line-height: 1.8;
+      }
+
+      .notice-detail-header {
+        padding-bottom: 20px;
+        border-bottom: 2px solid #f0f0f0;
+        margin-bottom: 30px;
+      }
+
+      .notice-detail-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .notice-detail-meta {
+        display: flex;
+        gap: 20px;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .notice-detail-content {
+        font-size: 16px;
+        color: #333;
+        white-space: pre-wrap;
+      }
+
+      @media (max-width: 768px) {
+        .notice-header h1 {
+          font-size: 20px;
+        }
+
+        .notice-stats {
+          grid-template-columns: 1fr;
+        }
+
+        .notice-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .search-box {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div class="notice-header">
+      <button class="back-btn" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h1><i class="fas fa-bullhorn"></i> 공지사항</h1>
     </div>
 
-    <!-- 액션 바 -->
-    <div class="notice-actions">
-      <div class="search-box">
-        <input type="text" class="search-input" id="searchInput" placeholder="제목 또는 내용으로 검색...">
-        <button class="btn btn-secondary" onclick="searchNotices()">
-          <i class="fas fa-search"></i> 검색
+    <!-- 컨테이너 -->
+    <div class="notice-container">
+      <!-- 통계 -->
+      <div class="notice-stats">
+        <div class="stat-card">
+          <div class="stat-icon blue">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <div class="stat-content">
+            <h3>전체 공지</h3>
+            <p id="totalNotices">0</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="stat-content">
+            <h3>중요 공지</h3>
+            <p id="importantNotices">0</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 액션 바 -->
+      <div class="notice-actions">
+        <div class="search-box">
+          <input
+            type="text"
+            class="search-input"
+            id="searchInput"
+            placeholder="제목 또는 내용으로 검색..."
+          />
+          <button class="btn btn-secondary" onclick="searchNotices()">
+            <i class="fas fa-search"></i> 검색
+          </button>
+        </div>
+        <button
+          class="btn btn-primary"
+          onclick="openWriteModal()"
+          id="writeBtn"
+          style="display: none"
+        >
+          <i class="fas fa-pen"></i> 공지 작성
         </button>
       </div>
-      <button class="btn btn-primary" onclick="openWriteModal()" id="writeBtn" style="display: none;">
-        <i class="fas fa-pen"></i> 공지 작성
-      </button>
-    </div>
 
-    <!-- 공지사항 목록 -->
-    <div class="notice-list" id="noticeList">
-      <!-- 공지사항이 여기 표시됩니다 -->
-    </div>
-  </div>
-
-  <!-- 공지사항 상세 모달 -->
-  <div class="modal" id="detailModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>공지사항</h2>
-        <button class="modal-close" onclick="closeDetailModal()">&times;</button>
+      <!-- 공지사항 목록 -->
+      <div class="notice-list" id="noticeList">
+        <!-- 공지사항이 여기 표시됩니다 -->
       </div>
-      <div class="modal-body">
-        <div class="notice-detail" id="noticeDetail">
-          <!-- 상세 내용이 여기 표시됩니다 -->
+    </div>
+
+    <!-- 공지사항 상세 모달 -->
+    <div class="modal" id="detailModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>공지사항</h2>
+          <button class="modal-close" onclick="closeDetailModal()">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="notice-detail" id="noticeDetail">
+            <!-- 상세 내용이 여기 표시됩니다 -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- 공지사항 작성 모달 -->
-  <div class="modal" id="writeModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>공지사항 작성</h2>
-        <button class="modal-close" onclick="closeWriteModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="noticeForm" onsubmit="submitNotice(event)">
-          <div class="form-group">
-            <label class="form-label">제목</label>
-            <input type="text" class="form-input" id="noticeTitle" required placeholder="공지사항 제목을 입력하세요">
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label">분류</label>
-            <select class="form-select" id="noticeType">
-              <option value="normal">일반</option>
-              <option value="important">중요</option>
-              <option value="event">이벤트</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">내용</label>
-            <textarea class="form-textarea" id="noticeContent" required placeholder="공지사항 내용을 입력하세요"></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="width: 100%;">
-            <i class="fas fa-check"></i> 등록하기
+    <!-- 공지사항 작성 모달 -->
+    <div class="modal" id="writeModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>공지사항 작성</h2>
+          <button class="modal-close" onclick="closeWriteModal()">
+            &times;
           </button>
-        </form>
+        </div>
+        <div class="modal-body">
+          <form id="noticeForm" onsubmit="submitNotice(event)">
+            <div class="form-group">
+              <label class="form-label">제목</label>
+              <input
+                type="text"
+                class="form-input"
+                id="noticeTitle"
+                required
+                placeholder="공지사항 제목을 입력하세요"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">분류</label>
+              <select class="form-select" id="noticeType">
+                <option value="normal">일반</option>
+                <option value="important">중요</option>
+                <option value="event">이벤트</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">내용</label>
+              <textarea
+                class="form-textarea"
+                id="noticeContent"
+                required
+                placeholder="공지사항 내용을 입력하세요"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              <i class="fas fa-check"></i> 등록하기
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script src="auth-manager.js"></script>
-  <script>
-    // 공지사항 데이터 (LocalStorage 사용)
-    let notices = JSON.parse(localStorage.getItem('notices') || '[]');
+    <script src="auth-manager.js"></script>
+    <script>
+      // 공지사항 데이터 (LocalStorage 사용)
+      let notices = JSON.parse(localStorage.getItem('notices') || '[]');
 
-    // 초기 샘플 데이터
-    if (notices.length === 0) {
-      notices = [
-        {
-          id: Date.now() + 1,
-          title: '키스포유 서비스 오픈 안내',
-          content: '안녕하세요, 키스포유입니다.\n\n전국 마사지 업체 정보를 한눈에 확인할 수 있는 키스포유 서비스가 오픈했습니다.\n\n앞으로 더 나은 서비스로 보답하겠습니다.\n\n감사합니다.',
-          type: 'important',
-          date: new Date().toISOString(),
-          author: '관리자',
-          views: 0
-        },
-        {
-          id: Date.now() + 2,
-          title: '제휴 업체 모집 안내',
-          content: '제휴를 원하시는 업체분들은 제휴문의 메뉴를 통해 신청해주시기 바랍니다.\n\n상세한 조건은 제휴문의 시 안내드리겠습니다.',
-          type: 'normal',
-          date: new Date(Date.now() - 86400000).toISOString(),
-          author: '관리자',
-          views: 0
-        },
-        {
-          id: Date.now() + 3,
-          title: '회원 가입 이벤트 진행 중',
-          content: '지금 회원가입하시고 다양한 혜택을 받아보세요!\n\n이벤트 기간: 2025.01.01 ~ 2025.12.31',
-          type: 'event',
-          date: new Date(Date.now() - 172800000).toISOString(),
-          author: '관리자',
-          views: 0
-        }
-      ];
-      saveNotices();
-    }
+      // 초기 샘플 데이터
+      if (notices.length === 0) {
+        notices = [
+          {
+            id: Date.now() + 1,
+            title: '키스포유 서비스 오픈 안내',
+            content:
+              '안녕하세요, 키스포유입니다.\n\n전국 마사지 업체 정보를 한눈에 확인할 수 있는 키스포유 서비스가 오픈했습니다.\n\n앞으로 더 나은 서비스로 보답하겠습니다.\n\n감사합니다.',
+            type: 'important',
+            date: new Date().toISOString(),
+            author: '관리자',
+            views: 0,
+          },
+          {
+            id: Date.now() + 2,
+            title: '제휴 업체 모집 안내',
+            content:
+              '제휴를 원하시는 업체분들은 제휴문의 메뉴를 통해 신청해주시기 바랍니다.\n\n상세한 조건은 제휴문의 시 안내드리겠습니다.',
+            type: 'normal',
+            date: new Date(Date.now() - 86400000).toISOString(),
+            author: '관리자',
+            views: 0,
+          },
+          {
+            id: Date.now() + 3,
+            title: '회원 가입 이벤트 진행 중',
+            content:
+              '지금 회원가입하시고 다양한 혜택을 받아보세요!\n\n이벤트 기간: 2025.01.01 ~ 2025.12.31',
+            type: 'event',
+            date: new Date(Date.now() - 172800000).toISOString(),
+            author: '관리자',
+            views: 0,
+          },
+        ];
+        saveNotices();
+      }
 
-    // 공지사항 저장
-    function saveNotices() {
-      localStorage.setItem('notices', JSON.stringify(notices));
-    }
+      // 공지사항 저장
+      function saveNotices() {
+        localStorage.setItem('notices', JSON.stringify(notices));
+      }
 
-    // 통계 업데이트
-    function updateStats() {
-      document.getElementById('totalNotices').textContent = notices.length;
-      document.getElementById('importantNotices').textContent = notices.filter(n => n.type === 'important').length;
-    }
+      // 통계 업데이트
+      function updateStats() {
+        document.getElementById('totalNotices').textContent = notices.length;
+        document.getElementById('importantNotices').textContent =
+          notices.filter((n) => n.type === 'important').length;
+      }
 
-    // 공지사항 목록 렌더링
-    function renderNotices(filteredNotices = notices) {
-      const list = document.getElementById('noticeList');
-      
-      if (filteredNotices.length === 0) {
-        list.innerHTML = `
+      // 공지사항 목록 렌더링
+      function renderNotices(filteredNotices = notices) {
+        const list = document.getElementById('noticeList');
+
+        if (filteredNotices.length === 0) {
+          list.innerHTML = `
           <div class="empty-state">
             <i class="fas fa-inbox"></i>
             <h3>공지사항이 없습니다</h3>
             <p>등록된 공지사항이 없습니다.</p>
           </div>
         `;
-        return;
-      }
-
-      // 최신순 정렬
-      const sortedNotices = [...filteredNotices].sort((a, b) => new Date(b.date) - new Date(a.date));
-      
-      list.innerHTML = sortedNotices.map(notice => {
-        const date = new Date(notice.date);
-        const isNew = (Date.now() - date.getTime()) < 7 * 24 * 60 * 60 * 1000; // 7일 이내
-        
-        let badgeClass = 'badge-new';
-        let badgeText = '일반';
-        
-        if (notice.type === 'important') {
-          badgeClass = 'badge-important';
-          badgeText = '중요';
-        } else if (notice.type === 'event') {
-          badgeClass = 'badge-event';
-          badgeText = '이벤트';
-        } else if (isNew) {
-          badgeText = 'NEW';
+          return;
         }
 
-        return `
+        // 최신순 정렬
+        const sortedNotices = [...filteredNotices].sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+
+        list.innerHTML = sortedNotices
+          .map((notice) => {
+            const date = new Date(notice.date);
+            const isNew = Date.now() - date.getTime() < 7 * 24 * 60 * 60 * 1000; // 7일 이내
+
+            let badgeClass = 'badge-new';
+            let badgeText = '일반';
+
+            if (notice.type === 'important') {
+              badgeClass = 'badge-important';
+              badgeText = '중요';
+            } else if (notice.type === 'event') {
+              badgeClass = 'badge-event';
+              badgeText = '이벤트';
+            } else if (isNew) {
+              badgeText = 'NEW';
+            }
+
+            return `
           <div class="notice-item" onclick="viewNotice(${notice.id})">
             <div class="notice-icon">
-              <i class="fas fa-${notice.type === 'important' ? 'exclamation' : notice.type === 'event' ? 'gift' : 'bullhorn'}"></i>
+              <i class="fas fa-${
+                notice.type === 'important'
+                  ? 'exclamation'
+                  : notice.type === 'event'
+                  ? 'gift'
+                  : 'bullhorn'
+              }"></i>
             </div>
             <div class="notice-content">
               <div class="notice-title">
@@ -607,127 +652,136 @@
               </div>
               <div class="notice-meta">
                 <span><i class="fas fa-user"></i> ${notice.author}</span>
-                <span><i class="fas fa-calendar"></i> ${date.toLocaleDateString('ko-KR')}</span>
+                <span><i class="fas fa-calendar"></i> ${date.toLocaleDateString(
+                  'ko-KR'
+                )}</span>
                 <span><i class="fas fa-eye"></i> ${notice.views}</span>
               </div>
             </div>
           </div>
         `;
-      }).join('');
-    }
+          })
+          .join('');
+      }
 
-    // 공지사항 상세보기
-    function viewNotice(id) {
-      const notice = notices.find(n => n.id === id);
-      if (!notice) return;
+      // 공지사항 상세보기
+      function viewNotice(id) {
+        const notice = notices.find((n) => n.id === id);
+        if (!notice) return;
 
-      // 조회수 증가
-      notice.views++;
-      saveNotices();
+        // 조회수 증가
+        notice.views++;
+        saveNotices();
 
-      const date = new Date(notice.date);
-      const detailHtml = `
+        const date = new Date(notice.date);
+        const detailHtml = `
         <div class="notice-detail-header">
           <div class="notice-detail-title">${notice.title}</div>
           <div class="notice-detail-meta">
             <span><i class="fas fa-user"></i> ${notice.author}</span>
-            <span><i class="fas fa-calendar"></i> ${date.toLocaleDateString('ko-KR')}</span>
+            <span><i class="fas fa-calendar"></i> ${date.toLocaleDateString(
+              'ko-KR'
+            )}</span>
             <span><i class="fas fa-eye"></i> ${notice.views}</span>
           </div>
         </div>
         <div class="notice-detail-content">${notice.content}</div>
       `;
 
-      document.getElementById('noticeDetail').innerHTML = detailHtml;
-      document.getElementById('detailModal').classList.add('active');
-      
-      renderNotices();
-    }
+        document.getElementById('noticeDetail').innerHTML = detailHtml;
+        document.getElementById('detailModal').classList.add('active');
 
-    // 상세 모달 닫기
-    function closeDetailModal() {
-      document.getElementById('detailModal').classList.remove('active');
-    }
+        renderNotices();
+      }
 
-    // 작성 모달 열기
-    function openWriteModal() {
-      document.getElementById('writeModal').classList.add('active');
-    }
+      // 상세 모달 닫기
+      function closeDetailModal() {
+        document.getElementById('detailModal').classList.remove('active');
+      }
 
-    // 작성 모달 닫기
-    function closeWriteModal() {
-      document.getElementById('writeModal').classList.remove('active');
-      document.getElementById('noticeForm').reset();
-    }
+      // 작성 모달 열기
+      function openWriteModal() {
+        document.getElementById('writeModal').classList.add('active');
+      }
 
-    // 공지사항 작성
-    function submitNotice(event) {
-      event.preventDefault();
+      // 작성 모달 닫기
+      function closeWriteModal() {
+        document.getElementById('writeModal').classList.remove('active');
+        document.getElementById('noticeForm').reset();
+      }
 
-      const title = document.getElementById('noticeTitle').value;
-      const content = document.getElementById('noticeContent').value;
-      const type = document.getElementById('noticeType').value;
+      // 공지사항 작성
+      function submitNotice(event) {
+        event.preventDefault();
 
-      const newNotice = {
-        id: Date.now(),
-        title: title,
-        content: content,
-        type: type,
-        date: new Date().toISOString(),
-        author: authManager.getCurrentUser()?.name || '관리자',
-        views: 0
-      };
+        const title = document.getElementById('noticeTitle').value;
+        const content = document.getElementById('noticeContent').value;
+        const type = document.getElementById('noticeType').value;
 
-      notices.unshift(newNotice);
-      saveNotices();
+        const newNotice = {
+          id: Date.now(),
+          title: title,
+          content: content,
+          type: type,
+          date: new Date().toISOString(),
+          author: authManager.getCurrentUser()?.name || '관리자',
+          views: 0,
+        };
+
+        notices.unshift(newNotice);
+        saveNotices();
+        updateStats();
+        renderNotices();
+        closeWriteModal();
+
+        alert('공지사항이 등록되었습니다!');
+      }
+
+      // 검색
+      function searchNotices() {
+        const searchTerm = document
+          .getElementById('searchInput')
+          .value.toLowerCase();
+
+        if (!searchTerm) {
+          renderNotices();
+          return;
+        }
+
+        const filtered = notices.filter(
+          (notice) =>
+            notice.title.toLowerCase().includes(searchTerm) ||
+            notice.content.toLowerCase().includes(searchTerm)
+        );
+
+        renderNotices(filtered);
+      }
+
+      // 엔터키로 검색
+      document
+        .getElementById('searchInput')
+        .addEventListener('keypress', function (e) {
+          if (e.key === 'Enter') {
+            searchNotices();
+          }
+        });
+
+      // 모달 배경 클릭 시 닫기
+      window.addEventListener('click', function (e) {
+        if (e.target.classList.contains('modal')) {
+          e.target.classList.remove('active');
+        }
+      });
+
+      // 관리자 권한 확인
+      const currentUser = authManager.getCurrentUser();
+      if (currentUser && currentUser.role === 'admin') {
+        document.getElementById('writeBtn').style.display = 'inline-flex';
+      }
+
+      // 초기화
       updateStats();
       renderNotices();
-      closeWriteModal();
-      
-      alert('공지사항이 등록되었습니다!');
-    }
-
-    // 검색
-    function searchNotices() {
-      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      
-      if (!searchTerm) {
-        renderNotices();
-        return;
-      }
-
-      const filtered = notices.filter(notice => 
-        notice.title.toLowerCase().includes(searchTerm) ||
-        notice.content.toLowerCase().includes(searchTerm)
-      );
-
-      renderNotices(filtered);
-    }
-
-    // 엔터키로 검색
-    document.getElementById('searchInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        searchNotices();
-      }
-    });
-
-    // 모달 배경 클릭 시 닫기
-    window.addEventListener('click', function(e) {
-      if (e.target.classList.contains('modal')) {
-        e.target.classList.remove('active');
-      }
-    });
-
-    // 관리자 권한 확인
-    const currentUser = authManager.getCurrentUser();
-    if (currentUser && currentUser.role === 'admin') {
-      document.getElementById('writeBtn').style.display = 'inline-flex';
-    }
-
-    // 초기화
-    updateStats();
-    renderNotices();
-  </script>
-</body>
+    </script>
+  </body>
 </html>
-

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>제휴문의 - 키스포유</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Quill Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f6fa;
+      }
+
+      .partnership-header {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .back-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid white;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: all 0.3s;
+      }
+
+      .partnership-header h1 {
+        margin: 0;
+        font-size: 24px;
+        flex: 1;
+      }
+
+      .partnership-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .partnership-card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .partnership-intro {
+        background: #e3f2fd;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+
+      .partnership-intro h2 {
+        margin: 0 0 10px 0;
+        color: #1976d2;
+        font-size: 20px;
+      }
+
+      .partnership-intro p {
+        margin: 0;
+        color: #666;
+        line-height: 1.6;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+        font-size: 14px;
+      }
+
+      .form-label .required {
+        color: #f5576c;
+      }
+
+      .form-input,
+      .form-textarea,
+      .form-select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 14px;
+        box-sizing: border-box;
+        font-family: inherit;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus,
+      .form-select:focus {
+        outline: none;
+        border-color: #4facfe;
+      }
+
+      .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .form-hint {
+        font-size: 13px;
+        color: #999;
+        margin-top: 5px;
+      }
+
+      #editor {
+        height: 300px;
+        background: white;
+        border-radius: 8px;
+      }
+
+      .editor-container {
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .editor-container:focus-within {
+        border-color: #4facfe;
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      .btn {
+        flex: 1;
+        padding: 15px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 16px;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+      }
+
+      .btn-secondary {
+        background: #f8f9fa;
+        color: #666;
+        border: 1px solid #dee2e6;
+      }
+
+      .btn-secondary:hover {
+        background: #e9ecef;
+      }
+
+      .success-message {
+        display: none;
+        background: #d4edda;
+        color: #155724;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .success-message.active {
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .btn-group {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div class="partnership-header">
+      <button class="back-btn" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h1><i class="fas fa-handshake"></i> 제휴문의</h1>
+    </div>
+
+    <!-- 컨테이너 -->
+    <div class="partnership-container">
+      <!-- 성공 메시지 -->
+      <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i> 제휴 신청이 완료되었습니다!<br />
+        빠른 시일 내에 연락드리겠습니다.
+      </div>
+
+      <div class="partnership-card">
+        <div class="partnership-intro">
+          <h2><i class="fas fa-bullhorn"></i> 제휴 안내</h2>
+          <p>
+            키스포유와 함께할 파트너를 찾습니다!<br />
+            아래 양식을 작성해주시면 담당자가 검토 후 연락드리겠습니다.
+          </p>
+        </div>
+
+        <form id="partnershipForm" onsubmit="submitPartnership(event)">
+          <div class="form-group">
+            <label class="form-label">
+              지역 <span class="required">*</span>
+            </label>
+            <select class="form-select" id="region" required onchange="updateDistricts()">
+              <option value="">선택</option>
+              <option value="서울">서울</option>
+              <option value="부산">부산</option>
+              <option value="인천">인천</option>
+              <option value="대구">대구</option>
+              <option value="대전">대전</option>
+              <option value="광주">광주</option>
+              <option value="울산">울산</option>
+              <option value="세종">세종</option>
+              <option value="경기">경기</option>
+              <option value="강원">강원</option>
+              <option value="충북">충북</option>
+              <option value="충남">충남</option>
+              <option value="전북">전북</option>
+              <option value="전남">전남</option>
+              <option value="경북">경북</option>
+              <option value="경남">경남</option>
+              <option value="제주">제주</option>
+            </select>
+            <div class="form-hint">업소가 위치한 지역을 선택하세요</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              상세 위치 <span class="required">*</span>
+            </label>
+            <input
+              type="text"
+              class="form-input"
+              id="location"
+              required
+              placeholder="예: 송파구, 해운대구"
+            />
+            <div class="form-hint">업소가 위치한 대략의 위치 (예: 송파)</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              업소명 <span class="required">*</span>
+            </label>
+            <input
+              type="text"
+              class="form-input"
+              id="shopName"
+              required
+              placeholder="예: [강남]키스인포"
+            />
+            <div class="form-hint">지역과 업소명 입력 (예: [강남]키스인포)</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              전화번호 <span class="required">*</span>
+            </label>
+            <input
+              type="tel"
+              class="form-input"
+              id="phone"
+              required
+              placeholder="010-1234-5678"
+            />
+            <div class="form-hint">예약&문의 전화번호 (예:010-1234-5678)</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              코스 및 가격정보 <span class="required">*</span>
+            </label>
+            <textarea
+              class="form-textarea"
+              id="courses"
+              required
+              placeholder="예:&#10;- 아로마 마사지 60분: 80,000원&#10;- 스웨디시 90분: 120,000원&#10;- 타이마사지 120분: 150,000원"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              예약 및 이용안내 <span class="required">*</span>
+            </label>
+            <textarea
+              class="form-textarea"
+              id="reservationInfo"
+              required
+              placeholder="예:&#10;- 영업시간: 오전 10시 ~ 오후 11시&#10;- 예약 필수&#10;- 주차 가능"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              찾아오시는 길 <span class="required">*</span>
+            </label>
+            <textarea
+              class="form-textarea"
+              id="directions"
+              required
+              placeholder="예:&#10;- 지하철: 2호선 강남역 3번 출구 도보 5분&#10;- 버스: 146, 360번 강남역 하차&#10;- 주소: 서울시 강남구 ..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              출근부 내용 <span class="required">*</span>
+            </label>
+            <div class="editor-container">
+              <div id="editor"></div>
+            </div>
+            <div class="form-hint">출근부 정보를 상세히 작성해주세요</div>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">
+              <i class="fas fa-redo"></i> 취소
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i> 제휴신청
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Quill Editor -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="auth-manager.js"></script>
+    <script>
+      // Quill 에디터 초기화
+      const quill = new Quill('#editor', {
+        theme: 'snow',
+        placeholder: '출근부 정보를 입력하세요...\n\n예:\n오늘의 출근 인원:\n- 지수: 09:00 ~ 18:00\n- 민지: 10:00 ~ 19:00\n- 수지: 11:00 ~ 20:00',
+        modules: {
+          toolbar: [
+            [{ header: [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            [{ color: [] }, { background: [] }],
+            ['link', 'image'],
+            ['clean'],
+          ],
+        },
+      });
+
+      // 제휴 신청 데이터
+      let partnerships = JSON.parse(
+        localStorage.getItem('partnerships') || '[]'
+      );
+
+      // 폼 제출
+      function submitPartnership(event) {
+        event.preventDefault();
+
+        const editorContent = quill.root.innerHTML;
+
+        if (!editorContent || editorContent === '<p><br></p>') {
+          alert('출근부 내용을 입력해주세요.');
+          return;
+        }
+
+        const partnership = {
+          id: Date.now(),
+          region: document.getElementById('region').value,
+          location: document.getElementById('location').value,
+          shopName: document.getElementById('shopName').value,
+          phone: document.getElementById('phone').value,
+          courses: document.getElementById('courses').value,
+          reservationInfo: document.getElementById('reservationInfo').value,
+          directions: document.getElementById('directions').value,
+          schedule: editorContent,
+          submittedBy: authManager.getCurrentUser()?.name || '비회원',
+          date: new Date().toISOString(),
+          status: 'pending',
+        };
+
+        partnerships.push(partnership);
+        localStorage.setItem('partnerships', JSON.stringify(partnerships));
+
+        // 성공 메시지 표시
+        document.getElementById('successMessage').classList.add('active');
+        resetForm();
+
+        // 폼 숨기기
+        document.querySelector('.partnership-card form').style.display = 'none';
+
+        // 3초 후 메인으로 이동
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 3000);
+      }
+
+      // 폼 초기화
+      function resetForm() {
+        if (confirm('작성 중인 내용이 모두 지워집니다. 계속하시겠습니까?')) {
+          document.getElementById('partnershipForm').reset();
+          quill.setContents([]);
+        }
+      }
+
+      // 로그인 권장 (선택사항)
+      const currentUser = authManager.getCurrentUser();
+      if (!currentUser) {
+        const loginPrompt = confirm(
+          '로그인하시면 더 빠른 처리가 가능합니다.\n로그인 페이지로 이동하시겠습니까?'
+        );
+        if (loginPrompt) {
+          window.location.href = 'login.html';
+        }
+      }
+    </script>
+  </body>
+</html>
+
