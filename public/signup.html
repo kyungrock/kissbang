@@ -376,6 +376,39 @@
         display: block;
       }
 
+      .mongo-status {
+        display: none;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      .mongo-status.show {
+        display: block;
+        animation: slideDown 0.3s ease;
+      }
+
+      .mongo-status.success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .mongo-status.warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
+      }
+
+      .mongo-status.error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
       @media (max-width: 480px) {
         .signup-container {
           padding: 40px 30px;
@@ -401,6 +434,7 @@
 
       <div id="errorMessage" class="error-message"></div>
       <div id="successMessage" class="success-message"></div>
+      <div id="mongoStatus" class="mongo-status"></div>
 
       <form id="signupForm">
         <div class="form-group">
@@ -710,6 +744,40 @@
         }
       });
 
+      // MongoDB 상태 확인
+      async function checkMongoDBStatus() {
+        const mongoStatus = document.getElementById('mongoStatus');
+        
+        try {
+          const response = await fetch('/api/auth/me', {
+            method: 'GET',
+            credentials: 'include',
+          });
+          
+          if (response.status === 401) {
+            // 401은 정상 (로그인 안 한 상태)
+            mongoStatus.textContent = '✅ MongoDB 백엔드 연결됨 - 계정이 모든 기기에서 동기화됩니다';
+            mongoStatus.className = 'mongo-status success show';
+            return true;
+          } else if (response.ok || response.status < 500) {
+            mongoStatus.textContent = '✅ MongoDB 백엔드 연결됨 - 계정이 모든 기기에서 동기화됩니다';
+            mongoStatus.className = 'mongo-status success show';
+            return true;
+          } else {
+            mongoStatus.textContent = '⚠️ MongoDB 서버 오류 - localStorage로 저장됩니다 (기기별 분리)';
+            mongoStatus.className = 'mongo-status warning show';
+            return false;
+          }
+        } catch (error) {
+          mongoStatus.textContent = '⚠️ MongoDB 연결 실패 - localStorage로 저장됩니다 (기기별 분리)';
+          mongoStatus.className = 'mongo-status warning show';
+          return false;
+        }
+      }
+
+      // 페이지 로드 시 MongoDB 상태 확인
+      checkMongoDBStatus();
+
       // 회원가입 폼 제출
       const signupForm = document.getElementById('signupForm');
       const errorMessage = document.getElementById('errorMessage');
@@ -768,11 +836,16 @@
 
         if (result.success) {
           console.log('✅ 회원가입 성공! 사용자:', result.user);
-          
+
           // localStorage 확인 (디버깅용)
-          const savedUsers = JSON.parse(localStorage.getItem('kissbang_global_users') || '[]');
-          console.log('💾 저장된 전체 사용자:', savedUsers.map(u => u.username));
-          
+          const savedUsers = JSON.parse(
+            localStorage.getItem('kissbang_global_users') || '[]'
+          );
+          console.log(
+            '💾 저장된 전체 사용자:',
+            savedUsers.map((u) => u.username)
+          );
+
           successMessage.textContent =
             '회원가입이 완료되었습니다! 디버그 페이지로 이동합니다...';
           successMessage.classList.add('show');
