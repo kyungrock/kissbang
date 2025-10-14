@@ -43,7 +43,7 @@ class ApiAuthManager {
   // 로그인
   async login(username, password) {
     console.log('🌐 API 로그인 시도...');
-    
+
     try {
       const response = await fetch(`${this.apiUrl}/api/auth/login`, {
         method: 'POST',
@@ -160,6 +160,8 @@ class ApiAuthManager {
 
   // 회원가입
   async register(userData) {
+    console.log('🌐 API 회원가입 시도...', userData);
+    
     try {
       const response = await fetch(`${this.apiUrl}/api/auth/signup`, {
         method: 'POST',
@@ -173,12 +175,17 @@ class ApiAuthManager {
       const data = await response.json();
 
       if (response.ok) {
+        console.log('✅ API 회원가입 성공');
         return { success: true, user: data.user };
       } else {
-        return { success: false, error: data.message || '회원가입 실패' };
+        console.log('❌ API 회원가입 실패:', data.message);
+        console.log('⚠️ localStorage 폴백 사용');
+        // API 실패 시 localStorage 폴백
+        return this.registerLocalStorage(userData);
       }
     } catch (error) {
-      console.error('회원가입 오류:', error);
+      console.log('⚠️ API 연결 실패, localStorage 폴백 사용');
+      console.error('API 오류:', error);
       // 백엔드 실패 시 localStorage 폴백
       return this.registerLocalStorage(userData);
     }
@@ -410,9 +417,9 @@ window.authManager = authManager;
 (function initializeDefaultAccounts() {
   const globalKey = 'kissbang_global_users';
   let users = JSON.parse(localStorage.getItem(globalKey) || '[]');
-  
+
   // admin 계정이 없으면 생성
-  if (!users.find(u => u.username === 'admin')) {
+  if (!users.find((u) => u.username === 'admin')) {
     const adminUser = {
       id: 'admin-001',
       username: 'admin',

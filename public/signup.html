@@ -759,10 +759,15 @@
 
         if (hasError) return;
 
+        console.log('📋 회원가입 폼 데이터:', formData);
+
         // 회원가입 시도 (await 추가)
         const result = await authManager.register(formData);
 
+        console.log('📊 회원가입 결과:', result);
+
         if (result.success) {
+          console.log('✅ 회원가입 성공! 사용자:', result.user);
           successMessage.textContent =
             '회원가입이 완료되었습니다! 로그인 페이지로 이동합니다...';
           successMessage.classList.add('show');
@@ -771,7 +776,8 @@
             window.location.href = 'login.html';
           }, 2000);
         } else {
-          errorMessage.textContent = result.error;
+          console.error('❌ 회원가입 실패:', result.error);
+          errorMessage.textContent = '회원가입 실패: ' + result.error;
           errorMessage.classList.add('show');
         }
       });
