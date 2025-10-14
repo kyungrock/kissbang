@@ -4,12 +4,16 @@ import { verifyPassword, sanitizeUser, generateToken } from '@/lib/auth';
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json();
+    const body = await request.json();
+    const { email, username, password } = body;
+    
+    // username 또는 email 중 하나만 있어도 됨
+    const loginIdentifier = username || email;
 
     // 입력 검증
-    if (!email || !password) {
+    if (!loginIdentifier || !password) {
       return NextResponse.json(
-        { error: '이메일과 비밀번호를 입력해주세요.' },
+        { error: '아이디(이메일)와 비밀번호를 입력해주세요.' },
         { status: 400 }
       );
     }
@@ -17,11 +21,17 @@ export async function POST(request: NextRequest) {
     const { db } = await connectToDatabase();
     const usersCollection = db.collection('users');
 
-    // 사용자 찾기
-    const user = await usersCollection.findOne({ email });
+    // 사용자 찾기 (email 또는 username으로 검색)
+    const user = await usersCollection.findOne({
+      $or: [
+        { email: loginIdentifier },
+        { username: loginIdentifier }
+      ]
+    });
+    
     if (!user) {
       return NextResponse.json(
-        { error: '이메일 또는 비밀번호가 올바르지 않습니다.' },
+        { error: '아이디 또는 비밀번호가 올바르지 않습니다.' },
         { status: 401 }
       );
     }
@@ -30,7 +40,7 @@ export async function POST(request: NextRequest) {
     const isValid = await verifyPassword(password, user.password);
     if (!isValid) {
       return NextResponse.json(
-        { error: '이메일 또는 비밀번호가 올바르지 않습니다.' },
+        { error: '아이디 또는 비밀번호가 올바르지 않습니다.' },
         { status: 401 }
       );
     }
