@@ -820,13 +820,13 @@ body {
 }
 
 .info-item.greeting {
-  background: #f8f9fa;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border-left: 3px solid #667eea;
-  margin-bottom: 12px;
-  font-style: italic;
-  color: #555;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  border-left: none;
+  margin-bottom: 8px;
+  font-style: normal;
+  color: #666;
 }
 
 .info-item.greeting i {
@@ -1584,9 +1584,9 @@ body {
   align-items: center;
   gap: 8px;
   padding: 6px 0;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: none;
   background: transparent;
-  transition: background-color 0.3s;
+  transition: none;
 }
 
 .info-item:last-child {
@@ -1594,7 +1594,7 @@ body {
 }
 
 .info-item:hover {
-  background: #f8f9fa;
+  background: transparent;
 }
 
 .info-item i {
