@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API 테스트</title>
+  <style>
+    body {
+      font-family: monospace;
+      padding: 20px;
+      background: #1e1e1e;
+      color: #d4d4d4;
+    }
+    .result {
+      background: #252526;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #3e3e42;
+    }
+    .success { color: #89d185; }
+    .error { color: #f48771; }
+    .info { color: #4ec9b0; }
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      background: #0e639c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    pre {
+      background: #1e1e1e;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="info">🧪 MongoDB API 테스트</h1>
+
+  <div class="result">
+    <h2>1. API 엔드포인트 확인</h2>
+    <button onclick="testEndpoints()">엔드포인트 테스트</button>
+    <div id="endpointResult"></div>
+  </div>
+
+  <div class="result">
+    <h2>2. 회원가입 API 테스트</h2>
+    <button onclick="testSignup()">회원가입 테스트</button>
+    <div id="signupResult"></div>
+  </div>
+
+  <div class="result">
+    <h2>3. 로그인 API 테스트</h2>
+    <button onclick="testLogin()">로그인 테스트</button>
+    <div id="loginResult"></div>
+  </div>
+
+  <div class="result">
+    <h2>4. 세션 확인 API 테스트</h2>
+    <button onclick="testSession()">세션 확인</button>
+    <div id="sessionResult"></div>
+  </div>
+
+  <script>
+    const apiUrl = window.location.origin;
+
+    async function testEndpoints() {
+      const result = document.getElementById('endpointResult');
+      result.innerHTML = '<p class="info">테스트 중...</p>';
+
+      const endpoints = [
+        '/api/auth/signup',
+        '/api/auth/login',
+        '/api/auth/logout',
+        '/api/auth/me'
+      ];
+
+      let html = '<h3>API 엔드포인트 확인:</h3>';
+
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetch(apiUrl + endpoint, {
+            method: endpoint.includes('me') ? 'GET' : 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: endpoint.includes('me') ? undefined : JSON.stringify({})
+          });
+
+          const status = response.status;
+          const statusClass = status < 500 ? 'success' : 'error';
+          
+          html += `<p class="${statusClass}">✓ ${endpoint} - Status: ${status}</p>`;
+        } catch (error) {
+          html += `<p class="error">✗ ${endpoint} - Error: ${error.message}</p>`;
+        }
+      }
+
+      result.innerHTML = html;
+    }
+
+    async function testSignup() {
+      const result = document.getElementById('signupResult');
+      result.innerHTML = '<p class="info">테스트 중...</p>';
+
+      const testUser = {
+        username: 'apitest' + Date.now(),
+        email: 'apitest' + Date.now() + '@test.com',
+        password: 'test1234',
+        name: 'API테스트',
+        phone: '010-1234-5678',
+        profileImage: ''
+      };
+
+      try {
+        console.log('🧪 회원가입 API 테스트:', testUser);
+        
+        const response = await fetch(apiUrl + '/api/auth/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(testUser)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          result.innerHTML = `
+            <p class="success">✅ API 회원가입 성공!</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        } else {
+          result.innerHTML = `
+            <p class="error">❌ API 회원가입 실패 (Status: ${response.status})</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        }
+      } catch (error) {
+        result.innerHTML = `
+          <p class="error">❌ API 연결 실패</p>
+          <p class="error">Error: ${error.message}</p>
+          <p class="info">MongoDB 백엔드가 작동하지 않습니다.</p>
+        `;
+      }
+    }
+
+    async function testLogin() {
+      const result = document.getElementById('loginResult');
+      result.innerHTML = '<p class="info">테스트 중...</p>';
+
+      try {
+        const response = await fetch(apiUrl + '/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            username: 'admin',
+            password: 'admin123!'
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          result.innerHTML = `
+            <p class="success">✅ API 로그인 성공!</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        } else {
+          result.innerHTML = `
+            <p class="error">❌ API 로그인 실패 (Status: ${response.status})</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        }
+      } catch (error) {
+        result.innerHTML = `
+          <p class="error">❌ API 연결 실패</p>
+          <p class="error">Error: ${error.message}</p>
+        `;
+      }
+    }
+
+    async function testSession() {
+      const result = document.getElementById('sessionResult');
+      result.innerHTML = '<p class="info">테스트 중...</p>';
+
+      try {
+        const response = await fetch(apiUrl + '/api/auth/me', {
+          method: 'GET',
+          credentials: 'include'
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          result.innerHTML = `
+            <p class="success">✅ 세션 확인 성공!</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        } else {
+          result.innerHTML = `
+            <p class="error">❌ 세션 없음 (Status: ${response.status})</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        }
+      } catch (error) {
+        result.innerHTML = `
+          <p class="error">❌ API 연결 실패</p>
+          <p class="error">Error: ${error.message}</p>
+        `;
+      }
+    }
+
+    // 자동 테스트
+    window.onload = function() {
+      console.log('🌐 API URL:', apiUrl);
+      console.log('📍 테스트 엔드포인트:', apiUrl + '/api/auth/*');
+    };
+  </script>
+</body>
+</html>
+
