@@ -85,6 +85,9 @@
         🔄 새로고침
       </button>
       <button class="btn btn-danger" onclick="clearAll()">🗑️ 모두 삭제</button>
+      <button class="btn btn-danger" onclick="keepOnlyAdmin()">
+        🧹 Admin만 남기고 삭제
+      </button>
       <button class="btn btn-success" onclick="createTestUser()">
         ➕ 테스트 계정 생성
       </button>
@@ -275,6 +278,38 @@
           localStorage.clear();
           sessionStorage.clear();
           alert('모든 데이터가 삭제되었습니다!');
+          refreshData();
+        }
+      }
+
+      function keepOnlyAdmin() {
+        if (confirm('Admin 계정만 남기고 나머지를 모두 삭제하시겠습니까?')) {
+          // Admin 계정 찾기
+          const globalUsers = JSON.parse(
+            localStorage.getItem('kissbang_global_users') || '[]'
+          );
+          const localUsers = JSON.parse(
+            localStorage.getItem('kissbang_users') || '[]'
+          );
+          
+          const allUsers = [...globalUsers, ...localUsers];
+          const adminUser = allUsers.find(u => u.username === 'admin' || u.role === 'admin');
+          
+          if (!adminUser) {
+            alert('Admin 계정을 찾을 수 없습니다!');
+            return;
+          }
+          
+          // Admin만 남기고 저장
+          const onlyAdmin = [adminUser];
+          localStorage.setItem('kissbang_global_users', JSON.stringify(onlyAdmin));
+          localStorage.setItem('kissbang_users', JSON.stringify(onlyAdmin));
+          
+          // 현재 사용자도 삭제
+          localStorage.removeItem('currentUser');
+          sessionStorage.clear();
+          
+          alert('Admin 계정만 남기고 모두 삭제되었습니다!');
           refreshData();
         }
       }
