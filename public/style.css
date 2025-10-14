@@ -1437,7 +1437,8 @@ body {
 .shop-info-section {
   background: white;
   padding: 0;
-  border-bottom: 1px solid #eee;
+  margin: 0;
+  border-bottom: none;
 }
 
 .shop-info-container {
@@ -2129,7 +2130,7 @@ body {
   .services-section,
   .reviews-section,
   .booking-section {
-    padding: 4px 15px;
+    padding: 0;
   }
 
   .shop-flag .flag-image {
