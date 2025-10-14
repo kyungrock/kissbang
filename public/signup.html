@@ -747,29 +747,33 @@
       // MongoDB 상태 확인
       async function checkMongoDBStatus() {
         const mongoStatus = document.getElementById('mongoStatus');
-        
+
         try {
           const response = await fetch('/api/auth/me', {
             method: 'GET',
             credentials: 'include',
           });
-          
+
           if (response.status === 401) {
             // 401은 정상 (로그인 안 한 상태)
-            mongoStatus.textContent = '✅ MongoDB 백엔드 연결됨 - 계정이 모든 기기에서 동기화됩니다';
+            mongoStatus.textContent =
+              '✅ MongoDB 백엔드 연결됨 - 계정이 모든 기기에서 동기화됩니다';
             mongoStatus.className = 'mongo-status success show';
             return true;
           } else if (response.ok || response.status < 500) {
-            mongoStatus.textContent = '✅ MongoDB 백엔드 연결됨 - 계정이 모든 기기에서 동기화됩니다';
+            mongoStatus.textContent =
+              '✅ MongoDB 백엔드 연결됨 - 계정이 모든 기기에서 동기화됩니다';
             mongoStatus.className = 'mongo-status success show';
             return true;
           } else {
-            mongoStatus.textContent = '⚠️ MongoDB 서버 오류 - localStorage로 저장됩니다 (기기별 분리)';
+            mongoStatus.textContent =
+              '⚠️ MongoDB 서버 오류 - localStorage로 저장됩니다 (기기별 분리)';
             mongoStatus.className = 'mongo-status warning show';
             return false;
           }
         } catch (error) {
-          mongoStatus.textContent = '⚠️ MongoDB 연결 실패 - localStorage로 저장됩니다 (기기별 분리)';
+          mongoStatus.textContent =
+            '⚠️ MongoDB 연결 실패 - localStorage로 저장됩니다 (기기별 분리)';
           mongoStatus.className = 'mongo-status warning show';
           return false;
         }

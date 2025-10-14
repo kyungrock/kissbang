@@ -121,7 +121,8 @@
       // MongoDB 사용자 목록 로드
       async function loadMongoUsers() {
         const resultDiv = document.getElementById('mongoUsers');
-        resultDiv.innerHTML = '<p class="info">MongoDB에서 사용자 목록을 가져오는 중...</p>';
+        resultDiv.innerHTML =
+          '<p class="info">MongoDB에서 사용자 목록을 가져오는 중...</p>';
 
         try {
           // API 엔드포인트로 모든 사용자 가져오기 (관리자 기능)
@@ -135,7 +136,8 @@
             const users = data.users || [];
 
             if (users.length === 0) {
-              resultDiv.innerHTML = '<p class="error">MongoDB에 사용자가 없습니다.</p>';
+              resultDiv.innerHTML =
+                '<p class="error">MongoDB에 사용자가 없습니다.</p>';
               return;
             }
 
@@ -143,12 +145,20 @@
               .map(
                 (u) => `
               <div class="user-card">
-                <div><strong class="success">아이디:</strong> ${u.username || 'N/A'}</div>
+                <div><strong class="success">아이디:</strong> ${
+                  u.username || 'N/A'
+                }</div>
                 <div><strong class="success">이메일:</strong> ${u.email}</div>
-                <div><strong class="success">이름:</strong> ${u.name || 'N/A'}</div>
+                <div><strong class="success">이름:</strong> ${
+                  u.name || 'N/A'
+                }</div>
                 <div><strong class="success">권한:</strong> ${u.role}</div>
-                <div><strong class="success">활성:</strong> ${u.isActive !== false ? 'Yes' : 'No'}</div>
-                <div><strong class="info">생성일:</strong> ${new Date(u.createdAt).toLocaleString('ko-KR')}</div>
+                <div><strong class="success">활성:</strong> ${
+                  u.isActive !== false ? 'Yes' : 'No'
+                }</div>
+                <div><strong class="info">생성일:</strong> ${new Date(
+                  u.createdAt
+                ).toLocaleString('ko-KR')}</div>
               </div>
             `
               )
@@ -172,9 +182,15 @@
               resultDiv.innerHTML = `
                 <p class="info">⚠️ 전체 목록 조회 권한 없음. 현재 로그인된 사용자만 표시:</p>
                 <div class="user-card">
-                  <div><strong class="success">아이디:</strong> ${user.username || 'N/A'}</div>
-                  <div><strong class="success">이메일:</strong> ${user.email}</div>
-                  <div><strong class="success">이름:</strong> ${user.name || 'N/A'}</div>
+                  <div><strong class="success">아이디:</strong> ${
+                    user.username || 'N/A'
+                  }</div>
+                  <div><strong class="success">이메일:</strong> ${
+                    user.email
+                  }</div>
+                  <div><strong class="success">이름:</strong> ${
+                    user.name || 'N/A'
+                  }</div>
                   <div><strong class="success">권한:</strong> ${user.role}</div>
                 </div>
               `;

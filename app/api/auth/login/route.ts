@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { email, username, password } = body;
-    
+
     // username 또는 email 중 하나만 있어도 됨
     const loginIdentifier = username || email;
 
@@ -23,12 +23,9 @@ export async function POST(request: NextRequest) {
 
     // 사용자 찾기 (email 또는 username으로 검색)
     const user = await usersCollection.findOne({
-      $or: [
-        { email: loginIdentifier },
-        { username: loginIdentifier }
-      ]
+      $or: [{ email: loginIdentifier }, { username: loginIdentifier }],
     });
-    
+
     if (!user) {
       return NextResponse.json(
         { error: '아이디 또는 비밀번호가 올바르지 않습니다.' },

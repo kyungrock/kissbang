@@ -161,7 +161,7 @@ class ApiAuthManager {
   // 회원가입
   async register(userData) {
     console.log('🌐 API 회원가입 시도...', userData);
-    
+
     try {
       const response = await fetch(`${this.apiUrl}/api/auth/signup`, {
         method: 'POST',
