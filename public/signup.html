@@ -768,12 +768,18 @@
 
         if (result.success) {
           console.log('✅ 회원가입 성공! 사용자:', result.user);
+          
+          // localStorage 확인 (디버깅용)
+          const savedUsers = JSON.parse(localStorage.getItem('kissbang_global_users') || '[]');
+          console.log('💾 저장된 전체 사용자:', savedUsers.map(u => u.username));
+          
           successMessage.textContent =
-            '회원가입이 완료되었습니다! 로그인 페이지로 이동합니다...';
+            '회원가입이 완료되었습니다! 디버그 페이지로 이동합니다...';
           successMessage.classList.add('show');
 
           setTimeout(() => {
-            window.location.href = 'login.html';
+            // 디버그 페이지로 이동하여 확인
+            window.location.href = 'debug-storage.html';
           }, 2000);
         } else {
           console.error('❌ 회원가입 실패:', result.error);
