@@ -10,7 +10,7 @@ class ApiAuthManager {
   // 초기화
   async init() {
     if (this.initialized) return;
-    
+
     try {
       await this.checkSession();
       this.initialized = true;
@@ -95,17 +95,19 @@ class ApiAuthManager {
 
       // 디버깅: 입력된 비밀번호 확인 (개발용)
       console.log('🔐 입력한 비밀번호 길이:', password.length);
-      
+
       // 사용자 찾기 - 단계별로 확인
-      let user = uniqueUsers.find((u) => u.username === username || u.email === username);
-      
+      let user = uniqueUsers.find(
+        (u) => u.username === username || u.email === username
+      );
+
       if (user) {
         console.log('👤 사용자 찾음:', user.username);
         console.log('🔒 저장된 비밀번호:', user.password);
         console.log('🔑 입력한 비밀번호:', password);
         console.log('✔️ 비밀번호 일치?', user.password === password);
         console.log('✔️ 활성 상태?', user.isActive);
-        
+
         // 비밀번호 확인
         if (user.password !== password) {
           console.log('❌ 비밀번호 불일치');
@@ -114,7 +116,7 @@ class ApiAuthManager {
             error: '비밀번호가 일치하지 않습니다.',
           };
         }
-        
+
         // 활성 상태 확인
         if (!user.isActive) {
           console.log('❌ 비활성 계정');
@@ -123,7 +125,7 @@ class ApiAuthManager {
             error: '비활성화된 계정입니다.',
           };
         }
-        
+
         console.log('✅ 로그인 성공:', user.username);
         user.lastLogin = new Date().toISOString();
 
@@ -397,3 +399,31 @@ const authManager = new ApiAuthManager();
 
 // 하위 호환성을 위해 전역으로 노출
 window.authManager = authManager;
+
+// 페이지 로드 시 기본 admin 계정 생성 보장
+(function initializeDefaultAccounts() {
+  const globalKey = 'kissbang_global_users';
+  let users = JSON.parse(localStorage.getItem(globalKey) || '[]');
+  
+  // admin 계정이 없으면 생성
+  if (!users.find(u => u.username === 'admin')) {
+    const adminUser = {
+      id: 'admin-001',
+      username: 'admin',
+      email: 'admin@kissbang.com',
+      password: 'admin123!',
+      role: 'admin',
+      name: '관리자',
+      phone: '010-0000-0000',
+      profileImage: '',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      isActive: true,
+      lastLogin: null,
+    };
+    users.push(adminUser);
+    localStorage.setItem(globalKey, JSON.stringify(users));
+    localStorage.setItem('kissbang_users', JSON.stringify(users));
+    console.log('✅ Admin 계정 자동 생성 완료');
+  }
+})();
