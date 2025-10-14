@@ -42,6 +42,8 @@ class ApiAuthManager {
 
   // 로그인
   async login(username, password) {
+    console.log('🌐 API 로그인 시도...');
+    
     try {
       const response = await fetch(`${this.apiUrl}/api/auth/login`, {
         method: 'POST',
@@ -55,15 +57,19 @@ class ApiAuthManager {
       const data = await response.json();
 
       if (response.ok) {
+        console.log('✅ API 로그인 성공');
         this.currentUser = data.user;
         // localStorage에도 저장 (하위 호환성)
         localStorage.setItem('currentUser', JSON.stringify(data.user));
         return { success: true, user: data.user };
       } else {
-        return { success: false, error: data.message || '로그인 실패' };
+        console.log('❌ API 로그인 실패, localStorage 폴백 사용');
+        // API 실패 시 localStorage 폴백
+        return this.loginLocalStorage(username, password);
       }
     } catch (error) {
-      console.error('로그인 오류:', error);
+      console.log('⚠️ API 연결 실패, localStorage 폴백 사용');
+      console.error('API 오류:', error);
       // 백엔드 실패 시 localStorage 폴백
       return this.loginLocalStorage(username, password);
     }
