@@ -2135,12 +2135,7 @@ function createShopCard(shop) {
                 </div>
                 
                 <div class="card-info">
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>${shop.address}</span>
-                    </div>
                     <div class="info-item greeting">
-                        <i class="fas fa-heart"></i>
                         <span>${getGreeting(shop)}</span>
                     </div>
                 </div>

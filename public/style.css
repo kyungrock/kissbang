@@ -821,9 +821,12 @@ body {
 
 .info-item.greeting {
   background: transparent;
-  padding: 0;
+  padding-top: 8px;
+  padding-bottom: 0;
   border-radius: 0;
   border-left: none;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 8px;
   margin-bottom: 8px;
   font-style: normal;
   color: #666;
