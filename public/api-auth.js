@@ -59,8 +59,23 @@ class ApiAuthManager {
       if (response.ok) {
         console.log('✅ API 로그인 성공');
         this.currentUser = data.user;
-        // localStorage에도 저장 (하위 호환성)
+        
+        // localStorage에도 저장 (동기화)
         localStorage.setItem('currentUser', JSON.stringify(data.user));
+        
+        // 글로벌 사용자 목록에도 추가/업데이트
+        const globalKey = 'kissbang_global_users';
+        let users = JSON.parse(localStorage.getItem(globalKey) || '[]');
+        
+        // 기존 사용자 제거 후 추가 (업데이트)
+        users = users.filter(u => u.username !== data.user.username && u.email !== data.user.email);
+        users.push(data.user);
+        
+        localStorage.setItem(globalKey, JSON.stringify(users));
+        localStorage.setItem('kissbang_users', JSON.stringify(users));
+        
+        console.log('✅ localStorage 동기화 완료');
+        
         return { success: true, user: data.user };
       } else {
         console.log('❌ API 로그인 실패, localStorage 폴백 사용');
@@ -176,6 +191,33 @@ class ApiAuthManager {
 
       if (response.ok) {
         console.log('✅ API 회원가입 성공');
+        
+        // MongoDB 성공 시에도 localStorage에 저장 (동기화용)
+        const userWithPassword = {
+          ...data.user,
+          password: userData.password, // MongoDB는 비밀번호를 안 보내므로 추가
+          id: data.user.id || 'user-' + Date.now(),
+          username: userData.username,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          isActive: true,
+          lastLogin: new Date().toISOString()
+        };
+        
+        // 글로벌 저장소에 추가
+        const globalKey = 'kissbang_global_users';
+        let users = JSON.parse(localStorage.getItem(globalKey) || '[]');
+        
+        // 중복 제거
+        users = users.filter(u => u.username !== userData.username && u.email !== userData.email);
+        users.push(userWithPassword);
+        
+        localStorage.setItem(globalKey, JSON.stringify(users));
+        localStorage.setItem('kissbang_users', JSON.stringify(users));
+        localStorage.setItem('currentUser', JSON.stringify(userWithPassword));
+        
+        console.log('✅ localStorage에도 저장 완료 (동기화)');
+        
         return { success: true, user: data.user };
       } else {
         console.log('❌ API 회원가입 실패:', data.message);
