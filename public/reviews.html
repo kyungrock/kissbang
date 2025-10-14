@@ -387,8 +387,25 @@
 
     <script src="api-auth.js"></script>
     <script>
-      // 후기 데이터
-      let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+      // 후기 데이터 (글로벌 키 사용하여 동기화)
+      const REVIEWS_GLOBAL_KEY = 'kissbang_global_reviews';
+      const REVIEWS_LOCAL_KEY = 'reviews';
+      
+      // 글로벌과 로컬 후기 병합
+      function loadReviews() {
+        const globalReviews = JSON.parse(localStorage.getItem(REVIEWS_GLOBAL_KEY) || '[]');
+        const localReviews = JSON.parse(localStorage.getItem(REVIEWS_LOCAL_KEY) || '[]');
+        const allReviews = [...globalReviews, ...localReviews];
+        
+        // 중복 제거 (id 기준)
+        const uniqueReviews = Array.from(
+          new Map(allReviews.map(r => [r.id, r])).values()
+        );
+        
+        return uniqueReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+      }
+      
+      let reviews = loadReviews();
 
       // 초기 샘플 데이터
       if (reviews.length === 0) {
@@ -424,9 +441,11 @@
         saveReviews();
       }
 
-      // 저장
+      // 저장 (글로벌 키에 저장하여 동기화)
       function saveReviews() {
-        localStorage.setItem('reviews', JSON.stringify(reviews));
+        localStorage.setItem(REVIEWS_GLOBAL_KEY, JSON.stringify(reviews));
+        localStorage.setItem(REVIEWS_LOCAL_KEY, JSON.stringify(reviews));
+        console.log('✅ 후기 저장 완료:', reviews.length, '개');
       }
 
       // 목록 렌더링
@@ -597,9 +616,14 @@
         document.getElementById('writeBtn').style.display = 'inline-flex';
       }
 
+      // 페이지 로드 시 최신 데이터 다시 로드
+      reviews = loadReviews();
+      
       // 초기화
       renderReviews();
       resetRating();
+      
+      console.log('📋 로드된 후기 수:', reviews.length);
     </script>
   </body>
 </html>
