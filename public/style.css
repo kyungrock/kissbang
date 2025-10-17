@@ -633,7 +633,7 @@ body {
 .massage-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
 }
 
 .massage-card {
@@ -655,8 +655,8 @@ body {
 
 .card-image {
   position: relative;
-  width: 95px;
-  height: 250px;
+  width: 85px;
+  height: 200px;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -729,7 +729,7 @@ body {
 }
 
 .card-content {
-  padding: 15px 0 15px 15px;
+  padding: 12px 0 12px 12px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -741,20 +741,20 @@ body {
 .card-header {
   display: flex;
   align-items: flex-start;
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .card-info {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .card-info .info-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  font-size: 0.9rem;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
   color: #666;
 }
 
@@ -797,7 +797,7 @@ body {
 }
 
 .card-info {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .info-item {
@@ -1091,7 +1091,6 @@ body {
   padding: 15px 20px;
   border-radius: 12px;
   margin: 20px 0;
-  border-left: 4px solid #667eea;
 }
 
 .info-section h3 {
@@ -1122,7 +1121,6 @@ body {
   padding: 20px;
   background: #f8f9fa;
   border-radius: 12px;
-  border-left: 4px solid #667eea;
 }
 
 .terms-section h3 {
@@ -1215,12 +1213,12 @@ body {
   }
 
   .card-image {
-    width: 95px;
-    height: 250px;
+    width: 85px;
+    height: 200px;
   }
 
   .card-content {
-    padding: 15px 0 15px 15px;
+    padding: 12px 0 12px 12px;
   }
 
   .card-flag {
@@ -1567,7 +1565,6 @@ body {
   padding: 15px 20px;
   background: #f8f9fa;
   border-radius: 0;
-  border-left: 4px solid #667eea;
 }
 
 .shop-description p {
@@ -1661,7 +1658,6 @@ body {
   background: #f8f9ff;
   border-radius: 0;
   padding: 20px;
-  border-left: 4px solid #667eea;
   margin: 0;
 }
 
@@ -1673,11 +1669,6 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.staff-info h3::before {
-  content: '👩‍⚕️';
-  font-size: 1.2rem;
 }
 
 .staff-info p {
@@ -1801,24 +1792,20 @@ body {
 }
 
 .section-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #1a252f;
+  margin-bottom: 25px;
+  text-align: center;
+  padding: 1px 0;
   margin-left: 0;
   margin-right: 0;
-}
-
-.section-title::before {
-  content: '';
-  width: 4px;
-  height: 20px;
-  background: #667eea;
-  border-radius: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .services-grid {
@@ -1868,7 +1855,6 @@ body {
   background: #f8f9fa;
   border-radius: 0;
   padding: 20px;
-  border-left: 4px solid #667eea;
   margin: 0 -20px;
   width: calc(100% + 40px);
 }
@@ -1881,11 +1867,6 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.course-category-title::before {
-  content: '💆‍♀️';
-  font-size: 1.2rem;
 }
 
 .course-item {
@@ -1944,7 +1925,6 @@ body {
   background: #f8f9fa;
   padding: 8px 12px;
   border-radius: 6px;
-  border-left: 3px solid #667eea;
 }
 
 /* 리뷰 섹션 */
@@ -2003,7 +1983,6 @@ body {
   background: #f8f9fa;
   padding: 15px;
   border-radius: 12px;
-  border-left: 4px solid #667eea;
 }
 
 .review-header {
@@ -2383,7 +2362,7 @@ body {
 /* 주변 다른샵 보기 섹션 (booking-section 내부) */
 .booking-info .nearby-shops-title {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -2395,6 +2374,9 @@ body {
   flex: 1;
   min-width: 0;
   text-align: center;
+  height: 38px;
+  min-height: 30px;
+  margin-top: 1px;
 }
 
 .booking-info .nearby-title-line1 {
@@ -2407,10 +2389,11 @@ body {
 .booking-info .nearby-title-line2 {
   display: flex;
   align-items: center;
-  gap: 3px;
-  font-size: 0.65rem;
-  font-weight: 500;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
   color: #666;
+  margin: 0;
 }
 
 .booking-info .nearby-shops-title:hover {
@@ -2586,7 +2569,7 @@ body {
 
   .nearby-shops-title {
     font-size: 1.2rem;
-    margin-bottom: 15px;
+    margin-bottom: 1px;
   }
 
   .nearby-shops-grid {
@@ -2649,7 +2632,6 @@ body {
 /* 관련정보 모달 추가 스타일 */
 .info-highlight {
   background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
-  border-left: 4px solid #667eea;
   padding: 20px;
   margin: 15px 0;
   border-radius: 8px;
