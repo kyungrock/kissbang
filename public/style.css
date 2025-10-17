@@ -70,6 +70,22 @@ body {
   font-weight: 600;
 }
 
+/* PC 화면에서도 모바일과 동일한 폰트 굵기 적용 */
+@media (min-width: 481px) {
+  * {
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif !important;
+    font-weight: 600 !important;
+  }
+
+  .fas,
+  .fa,
+  [class*='fa-'] {
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Pro',
+      'Font Awesome 6 Brands' !important;
+  }
+}
+
 /* FontAwesome 아이콘은 원래 폰트 유지 */
 .fas,
 .fa,
@@ -350,7 +366,7 @@ body {
   top: 75px;
   z-index: 90;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-top: -13px;
+  margin-top: -16px;
 }
 
 .filter-container {
@@ -768,12 +784,12 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
 }
 
 .card-info {
   margin-bottom: 12px;
-  padding-top: 5px;
+  padding-top: -5px;
 }
 
 .card-info .info-item {
@@ -1201,7 +1217,7 @@ body {
   .filter-container {
     max-width: 520px;
     margin: 0 auto;
-    padding: 0 20px 5px 20px;
+    padding: 0 20px 10px 20px;
   }
 
   .theme-filter-container {
@@ -1211,6 +1227,10 @@ body {
 }
 
 @media (min-width: 768px) {
+  .filter-container {
+    padding: 0 20px 10px 20px;
+  }
+
   .theme-filter-container {
     max-width: 520px;
     padding: 10px 30px;
@@ -1218,9 +1238,13 @@ body {
 }
 
 @media (min-width: 1024px) {
+  .filter-container {
+    padding: 0 20px 10px 20px;
+  }
+
   .theme-filter-container {
     max-width: 520px;
-    padding: 10px 40px;
+    padding: 41px 40px;
   }
 }
 
