@@ -350,7 +350,7 @@ body {
   top: 75px;
   z-index: 90;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-top: -12px;
+  margin-top: -13px;
 }
 
 .filter-container {
@@ -1706,7 +1706,7 @@ body {
 
 .info-label {
   font-size: 0.8rem;
-  color: #666;
+  color: #ff0000;
   font-weight: 500;
   line-height: 1.2;
 }
