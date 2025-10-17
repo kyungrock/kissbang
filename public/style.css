@@ -1224,11 +1224,21 @@ body {
 }
 
 @media (max-width: 480px) {
+  * {
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif !important;
+    font-weight: 600 !important;
+  }
+
+  .fas,
+  .fa,
+  [class*='fa-'] {
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Pro',
+      'Font Awesome 6 Brands' !important;
+  }
+
   .header-content {
     padding: 0 15px;
-    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-      Roboto, sans-serif;
-    font-weight: 600;
   }
 
   .nav {
@@ -1350,6 +1360,19 @@ body {
 }
 
 @media (max-width: 360px) {
+  * {
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif !important;
+    font-weight: 600 !important;
+  }
+
+  .fas,
+  .fa,
+  [class*='fa-'] {
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Pro',
+      'Font Awesome 6 Brands' !important;
+  }
+
   .country-boxes {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2878,6 +2901,19 @@ body {
 
 /* 모바일 반응형 스타일 */
 @media (max-width: 768px) {
+  * {
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif !important;
+    font-weight: 600 !important;
+  }
+
+  .fas,
+  .fa,
+  [class*='fa-'] {
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Pro',
+      'Font Awesome 6 Brands' !important;
+  }
+
   .service-grid {
     grid-template-columns: 1fr;
     gap: 10px;
