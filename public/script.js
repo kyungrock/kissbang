@@ -757,11 +757,11 @@ let searchTimeout = null;
 function checkAgeVerification() {
   const ageVerified = localStorage.getItem('ageVerified');
   const verifiedTime = localStorage.getItem('ageVerifiedTime');
-  
+
   // 인증 유효 기간: 24시간
   const expirationTime = 24 * 60 * 60 * 1000; // 24시간 (밀리초)
   const currentTime = new Date().getTime();
-  
+
   if (ageVerified === 'true' && verifiedTime) {
     const timeDiff = currentTime - parseInt(verifiedTime);
     if (timeDiff < expirationTime) {
@@ -774,7 +774,7 @@ function checkAgeVerification() {
       return false;
     }
   }
-  
+
   return false;
 }
 
@@ -801,15 +801,17 @@ function confirmAge() {
   const currentTime = new Date().getTime();
   localStorage.setItem('ageVerified', 'true');
   localStorage.setItem('ageVerifiedTime', currentTime.toString());
-  
+
   // 모달 닫기
   hideAgeVerificationModal();
 }
 
 function denyAge() {
   // 미성년자 선택 시 경고 후 다른 페이지로 리디렉션
-  alert('만 19세 미만은 이용하실 수 없습니다.\n청소년 보호법에 의거하여 접근이 제한됩니다.');
-  
+  alert(
+    '만 19세 미만은 이용하실 수 없습니다.\n청소년 보호법에 의거하여 접근이 제한됩니다.'
+  );
+
   // 구글 홈페이지로 리디렉션 (또는 원하는 다른 페이지)
   window.location.href = 'https://www.google.com';
 }
@@ -818,32 +820,32 @@ function denyAge() {
 function switchVerificationTab(tabName) {
   // 모든 탭 버튼 비활성화
   const tabs = document.querySelectorAll('.verification-tab');
-  tabs.forEach(tab => tab.classList.remove('active'));
-  
+  tabs.forEach((tab) => tab.classList.remove('active'));
+
   // 모든 인증 콘텐츠 숨기기
   const contents = document.querySelectorAll('.verification-content');
-  contents.forEach(content => content.classList.remove('active'));
-  
+  contents.forEach((content) => content.classList.remove('active'));
+
   // 선택된 탭 활성화
-  const selectedTab = Array.from(tabs).find(tab => {
+  const selectedTab = Array.from(tabs).find((tab) => {
     const tabText = tab.textContent.trim();
     if (tabName === 'simple' && tabText === '간편인증') return true;
     if (tabName === 'phone' && tabText === '휴대폰') return true;
     if (tabName === 'jumin' && tabText === '주민번호') return true;
     return false;
   });
-  
+
   if (selectedTab) {
     selectedTab.classList.add('active');
   }
-  
+
   // 선택된 콘텐츠 표시
   const contentMap = {
-    'simple': 'simpleVerification',
-    'phone': 'phoneVerification',
-    'jumin': 'juminVerification'
+    simple: 'simpleVerification',
+    phone: 'phoneVerification',
+    jumin: 'juminVerification',
   };
-  
+
   const selectedContent = document.getElementById(contentMap[tabName]);
   if (selectedContent) {
     selectedContent.classList.add('active');
@@ -853,13 +855,14 @@ function switchVerificationTab(tabName) {
 // 휴대폰 번호 포맷팅
 function formatPhoneNumber(input) {
   let value = input.value.replace(/[^0-9]/g, '');
-  
+
   if (value.length <= 3) {
     input.value = value;
   } else if (value.length <= 7) {
     input.value = value.slice(0, 3) + '-' + value.slice(3);
   } else {
-    input.value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+    input.value =
+      value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
   }
 }
 
@@ -870,31 +873,34 @@ let correctCode;
 function sendVerificationCode() {
   const phoneNumber = document.getElementById('phoneNumber').value;
   const phoneError = document.getElementById('phoneError');
-  
+
   // 휴대폰 번호 유효성 검사
   const phoneRegex = /^010-\d{4}-\d{4}$/;
   if (!phoneRegex.test(phoneNumber)) {
-    phoneError.textContent = '올바른 휴대폰 번호를 입력해주세요. (010-0000-0000)';
+    phoneError.textContent =
+      '올바른 휴대폰 번호를 입력해주세요. (010-0000-0000)';
     phoneError.classList.add('show');
     return;
   }
-  
+
   phoneError.classList.remove('show');
-  
+
   // 인증번호 생성 (6자리 랜덤)
   correctCode = Math.floor(100000 + Math.random() * 900000).toString();
-  
+
   // 실제 운영 시에는 여기서 백엔드 API 호출
   // await fetch('/api/send-verification-code', { ... });
-  
+
   // 데모용: 콘솔에 인증번호 표시
   console.log('인증번호:', correctCode);
-  alert(`[데모] 인증번호가 발송되었습니다.\n데모 인증번호: ${correctCode}\n\n* 실제 서비스에서는 SMS로 발송됩니다.`);
-  
+  alert(
+    `[데모] 인증번호가 발송되었습니다.\n데모 인증번호: ${correctCode}\n\n* 실제 서비스에서는 SMS로 발송됩니다.`
+  );
+
   // 인증번호 입력 필드 표시
   document.getElementById('verificationCodeGroup').style.display = 'block';
   document.getElementById('phoneVerifyBtn').style.display = 'block';
-  
+
   // 타이머 시작 (3분)
   startTimer(180);
 }
@@ -903,24 +909,24 @@ function sendVerificationCode() {
 function startTimer(seconds) {
   const timerElement = document.getElementById('timer');
   let remainingTime = seconds;
-  
+
   // 기존 타이머 클리어
   if (verificationTimer) {
     clearInterval(verificationTimer);
   }
-  
+
   verificationTimer = setInterval(() => {
     const minutes = Math.floor(remainingTime / 60);
     const secs = remainingTime % 60;
-    
+
     timerElement.textContent = `${minutes}:${secs.toString().padStart(2, '0')}`;
-    
+
     if (remainingTime <= 0) {
       clearInterval(verificationTimer);
       timerElement.textContent = '인증시간이 만료되었습니다.';
       correctCode = null;
     }
-    
+
     remainingTime--;
   }, 1000);
 }
@@ -929,23 +935,23 @@ function startTimer(seconds) {
 function verifyPhoneCode() {
   const inputCode = document.getElementById('verificationCode').value;
   const codeError = document.getElementById('codeError');
-  
+
   if (!inputCode) {
     codeError.textContent = '인증번호를 입력해주세요.';
     codeError.classList.add('show');
     return;
   }
-  
+
   if (inputCode !== correctCode) {
     codeError.textContent = '인증번호가 일치하지 않습니다.';
     codeError.classList.add('show');
     return;
   }
-  
+
   // 인증 성공
   codeError.classList.remove('show');
   clearInterval(verificationTimer);
-  
+
   alert('휴대폰 인증이 완료되었습니다!');
   confirmAge();
 }
@@ -953,25 +959,25 @@ function verifyPhoneCode() {
 // 주민번호 앞자리 체크 (생년월일 검증)
 function checkJuminFront(input) {
   const juminError = document.getElementById('juminError');
-  
+
   if (input.value.length === 6) {
     // 생년월일 유효성 검사
     const year = parseInt(input.value.substring(0, 2));
     const month = parseInt(input.value.substring(2, 4));
     const day = parseInt(input.value.substring(4, 6));
-    
+
     if (month < 1 || month > 12) {
       juminError.textContent = '올바른 월을 입력해주세요. (01-12)';
       juminError.classList.add('show');
       return;
     }
-    
+
     if (day < 1 || day > 31) {
       juminError.textContent = '올바른 일을 입력해주세요. (01-31)';
       juminError.classList.add('show');
       return;
     }
-    
+
     juminError.classList.remove('show');
   }
 }
@@ -981,21 +987,21 @@ function verifyJumin() {
   const juminFront = document.getElementById('juminFront').value;
   const juminBack = document.getElementById('juminBack').value;
   const juminError = document.getElementById('juminError');
-  
+
   // 앞자리 검증
   if (juminFront.length !== 6) {
     juminError.textContent = '생년월일 6자리를 입력해주세요.';
     juminError.classList.add('show');
     return;
   }
-  
+
   // 뒷자리 첫 번째 숫자 검증
   if (juminBack.length !== 1) {
     juminError.textContent = '주민등록번호 뒷자리 첫 번째 숫자를 입력해주세요.';
     juminError.classList.add('show');
     return;
   }
-  
+
   // 성별 숫자 검증 (1, 2, 3, 4만 허용)
   const genderDigit = parseInt(juminBack);
   if (![1, 2, 3, 4].includes(genderDigit)) {
@@ -1003,12 +1009,12 @@ function verifyJumin() {
     juminError.classList.add('show');
     return;
   }
-  
+
   // 생년월일로 만 19세 이상 확인
   const year = parseInt(juminFront.substring(0, 2));
   const month = parseInt(juminFront.substring(2, 4));
   const day = parseInt(juminFront.substring(4, 6));
-  
+
   // 세기 판별 (1, 2: 1900년대, 3, 4: 2000년대)
   let fullYear;
   if (genderDigit === 1 || genderDigit === 2) {
@@ -1016,19 +1022,19 @@ function verifyJumin() {
   } else {
     fullYear = 2000 + year;
   }
-  
+
   // 만 19세 확인
   const birthDate = new Date(fullYear, month - 1, day);
   const today = new Date();
   const age = today.getFullYear() - birthDate.getFullYear();
   const monthDiff = today.getMonth() - birthDate.getMonth();
   const dayDiff = today.getDate() - birthDate.getDate();
-  
+
   let actualAge = age;
   if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
     actualAge--;
   }
-  
+
   if (actualAge < 19) {
     juminError.textContent = '만 19세 미만은 이용할 수 없습니다.';
     juminError.classList.add('show');
@@ -1037,7 +1043,7 @@ function verifyJumin() {
     }, 1500);
     return;
   }
-  
+
   // 인증 성공
   juminError.classList.remove('show');
   alert('주민번호 인증이 완료되었습니다!');
@@ -1050,7 +1056,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!checkAgeVerification()) {
     showAgeVerificationModal();
   }
-  
+
   initializeApp();
 });
 
@@ -1084,10 +1090,10 @@ function initializeApp() {
   if (allFilterBtn) {
     allFilterBtn.classList.add('active');
   }
-  
+
   // footer-links 텍스트 초기 업데이트
   updateFooterLinkText();
-  
+
   // jeju-si.html 페이지에서 구 정보 유지
   const currentPath = window.location.pathname;
   const currentFileName = currentPath.split('/').pop();
@@ -1096,7 +1102,7 @@ function initializeApp() {
     currentRegion = '제주';
     currentDistrict = '제주시';
     currentFilter = 'all';
-    
+
     // 구 선택 활성화
     const districtSelect = document.getElementById('districtSelect');
     if (districtSelect) {
@@ -1108,7 +1114,7 @@ function initializeApp() {
     currentRegion = '제주';
     currentDistrict = '제주시';
     currentFilter = 'massage';
-    
+
     // 구 선택 활성화
     const districtSelect = document.getElementById('districtSelect');
     if (districtSelect) {
@@ -1120,7 +1126,7 @@ function initializeApp() {
     currentRegion = '제주';
     currentDistrict = '제주시';
     currentFilter = 'outcall';
-    
+
     // 구 선택 활성화
     const districtSelect = document.getElementById('districtSelect');
     if (districtSelect) {
@@ -1132,7 +1138,7 @@ function initializeApp() {
     currentRegion = '제주';
     currentDistrict = '서귀포시';
     currentFilter = 'all';
-    
+
     // 구 선택 활성화
     const districtSelect = document.getElementById('districtSelect');
     if (districtSelect) {
@@ -1144,7 +1150,7 @@ function initializeApp() {
     currentRegion = '제주';
     currentDistrict = '서귀포시';
     currentFilter = 'massage';
-    
+
     // 구 선택 활성화
     const districtSelect = document.getElementById('districtSelect');
     if (districtSelect) {
@@ -1156,7 +1162,7 @@ function initializeApp() {
     currentRegion = '제주';
     currentDistrict = '서귀포시';
     currentFilter = 'outcall';
-    
+
     // 구 선택 활성화
     const districtSelect = document.getElementById('districtSelect');
     if (districtSelect) {
@@ -1189,7 +1195,8 @@ function initializeApp() {
       // 지역 선택 해제 시 전체로 초기화
       currentRegion = '';
       currentDistrict = '';
-      districtSelect.innerHTML = '<option value="">구를 선택하세요</option>';
+      districtSelect.innerHTML =
+        '<option value="">세부 지역을 선택하세요</option>';
       districtSelect.disabled = true;
       districtSelect.style.opacity = '0.5';
 
@@ -1241,37 +1248,61 @@ function initializeApp() {
     currentDistrict = selectedDistrict;
 
     // 제주 + 제주시 + 전체(all)일 때 jeju-si.html로 이동
-    if (currentRegion === '제주' && selectedDistrict === '제주시' && currentFilter === 'all') {
+    if (
+      currentRegion === '제주' &&
+      selectedDistrict === '제주시' &&
+      currentFilter === 'all'
+    ) {
       window.location.href = 'jeju-si.html';
       return;
     }
-    
+
     // 제주 + 제주시 + 마사지일 때 jeju-si-massage.html로 이동
-    if (currentRegion === '제주' && selectedDistrict === '제주시' && currentFilter === 'massage') {
+    if (
+      currentRegion === '제주' &&
+      selectedDistrict === '제주시' &&
+      currentFilter === 'massage'
+    ) {
       window.location.href = 'jeju-si-massage.html';
       return;
     }
-    
+
     // 제주 + 제주시 + 출장마사지일 때 jeju-si-outcall.html로 이동
-    if (currentRegion === '제주' && selectedDistrict === '제주시' && currentFilter === 'outcall') {
+    if (
+      currentRegion === '제주' &&
+      selectedDistrict === '제주시' &&
+      currentFilter === 'outcall'
+    ) {
       window.location.href = 'jeju-si-outcall.html';
       return;
     }
-    
+
     // 제주 + 서귀포시 + 전체(all)일 때 jeju-seogwipo.html로 이동
-    if (currentRegion === '제주' && selectedDistrict === '서귀포시' && currentFilter === 'all') {
+    if (
+      currentRegion === '제주' &&
+      selectedDistrict === '서귀포시' &&
+      currentFilter === 'all'
+    ) {
       window.location.href = 'jeju-seogwipo.html';
       return;
     }
-    
+
     // 제주 + 서귀포시 + 마사지일 때 jeju-seogwipo-massage.html로 이동
-    if (currentRegion === '제주' && selectedDistrict === '서귀포시' && currentFilter === 'massage') {
+    if (
+      currentRegion === '제주' &&
+      selectedDistrict === '서귀포시' &&
+      currentFilter === 'massage'
+    ) {
       window.location.href = 'jeju-seogwipo-massage.html';
       return;
     }
-    
+
     // 제주 + 서귀포시 + 출장마사지일 때 jeju-seogwipo-outcall.html로 이동
-    if (currentRegion === '제주' && selectedDistrict === '서귀포시' && currentFilter === 'outcall') {
+    if (
+      currentRegion === '제주' &&
+      selectedDistrict === '서귀포시' &&
+      currentFilter === 'outcall'
+    ) {
       window.location.href = 'jeju-seogwipo-outcall.html';
       return;
     }
@@ -1343,17 +1374,21 @@ function initializeApp() {
     if (btn.classList.contains('info-btn')) {
       return;
     }
-    
+
     btn.addEventListener('click', function (e) {
       e.preventDefault(); // 기본 동작 방지
-      
+
       // jeju.html에서 all 필터 클릭 시 메인 페이지로 이동
       const resultsTitle = document.getElementById('resultsTitle');
-      if (resultsTitle && resultsTitle.textContent.includes('제주 마사지사이트 업체') && this.getAttribute('data-filter') === 'all') {
+      if (
+        resultsTitle &&
+        resultsTitle.textContent.includes('제주 마사지사이트 업체') &&
+        this.getAttribute('data-filter') === 'all'
+      ) {
         window.location.href = 'index.html';
         return;
       }
-      
+
       // 모든 필터 버튼에서 active 클래스 제거 (관련정보 버튼 제외)
       filterBtns.forEach((b) => {
         if (!b.classList.contains('info-btn')) {
@@ -1462,7 +1497,7 @@ function initializeApp() {
       if (themeFilterSection) {
         const isVisible = themeFilterSection.style.display !== 'none';
         themeFilterSection.style.display = isVisible ? 'none' : 'block';
-        
+
         // 버튼 눌러진 표시 토글
         typeFilterBtn.classList.toggle('active', !isVisible);
 
@@ -1564,7 +1599,7 @@ function initializeApp() {
       }
 
       filterByType(selectedTheme);
-      
+
       // resultsTitle 업데이트
       updateResultsTitleByTheme(selectedTheme);
 
@@ -1573,7 +1608,7 @@ function initializeApp() {
       if (themeFilterSection) {
         themeFilterSection.style.display = 'none';
       }
-      
+
       // 테마보기 버튼 눌러진 표시 유지 (제거하지 않음)
     });
   });
@@ -1640,7 +1675,7 @@ function updateDistrictOptions(region) {
   const currentValue = districtSelect.value;
 
   // 옵션만 업데이트 (아이콘 보존)
-  districtSelect.innerHTML = '<option value="">구를 선택하세요</option>';
+  districtSelect.innerHTML = '<option value="">세부 지역을 선택하세요</option>';
 
   if (region && districtData[region]) {
     districtData[region].forEach((district) => {
@@ -1784,7 +1819,7 @@ function performSearch() {
 // 필터링된 결과 표시
 function displayFilteredResults() {
   let filteredShops = massageShops;
-  
+
   // footer-links 텍스트 업데이트
   updateFooterLinkText();
 
@@ -2326,15 +2361,19 @@ function updateResultsTitleByTheme(selectedTheme) {
     aroma: '아로마마사지',
     waxing: '왁싱',
     chinese: '중국마사지',
-    foot: '발마사지'
+    foot: '발마사지',
   };
-  
+
   if (resultsTitle) {
     const regionName = currentRegion || '';
     const themeName = themeNames[selectedTheme] || selectedTheme;
-    const filterType = currentFilter === 'massage' ? '마사지' : 
-                      currentFilter === 'outcall' ? '출장마사지' : '';
-    
+    const filterType =
+      currentFilter === 'massage'
+        ? '마사지'
+        : currentFilter === 'outcall'
+        ? '출장마사지'
+        : '';
+
     if (selectedTheme === 'all') {
       resultsTitle.textContent = `${regionName}${filterType} 전체 업체`;
     } else {
@@ -2517,15 +2556,17 @@ function getCurrentFilter() {
 
 // footer-links 상세정보 텍스트 업데이트
 function updateFooterLinkText() {
-  const footerLink = document.querySelector('.footer-link[onclick*="openDetailsModal"]');
+  const footerLink = document.querySelector(
+    '.footer-link[onclick*="openDetailsModal"]'
+  );
   if (!footerLink) return;
-  
+
   // 현재 페이지 URL에 따른 특별 처리
   const currentPath = window.location.pathname;
   const currentFileName = currentPath.split('/').pop();
-  
+
   let titleText = '상세정보';
-  
+
   // 파일명을 기반으로 자동 생성
   if (currentFileName === 'outcall.html') {
     titleText = '출장마사지정보';
@@ -2538,18 +2579,18 @@ function updateFooterLinkText() {
     let region = '';
     let district = '';
     let filterType = '마사지사이트';
-    
+
     // jeju 관련 파일인지 확인
     if (currentFileName.includes('jeju')) {
       region = '제주';
-      
+
       // 구 추출
       if (currentFileName.includes('jeju-si')) {
         district = ' 제주시';
       } else if (currentFileName.includes('jeju-seogwipo')) {
         district = ' 서귀포시';
       }
-      
+
       // 필터 타입 추출
       if (currentFileName.includes('-massage.html')) {
         filterType = '마사지';
@@ -2558,7 +2599,7 @@ function updateFooterLinkText() {
       }
       // .html 또는 jeju.html의 경우 '마사지사이트' 유지
     }
-    
+
     // 최종 텍스트 생성
     if (region) {
       titleText = `${region}${district}${filterType}정보`;
@@ -2568,18 +2609,25 @@ function updateFooterLinkText() {
       const regionSelect = document.getElementById('regionSelect');
       const districtSelect = document.getElementById('districtSelect');
       const currentFilter = getCurrentFilter();
-      
+
       if (resultsTitle) {
         const title = resultsTitle.textContent;
         // "업체"를 "정보"로 변경
         titleText = title.replace('업체', '정보');
       } else if (regionSelect && districtSelect) {
         // resultsTitle이 없을 경우 지역 정보로 구성
-        const region = regionSelect.value || regionSelect.options[regionSelect.selectedIndex]?.text || '';
-        const district = districtSelect.value || districtSelect.options[districtSelect.selectedIndex]?.text || '';
-        const filterType = currentFilter === 'outcall' ? '출장마사지' : '마사지';
-        
-        if (region && district && district !== '구를 선택하세요') {
+        const region =
+          regionSelect.value ||
+          regionSelect.options[regionSelect.selectedIndex]?.text ||
+          '';
+        const district =
+          districtSelect.value ||
+          districtSelect.options[districtSelect.selectedIndex]?.text ||
+          '';
+        const filterType =
+          currentFilter === 'outcall' ? '출장마사지' : '마사지';
+
+        if (region && district && district !== '세부 지역을 선택하세요') {
           titleText = `${region}${district}${filterType}정보`;
         } else if (region) {
           titleText = `${region}${filterType}정보`;
@@ -2589,7 +2637,7 @@ function updateFooterLinkText() {
       }
     }
   }
-  
+
   footerLink.textContent = titleText;
 }
 
@@ -2603,20 +2651,26 @@ function openDetailsModal(event) {
     const regionSelect = document.getElementById('regionSelect');
     const districtSelect = document.getElementById('districtSelect');
     const currentFilter = getCurrentFilter();
-    
+
     let titleText = '상세정보';
-    
+
     if (resultsTitle) {
       const title = resultsTitle.textContent;
       // "업체"를 "정보"로 변경
       titleText = title.replace('업체', '정보');
     } else if (regionSelect && districtSelect) {
       // resultsTitle이 없을 경우 지역 정보로 구성
-      const region = regionSelect.value || regionSelect.options[regionSelect.selectedIndex]?.text || '';
-      const district = districtSelect.value || districtSelect.options[districtSelect.selectedIndex]?.text || '';
+      const region =
+        regionSelect.value ||
+        regionSelect.options[regionSelect.selectedIndex]?.text ||
+        '';
+      const district =
+        districtSelect.value ||
+        districtSelect.options[districtSelect.selectedIndex]?.text ||
+        '';
       const filterType = currentFilter === 'outcall' ? '출장마사지' : '마사지';
-      
-      if (region && district && district !== '구를 선택하세요') {
+
+      if (region && district && district !== '세부 지역을 선택하세요') {
         titleText = `${region}${district}${filterType}정보`;
       } else if (region) {
         titleText = `${region}${filterType}정보`;
@@ -2624,13 +2678,13 @@ function openDetailsModal(event) {
         titleText = `${filterType}정보`;
       }
     }
-    
+
     // footer-links의 상세정보 텍스트 업데이트
     const footerLink = event.target;
     if (footerLink) {
       footerLink.textContent = titleText;
     }
-    
+
     modal.classList.add('active');
     document.body.style.overflow = 'hidden'; // 스크롤 방지
   }
@@ -2639,7 +2693,7 @@ function openDetailsModal(event) {
 // 관련정보 모달 열기
 function openRelatedInfoModal(event) {
   event.preventDefault();
-  
+
   const modal = document.getElementById('relatedInfoModal');
   if (modal) {
     modal.classList.add('active');
@@ -2712,13 +2766,17 @@ function initFilterDragScroll() {
   let startScrollLeft;
   let touchHasMoved = false;
 
-  filterContainer.addEventListener('touchstart', (e) => {
-    isDown = true;
-    touchHasMoved = false;
-    filterContainer.classList.add('active');
-    startTouchX = e.touches[0].pageX;
-    startScrollLeft = filterContainer.scrollLeft;
-  }, { passive: false });
+  filterContainer.addEventListener(
+    'touchstart',
+    (e) => {
+      isDown = true;
+      touchHasMoved = false;
+      filterContainer.classList.add('active');
+      startTouchX = e.touches[0].pageX;
+      startScrollLeft = filterContainer.scrollLeft;
+    },
+    { passive: false }
+  );
 
   filterContainer.addEventListener('touchend', (e) => {
     if (isDown && touchHasMoved) {
@@ -2729,24 +2787,32 @@ function initFilterDragScroll() {
     filterContainer.classList.remove('active');
   });
 
-  filterContainer.addEventListener('touchmove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    touchHasMoved = true;
-    const touchX = e.touches[0].pageX;
-    const walk = (startTouchX - touchX) * 2; // 스크롤 속도 조절
-    filterContainer.scrollLeft = startScrollLeft + walk;
-  }, { passive: false });
+  filterContainer.addEventListener(
+    'touchmove',
+    (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      touchHasMoved = true;
+      const touchX = e.touches[0].pageX;
+      const walk = (startTouchX - touchX) * 2; // 스크롤 속도 조절
+      filterContainer.scrollLeft = startScrollLeft + walk;
+    },
+    { passive: false }
+  );
 
   // 휠 이벤트 (마우스 휠로 좌우 스크롤)
-  filterContainer.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    filterContainer.scrollLeft += e.deltaY;
-  }, { passive: false });
+  filterContainer.addEventListener(
+    'wheel',
+    (e) => {
+      e.preventDefault();
+      filterContainer.scrollLeft += e.deltaY;
+    },
+    { passive: false }
+  );
 
   // 필터 버튼 클릭 이벤트 방지 (드래그 중일 때)
   const filterButtons = filterContainer.querySelectorAll('.filter-btn');
-  filterButtons.forEach(btn => {
+  filterButtons.forEach((btn) => {
     btn.addEventListener('click', (e) => {
       if (hasMoved || touchHasMoved) {
         e.preventDefault();
