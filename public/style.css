@@ -736,6 +736,9 @@ body {
   justify-content: space-between;
   font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, sans-serif;
+  font-weight: 600;
+  color: #2c3e50;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
@@ -754,8 +757,9 @@ body {
   align-items: center;
   gap: 6px;
   margin-bottom: 6px;
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2c3e50;
 }
 
 .card-info .info-item:last-child {
@@ -780,11 +784,12 @@ body {
 }
 
 .shop-name {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #333;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #1a252f;
   margin-bottom: 4px;
   flex: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .shop-type {
@@ -792,8 +797,8 @@ body {
   color: #1976d2;
   padding: 4px 8px;
   border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 .card-info {
