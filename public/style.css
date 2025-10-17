@@ -1226,23 +1226,38 @@ body {
 @media (max-width: 480px) {
   .header-content {
     padding: 0 15px;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .nav {
     gap: 10px;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .nav-link {
     padding: 4px 8px;
     font-size: 0.8rem;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .search-section {
     padding: 15px;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .main-content {
     padding: 15px;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .massage-card {
@@ -2233,32 +2248,50 @@ body {
 
   .shop-name {
     font-size: 1.5rem;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .shop-name-container {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .shop-location-info {
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .shop-district {
     font-size: 0.9rem;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .booking-info {
     flex-direction: column;
     align-items: center;
     gap: 4px;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .booking-actions {
     justify-content: center;
+    font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, sans-serif;
+    font-weight: 600;
   }
 
   .services-grid {
