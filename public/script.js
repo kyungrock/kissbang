@@ -2267,6 +2267,10 @@ function filterByType(selectedType) {
 
 // 인사말 반환 (업체별 동적 생성)
 function getGreeting(shop) {
+  // 특정 업체(이쁘니출장) 전용 인사말 오버라이드
+  if (shop && shop.name && shop.name.includes('이쁘니출장')) {
+    return '20대, 30대 관리사 힐링으로 모시겠습니다. 편하게 문의주세요';
+  }
   // 관리사 나이 정보 추출
   let ageGroup = '20대';
   if (shop.staffInfo) {
@@ -2295,7 +2299,7 @@ function getGreeting(shop) {
     korean: [
       `${ageGroup} 전문 관리사의 정성 케어`,
       `${ageGroup} 숙련된 힐링 터치`,
-      `프리미엄 ${ageGroup} 관리사 대기`,
+      `안녕하세요. 저희는 사랑하는 고객님을 위한 서비스를 제공합니다.`,
       `${ageGroup} 전문가의 맞춤 힐링`,
       `${ageGroup} 관리사의 감성 케어`,
     ],
