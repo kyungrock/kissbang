@@ -1406,6 +1406,128 @@ body {
   }
 }
 
+/* 갤럭시 Z폴드 등 매우 작은 화면 대응 */
+@media (max-width: 320px) {
+  .container {
+    padding: 0 8px;
+  }
+
+  .header-content {
+    padding: 0 8px;
+  }
+
+  .search-box {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .search-box input {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+
+  .search-box select {
+    font-size: 0.9rem;
+    padding: 8px 6px;
+  }
+
+  .filter-container {
+    padding: 0 8px 8px 8px;
+  }
+
+  .filter-btn {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+
+  .massage-card {
+    margin-bottom: 8px;
+  }
+
+  .card-content {
+    padding: 6px 0 6px 8px;
+  }
+
+  .shop-name {
+    font-size: 1.1rem;
+  }
+
+  .card-info .info-item {
+    font-size: 0.85rem;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .price-container {
+    font-size: 0.9rem;
+  }
+
+  .shop-location-info {
+    font-size: 0.8rem;
+  }
+}
+
+/* 갤럭시 Z폴드 접힌 상태 (280px 이하) */
+@media (max-width: 280px) {
+  .container {
+    padding: 0 4px;
+  }
+
+  .header-content {
+    padding: 0 4px;
+  }
+
+  .search-box {
+    padding: 6px;
+    gap: 4px;
+  }
+
+  .search-box input {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+
+  .search-box select {
+    font-size: 0.8rem;
+    padding: 6px 4px;
+  }
+
+  .filter-container {
+    padding: 0 4px 6px 4px;
+  }
+
+  .filter-btn {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+  }
+
+  .massage-card {
+    margin-bottom: 6px;
+  }
+
+  .card-content {
+    padding: 4px 0 4px 6px;
+  }
+
+  .shop-name {
+    font-size: 1rem;
+  }
+
+  .card-info .info-item {
+    font-size: 0.8rem;
+    gap: 3px;
+    margin-bottom: 3px;
+  }
+
+  .price-container {
+    font-size: 0.85rem;
+  }
+
+  .shop-location-info {
+    font-size: 0.75rem;
+  }
+}
+
 /* 로딩 애니메이션 */
 .loading {
   display: flex;

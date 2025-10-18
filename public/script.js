@@ -2097,6 +2097,23 @@ function generateRandomDistance() {
 
 // 업체명에서 동 추출하여 새로운 이름 생성
 function createShopDisplayName(shop) {
+  // 출장마사지의 경우 지역 + 업체명 표시
+  if (shop.type === '출장마사지') {
+    const dongName = extractDongFromAddress(shop.address);
+    const region = dongName || shop.region || '출장마사지';
+
+    // 업체명에서 지역 부분 제거하고 순수 업체명만 추출
+    let shopName = shop.name;
+    if (shopName.includes('제주시')) {
+      shopName = shopName.replace('제주시', '').trim();
+    }
+    if (shopName.includes('제주도')) {
+      shopName = shopName.replace('제주도', '').trim();
+    }
+
+    return `${region} ${shopName}`;
+  }
+
   // 이미 동이 포함된 이름인지 확인
   const dongName = extractDongFromAddress(shop.address);
   if (dongName && !shop.name.includes(dongName)) {
@@ -2121,7 +2138,11 @@ function createShopDisplayName(shop) {
 // 업체 카드 생성
 function createShopCard(shop) {
   const displayName = createShopDisplayName(shop);
-  const locationInfo = extractLocationInfo(shop.address);
+  // 출장마사지의 경우 지역명만 표시
+  const locationInfo =
+    shop.type === '출장마사지'
+      ? extractDongFromAddress(shop.address) || shop.region || '출장마사지'
+      : extractLocationInfo(shop.address);
   const distance = generateRandomDistance();
 
   return `
