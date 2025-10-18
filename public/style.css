@@ -565,6 +565,7 @@ body {
   color: #333;
   margin-bottom: 15px;
   text-align: center;
+  display: none;
 }
 
 .country-boxes {
