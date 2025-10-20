@@ -421,7 +421,8 @@ textarea,
   top: 80px; /* 헤더 높이만큼 아래에 고정 */
   z-index: 99;
   background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: none;
+  outline: none;
 }
 
 /* Webkit 브라우저 스크롤바 숨김 */
