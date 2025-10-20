@@ -1575,6 +1575,39 @@ textarea,
   }
 }
 
+/* 매우 작은 화면에서 검색 버튼이 사라지지 않도록 보장 */
+@media (max-width: 240px) {
+  .search-box.main-search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    flex-wrap: nowrap;
+  }
+
+  .search-box.main-search .search-input {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.75rem;
+    padding: 8px 6px;
+  }
+
+  .search-box.main-search .search-btn-small {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+
+  .search-box.main-search .search-btn-small i {
+    font-size: 0.7rem;
+  }
+}
+
 /* 로딩 애니메이션 */
 .loading {
   display: flex;
