@@ -1613,6 +1613,56 @@ function initializeApp() {
     });
   });
 
+  // 테마박스 외부 터치/스크롤 시 숨김 기능
+  document.addEventListener('click', function (e) {
+    const themeFilterSection = document.getElementById('themeFilterSection');
+    const typeFilterBtn = document.querySelector('.type-filter-btn');
+
+    if (themeFilterSection && themeFilterSection.style.display === 'block') {
+      // 테마박스나 테마보기 버튼이 아닌 곳을 클릭한 경우
+      if (
+        !themeFilterSection.contains(e.target) &&
+        !typeFilterBtn.contains(e.target)
+      ) {
+        themeFilterSection.style.display = 'none';
+        typeFilterBtn.classList.remove('active');
+      }
+    }
+  });
+
+  // 스크롤 시 테마박스 숨김
+  document.addEventListener('scroll', function () {
+    const themeFilterSection = document.getElementById('themeFilterSection');
+    const typeFilterBtn = document.querySelector('.type-filter-btn');
+
+    if (themeFilterSection && themeFilterSection.style.display === 'block') {
+      themeFilterSection.style.display = 'none';
+      typeFilterBtn.classList.remove('active');
+    }
+  });
+
+  // 터치 이벤트로 스크롤 감지
+  let touchStartY = 0;
+  document.addEventListener('touchstart', function (e) {
+    touchStartY = e.touches[0].clientY;
+  });
+
+  document.addEventListener('touchmove', function (e) {
+    const themeFilterSection = document.getElementById('themeFilterSection');
+    const typeFilterBtn = document.querySelector('.type-filter-btn');
+
+    if (themeFilterSection && themeFilterSection.style.display === 'block') {
+      const currentY = e.touches[0].clientY;
+      const diffY = Math.abs(currentY - touchStartY);
+
+      // 세로 스크롤이 감지되면 테마박스 숨김
+      if (diffY > 10) {
+        themeFilterSection.style.display = 'none';
+        typeFilterBtn.classList.remove('active');
+      }
+    }
+  });
+
   // 마사지 국가별 박스 이벤트 리스너
   const massageCountryBoxes = document.querySelectorAll(
     '#massageCountryFilterSection .country-box'
