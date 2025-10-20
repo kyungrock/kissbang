@@ -1655,7 +1655,7 @@ function initializeApp() {
   // 터치 이벤트로 스크롤 감지
   let touchStartY = 0;
   let isScrolling = false;
-  
+
   document.addEventListener('touchstart', function (e) {
     touchStartY = e.touches[0].clientY;
     isScrolling = false;
@@ -1682,7 +1682,11 @@ function initializeApp() {
     const themeFilterSection = document.getElementById('themeFilterSection');
     const typeFilterBtn = document.querySelector('.type-filter-btn');
 
-    if (isScrolling && themeFilterSection && themeFilterSection.style.display === 'block') {
+    if (
+      isScrolling &&
+      themeFilterSection &&
+      themeFilterSection.style.display === 'block'
+    ) {
       themeFilterSection.style.display = 'none';
       typeFilterBtn.classList.remove('active');
     }
