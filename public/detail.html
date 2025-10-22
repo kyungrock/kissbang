@@ -38,52 +38,6 @@
     />
   </head>
   <body>
-    <!-- 성인 인증 모달 -->
-    <div id="ageVerificationModal" class="age-verification-modal">
-      <div class="age-verification-content">
-        <div class="age-verification-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        <h2 class="age-verification-title">성인 인증</h2>
-        <p class="age-verification-description">
-          본 사이트는 성인(만 19세 이상)만 이용 가능합니다.<br>
-          아래 방법 중 하나를 선택하여 인증해주세요.
-        </p>
-        
-        <!-- 인증 방법 탭 -->
-        <div class="verification-tabs">
-          <button class="verification-tab active" onclick="switchVerificationTab('simple')">
-            간편인증
-          </button>
-          <button class="verification-tab" onclick="switchVerificationTab('phone')">
-            휴대폰
-          </button>
-          <button class="verification-tab" onclick="switchVerificationTab('jumin')">
-            주민번호
-          </button>
-        </div>
-
-        <!-- 간편 인증 -->
-        <div id="simpleVerification" class="verification-content active">
-          <div class="age-verification-warning">
-            <i class="fas fa-exclamation-triangle"></i>
-            청소년 보호법에 의거하여 만 19세 미만의 청소년은<br>
-            본 사이트를 이용할 수 없습니다.
-          </div>
-          <div class="age-verification-buttons">
-            <button class="age-btn age-btn-confirm" onclick="confirmAge()">
-              <i class="fas fa-check-circle"></i>
-              <span>만 19세 이상입니다</span>
-            </button>
-            <button class="age-btn age-btn-deny" onclick="denyAge()">
-              <i class="fas fa-times-circle"></i>
-              <span>만 19세 미만입니다</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 휴대폰 인증 -->
-        <div id="phoneVerification" class="verification-content">
           <form class="phone-verification-form" onsubmit="return false;">
             <div class="form-group">
               <label class="form-label">휴대폰 번호</label>
