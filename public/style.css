@@ -248,7 +248,7 @@ textarea,
 
 .search-btn-small {
   background: #ebeaf1;
-  color: white;
+  color: #667eea;
   border: none;
   width: 40px;
   height: 40px;
@@ -262,6 +262,7 @@ textarea,
 
 .search-btn-small:hover {
   background: #5a6fd8;
+  color: white;
   transform: scale(1.05);
 }
 
@@ -1451,6 +1452,48 @@ textarea,
   }
 }
 
+/* 340px 이하 화면 대응 */
+@media (max-width: 340px) {
+  .search-box.main-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex-wrap: nowrap;
+    padding: 10px 14px;
+  }
+
+  .search-box.main-search .search-input {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.95rem;
+    padding: 10px 8px;
+  }
+
+  .search-box.main-search .search-btn-small {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+
+  .search-box.main-search .search-btn-small:hover {
+    background: #5a6fd8;
+    transform: scale(1.05);
+  }
+
+  .search-box.main-search .search-btn-small i {
+    font-size: 0.85rem;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
 /* 갤럭시 Z폴드 등 매우 작은 화면 대응 */
 @media (max-width: 320px) {
   .container {
@@ -1474,6 +1517,46 @@ textarea,
   .search-box select {
     font-size: 0.9rem;
     padding: 8px 6px;
+  }
+
+  /* 320px 이하에서 main-search 검색 버튼 보장 */
+  .search-box.main-search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    flex-wrap: nowrap;
+    padding: 8px 12px;
+  }
+
+  .search-box.main-search .search-input {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.9rem;
+    padding: 8px 6px;
+  }
+
+  .search-box.main-search .search-btn-small {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+
+  .search-box.main-search .search-btn-small:hover {
+    background: #5a6fd8;
+    transform: scale(1.05);
+  }
+
+  .search-box.main-search .search-btn-small i {
+    font-size: 0.8rem;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   .filter-container {
@@ -1538,6 +1621,46 @@ textarea,
     padding: 6px 4px;
   }
 
+  /* 280px 이하에서 main-search 검색 버튼 보장 */
+  .search-box.main-search {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    flex-wrap: nowrap;
+    padding: 6px 8px;
+  }
+
+  .search-box.main-search .search-input {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.8rem;
+    padding: 6px 4px;
+  }
+
+  .search-box.main-search .search-btn-small {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+  }
+
+  .search-box.main-search .search-btn-small:hover {
+    background: #5a6fd8;
+    transform: scale(1.05);
+  }
+
+  .search-box.main-search .search-btn-small i {
+    font-size: 0.7rem;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
   .filter-container {
     padding: 0 4px 6px 4px;
     top: 60px; /* 매우 작은 화면에서 헤더 높이 조정 */
@@ -1580,31 +1703,40 @@ textarea,
   .search-box.main-search {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     min-width: 0;
     flex-wrap: nowrap;
+    padding: 4px 6px;
   }
 
   .search-box.main-search .search-input {
     flex: 1;
     min-width: 0;
     font-size: 0.75rem;
-    padding: 8px 6px;
+    padding: 6px 4px;
   }
 
   .search-box.main-search .search-btn-small {
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    display: flex;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    display: flex !important;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  .search-box.main-search .search-btn-small:hover {
+    background: #5a6fd8;
+    transform: scale(1.05);
   }
 
   .search-box.main-search .search-btn-small i {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }
 

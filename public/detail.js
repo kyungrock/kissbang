@@ -1033,18 +1033,18 @@ function updateSEOMetaTags(shop) {
   const districtKeyword = shop.district ? `${shop.district}마사지` : '';
 
   // 제목 업데이트
-  const title = `${shop.name} - ${regionKeyword} 상세정보 | 마사지가가`;
+  const title = `${shop.name} - ${regionKeyword} 상세정보 | 마사지천국`;
   document.getElementById('pageTitle').textContent = title;
   document.title = title;
 
   // 메타 설명 업데이트
-  const description = `${shop.name} ${regionKeyword} 상세정보. ${shop.price}부터, ${shop.operatingHours}. ${shop.address}. 전화예약 ${shop.phone}. 마사지가가에서 확인하세요.`;
+  const description = `${shop.name} ${regionKeyword} 상세정보. ${shop.price}부터, ${shop.operatingHours}. ${shop.address}. 전화예약 ${shop.phone}. 마사지천국에서 확인하세요.`;
   document
     .getElementById('pageDescription')
     .setAttribute('content', description);
 
   // 키워드 업데이트
-  const keywords = `${regionKeyword}, ${districtKeyword}, ${shop.name}, 마사지상세, 마사지예약, 마사지가격, 마사지코스, 마사지리뷰, 마사지가가`;
+  const keywords = `${regionKeyword}, ${districtKeyword}, ${shop.name}, 마사지상세, 마사지예약, 마사지가격, 마사지코스, 마사지리뷰, 마사지천국`;
   document.getElementById('pageKeywords').setAttribute('content', keywords);
 
   // Open Graph 메타태그 업데이트
@@ -1090,7 +1090,7 @@ function generateShopNameWithRegion(originalName, region) {
 
 // Open Graph 메타태그 업데이트
 function updateOpenGraphTags(shop, regionKeyword) {
-  const title = `${shop.name} - ${regionKeyword} 상세정보 | 마사지가가`;
+  const title = `${shop.name} - ${regionKeyword} 상세정보 | 마사지천국`;
   const description = `${shop.name} ${regionKeyword} 상세정보. ${shop.price}부터, ${shop.operatingHours}. ${shop.address}. 전화예약 ${shop.phone}.`;
 
   // 기존 Open Graph 메타태그 업데이트

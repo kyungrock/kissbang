@@ -1,4 +1,4 @@
-# 🎉 마사지가가 - Next.js + Vercel + MongoDB 플랫폼
+# 🎉 마사지천국 - Next.js + Vercel + MongoDB 플랫폼
 
 **전국 마사지 업체 검색 및 예약 플랫폼**
 
@@ -301,7 +301,7 @@ const response = await fetch('SMS_API_ENDPOINT', {
   },
   body: JSON.stringify({
     to: phone,
-    message: `[마사지가가] 인증번호: ${code}`,
+    message: `[마사지천국] 인증번호: ${code}`,
   }),
 });
 ```

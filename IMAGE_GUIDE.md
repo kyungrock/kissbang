@@ -12,7 +12,7 @@
 
 <!-- 이미지 URL 사용 방법 -->
 <div class="logo-icon" id="logoIcon">
-  <img src="https://your-logo-url.com/logo.png" alt="마사지가가 로고" />
+  <img src="https://your-logo-url.com/logo.png" alt="마사지천국 로고" />
 </div>
 ```
 
@@ -20,7 +20,7 @@
 
 ```html
 <div class="logo-icon" id="logoIcon">
-  <img src="https://i.imgur.com/yourlogo.png" alt="마사지가가 로고" />
+  <img src="https://i.imgur.com/yourlogo.png" alt="마사지천국 로고" />
 </div>
 ```
 
@@ -30,7 +30,7 @@
 
 ```html
 <div class="logo-icon" id="logoIcon">
-  <img src="https://your-logo-url.com/logo.png" alt="마사지가가 로고" />
+  <img src="https://your-logo-url.com/logo.png" alt="마사지천국 로고" />
 </div>
 ```
 
@@ -135,7 +135,7 @@ https://res.cloudinary.com/demo/image/upload/sample.jpg
 ```html
 <!-- Option 1: 실제 로고 이미지 -->
 <div class="logo-icon" id="logoIcon">
-  <img src="https://i.imgur.com/YOUR_LOGO.png" alt="마사지가가 로고" />
+  <img src="https://i.imgur.com/YOUR_LOGO.png" alt="마사지천국 로고" />
 </div>
 
 <!-- Option 2: 기본 아이콘 (현재) -->
@@ -197,4 +197,4 @@ onerror = "this.style.display='none'; this.parentElement.innerHTML='홍';";
 
 ---
 
-**마사지가가** - 전국 마사지 예약 플랫폼
+**마사지천국** - 전국 마사지 예약 플랫폼

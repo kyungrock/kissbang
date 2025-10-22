@@ -2,7 +2,7 @@
 
 ## 개요
 
-마사지가가 플랫폼에 로그인, 회원가입, 회원관리, 어드민 기능이 추가되었습니다.
+마사지천국 플랫폼에 로그인, 회원가입, 회원관리, 어드민 기능이 추가되었습니다.
 
 ## 주요 기능
 
@@ -251,7 +251,7 @@ location.reload();
 <!-- login.html 또는 signup.html -->
 <div class="logo-icon" id="logoIcon">
   <!-- 아이콘 대신 이미지 URL 사용 -->
-  <img src="https://i.imgur.com/yourlogo.png" alt="마사지가가 로고" />
+  <img src="https://i.imgur.com/yourlogo.png" alt="마사지천국 로고" />
 </div>
 ```
 
@@ -279,4 +279,4 @@ location.reload();
 
 ---
 
-**마사지가가** - 전국 마사지 예약 플랫폼
+**마사지천국** - 전국 마사지 예약 플랫폼
