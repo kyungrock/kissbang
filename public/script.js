@@ -755,12 +755,6 @@ let searchTimeout = null;
 
 // 성인 인증 관련 함수 제거됨
 
-
-
-
-
-
-
 // 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function () {
   initializeApp();
@@ -2490,7 +2484,7 @@ function openDetailsModal(event) {
 
     if (resultsTitle) {
       const title = resultsTitle.textContent;
-      // "업체"를 "정보"로 변경
+      // "업체"를 "정보"로 변경하고 업체 정보만 표시
       titleText = title.replace('업체', '정보');
     } else if (regionSelect && districtSelect) {
       // resultsTitle이 없을 경우 지역 정보로 구성
