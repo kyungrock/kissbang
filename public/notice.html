@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공지사항 - 키스포유</title>
     <link rel="stylesheet" href="style.css" />
+    <!-- 햄버거 메뉴 스타일 -->
+    <!-- 스타일은 hamburger-menu-component.html에 포함됨 -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
@@ -416,10 +418,9 @@
   </head>
   <body>
     <!-- 헤더 -->
+    <div id="header-container"></div>
+    <!-- 메인 헤더 -->
     <div class="notice-header">
-      <button class="back-btn" onclick="window.history.back()">
-        <i class="fas fa-arrow-left"></i>
-      </button>
       <h1><i class="fas fa-bullhorn"></i> 공지사항</h1>
     </div>
 
@@ -542,6 +543,10 @@
       </div>
     </div>
 
+    <!-- 햄버거 메뉴 -->
+    <div id="hamburger-menu-container"></div>
+
+    <script src="common-components.js"></script>
     <script src="api-auth.js"></script>
     <script>
       // 공지사항 데이터 (LocalStorage 사용)

@@ -19,23 +19,19 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
+    <!-- Gmarket Sans 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- 햄버거 메뉴 스타일 -->
+    <!-- 스타일은 hamburger-menu-component.html에 포함됨 -->
   </head>
   <body>
-    <header class="header">
-      <div class="header-content">
-        <div
-          class="logo"
-          onclick="window.location.href='index.html'"
-          style="cursor: pointer"
-        >
-          <i class="fas fa-spa"></i>
-          마사지천국
-        </div>
-        <div class="search-toggle" id="searchToggle">
-          <i class="fas fa-search"></i>
-        </div>
-      </div>
-    </header>
+    <!-- 헤더 -->
+    <div id="header-container"></div>
 
     <section class="search-section">
       <div class="search-container">
@@ -68,9 +64,9 @@
 
     <section class="filter-section">
       <div class="filter-container">
-        <button class="filter-btn" data-filter="all">전체</button>
-        <button class="filter-btn active" data-filter="massage">마사지</button>
-        <button class="filter-btn" data-filter="outcall">출장마사지</button>
+        <a class="filter-btn" data-filter="all">전체</a>
+        <a class="filter-btn" data-filter="massage">마사지</a>
+        <a class="filter-btn" data-filter="outcall">출장마사지</a>
         <div class="type-filter-dropdown">
           <button class="filter-btn type-filter-btn" id="typeFilterBtn">
             테마보기
@@ -229,6 +225,7 @@
       </div>
     </footer>
 
+    <script src="common-components.js"></script>
     <script src="script.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
@@ -945,5 +942,7 @@
         </div>
       </div>
     </div>
+    <!-- 햄버거 메뉴 -->
+    <div id="hamburger-menu-container"></div>
   </body>
 </html>
