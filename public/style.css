@@ -577,7 +577,7 @@ textarea,
   padding: 0;
   border-bottom: 1px solid #eee;
   position: sticky;
-  top: 106px;
+  top: 100px; /* 필터 섹션(top: 1px) + 필터 컨테이너 높이(약 50px) + 여유 공간 */
   z-index: 89;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
@@ -591,8 +591,8 @@ textarea,
 .theme-filter-container {
   max-width: 420px;
   margin: 0px auto;
-  margin-top: -15px;
-  padding: 30px 10px 5px 10px;
+  margin-top: -40px;
+  padding: 15px 10px 5px 10px;
 }
 
 .country-filter-title {
@@ -1288,8 +1288,8 @@ textarea,
 
   .theme-filter-container {
     max-width: 520px;
-    padding: 30px 20px 5px 20px;
-    margin-top: -15px;
+    padding: 15px 20px 5px 20px;
+    margin-top: -40px;
   }
 }
 
@@ -1301,8 +1301,8 @@ textarea,
 
   .theme-filter-container {
     max-width: 520px;
-    padding: 30px 30px 5px 30px;
-    margin-top: -15px;
+    padding: 15px 30px 5px 30px;
+    margin-top: -40px;
   }
 }
 
@@ -1314,8 +1314,8 @@ textarea,
 
   .theme-filter-container {
     max-width: 520px;
-    padding: 30px 40px 10px 40px;
-    margin-top: -15px;
+    padding: 15px 40px 10px 40px;
+    margin-top: -40px;
   }
 }
 

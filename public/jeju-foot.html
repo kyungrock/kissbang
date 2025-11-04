@@ -4,16 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="./" />
-    <title>
-      울산 중구마사지 - 마사지천국 | 울산 중구 마사지사이트 업체 예약 플랫폼
-    </title>
+    <title>제주 발마사지 - 마사지천국 | 제주 발마사지 업체 예약 플랫폼</title>
     <meta
       name="description"
-      content="울산 중구마사지 마사지천국, 울산 중구마사지, 울산 중구출장마사지 등 울산 중구 전 지역 마사지 업체를 한눈에! 태국마사지, 한국마사지, 스파, 왁싱까지. 울산 중구 최저가 마사지 업체를 찾아보세요."
+      content="제주 발마사지 마사지천국, 제주도 발마사지 업체를 한눈에! 발의 반사구를 자극하여 전신의 피로를 해소하고 혈액순환을 촉진하는 발마사지를 찾아보세요."
     />
     <meta
       name="keywords"
-      content="울산 중구마사지, 울산 중구마사지사이트, 울산 중구출장마사지, 마사지사이트, 마사지, 아로마마사지, 타이마사지, 스웨디시, 1인샵, 왁싱, 출장마사지, 마사지예약, 마사지천국"
+      content="제주 발마사지, 제주도 발마사지, 마사지사이트, 마사지, 발마사지, 마사지예약, 마사지천국"
     />
     <meta name="author" content="마사지천국" />
     <link rel="stylesheet" href="style.css" />
@@ -21,11 +19,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
+    <!-- Gmarket Sans 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@300;500;700&display=swap"
       rel="stylesheet"
     />
-
     <!-- 햄버거 메뉴 스타일 -->
     <!-- 스타일은 hamburger-menu-component.html에 포함됨 -->
   </head>
@@ -46,7 +46,6 @@
             <i class="fas fa-search"></i>
           </button>
         </div>
-        <!-- 지역별 검색 -->
         <div class="location-search">
           <div class="search-box">
             <select id="regionSelect" class="search-select">
@@ -93,24 +92,27 @@
       id="massageCountryFilterSection"
       style="display: none"
     >
-      <div class="filter-container">
-        <div class="filter-title">마사지 국가별</div>
-        <div class="country-filter-buttons">
-          <button class="country-filter-btn" data-country="all">전체</button>
-          <button class="country-filter-btn" data-country="korean">한국</button>
-          <button class="country-filter-btn" data-country="thai">태국</button>
-          <button class="country-filter-btn" data-country="chinese">
-            중국
-          </button>
-          <button class="country-filter-btn" data-country="vietnamese">
-            베트남
-          </button>
-          <button class="country-filter-btn" data-country="filipino">
-            필리핀
-          </button>
-          <button class="country-filter-btn" data-country="russian">
-            러시아
-          </button>
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
         </div>
       </div>
     </section>
@@ -120,24 +122,27 @@
       id="outcallCountryFilterSection"
       style="display: none"
     >
-      <div class="filter-container">
-        <div class="filter-title">출장마사지 국가별</div>
-        <div class="country-filter-buttons">
-          <button class="country-filter-btn" data-country="all">전체</button>
-          <button class="country-filter-btn" data-country="korean">한국</button>
-          <button class="country-filter-btn" data-country="thai">태국</button>
-          <button class="country-filter-btn" data-country="chinese">
-            중국
-          </button>
-          <button class="country-filter-btn" data-country="vietnamese">
-            베트남
-          </button>
-          <button class="country-filter-btn" data-country="filipino">
-            필리핀
-          </button>
-          <button class="country-filter-btn" data-country="russian">
-            러시아
-          </button>
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 출장마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
         </div>
       </div>
     </section>
@@ -177,10 +182,9 @@
 
     <main class="main-content">
       <div class="results-header">
-        <h1 id="resultsTitle">울산 중구 마사지사이트 업체</h1>
+        <h1 id="resultsTitle">제주 발마사지 업체</h1>
         <span id="resultsCount" class="results-count">총 0개</span>
       </div>
-
       <div id="massageList" class="massage-list">
         <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
       </div>
@@ -191,7 +195,7 @@
         <div class="footer-links">
           <div class="footer-link-row">
             <a href="#" class="footer-link" onclick="openDetailsModal(event)"
-              >울산 중구 마사지사이트 정보</a
+              >제주 발마사지정보</a
             >
           </div>
           <div class="footer-divider-line"></div>
@@ -220,6 +224,9 @@
         </div>
       </div>
     </footer>
+
+    <!-- 햄버거 메뉴 -->
+    <div id="hamburger-menu-container"></div>
 
     <!-- 회사소개 모달 -->
     <div id="aboutModal" class="modal">
@@ -426,7 +433,52 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- 동적으로 생성됩니다 -->
+          <div class="terms-section">
+            <h3>마사지사이트 마사지천국 - 전국 마사지 예약의 중심</h3>
+            <p>
+              마사지천국는 최고의 <strong>마사지사이트</strong>로,
+              <strong>서울마사지사이트</strong>,
+              <strong>부산마사지사이트</strong>, 제주 등 전국 마사지 업체를
+              한눈에 볼 수 있는 예약 플랫폼입니다.
+              <strong>아로마마사지</strong>, <strong>타이마사지</strong>,
+              <strong>스웨디시</strong>, <strong>1인샵</strong>,
+              <strong>왁싱</strong> 등 다양한 마사지 서비스를 지역별로 간편하게
+              예약할 수 있습니다.
+            </p>
+            <p>
+              마사지천국는 고객의 편의를 위해 엄선된 업체를 제공하며, 최저가
+              보장과 실시간 예약 시스템으로 편리함을 더합니다.
+              <strong>서울마사지사이트</strong>에서는 프리미엄
+              <strong>스웨디시</strong>와 <strong>아로마마사지</strong>를,
+              <strong>부산마사지사이트</strong>에서는 전통
+              <strong>타이마사지</strong>와 <strong>왁싱</strong> 서비스를
+              만나보세요. 여행 중 힐링이 필요하다면
+              <strong>제주마사지사이트</strong>에서 특별한
+              <strong>1인샵</strong> 경험을 즐길 수 있습니다.
+            </p>
+            <p>
+              지금 마사지천국 <strong>마사지사이트</strong>에서 당신에게 맞는
+              마사지 서비스를 찾아 지역에 맞게 예약하세요.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h3>휴식과 힐링</h3>
+            <p>
+              바쁜 일상 속에서 <strong>마사지</strong>는 몸과 마음을 동시에
+              회복시키는 최적의 방법입니다. <strong>마사지사이트</strong>를 통해
+              서울, 부산, 제주 등 지역별 <strong>아로마마사지</strong>와
+              <strong>스웨디시</strong>를 찾아 편안한 휴식을 즐겨보세요.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h3>이용 안내</h3>
+            <p>
+              본 서비스는 정보 제공 목적으로만 사용되며, 실제 서비스 이용 시에는
+              각 업소의 이용약관을 확인하시기 바랍니다.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -436,11 +488,97 @@
     <script>
       // 페이지 로드 시 초기화
       document.addEventListener('DOMContentLoaded', function () {
-        initializeApp();
+        // 지역 선택 설정
+        const regionSelect = document.getElementById('regionSelect');
+        if (regionSelect) {
+          regionSelect.value = '제주';
+          if (typeof updateDistrictOptions === 'function') {
+            updateDistrictOptions('제주');
+          }
+        }
+
+        if (typeof currentRegion !== 'undefined') {
+          currentRegion = '제주';
+        }
+        if (typeof currentFilter !== 'undefined') {
+          currentFilter = 'foot';
+        }
+        window.currentFilter = 'foot';
+
+        // 결과 제목 및 푸터 링크 업데이트
+        if (typeof updateResultsTitle === 'function') {
+          updateResultsTitle();
+        }
+        if (typeof updateFooterLinkText === 'function') {
+          updateFooterLinkText();
+        }
+
+        // 필터링된 결과 표시
+        if (typeof displayFilteredResults === 'function') {
+          displayFilteredResults();
+        }
       });
     </script>
 
     <!-- 햄버거 메뉴 -->
     <div id="hamburger-menu-container"></div>
+
+    <!-- 관련정보 모달 -->
+    <div id="relatedInfoModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>관련정보</h2>
+          <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- 1. 주변 놀거리 소개 -->
+          <div class="terms-section">
+            <h3>🏝️ 제주 발마사지 업체 주변 놀거리 소개</h3>
+            <p>
+              <strong>제주 발마사지 업체</strong>를 방문하신 후에는 제주도의
+              아름다운 자연과 다양한 관광 명소들을 즐기실 수 있습니다.
+            </p>
+          </div>
+
+          <!-- 2. H1 실제 고객 후기 및 사연 -->
+          <div class="terms-section">
+            <h3>💬 제주 발마사지 업체 실제 고객 후기 및 사연</h3>
+            <p>
+              <strong>제주 발마사지 업체</strong>를 이용하신 고객들의 생생한
+              후기와 특별한 경험담을 공유해드립니다.
+            </p>
+          </div>
+
+          <!-- 3. H1 받으면 좋은 상품 소개 -->
+          <div class="terms-section">
+            <h3>🎁 제주 발마사지 업체 받으면 좋은 상품 소개</h3>
+            <p>
+              <strong>제주 발마사지 업체</strong>에서는 제주도만의 특별한 상품과
+              서비스를 제공하여 고객님들의 만족도를 극대화하고 있습니다.
+            </p>
+          </div>
+
+          <!-- 4. H1 음식점 추천 -->
+          <div class="terms-section">
+            <h3>🍽️ 제주 발마사지 업체 음식점 추천</h3>
+            <p>
+              <strong>제주 발마사지 업체</strong>에서 마사지를 받은 후에는
+              제주도의 맛있는 음식으로 에너지를 보충하세요.
+            </p>
+          </div>
+
+          <!-- 5. H1 추천 인사 -->
+          <div class="terms-section">
+            <h3>👥 제주 발마사지 업체 추천 인사</h3>
+            <p>
+              <strong>제주 발마사지 업체</strong>에서는 고객님들의 만족을 위해
+              최고의 전문 인력들이 서비스를 제공하고 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

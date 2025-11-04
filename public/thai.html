@@ -3,40 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="./" />
-    <title>
-      울산 남구마사지 - 마사지천국 | 울산 남구 마사지사이트 업체 예약 플랫폼
-    </title>
+    <title>타이마사지 - 마사지사이트</title>
     <meta
       name="description"
-      content="울산 남구마사지 마사지천국, 울산 남구마사지, 울산 남구출장마사지 등 울산 남구 전 지역 마사지 업체를 한눈에! 태국마사지, 한국마사지, 스파, 왁싱까지. 울산 남구 최저가 마사지 업체를 찾아보세요."
+      content="전국 타이마사지 업체 정보. 정통 태국식 마사지 기법으로 근육과 관절의 긴장을 완화하고 에너지 라인을 자극하는 타이마사지를 찾아보세요."
     />
-    <meta
-      name="keywords"
-      content="울산 남구마사지, 울산 남구마사지사이트, 울산 남구출장마사지, 마사지사이트, 마사지, 아로마마사지, 타이마사지, 스웨디시, 1인샵, 왁싱, 출장마사지, 마사지예약, 마사지천국"
-    />
-    <meta name="author" content="마사지천국" />
     <link rel="stylesheet" href="style.css" />
     <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
     />
-    <!-- Gmarket Sans 폰트 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@300;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- 햄버거 메뉴 스타일 -->
-    <!-- 스타일은 hamburger-menu-component.html에 포함됨 -->
   </head>
   <body>
     <!-- 헤더 -->
     <div id="header-container"></div>
 
+    <!-- 검색 섹션 -->
     <section class="search-section">
       <div class="search-container">
+        <!-- 통합 검색창 -->
         <div class="search-box main-search">
           <input
             type="text"
@@ -48,6 +33,8 @@
             <i class="fas fa-search"></i>
           </button>
         </div>
+
+        <!-- 지역별 검색 -->
         <div class="location-search">
           <div class="search-box">
             <select id="regionSelect" class="search-select">
@@ -182,22 +169,26 @@
       </div>
     </section>
 
+    <!-- 메인 콘텐츠 -->
     <main class="main-content">
       <div class="results-header">
-        <h1 id="resultsTitle">울산 남구 마사지사이트 업체</h1>
-        <span id="resultsCount" class="results-count">총 0개</span>
+        <h1 id="resultsTitle">타이마사지 업체</h1>
+        <span class="results-count" id="resultsCount">총 4개</span>
       </div>
-      <div id="massageList" class="massage-list">
+
+      <!-- 업체 목록 -->
+      <div class="massage-list" id="massageList">
         <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
       </div>
     </main>
 
+    <!-- 푸터 -->
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-links">
           <div class="footer-link-row">
             <a href="#" class="footer-link" onclick="openDetailsModal(event)"
-              >울산 남구마사지정보</a
+              >상세정보</a
             >
           </div>
           <div class="footer-divider-line"></div>
@@ -227,73 +218,209 @@
       </div>
     </footer>
 
-    <script src="common-components.js"></script>
-    <script src="script.js"></script>
-
-    <!-- 관련정보 모달 -->
-    <div id="relatedInfoModal" class="modal">
+    <!-- 회사소개 모달 -->
+    <div class="modal" id="aboutModal">
       <div class="modal-content">
         <div class="modal-header">
-          <h2>관련정보</h2>
-          <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+          <h2>회사소개</h2>
+          <button class="modal-close" onclick="closeModal('aboutModal')">
             &times;
           </button>
         </div>
         <div class="modal-body">
-          <!-- 관련정보 내용은 ulsan.html과 동일한 구조로 필요시 추가 -->
+          <p>
+            <strong>마사지사이트</strong>는 전국 마사지 업체 정보를 제공하는
+            종합 플랫폼입니다.
+          </p>
+          <div class="info-section">
+            <h3>주요 서비스</h3>
+            <p>• 전국 마사지 업체 검색 및 정보 제공</p>
+            <p>• 지역별, 서비스별 맞춤 검색</p>
+            <p>• 실시간 업체 정보 및 리뷰 제공</p>
+          </div>
+          <div class="highlight">
+            <p>고객님의 건강한 휴식을 위해 최선을 다하겠습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 이용약관 모달 -->
+    <div class="modal" id="termsModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>이용약관</h2>
+          <button class="modal-close" onclick="closeModal('termsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
           <div class="terms-section">
-            <h3>🏝️ 울산 남구 마사지사이트 업체 주변 놀거리 소개</h3>
+            <h3>제1조 (목적)</h3>
             <p>
-              <strong>울산 남구 마사지사이트 업체</strong>를 방문하신 후에는
-              울산도의 아름다운 자연과 다양한 관광 명소들을 즐기실 수 있습니다.
+              본 약관은 마사지사이트가 제공하는 서비스의 이용조건 및 절차에 관한
+              사항을 규정함을 목적으로 합니다.
+            </p>
+          </div>
+          <div class="terms-section">
+            <h3>제2조 (정의)</h3>
+            <p>
+              1. "서비스"란 마사지사이트가 제공하는 모든 서비스를 의미합니다.
+            </p>
+            <p>
+              2. "이용자"란 서비스에 접속하여 본 약관에 따라 서비스를 이용하는
+              회원 및 비회원을 의미합니다.
+            </p>
+          </div>
+          <div class="terms-section">
+            <h3>제3조 (약관의 효력 및 변경)</h3>
+            <p>
+              본 약관은 서비스 화면에 게시하거나 기타의 방법으로 이용자에게
+              공지함으로써 효력이 발생합니다.
             </p>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- 상세정보 모달 -->
+    <div class="modal" id="detailsModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>타이마사지 상세정보</h2>
+          <button class="modal-close" onclick="closeModal('detailsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="info-highlight">
+            <h4>타이마사지 서비스 안내</h4>
+            <ul>
+              <li>정통 태국식 마사지 기법 제공</li>
+              <li>에너지 라인을 통한 깊은 힐링</li>
+              <li>압박과 스트레칭의 조화로운 결합</li>
+              <li>관절 가동범위 개선 및 유연성 향상</li>
+            </ul>
+          </div>
+
+          <div class="service-categories">
+            <h4>타이마사지 코스</h4>
+            <div class="service-grid">
+              <div class="service-item">
+                <i class="fas fa-clock"></i>
+                <span>60분 코스</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-clock"></i>
+                <span>90분 코스</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-clock"></i>
+                <span>120분 코스</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-clock"></i>
+                <span>150분 코스</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="service-details">
+            <div class="service-detail-item">
+              <h5><i class="fas fa-hands"></i> 타이마사지 효과</h5>
+              <p>
+                에너지 라인을 따라 압박과 스트레칭을 결합하여 근육의 긴장을
+                완화하고 관절의 가동범위를 개선합니다. 몸의 유연성을 향상시키고
+                에너지 순환을 촉진합니다.
+              </p>
+            </div>
+
+            <div class="service-detail-item">
+              <h5><i class="fas fa-user-md"></i> 전문 관리사</h5>
+              <p>
+                태국에서 수련한 전문 관리사가 정통 타이마사지 기법으로 고객님의
+                몸과 마음을 힐링해드립니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 관련정보 모달 -->
+    <div class="modal" id="relatedInfoModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>타이마사지 관련정보</h2>
+          <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="therapist-info">
+            <h4>타이마사지 관리사 정보</h4>
+            <ul>
+              <li>전원 <strong>태국 수련 경험</strong> 보유</li>
+              <li>타이마사지 전문 자격증 취득</li>
+              <li>20대~30대 전문 관리사</li>
+              <li>고객 만족도 최우선 서비스</li>
+            </ul>
+          </div>
+
+          <div class="responsibility-info">
+            <div class="responsibility-item">
+              <h5><i class="fas fa-shield-alt"></i> 안전 관리</h5>
+              <ul>
+                <li>정기적인 시설 점검 및 소독</li>
+                <li>관리사 건강 검진 및 교육</li>
+                <li>고객 개인정보 보호</li>
+              </ul>
+            </div>
+
+            <div class="responsibility-item">
+              <h5><i class="fas fa-heart"></i> 서비스 품질</h5>
+              <ul>
+                <li>고객 맞춤형 타이마사지 서비스 제공</li>
+                <li>지속적인 서비스 품질 개선</li>
+                <li>고객 피드백 적극 반영</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="notice-box">
+            <p>
+              <strong>주의사항:</strong> 타이마사지는 성인만 이용 가능하며,
+              미성년자 출입을 금지합니다. 서비스 이용 시 개인정보 보호에
+              주의하시기 바랍니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="common-components.js"></script>
+    <script src="script.js"></script>
     <script>
-      // 페이지 로드 시 초기화
-      document.addEventListener('DOMContentLoaded', function () {
-        // 지역 선택 설정
-        const regionSelect = document.getElementById('regionSelect');
-        if (regionSelect) {
-          regionSelect.value = '울산';
-          if (typeof updateDistrictOptions === 'function') {
-            updateDistrictOptions('울산');
-          }
-          const districtSelect = document.getElementById('districtSelect');
-          if (districtSelect) {
-            districtSelect.disabled = false;
-            districtSelect.style.opacity = '1';
-            districtSelect.value = '남구';
-          }
-        }
+      // 타이마사지 페이지 전용 설정
+      // initializeApp이 실행된 후에 필터 적용
+      setTimeout(function () {
+        // 현재 필터를 타이마사지로 설정
+        currentFilter = 'thai';
+        window.currentFilter = 'thai';
 
-        if (typeof currentRegion !== 'undefined') {
-          currentRegion = '울산';
-        }
-        if (typeof currentDistrict !== 'undefined') {
-          currentDistrict = '남구';
-        }
-        if (typeof currentFilter !== 'undefined') {
-          currentFilter = 'massage';
-        }
-
-        // 마사지 필터 버튼을 기본으로 활성화
-        const massageFilterBtn = document.querySelector(
-          '[data-filter="massage"]'
-        );
-        if (massageFilterBtn) {
-          massageFilterBtn.classList.add('active');
+        // 결과 제목 업데이트
+        const resultsTitle = document.getElementById('resultsTitle');
+        if (resultsTitle) {
+          resultsTitle.textContent = '타이마사지 업체';
         }
 
         // 필터링된 결과 표시
         if (typeof displayFilteredResults === 'function') {
           displayFilteredResults();
         }
-      });
+      }, 100);
     </script>
+
     <!-- 햄버거 메뉴 -->
     <div id="hamburger-menu-container"></div>
   </body>

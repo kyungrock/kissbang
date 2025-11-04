@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>테마 필터 드롭다운</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <i class="fas fa-spa"></i>
+          <span>마사지사이트</span>
+        </div>
+        <div class="nav">
+          <a href="index.html" class="nav-link">홈</a>
+          <a href="massage.html" class="nav-link">마사지</a>
+          <a href="outcall.html" class="nav-link">출장마사지</a>
+        </div>
+        <div class="search-toggle" id="searchToggle">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- 검색 섹션 -->
+    <section class="search-section">
+      <div class="search-container">
+        <!-- 통합 검색창 -->
+        <div class="search-box main-search">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            id="mainSearchInput"
+            class="search-input"
+            placeholder="지역, 업체명, 서비스 검색"
+          />
+          <button class="search-btn-small" id="mainSearchBtn">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+
+        <!-- 지역별 검색 -->
+        <div class="location-search">
+          <div class="search-box">
+            <i class="fas fa-map-marker-alt"></i>
+            <select id="regionSelect" class="search-select">
+              <option value="">지역을 선택하세요</option>
+            </select>
+          </div>
+          <div class="search-box">
+            <i class="fas fa-building"></i>
+            <select id="districtSelect" class="search-select" disabled>
+              <option value="">세부 지역을 선택하세요</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 필터 섹션 -->
+    <section class="filter-section">
+      <div class="filter-container">
+        <a href="#" class="filter-btn active" data-filter="all">전체</a>
+        <a href="#" class="filter-btn" data-filter="massage">마사지</a>
+        <a href="#" class="filter-btn" data-filter="outcall">출장마사지</a>
+
+        <!-- 타입 필터 드롭다운 -->
+        <div class="type-filter-dropdown">
+          <button class="filter-btn type-filter-btn" id="typeFilterBtn">
+            테마보기
+            <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 테마 필터 섹션 -->
+    <section
+      class="theme-filter-section"
+      id="themeFilterSection"
+      style="display: none"
+    >
+      <div class="theme-filter-container">
+        <div class="theme-boxes">
+          <div class="theme-box" data-theme="all">
+            <i class="fas fa-th-large"></i>
+            <span class="theme-name">전체</span>
+          </div>
+          <div class="theme-box" data-theme="swedish">
+            <i class="fas fa-spa"></i>
+            <span class="theme-name">스웨디시</span>
+          </div>
+          <div class="theme-box" data-theme="thai">
+            <i class="fas fa-hands"></i>
+            <span class="theme-name">타이마사지</span>
+          </div>
+          <div class="theme-box" data-theme="aroma">
+            <i class="fas fa-leaf"></i>
+            <span class="theme-name">아로마마사지</span>
+          </div>
+          <div class="theme-box" data-theme="waxing">
+            <i class="fas fa-cut"></i>
+            <span class="theme-name">왁싱</span>
+          </div>
+          <div class="theme-box" data-theme="chinese">
+            <i class="fas fa-hand-paper"></i>
+            <span class="theme-name">중국마사지</span>
+          </div>
+          <div class="theme-box" data-theme="foot">
+            <i class="fas fa-shoe-prints"></i>
+            <span class="theme-name">발마사지</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+      <div class="results-header">
+        <h1 id="resultsTitle">전체 마사지사이트 업체</h1>
+        <span class="results-count" id="resultsCount">총 4개</span>
+      </div>
+
+      <!-- 업체 목록 -->
+      <div class="massage-list" id="massageList">
+        <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
+      </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <div class="footer-link-row">
+            <a href="#" class="footer-link" onclick="openAboutModal(event)"
+              >회사소개</a
+            >
+            <span class="footer-divider">|</span>
+            <a href="#" class="footer-link" onclick="openTermsModal(event)"
+              >이용약관</a
+            >
+            <span class="footer-divider">|</span>
+            <a href="#" class="footer-link" onclick="openDetailsModal(event)"
+              >상세정보</a
+            >
+          </div>
+          <div class="footer-divider-line"></div>
+          <div class="footer-link-row">
+            <a
+              href="#"
+              class="footer-link"
+              onclick="openRelatedInfoModal(event)"
+              >관련정보</a
+            >
+          </div>
+        </div>
+
+        <div class="footer-info">
+          <p><strong>마사지사이트</strong></p>
+          <p>전국 마사지 업체 정보 제공</p>
+          <p>
+            고객센터: <a href="tel:1588-0000" class="footer-phone">1588-0000</a>
+          </p>
+          <p>
+            문의:
+            <a href="mailto:info@massage-site.com" class="footer-contact-btn"
+              >info@massage-site.com</a
+            >
+          </p>
+        </div>
+
+        <div class="footer-copyright">
+          <p>&copy; 2024 마사지사이트. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 회사소개 모달 -->
+    <div class="modal" id="aboutModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>회사소개</h2>
+          <button class="modal-close" onclick="closeModal('aboutModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <strong>마사지사이트</strong>는 전국 마사지 업체 정보를 제공하는
+            종합 플랫폼입니다.
+          </p>
+          <div class="info-section">
+            <h3>주요 서비스</h3>
+            <p>• 전국 마사지 업체 검색 및 정보 제공</p>
+            <p>• 지역별, 서비스별 맞춤 검색</p>
+            <p>• 실시간 업체 정보 및 리뷰 제공</p>
+          </div>
+          <div class="highlight">
+            <p>고객님의 건강한 휴식을 위해 최선을 다하겠습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 이용약관 모달 -->
+    <div class="modal" id="termsModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>이용약관</h2>
+          <button class="modal-close" onclick="closeModal('termsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>제1조 (목적)</h3>
+            <p>
+              본 약관은 마사지사이트가 제공하는 서비스의 이용조건 및 절차에 관한
+              사항을 규정함을 목적으로 합니다.
+            </p>
+          </div>
+          <div class="terms-section">
+            <h3>제2조 (정의)</h3>
+            <p>
+              1. "서비스"란 마사지사이트가 제공하는 모든 서비스를 의미합니다.
+            </p>
+            <p>
+              2. "이용자"란 서비스에 접속하여 본 약관에 따라 서비스를 이용하는
+              회원 및 비회원을 의미합니다.
+            </p>
+          </div>
+          <div class="terms-section">
+            <h3>제3조 (약관의 효력 및 변경)</h3>
+            <p>
+              본 약관은 서비스 화면에 게시하거나 기타의 방법으로 이용자에게
+              공지함으로써 효력이 발생합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 상세정보 모달 -->
+    <div class="modal" id="detailsModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>상세정보</h2>
+          <button class="modal-close" onclick="closeModal('detailsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="info-highlight">
+            <h4>마사지사이트 서비스 안내</h4>
+            <ul>
+              <li>전국 마사지 업체 정보 제공</li>
+              <li>지역별, 서비스별 맞춤 검색</li>
+              <li>실시간 업체 정보 및 리뷰</li>
+              <li>편리한 예약 및 문의 서비스</li>
+            </ul>
+          </div>
+
+          <div class="service-categories">
+            <h4>제공 서비스</h4>
+            <div class="service-grid">
+              <div class="service-item">
+                <i class="fas fa-spa"></i>
+                <span>스웨디시 마사지</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-hands"></i>
+                <span>타이 마사지</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-leaf"></i>
+                <span>아로마 마사지</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-cut"></i>
+                <span>왁싱 서비스</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-hand-paper"></i>
+                <span>중국 마사지</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-shoe-prints"></i>
+                <span>발 마사지</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 관련정보 모달 -->
+    <div class="modal" id="relatedInfoModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>관련정보</h2>
+          <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="therapist-info">
+            <h4>관리사 정보</h4>
+            <ul>
+              <li>전원 <strong>20대~30대</strong> 전문 관리사</li>
+              <li>각종 마사지 자격증 보유</li>
+              <li>고객 만족도 최우선 서비스</li>
+              <li>위생적이고 안전한 시설</li>
+            </ul>
+          </div>
+
+          <div class="responsibility-info">
+            <div class="responsibility-item">
+              <h5><i class="fas fa-shield-alt"></i> 안전 관리</h5>
+              <ul>
+                <li>정기적인 시설 점검 및 소독</li>
+                <li>관리사 건강 검진 및 교육</li>
+                <li>고객 개인정보 보호</li>
+              </ul>
+            </div>
+
+            <div class="responsibility-item">
+              <h5><i class="fas fa-heart"></i> 서비스 품질</h5>
+              <ul>
+                <li>고객 맞춤형 서비스 제공</li>
+                <li>지속적인 서비스 품질 개선</li>
+                <li>고객 피드백 적극 반영</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="notice-box">
+            <p>
+              <strong>주의사항:</strong> 모든 서비스는 성인만 이용 가능하며,
+              미성년자 출입을 금지합니다. 서비스 이용 시 개인정보 보호에
+              주의하시기 바랍니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

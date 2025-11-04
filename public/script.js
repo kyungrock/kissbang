@@ -737,8 +737,6 @@ const massageShops = [
 const regionSelect = document.getElementById('regionSelect');
 const districtSelect = document.getElementById('districtSelect');
 const searchBtn = document.getElementById('searchBtn');
-const mainSearchInput = document.getElementById('mainSearchInput');
-const mainSearchBtn = document.getElementById('mainSearchBtn');
 const filterBtns = document.querySelectorAll('.filter-btn');
 const massageList = document.getElementById('massageList');
 const resultsTitle = document.getElementById('resultsTitle');
@@ -751,24 +749,31 @@ let currentDistrict = '';
 let currentCountry = 'overall';
 
 // 검색 디바운싱을 위한 타이머
-let searchTimeout = null;
-
 // 성인 인증 관련 함수 제거됨
 
-// 페이지 로드 시 초기화
-document.addEventListener('DOMContentLoaded', function () {
-  initializeApp();
-});
+// 페이지 로드 시 초기화 (아래 3088라인에서 실행됨)
 
 // 지역 선택 옵션 초기화
 function initializeRegionOptions() {
+  console.log('initializeRegionOptions 호출');
   const regionSelect = document.getElementById('regionSelect');
-  if (!regionSelect) return;
+  console.log('regionSelect:', regionSelect);
+  if (!regionSelect) {
+    console.log('regionSelect 없음 - 종료');
+    return;
+  }
+
+  console.log(
+    'regionSelect 찾음, 초기 옵션 개수:',
+    regionSelect.children.length
+  );
 
   // 기존 옵션 제거 (첫 번째 옵션 "지역을 선택하세요" 제외)
   while (regionSelect.children.length > 1) {
     regionSelect.removeChild(regionSelect.lastChild);
   }
+
+  console.log('기존 옵션 제거 후:', regionSelect.children.length);
 
   // districtData의 키들을 커스텀 정렬하여 옵션으로 추가
   const customOrder = [
@@ -790,18 +795,27 @@ function initializeRegionOptions() {
     '부산',
     '제주',
   ];
+
+  console.log('districtData:', districtData);
   const regions = Object.keys(districtData).sort((a, b) => {
     const indexA = customOrder.indexOf(a);
     const indexB = customOrder.indexOf(b);
     return indexA - indexB;
   });
+  console.log('정렬된 지역들:', regions);
+
   regions.forEach((region) => {
     const option = document.createElement('option');
     option.value = region;
     option.textContent = region;
     regionSelect.appendChild(option);
   });
+
+  console.log('옵션 추가 완료, 최종 옵션 개수:', regionSelect.children.length);
 }
+
+// 지역별 테마 페이지 URL 생성 함수는 initializeApp 함수 내부로 이동되었습니다.
+// 전역에서 접근하려면 window.getThemePageUrl을 사용하세요.
 
 // 앱 초기화
 function initializeApp() {
@@ -817,96 +831,36 @@ function initializeApp() {
   // footer-links 텍스트 초기 업데이트
   updateFooterLinkText();
 
-  // jeju-si.html 페이지에서 구 정보 유지
+  // 파일명에서 지역과 세부지역 자동 감지 (효율적인 중앙화된 로직)
   const currentPath = window.location.pathname;
   const currentFileName = currentPath.split('/').pop();
-  if (currentFileName === 'jeju-si.html') {
-    // 제주시로 설정
-    currentRegion = '제주';
-    currentDistrict = '제주시';
-    currentFilter = 'all';
+  const detectedInfo = detectRegionAndDistrictFromFilename(currentFileName);
 
-    // 구 선택 활성화
-    const districtSelect = document.getElementById('districtSelect');
-    if (districtSelect) {
-      districtSelect.disabled = false;
-      districtSelect.style.opacity = '1';
+  if (detectedInfo.region) {
+    currentRegion = detectedInfo.region;
+    currentDistrict = detectedInfo.district || '';
+    if (detectedInfo.filter) {
+      currentFilter = detectedInfo.filter;
     }
-  } else if (currentFileName === 'jeju-si-massage.html') {
-    // 제주시 마사지로 설정
-    currentRegion = '제주';
-    currentDistrict = '제주시';
-    currentFilter = 'massage';
 
-    // 구 선택 활성화
-    const districtSelect = document.getElementById('districtSelect');
-    if (districtSelect) {
-      districtSelect.disabled = false;
-      districtSelect.style.opacity = '1';
-    }
-  } else if (currentFileName === 'jeju-si-outcall.html') {
-    // 제주시 출장마사지로 설정
-    currentRegion = '제주';
-    currentDistrict = '제주시';
-    currentFilter = 'outcall';
-
-    // 구 선택 활성화
-    const districtSelect = document.getElementById('districtSelect');
-    if (districtSelect) {
-      districtSelect.disabled = false;
-      districtSelect.style.opacity = '1';
-    }
-  } else if (currentFileName === 'jeju-seogwipo.html') {
-    // 서귀포시로 설정
-    currentRegion = '제주';
-    currentDistrict = '서귀포시';
-    currentFilter = 'all';
-
-    // 구 선택 활성화
-    const districtSelect = document.getElementById('districtSelect');
-    if (districtSelect) {
-      districtSelect.disabled = false;
-      districtSelect.style.opacity = '1';
-    }
-  } else if (currentFileName === 'jeju-seogwipo-massage.html') {
-    // 서귀포시 마사지로 설정
-    currentRegion = '제주';
-    currentDistrict = '서귀포시';
-    currentFilter = 'massage';
-
-    // 구 선택 활성화
-    const districtSelect = document.getElementById('districtSelect');
-    if (districtSelect) {
-      districtSelect.disabled = false;
-      districtSelect.style.opacity = '1';
-    }
-  } else if (currentFileName === 'jeju-seogwipo-outcall.html') {
-    // 서귀포시 출장마사지로 설정
-    currentRegion = '제주';
-    currentDistrict = '서귀포시';
-    currentFilter = 'outcall';
-
-    // 구 선택 활성화
-    const districtSelect = document.getElementById('districtSelect');
-    if (districtSelect) {
-      districtSelect.disabled = false;
-      districtSelect.style.opacity = '1';
+    // 구 선택 활성화 (세부지역이 있는 경우)
+    if (detectedInfo.district) {
+      const districtSelect = document.getElementById('districtSelect');
+      if (districtSelect) {
+        districtSelect.disabled = false;
+        districtSelect.style.opacity = '1';
+      }
     }
   }
 
   // 검색 토글 버튼 이벤트 리스너 (검색창으로 스크롤)
   const searchToggle = document.getElementById('searchToggle');
   const searchSection = document.querySelector('.search-section');
-  const mainSearchInput = document.getElementById('mainSearchInput');
 
-  if (searchToggle && searchSection && mainSearchInput) {
+  if (searchToggle && searchSection) {
     searchToggle.addEventListener('click', function () {
       // 검색창으로 부드럽게 스크롤
       searchSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // 검색 입력창에 포커스
-      setTimeout(() => {
-        mainSearchInput.focus();
-      }, 500);
     });
   }
 
@@ -918,61 +872,31 @@ function initializeApp() {
     });
   }
 
-  // 통합 검색 이벤트 리스너
-  mainSearchBtn.addEventListener('click', function (e) {
-    e.preventDefault(); // 기본 동작 방지
-    // 기존 타이머 클리어
-    if (searchTimeout) {
-      clearTimeout(searchTimeout);
-    }
-    performMainSearch();
-  });
-
-  // 통합 검색 입력창 엔터키 이벤트
-  mainSearchInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault(); // 기본 동작 방지
-      // 기존 타이머 클리어
-      if (searchTimeout) {
-        clearTimeout(searchTimeout);
-      }
-      performMainSearch();
-    }
-  });
-
-  // 통합 검색 실시간 검색 (디바운싱 적용)
-  mainSearchInput.addEventListener('input', function () {
-    // 기존 타이머 클리어
-    if (searchTimeout) {
-      clearTimeout(searchTimeout);
-    }
-
-    // 300ms 후에 검색 실행
-    searchTimeout = setTimeout(() => {
-      if (this.value.length >= 2) {
-        performMainSearch();
-      } else if (this.value.length === 0) {
-        // 검색어가 없으면 전체 표시
-        displayMassageShops(massageShops);
-        // 메인 페이지가 아닌 경우 "마사지"로 표시
-        const isMainPage =
-          window.location.pathname.includes('index.html') ||
-          window.location.pathname === '/' ||
-          window.location.pathname === '';
-        const title = isMainPage
-          ? '전체 마사지사이트 업체'
-          : '전체 마사지 업체';
-        updateResultsHeader(title, massageShops.length);
-      }
-    }, 300);
-  });
-
   // 필터 버튼 이벤트 리스너는 initializeApp 함수에서 처리됩니다
 
   // 타입 필터 드롭다운 기능
   const typeFilterBtn = document.getElementById('typeFilterBtn');
   const typeDropdownMenu = document.getElementById('typeDropdownMenu');
   const typeDropdownItems = document.querySelectorAll('.type-dropdown-item');
+
+  // 타입 드롭다운 아이템 클릭 이벤트
+  typeDropdownItems.forEach((item) => {
+    item.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const selectedTheme = this.dataset.type;
+
+      // 중앙화된 함수로 테마 페이지 URL 생성
+      const targetPage = window.getThemePageUrl
+        ? window.getThemePageUrl(selectedTheme, currentRegion, currentDistrict)
+        : null;
+      if (targetPage) {
+        window.location.href = targetPage;
+        return;
+      }
+    });
+  });
 
   // 타입보기 버튼 클릭 이벤트
   if (typeFilterBtn && typeDropdownMenu) {
@@ -988,6 +912,44 @@ function initializeApp() {
 
         // 버튼 눌러진 표시 토글
         typeFilterBtn.classList.toggle('active', !isVisible);
+
+        // 테마 필터 섹션이 보여질 때 필터 섹션 바로 아래에 고정되도록 위치 조정
+        if (!isVisible) {
+          // 필터 섹션의 실제 높이를 계산하여 위치 조정
+          const filterSection = document.querySelector('.filter-section');
+          if (filterSection) {
+            // 약간의 지연을 두고 계산하여 DOM 업데이트 완료 후 위치 계산
+            setTimeout(() => {
+              // 필터 섹션의 실제 높이 (offsetHeight 사용)
+              const filterSectionHeight = filterSection.offsetHeight;
+              // 필터 섹션의 getBoundingClientRect로 현재 viewport에서의 위치 확인
+              const filterSectionRect = filterSection.getBoundingClientRect();
+
+              // 필터 섹션이 sticky로 고정되어 있는지 확인 (top이 1px 근처인지)
+              const isFilterSticky = filterSectionRect.top <= 10;
+
+              if (isFilterSticky) {
+                // 필터 섹션이 sticky로 고정되어 있으면: 헤더 높이(80px) + 필터 섹션 높이 - 여백 조정
+                const headerHeight = 80;
+                const topOffset = -60; // 위쪽 여백 줄이기
+                themeFilterSection.style.top = `${
+                  headerHeight + filterSectionHeight + topOffset
+                }px`;
+              } else {
+                // 필터 섹션이 sticky가 아니면: 필터 섹션의 viewport 기준 bottom 위치 - 여백 조정
+                const filterSectionBottom =
+                  filterSectionRect.top + filterSectionHeight;
+                const topOffset = -60; // 위쪽 여백 줄이기
+                themeFilterSection.style.top = `${
+                  filterSectionBottom + topOffset
+                }px`;
+              }
+            }, 10);
+          } else {
+            // 필터 섹션을 찾을 수 없는 경우 기본값 사용 (여백 조정)
+            themeFilterSection.style.top = '80px';
+          }
+        }
 
         // 테마 필터 섹션이 보여질 때 전체 보기 버튼 활성화 (눌림표시 없이)
         if (!isVisible) {
@@ -1027,19 +989,36 @@ function initializeApp() {
   // 테마 박스 클릭 이벤트
   const themeBoxes = document.querySelectorAll('.theme-box');
   themeBoxes.forEach((box) => {
+    // onclick 속성 제거를 위해 기존 이벤트 리스너만 사용
     box.addEventListener('click', function (e) {
+      // onclick 속성이 있으면 기본 동작 방지
+      if (this.onclick || this.getAttribute('onclick')) {
+        e.preventDefault();
+        e.stopPropagation();
+        // onclick 제거
+        this.removeAttribute('onclick');
+        this.onclick = null;
+      }
+
       e.preventDefault();
       e.stopPropagation();
 
       // 모든 테마 박스에서 active 클래스 제거
-      themeBoxes.forEach((b) => b.classList.remove('active'));
+      themeBoxes.forEach((b) => {
+        b.classList.remove('active');
+        // 다른 박스의 onclick도 제거
+        if (b !== this) {
+          b.removeAttribute('onclick');
+          b.onclick = null;
+        }
+      });
       // 클릭된 박스에 active 클래스 추가
       this.classList.add('active');
 
       // 선택된 테마로 필터링
       const selectedTheme = this.dataset.theme;
 
-      // 제주 지역에서 테마 클릭 시 해당 페이지로 이동
+      // 제주 지역에서 테마 클릭 시 해당 페이지로 이동 (기존 로직 유지)
       if (currentRegion === '제주') {
         if (selectedTheme === 'all') {
           // 제주시가 선택된 경우 jeju-si.html로 이동
@@ -1047,8 +1026,8 @@ function initializeApp() {
             window.location.href = 'jeju-si.html';
             return;
           }
-          // 서귀포시가 선택된 경우 jeju-seogwipo.html로 이동
-          if (currentDistrict === '서귀포시') {
+          // 서귀포가 선택된 경우 jeju-seogwipo.html로 이동
+          if (currentDistrict === '서귀포') {
             window.location.href = 'jeju-seogwipo.html';
             return;
           }
@@ -1061,8 +1040,8 @@ function initializeApp() {
             window.location.href = 'jeju-si-massage.html';
             return;
           }
-          // 서귀포시가 선택된 경우 jeju-seogwipo-massage.html로 이동
-          if (currentDistrict === '서귀포시') {
+          // 서귀포가 선택된 경우 jeju-seogwipo-massage.html로 이동
+          if (currentDistrict === '서귀포') {
             window.location.href = 'jeju-seogwipo-massage.html';
             return;
           }
@@ -1075,8 +1054,8 @@ function initializeApp() {
             window.location.href = 'jeju-si-outcall.html';
             return;
           }
-          // 서귀포시가 선택된 경우 jeju-seogwipo-outcall.html로 이동
-          if (currentDistrict === '서귀포시') {
+          // 서귀포가 선택된 경우 jeju-seogwipo-outcall.html로 이동
+          if (currentDistrict === '서귀포') {
             window.location.href = 'jeju-seogwipo-outcall.html';
             return;
           }
@@ -1086,10 +1065,27 @@ function initializeApp() {
         }
       }
 
-      filterByType(selectedTheme);
+      // 테마별 페이지로 이동 (전체 제외)
+      if (selectedTheme !== 'all') {
+        const themePages = {
+          swedish: 'swedish.html',
+          thai: 'thai.html',
+          aroma: 'aroma.html',
+          chinese: 'chinese.html',
+          foot: 'foot.html',
+          waxing: 'waxing.html',
+        };
 
-      // resultsTitle 업데이트
-      updateResultsTitleByTheme(selectedTheme);
+        const targetPage = themePages[selectedTheme];
+        if (targetPage) {
+          window.location.href = targetPage;
+          return;
+        }
+      }
+
+      // 전체 선택 시 필터 적용
+      currentFilter = selectedTheme;
+      displayFilteredResults();
 
       // 테마 필터 섹션 숨기기
       const themeFilterSection = document.getElementById('themeFilterSection');
@@ -1275,32 +1271,6 @@ function updateDistrictOptions(region) {
   }
 }
 
-// 통합 검색 수행
-function performMainSearch() {
-  const searchTerm = mainSearchInput.value.trim().toLowerCase();
-
-  if (searchTerm.length < 2) {
-    return;
-  }
-
-  // 검색어로 필터링
-  const filteredShops = massageShops.filter((shop) => {
-    return (
-      shop.name.toLowerCase().includes(searchTerm) ||
-      shop.address.toLowerCase().includes(searchTerm) ||
-      shop.region.toLowerCase().includes(searchTerm) ||
-      shop.district.toLowerCase().includes(searchTerm) ||
-      shop.description.toLowerCase().includes(searchTerm) ||
-      getTypeName(shop).toLowerCase().includes(searchTerm) ||
-      (shop.subway && shop.subway.toLowerCase().includes(searchTerm))
-    );
-  });
-
-  // 결과 표시
-  displayMassageShops(filteredShops);
-  updateResultsHeader(`"${searchTerm}" 검색 결과`, filteredShops.length);
-}
-
 // 지역별 검색 수행 (즉각 반응용)
 function performLocationSearch() {
   if (!currentRegion) {
@@ -1396,115 +1366,59 @@ function performSearch() {
 // 지역 선택 시 페이지 이동 함수
 function handleRegionChange() {
   const selectedRegion = regionSelect.value;
+  const selectedDistrict = districtSelect.value;
 
   if (!selectedRegion) return;
 
-  // 지역별 페이지 이동 로직
-  if (selectedRegion === '제주') {
-    window.location.href = 'jeju.html';
-  } else if (selectedRegion === '울산') {
-    window.location.href = 'ulsan.html';
-  } else if (selectedRegion === '부산') {
-    window.location.href = 'busan.html';
-  } else if (selectedRegion === '서울') {
-    window.location.href = 'seoul.html';
-  } else if (selectedRegion === '대구') {
-    window.location.href = 'daegu.html';
-  } else if (selectedRegion === '인천') {
-    window.location.href = 'incheon.html';
-  } else {
-    // 기본적으로 메인 페이지로 이동
-    window.location.href = 'index.html';
+  // 지역 선택 시 구 옵션 업데이트
+  updateDistrictOptions(selectedRegion);
+
+  // 구가 선택된 경우 해당 구의 업체들을 필터링해서 표시
+  if (selectedDistrict) {
+    currentRegion = selectedRegion;
+    currentDistrict = selectedDistrict;
+    displayFilteredResults();
+    return;
+  }
+
+  // 지역만 선택된 경우 해당 지역의 모든 업체들을 표시
+  if (selectedRegion) {
+    currentRegion = selectedRegion;
+    currentDistrict = ''; // 구 선택 초기화
+
+    // districtMap을 활용한 페이지 이동 로직
+    for (const [key, value] of Object.entries(districtMap)) {
+      if (value.regionName === selectedRegion) {
+        // 해당 지역 페이지로 이동
+        window.location.href = `${key}.html`;
+        return;
+      }
+    }
+
+    // 구 옵션이 로드된 후 결과 표시 (fallback)
+    setTimeout(() => {
+      displayFilteredResults();
+    }, 100);
+    return;
   }
 }
 
-// 구 선택 시 페이지 이동 함수
-function handleDistrictChange() {
-  const selectedRegion = regionSelect.value;
-  const selectedDistrict = districtSelect.value;
-
-  if (!selectedRegion || !selectedDistrict) return;
-
-  // 현재 필터 사용 (initializeApp에서 이미 설정됨)
-  console.log('Current filter:', currentFilter);
-
-  // 제주 지역의 구별 페이지 이동 로직 (필터 유지)
-  if (selectedRegion === '제주') {
-    if (selectedDistrict === '제주시') {
-      // 현재 필터에 따라 다른 페이지로 이동
-      if (currentFilter === 'massage') {
-        window.location.href = 'jeju-si-massage.html';
-      } else if (currentFilter === 'outcall') {
-        window.location.href = 'jeju-si-outcall.html';
-      } else {
-        window.location.href = 'jeju-si.html';
-      }
-    } else if (selectedDistrict === '서귀포') {
-      // 현재 필터에 따라 다른 페이지로 이동
-      if (currentFilter === 'massage') {
-        window.location.href = 'jeju-seogwipo-massage.html';
-      } else if (currentFilter === 'outcall') {
-        window.location.href = 'jeju-seogwipo-outcall.html';
-      } else {
-        window.location.href = 'jeju-seogwipo.html';
-      }
-    }
-  }
-  // 울산 지역의 구별 페이지 이동 로직 (필터 유지)
-  else if (selectedRegion === '울산') {
-    if (selectedDistrict === '중구') {
-      // 현재 필터에 따라 다른 페이지로 이동
-      if (currentFilter === 'massage') {
-        window.location.href = 'ulsan-junggu-massage.html';
-      } else if (currentFilter === 'outcall') {
-        window.location.href = 'ulsan-junggu-outcall.html';
-      } else {
-        window.location.href = 'ulsan-junggu.html';
-      }
-    } else if (selectedDistrict === '남구') {
-      // 현재 필터에 따라 다른 페이지로 이동
-      if (currentFilter === 'massage') {
-        window.location.href = 'ulsan-namgu-massage.html';
-      } else if (currentFilter === 'outcall') {
-        window.location.href = 'ulsan-namgu-outcall.html';
-      } else {
-        window.location.href = 'ulsan-namgu.html';
-      }
-    } else if (selectedDistrict === '동구') {
-      // 현재 필터에 따라 다른 페이지로 이동
-      if (currentFilter === 'massage') {
-        window.location.href = 'ulsan-donggu-massage.html';
-      } else if (currentFilter === 'outcall') {
-        window.location.href = 'ulsan-donggu-outcall.html';
-      } else {
-        window.location.href = 'ulsan-donggu.html';
-      }
-    } else if (selectedDistrict === '북구') {
-      // 현재 필터에 따라 다른 페이지로 이동
-      if (currentFilter === 'massage') {
-        window.location.href = 'ulsan-bukgu-massage.html';
-      } else if (currentFilter === 'outcall') {
-        window.location.href = 'ulsan-bukgu-outcall.html';
-      } else {
-        window.location.href = 'ulsan-bukgu.html';
-      }
-    } else if (selectedDistrict === '울주') {
-      // 현재 필터에 따라 다른 페이지로 이동
-      if (currentFilter === 'massage') {
-        window.location.href = 'ulsan-ulju-massage.html';
-      } else if (currentFilter === 'outcall') {
-        window.location.href = 'ulsan-ulju-outcall.html';
-      } else {
-        window.location.href = 'ulsan-ulju.html';
-      }
-    }
-  }
-  // 다른 지역의 구별 페이지도 필요시 추가 가능
-}
 // 필터 버튼은 HTML에서 직접 링크로 처리됩니다
 // 필터링된 결과 표시
 function displayFilteredResults() {
   let filteredShops = massageShops;
+
+  // window.currentFilter가 설정되어 있으면 우선 사용
+  if (window.currentFilter && typeof window.currentFilter !== 'undefined') {
+    currentFilter = window.currentFilter;
+  }
+
+  // 현재 필터 값 로그 출력 (디버깅용)
+  console.log('displayFilteredResults - currentFilter:', currentFilter);
+  console.log(
+    'displayFilteredResults - window.currentFilter:',
+    window.currentFilter
+  );
 
   // footer-links 텍스트 업데이트
   updateFooterLinkText();
@@ -1582,13 +1496,20 @@ function displayFilteredResults() {
     // 왁싱 타입
     filteredShops = filteredShops.filter((shop) => {
       // type에 왁싱이 포함된 경우
-      if (shop.type && shop.type.includes('왁싱')) {
+      if (shop.type && shop.type.toLowerCase().includes('왁싱')) {
         return true;
       }
       // services에 왁싱이 포함된 경우
       if (
         shop.services &&
-        shop.services.some((service) => service.includes('왁싱'))
+        shop.services.some((service) => {
+          const serviceLower = service.toLowerCase();
+          return (
+            serviceLower.includes('왁싱') ||
+            serviceLower.includes('waxing') ||
+            serviceLower.includes('브라질리언')
+          );
+        })
       ) {
         return true;
       }
@@ -1634,18 +1555,87 @@ function displayFilteredResults() {
         return countryMap[currentCountry]?.includes(shop.type) || false;
       });
     }
-  } else if (currentFilter === 'waxing') {
-    // 왁싱 타입 - services에 '왁싱' 관련 키워드가 있는 업체들
-    filteredShops = filteredShops.filter(
-      (shop) =>
+  } else if (currentFilter === 'thai') {
+    // 타이마사지 타입
+    filteredShops = filteredShops.filter((shop) => {
+      // type에 타이마사지가 포함된 경우
+      if (
+        shop.type &&
+        (shop.type.includes('타이') || shop.type.includes('thai'))
+      ) {
+        return true;
+      }
+      // services에 타이마사지가 포함된 경우
+      if (
+        shop.services &&
+        shop.services.some(
+          (service) => service.includes('타이') || service.includes('태국')
+        )
+      ) {
+        return true;
+      }
+      return false;
+    });
+  } else if (currentFilter === 'aroma') {
+    // 아로마마사지 타입
+    filteredShops = filteredShops.filter((shop) => {
+      // type에 아로마가 포함된 경우
+      if (shop.type && shop.type.includes('아로마')) {
+        return true;
+      }
+      // services에 아로마가 포함된 경우
+      if (
+        shop.services &&
+        shop.services.some(
+          (service) => service.includes('아로마') || service.includes('에센셜')
+        )
+      ) {
+        return true;
+      }
+      return false;
+    });
+  } else if (currentFilter === 'chinese') {
+    // 중국마사지 타입
+    filteredShops = filteredShops.filter((shop) => {
+      // type에 중국마사지가 포함된 경우
+      if (shop.type && shop.type.includes('중국')) {
+        return true;
+      }
+      // services에 중국마사지가 포함된 경우
+      if (
         shop.services &&
         shop.services.some(
           (service) =>
-            service.toLowerCase().includes('왁싱') ||
-            service.toLowerCase().includes('waxing') ||
-            service.toLowerCase().includes('브라질리언')
+            service.includes('중국') ||
+            service.includes('지압') ||
+            service.includes('경락')
         )
-    );
+      ) {
+        return true;
+      }
+      return false;
+    });
+  } else if (currentFilter === 'foot') {
+    // 발마사지 타입
+    filteredShops = filteredShops.filter((shop) => {
+      // type에 발마사지가 포함된 경우
+      if (shop.type && (shop.type.includes('발') || shop.type === 'foot')) {
+        return true;
+      }
+      // services에 발마사지가 포함된 경우
+      if (
+        shop.services &&
+        shop.services.some(
+          (service) =>
+            service.includes('발') ||
+            service.includes('족욕') ||
+            service.includes('풋')
+        )
+      ) {
+        return true;
+      }
+      return false;
+    });
   } else if (currentFilter !== 'all') {
     filteredShops = filteredShops.filter((shop) => shop.type === currentFilter);
   }
@@ -1702,24 +1692,35 @@ function displayFilteredResults() {
       title = '출장마사지';
     }
   } else if (currentFilter === 'waxing') {
-    title = '왁싱';
+    title = '왁싱 업체';
   } else if (currentFilter === 'swedish') {
-    title = '스웨디시';
+    title = '스웨디시 업체';
   } else if (currentFilter === 'thai') {
-    title = '타이마사지';
+    title = '타이마사지 업체';
   } else if (currentFilter === 'aroma') {
-    title = '아로마마사지';
+    title = '아로마마사지 업체';
   } else if (currentFilter === 'chinese') {
-    title = '중국마사지';
+    title = '중국마사지 업체';
   } else if (currentFilter === 'foot') {
-    title = '발마사지';
+    title = '발마사지 업체';
   }
 
-  // 지역과 구 정보 추가
-  if (currentRegion && currentDistrict) {
-    title = `${currentRegion} ${currentDistrict} ${title}`;
-  } else if (currentRegion) {
-    title = `${currentRegion} ${title}`;
+  // 테마 필터는 지역 정보 없이 제목만 표시, 다른 필터는 지역 정보 추가
+  const themeFilters = [
+    'waxing',
+    'swedish',
+    'thai',
+    'aroma',
+    'chinese',
+    'foot',
+  ];
+  if (!themeFilters.includes(currentFilter)) {
+    // 지역과 구 정보 추가
+    if (currentRegion && currentDistrict) {
+      title = `${currentRegion} ${currentDistrict} ${title}`;
+    } else if (currentRegion) {
+      title = `${currentRegion} ${title}`;
+    }
   }
 
   // updateResultsHeader(title, filteredShops.length);
@@ -2076,20 +2077,22 @@ function updateResultsTitleByTheme(selectedTheme) {
     foot: '발마사지',
   };
 
+  const resultsTitle = document.getElementById('resultsTitle');
   if (resultsTitle) {
-    const regionName = currentRegion || '';
     const themeName = themeNames[selectedTheme] || selectedTheme;
-    const filterType =
-      currentFilter === 'massage'
-        ? '마사지'
-        : currentFilter === 'outcall'
-        ? '출장마사지'
-        : '';
 
     if (selectedTheme === 'all') {
-      resultsTitle.textContent = `${regionName}${filterType} 전체 업체`;
+      // 전체 선택 시 기본 제목
+      const isMainPage =
+        window.location.pathname.includes('index.html') ||
+        window.location.pathname === '/' ||
+        window.location.pathname === '';
+      resultsTitle.textContent = isMainPage
+        ? '전체 마사지사이트 업체'
+        : '전체 마사지 업체';
     } else {
-      resultsTitle.textContent = `${regionName}${themeName}${filterType} 업체`;
+      // 테마 선택 시 "스웨디시 업체" 형식
+      resultsTitle.textContent = `${themeName} 업체`;
     }
   }
 }
@@ -2266,139 +2269,566 @@ function getCurrentFilter() {
   return activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
 }
 
-// footer-links 상세정보 텍스트 업데이트
+// footer-links 상세정보 텍스트 업데이트 (districtMap 활용)
 function updateFooterLinkText() {
   const footerLink = document.querySelector(
     '.footer-link[onclick*="openDetailsModal"]'
   );
   if (!footerLink) return;
 
-  // 현재 페이지 URL에 따른 특별 처리
-  const currentPath = window.location.pathname;
-  const currentFileName = currentPath.split('/').pop();
-
   let titleText = '상세정보';
 
-  // 파일명을 기반으로 자동 생성
-  if (currentFileName === 'outcall.html') {
-    titleText = '출장마사지정보';
-  } else if (currentFileName === 'massage.html') {
-    // massage.html의 경우 현재 필터에 따라 결정
-    const currentFilter = getCurrentFilter();
-    titleText = currentFilter === 'outcall' ? '출장마사지정보' : '마사지정보';
-  } else {
-    // 파일명에서 지역, 구, 필터 추출하여 자동 생성
-    let region = '';
-    let district = '';
+  // currentRegion, currentDistrict, currentFilter 변수 활용
+  const themeNames = {
+    swedish: '스웨디시',
+    thai: '타이마사지',
+    aroma: '아로마마사지',
+    waxing: '왁싱',
+    chinese: '중국마사지',
+    foot: '발마사지',
+  };
+
+  if (currentRegion) {
     let filterType = '마사지사이트';
 
-    // jeju 관련 파일인지 확인
-    if (currentFileName.includes('jeju')) {
-      region = '제주';
-
-      // 구 추출
-      if (currentFileName.includes('jeju-si')) {
-        district = ' 제주시';
-      } else if (currentFileName.includes('jeju-seogwipo')) {
-        district = ' 서귀포시';
-      }
-
-      // 필터 타입 추출
-      if (currentFileName.includes('-massage.html')) {
-        filterType = '마사지';
-      } else if (currentFileName.includes('-outcall.html')) {
-        filterType = '출장마사지';
-      }
-      // .html 또는 jeju.html의 경우 '마사지사이트' 유지
+    // 테마 필터 확인
+    if (themeNames[currentFilter]) {
+      filterType = themeNames[currentFilter];
+    } else if (currentFilter === 'massage') {
+      filterType = '마사지';
+    } else if (currentFilter === 'outcall') {
+      filterType = '출장마사지';
     }
 
-    // 최종 텍스트 생성
-    if (region) {
-      titleText = `${region}${district}${filterType}정보`;
+    // 지역과 구가 모두 있으면 "지역 구" 형식으로 표시, 구만 있으면 "지역 구" 형식, 지역만 있으면 "지역" 형식
+    if (currentRegion && currentDistrict) {
+      titleText = `${currentRegion} ${currentDistrict}${filterType}정보`;
+    } else if (currentDistrict) {
+      titleText = `${currentDistrict} ${filterType}정보`;
+    } else if (currentRegion) {
+      titleText = `${currentRegion} ${filterType}정보`;
     } else {
-      // 기존 로직 (동적 생성) - jeju가 아닌 다른 파일들
-      const resultsTitle = document.getElementById('resultsTitle');
-      const regionSelect = document.getElementById('regionSelect');
-      const districtSelect = document.getElementById('districtSelect');
-      const currentFilter = getCurrentFilter();
-
-      if (resultsTitle) {
-        const title = resultsTitle.textContent;
-        // "업체"를 "정보"로 변경
-        titleText = title.replace('업체', '정보');
-      } else if (regionSelect && districtSelect) {
-        // resultsTitle이 없을 경우 지역 정보로 구성
-        const region =
-          regionSelect.value ||
-          regionSelect.options[regionSelect.selectedIndex]?.text ||
-          '';
-        const district =
-          districtSelect.value ||
-          districtSelect.options[districtSelect.selectedIndex]?.text ||
-          '';
-        const filterType =
-          currentFilter === 'outcall' ? '출장마사지' : '마사지';
-
-        if (region && district && district !== '세부 지역을 선택하세요') {
-          titleText = `${region}${district}${filterType}정보`;
-        } else if (region) {
-          titleText = `${region}${filterType}정보`;
-        } else {
-          titleText = `${filterType}정보`;
-        }
-      }
+      titleText = `${filterType}정보`;
+    }
+  } else {
+    // 지역 정보가 없는 경우
+    if (themeNames[currentFilter]) {
+      titleText = `${themeNames[currentFilter]}정보`;
+    } else if (currentFilter === 'massage') {
+      titleText = '마사지정보';
+    } else if (currentFilter === 'outcall') {
+      titleText = '출장마사지정보';
+    } else {
+      titleText = '마사지사이트정보';
     }
   }
 
   footerLink.textContent = titleText;
 }
 
-// 상세정보 모달 열기
-function openDetailsModal(event) {
-  event.preventDefault();
-  const modal = document.getElementById('detailsModal');
-  if (modal) {
-    // 현재 페이지의 지역과 마사지 타입 정보 가져오기
-    const resultsTitle = document.getElementById('resultsTitle');
-    const regionSelect = document.getElementById('regionSelect');
-    const districtSelect = document.getElementById('districtSelect');
-    const currentFilter = getCurrentFilter();
+// 파일명에서 지역, 세부지역, 필터 자동 감지 함수
+function detectRegionAndDistrictFromFilename(filename) {
+  try {
+    const result = { region: '', district: '', filter: '' };
 
-    let titleText = '상세정보';
+    if (!filename) return result;
 
-    if (resultsTitle) {
-      const title = resultsTitle.textContent;
-      // "업체"를 "정보"로 변경하고 업체 정보만 표시
-      titleText = title.replace('업체', '정보');
-    } else if (regionSelect && districtSelect) {
-      // resultsTitle이 없을 경우 지역 정보로 구성
-      const region =
-        regionSelect.value ||
-        regionSelect.options[regionSelect.selectedIndex]?.text ||
-        '';
-      const district =
-        districtSelect.value ||
-        districtSelect.options[districtSelect.selectedIndex]?.text ||
-        '';
-      const filterType = currentFilter === 'outcall' ? '출장마사지' : '마사지';
+    // .html 제거
+    const nameWithoutExt = filename.replace('.html', '');
+    const parts = nameWithoutExt.split('-');
 
-      if (region && district && district !== '세부 지역을 선택하세요') {
-        titleText = `${region}${district}${filterType}정보`;
-      } else if (region) {
-        titleText = `${region}${filterType}정보`;
-      } else {
-        titleText = `${filterType}정보`;
+    // districtMap 정의 (지역별 키 매핑)
+    const districtMap = {
+      jeju: {
+        regionName: '제주',
+        districts: {
+          si: '제주시',
+          seogwipo: '서귀포',
+        },
+      },
+      ulsan: {
+        regionName: '울산',
+        districts: {
+          junggu: '중구',
+          namgu: '남구',
+          donggu: '동구',
+          bukgu: '북구',
+          ulju: '울주',
+        },
+      },
+    };
+
+    // 필터 키워드
+    const filterKeywords = [
+      'massage',
+      'outcall',
+      'swedish',
+      'thai',
+      'aroma',
+      'waxing',
+      'chinese',
+      'foot',
+    ];
+
+    // 첫 번째 부분이 지역 키인지 확인
+    if (districtMap[parts[0]]) {
+      const regionData = districtMap[parts[0]];
+      result.region = regionData.regionName;
+
+      // 두 번째 부분이 세부지역인지 필터인지 확인
+      if (parts.length >= 2) {
+        if (regionData.districts[parts[1]]) {
+          // 세부지역인 경우
+          result.district = regionData.districts[parts[1]];
+
+          // 세 번째 부분이 필터인지 확인
+          if (parts.length >= 3 && filterKeywords.includes(parts[2])) {
+            result.filter = parts[2];
+          }
+        } else if (filterKeywords.includes(parts[1])) {
+          // 필터인 경우 (세부지역 없음)
+          result.filter = parts[1];
+        }
+      }
+    } else {
+      // 기본 테마 페이지인 경우 (예: swedish.html, thai.html 등)
+      if (filterKeywords.includes(parts[0])) {
+        result.filter = parts[0];
       }
     }
 
-    // footer-links의 상세정보 텍스트 업데이트
-    const footerLink = event.target;
-    if (footerLink) {
-      footerLink.textContent = titleText;
+    return result;
+  } catch (error) {
+    console.error('detectRegionAndDistrictFromFilename 오류:', error);
+    return { region: '', district: '', filter: '' };
+  }
+}
+
+// 상세정보 모달 열기
+function openDetailsModal(event) {
+  try {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
     }
 
+    console.log('openDetailsModal 함수 호출됨');
+
+    const modal = document.getElementById('detailsModal');
+    if (!modal) {
+      console.error('detailsModal을 찾을 수 없습니다.');
+      alert('모달을 찾을 수 없습니다. 페이지를 새로고침해주세요.');
+      return;
+    }
+
+    console.log('모달 요소 찾음:', modal);
+
+    // 현재 페이지의 지역과 마사지 타입 정보 가져오기
+    let currentFilter = 'all';
+
+    // 파일명에서 필터 정보 추출
+    const currentPage = window.location.pathname
+      .split('/')
+      .pop()
+      .replace('.html', '');
+    const themeFilters = {
+      swedish: 'swedish',
+      thai: 'thai',
+      aroma: 'aroma',
+      waxing: 'waxing',
+      chinese: 'chinese',
+      foot: 'foot',
+      massage: 'massage',
+      outcall: 'outcall',
+    };
+
+    if (themeFilters[currentPage]) {
+      currentFilter = themeFilters[currentPage];
+    } else {
+      try {
+        currentFilter = getCurrentFilter ? getCurrentFilter() : 'all';
+      } catch (e) {
+        console.warn('getCurrentFilter 오류:', e);
+        currentFilter = 'all';
+      }
+    }
+
+    // 전역 변수에서도 확인
+    if (typeof window.currentFilter !== 'undefined' && window.currentFilter) {
+      currentFilter = window.currentFilter;
+    }
+
+    // 파일명에서 지역과 세부지역 자동 감지
+    const currentFileName = window.location.pathname.split('/').pop();
+    const detectedInfo = detectRegionAndDistrictFromFilename(currentFileName);
+
+    // 현재 지역과 세부지역 정보 가져오기 (우선순위: 감지된 정보 > 전역 변수 > 선택 박스)
+    let region =
+      detectedInfo.region ||
+      (typeof currentRegion !== 'undefined' ? currentRegion : '');
+    let district =
+      detectedInfo.district ||
+      (typeof currentDistrict !== 'undefined' ? currentDistrict : '');
+
+    const regionSelect = document.getElementById('regionSelect');
+    const districtSelect = document.getElementById('districtSelect');
+
+    // 감지된 정보가 없으면 선택 박스에서 가져오기
+    if (!region && regionSelect) {
+      region =
+        regionSelect.value ||
+        regionSelect.options[regionSelect.selectedIndex]?.text ||
+        '';
+    }
+    if (!district && districtSelect) {
+      district =
+        districtSelect.value ||
+        districtSelect.options[districtSelect.selectedIndex]?.text ||
+        '';
+      if (district === '세부 지역을 선택하세요') district = '';
+    }
+
+    // 감지된 필터가 있으면 사용
+    if (detectedInfo.filter) {
+      currentFilter = detectedInfo.filter;
+    }
+
+    // 모달 제목 설정
+    const modalHeader = modal.querySelector('.modal-header h2');
+    if (modalHeader) {
+      modalHeader.textContent = '서비스 필터 전체 보기';
+    }
+
+    // 필터 링크 생성
+    let filterLinks = '';
+    try {
+      if (typeof generateFilterLinks === 'function') {
+        filterLinks = generateFilterLinks(currentFilter, region, district);
+      } else {
+        console.error('generateFilterLinks 함수를 찾을 수 없습니다.');
+        filterLinks = '<p>필터 링크를 생성할 수 없습니다.</p>';
+      }
+    } catch (e) {
+      console.error('generateFilterLinks 오류:', e);
+      filterLinks = '<p>필터 링크 생성 중 오류가 발생했습니다.</p>';
+    }
+
+    // 모달 본문 업데이트
+    const modalBody = modal.querySelector('.modal-body');
+    if (modalBody) {
+      modalBody.innerHTML = `
+        <div class="terms-section">
+          <h3>서비스 필터 전체 보기</h3>
+          <div class="filter-links-container" style="margin-top: 20px;">
+            ${filterLinks}
+          </div>
+        </div>
+      `;
+    }
+
+    // 모달 표시 - 여러 방법으로 시도
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // 스크롤 방지
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'flex-start';
+    modal.style.justifyContent = 'center';
+    modal.style.padding = '20px';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.background = 'rgba(0, 0, 0, 0.6)';
+    modal.style.zIndex = '10000';
+    document.body.style.overflow = 'hidden';
+
+    console.log('모달 표시 완료:', {
+      modal: modal,
+      hasActiveClass: modal.classList.contains('active'),
+      display: window.getComputedStyle(modal).display,
+      zIndex: window.getComputedStyle(modal).zIndex,
+    });
+  } catch (error) {
+    console.error('openDetailsModal 오류:', error);
+    alert('모달을 열 수 없습니다: ' + error.message);
+  }
+}
+
+// 전역 스코프에서 접근 가능하도록 window 객체에 할당
+if (typeof window !== 'undefined') {
+  window.openDetailsModal = openDetailsModal;
+}
+
+// 필터 링크 생성 함수
+function generateFilterLinks(excludeFilter, region, district) {
+  try {
+    // 모든 필터 정의 (총 8개)
+    const allFilters = [
+      { key: 'massage', name: '마사지' },
+      { key: 'outcall', name: '출장마사지' },
+      { key: 'swedish', name: '스웨디시' },
+      { key: 'thai', name: '타이마사지' },
+      { key: 'aroma', name: '아로마마사지' },
+      { key: 'waxing', name: '왁싱' },
+      { key: 'chinese', name: '중국마사지' },
+      { key: 'foot', name: '발마사지' },
+    ];
+
+    // all 필터인 경우: 전체 8개를 모두 표시 (index.html 또는 지역 페이지)
+    const currentPage = window.location.pathname.split('/').pop();
+    let filtersToShow;
+
+    if (excludeFilter === 'all' || !excludeFilter || excludeFilter === '') {
+      // all 필터인 경우: 전체 8개 표시 (모든 페이지에서)
+      filtersToShow = allFilters;
+    } else {
+      // 현재 필터를 제외한 나머지 필터들 (7개)
+      filtersToShow = allFilters.filter(
+        (filter) => filter.key !== excludeFilter && filter.key !== 'all'
+      );
+    }
+
+    // 링크 HTML 생성
+    let linksHTML =
+      '<div style="display: flex; flex-direction: column; gap: 12px;">';
+
+    filtersToShow.forEach((filter) => {
+      let url = '#';
+      try {
+        if (typeof generateFilterLinkUrl === 'function') {
+          url = generateFilterLinkUrl(filter.key, region, district);
+        } else {
+          // generateFilterLinkUrl 함수가 없으면 기본 URL 생성
+          if (filter.key === 'massage') {
+            url = 'massage.html';
+          } else if (filter.key === 'outcall') {
+            url = 'outcall.html';
+          } else {
+            url = `${filter.key}.html`;
+          }
+        }
+      } catch (e) {
+        console.warn('generateFilterLinkUrl 오류:', e);
+        // 기본 URL 사용
+        if (filter.key === 'massage') {
+          url = 'massage.html';
+        } else if (filter.key === 'outcall') {
+          url = 'outcall.html';
+        } else {
+          url = `${filter.key}.html`;
+        }
+      }
+
+      // 기본 페이지 목록 (지역/세부지역 정보 없음)
+      const basePages = [
+        'index.html',
+        'massage.html',
+        'outcall.html',
+        'swedish.html',
+        'thai.html',
+        'aroma.html',
+        'waxing.html',
+        'chinese.html',
+        'foot.html',
+      ];
+
+      const currentPage = window.location.pathname.split('/').pop();
+      const isBasePage = basePages.includes(currentPage);
+
+      // 지역과 세부지역 정보를 앞에 붙이기 (기본 페이지가 아닐 때만)
+      let displayName = filter.name;
+      if (!isBasePage && region) {
+        if (district) {
+          // 세부지역까지 있는 경우: "제주 제주시 마사지"
+          displayName = `${region} ${district} ${filter.name}`;
+        } else {
+          // 지역만 있는 경우: "제주 마사지"
+          displayName = `${region} ${filter.name}`;
+        }
+      }
+
+      linksHTML += `
+        <a href="${url}" style="
+          display: block;
+          padding: 12px 16px;
+          background-color: #f5f5f5;
+          border-radius: 8px;
+          text-decoration: none;
+          color: #333;
+          font-weight: 500;
+          transition: all 0.3s ease;
+        " onmouseover="this.style.backgroundColor='#e0e0e0'; this.style.color='#007bff';" 
+           onmouseout="this.style.backgroundColor='#f5f5f5'; this.style.color='#333';">
+          ${displayName}
+        </a>
+      `;
+    });
+
+    linksHTML += '</div>';
+    return linksHTML;
+  } catch (error) {
+    console.error('generateFilterLinks 오류:', error);
+    return '<p>필터 링크 생성 중 오류가 발생했습니다.</p>';
+  }
+}
+
+// 필터 링크 URL 생성 함수
+function generateFilterLinkUrl(filter, region, district) {
+  try {
+    // 기본 페이지 목록 (지역/세부지역 정보 없음)
+    const basePages = [
+      'index.html',
+      'massage.html',
+      'outcall.html',
+      'swedish.html',
+      'thai.html',
+      'aroma.html',
+      'waxing.html',
+      'chinese.html',
+      'foot.html',
+    ];
+
+    const currentPage = window.location.pathname.split('/').pop();
+    const isBasePage = basePages.includes(currentPage);
+
+    // 기본 페이지인 경우: 지역/세부지역 정보 없이 기본 URL 반환
+    if (isBasePage) {
+      if (filter === 'massage') {
+        return 'massage.html';
+      } else if (filter === 'outcall') {
+        return 'outcall.html';
+      } else {
+        return `${filter}.html`;
+      }
+    }
+
+    // districtMap 정의 (지역별 키 매핑)
+    const districtMap = {
+      jeju: {
+        regionName: '제주',
+        districts: {
+          si: '제주시',
+          seogwipo: '서귀포',
+        },
+      },
+      ulsan: {
+        regionName: '울산',
+        districts: {
+          junggu: '중구',
+          namgu: '남구',
+          donggu: '동구',
+          bukgu: '북구',
+          ulju: '울주',
+        },
+      },
+    };
+
+    // 지역과 세부지역이 모두 있는 경우
+    if (region && district) {
+      // districtMap에서 지역 키 찾기
+      let regionKey = '';
+      let districtKey = '';
+
+      for (const [key, value] of Object.entries(districtMap)) {
+        if (value.regionName === region) {
+          regionKey = key;
+          // 구 찾기
+          for (const [dKey, dName] of Object.entries(value.districts)) {
+            if (dName === district) {
+              districtKey = dKey;
+              break;
+            }
+          }
+          break;
+        }
+      }
+
+      if (regionKey && districtKey) {
+        // 테마 필터인 경우
+        if (
+          filter === 'swedish' ||
+          filter === 'thai' ||
+          filter === 'aroma' ||
+          filter === 'chinese' ||
+          filter === 'foot' ||
+          filter === 'waxing'
+        ) {
+          if (
+            window.getThemePageUrl &&
+            typeof window.getThemePageUrl === 'function'
+          ) {
+            const themePage = window.getThemePageUrl(filter, region, district);
+            if (themePage) return themePage;
+          }
+          return `${regionKey}-${districtKey}-${filter}.html`;
+        } else if (filter === 'massage') {
+          return `${regionKey}-${districtKey}-massage.html`;
+        } else if (filter === 'outcall') {
+          return `${regionKey}-${districtKey}-outcall.html`;
+        }
+      }
+    }
+
+    // 지역만 있는 경우
+    if (region) {
+      // districtMap에서 지역 키 찾기
+      let regionKey = '';
+      for (const [key, value] of Object.entries(districtMap)) {
+        if (value.regionName === region) {
+          regionKey = key;
+          break;
+        }
+      }
+
+      if (regionKey) {
+        // 테마 필터인 경우
+        if (
+          filter === 'swedish' ||
+          filter === 'thai' ||
+          filter === 'aroma' ||
+          filter === 'chinese' ||
+          filter === 'foot' ||
+          filter === 'waxing'
+        ) {
+          if (typeof getThemePageUrl === 'function') {
+            const themePage = getThemePageUrl(filter, region, '');
+            if (themePage) return themePage;
+          }
+          return `${regionKey}-${filter}.html`;
+        } else if (filter === 'massage') {
+          return `${regionKey}-massage.html`;
+        } else if (filter === 'outcall') {
+          return `${regionKey}-outcall.html`;
+        }
+      }
+    }
+
+    // 지역 정보가 없는 경우 (index.html 등)
+    if (filter === 'massage') {
+      return 'massage.html';
+    } else if (filter === 'outcall') {
+      return 'outcall.html';
+    } else if (
+      filter === 'swedish' ||
+      filter === 'thai' ||
+      filter === 'aroma' ||
+      filter === 'chinese' ||
+      filter === 'foot' ||
+      filter === 'waxing'
+    ) {
+      return `${filter}.html`;
+    }
+
+    return '#';
+  } catch (error) {
+    console.error('generateFilterLinkUrl 오류:', error);
+    // 기본 URL 반환
+    if (filter === 'massage') {
+      return 'massage.html';
+    } else if (filter === 'outcall') {
+      return 'outcall.html';
+    } else {
+      return `${filter}.html`;
+    }
   }
 }
 
@@ -2415,18 +2845,61 @@ function openRelatedInfoModal(event) {
 
 // 모달 닫기
 function closeModal(modalId) {
-  const modal = document.getElementById(modalId);
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = ''; // 스크롤 복원
+  try {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('active');
+      // 인라인 스타일 제거 (openDetailsModal에서 설정한 스타일)
+      modal.style.display = '';
+      modal.style.alignItems = '';
+      modal.style.justifyContent = '';
+      modal.style.padding = '';
+      modal.style.position = '';
+      modal.style.top = '';
+      modal.style.left = '';
+      modal.style.width = '';
+      modal.style.height = '';
+      modal.style.background = '';
+      modal.style.zIndex = '';
+      document.body.style.overflow = ''; // 스크롤 복원
+
+      console.log('모달 닫기 완료:', modalId);
+    } else {
+      console.warn('모달을 찾을 수 없습니다:', modalId);
+    }
+  } catch (error) {
+    console.error('closeModal 오류:', error);
   }
+}
+
+// 전역 스코프에서 접근 가능하도록 window 객체에 할당
+if (typeof window !== 'undefined') {
+  window.closeModal = closeModal;
 }
 
 // 모달 배경 클릭 시 닫기
 window.addEventListener('click', function (event) {
   if (event.target.classList.contains('modal')) {
-    event.target.classList.remove('active');
-    document.body.style.overflow = '';
+    const modal = event.target;
+    const modalId = modal.id;
+    if (modalId) {
+      closeModal(modalId);
+    } else {
+      // ID가 없는 경우 직접 닫기
+      modal.classList.remove('active');
+      modal.style.display = '';
+      modal.style.alignItems = '';
+      modal.style.justifyContent = '';
+      modal.style.padding = '';
+      modal.style.position = '';
+      modal.style.top = '';
+      modal.style.left = '';
+      modal.style.width = '';
+      modal.style.height = '';
+      modal.style.background = '';
+      modal.style.zIndex = '';
+      document.body.style.overflow = '';
+    }
   }
 });
 
@@ -2536,103 +3009,11 @@ function initFilterDragScroll() {
 
 // ✅ 간단한 중앙화된 초기화 함수
 function initializeApp() {
+  console.log('initializeApp 시작');
   initializeRegionOptions();
+  console.log('initializeRegionOptions 완료');
 
-  // 지역/구 선택 이벤트 리스너
-  const regionSelect = document.getElementById('regionSelect');
-  const districtSelect = document.getElementById('districtSelect');
-  if (regionSelect) regionSelect.addEventListener('change', handleRegionChange);
-  if (districtSelect)
-    districtSelect.addEventListener('change', handleDistrictChange);
-
-  // footer-links 텍스트 업데이트
-  if (typeof updateFooterLinkText === 'function') {
-    updateFooterLinkText();
-  }
-
-  // 파일명 분석
-  const currentPath = window.location.pathname;
-  const currentFileName = currentPath.split('/').pop().replace('.html', '');
-  const parts = currentFileName.split('-');
-
-  // jeju-seogwipo 특별 처리
-  if (currentFileName.includes('seogwipo')) {
-    console.log('서귀포 페이지 감지:', currentFileName);
-    currentRegion = '제주';
-    currentDistrict = '서귀포';
-    currentFilter =
-      parts[2] === 'massage'
-        ? 'massage'
-        : parts[2] === 'outcall'
-        ? 'outcall'
-        : 'all';
-
-    // UI 즉시 업데이트
-    const regionSelect = document.getElementById('regionSelect');
-    const districtSelect = document.getElementById('districtSelect');
-
-    if (regionSelect) {
-      regionSelect.value = '제주';
-    }
-
-    if (districtSelect) {
-      districtSelect.disabled = false;
-      districtSelect.style.opacity = '1';
-      districtSelect.value = '서귀포';
-      console.log('서귀포 강제 설정 완료');
-    }
-
-    // 옵션 업데이트
-    if (typeof updateDistrictOptions === 'function') {
-      updateDistrictOptions('제주');
-      // 옵션 업데이트 후 다시 서귀포 설정
-      setTimeout(() => {
-        if (districtSelect) {
-          districtSelect.value = '서귀포';
-          console.log('서귀포 재설정 완료');
-        }
-      }, 100);
-    }
-
-    // 필터 버튼 설정
-    setupFilterButtons();
-    updateResultsTitle();
-
-    if (typeof displayFilteredResults === 'function') {
-      displayFilteredResults();
-    }
-
-    return; // 다른 로직 실행하지 않음
-  }
-
-  // index.html, massage.html, outcall.html 처리
-  if (
-    currentFileName === 'index' ||
-    currentFileName === '' ||
-    currentFileName === 'massage' ||
-    currentFileName === 'outcall'
-  ) {
-    // 필터 설정
-    if (currentFileName === 'massage') {
-      currentFilter = 'massage';
-    } else if (currentFileName === 'outcall') {
-      currentFilter = 'outcall';
-    } else {
-      currentFilter = 'all';
-    }
-
-    console.log('Current filter set to:', currentFilter);
-
-    // 필터 버튼 활성화 상태 설정
-    const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
-    filterButtons.forEach((btn) => {
-      btn.classList.remove('active');
-      if (btn.dataset.filter === currentFilter) {
-        btn.classList.add('active');
-      }
-    });
-  }
-  // 지역별 구 설정 매핑
+  // districtMap 정의 (지역별 키 매핑) - getThemePageUrl에서 사용
   const districtMap = {
     jeju: {
       regionName: '제주',
@@ -2653,6 +3034,362 @@ function initializeApp() {
     },
   };
 
+  // 지역별 테마 페이지 URL 생성 함수 (중앙화) - initializeApp 내부로 통합
+  function getThemePageUrl(theme, region, district) {
+    // 기본 테마 페이지 매핑
+    const baseThemePages = {
+      swedish: 'swedish.html',
+      thai: 'thai.html',
+      aroma: 'aroma.html',
+      chinese: 'chinese.html',
+      foot: 'foot.html',
+      waxing: 'waxing.html',
+    };
+
+    // 테마가 유효한지 확인
+    if (!baseThemePages[theme]) {
+      return null;
+    }
+
+    // districtMap에서 지역 키 찾기
+    let regionKey = '';
+    let districtKey = '';
+
+    for (const [key, value] of Object.entries(districtMap)) {
+      if (value.regionName === region) {
+        regionKey = key;
+
+        // 세부지역이 있으면 세부지역 키도 찾기
+        if (district && district !== '' && district !== '전체') {
+          for (const [dKey, dName] of Object.entries(value.districts)) {
+            if (dName === district) {
+              districtKey = dKey;
+              break;
+            }
+          }
+        }
+        break;
+      }
+    }
+
+    // 지역과 세부지역이 모두 있는 경우
+    if (regionKey && districtKey) {
+      return `${regionKey}-${districtKey}-${theme}.html`;
+    }
+
+    // 지역만 있는 경우 (세부지역 없음)
+    if (regionKey && region && region !== '' && region !== '전체') {
+      return `${regionKey}-${theme}.html`;
+    }
+
+    // 기본 테마 페이지 반환
+    return baseThemePages[theme] || null;
+  }
+
+  // getThemePageUrl을 전역에서 접근 가능하도록 설정 (다른 함수에서도 사용)
+  window.getThemePageUrl = getThemePageUrl;
+
+  // 지역/구 선택 이벤트 리스너 (districtMap 활용)
+  const regionSelect = document.getElementById('regionSelect');
+  const districtSelect = document.getElementById('districtSelect');
+
+  if (regionSelect) {
+    regionSelect.addEventListener('change', function () {
+      const selectedRegion = regionSelect.value;
+
+      // 현재 페이지 파일명 가져오기
+      const currentPath = window.location.pathname;
+      const currentFileName = currentPath.split('/').pop();
+
+      // districtMap에서 해당 지역 찾기
+      for (const [regionKey, regionData] of Object.entries(districtMap)) {
+        if (regionData.regionName === selectedRegion) {
+          // 구 옵션 업데이트
+          updateDistrictOptions(selectedRegion);
+          // 구 선택 활성화
+          if (districtSelect) {
+            districtSelect.disabled = false;
+            districtSelect.style.opacity = '1';
+          }
+
+          // 이동할 페이지 결정
+          let targetPage = '';
+          if (currentFilter === 'massage') {
+            targetPage = `${regionKey}-massage.html`;
+          } else if (currentFilter === 'outcall') {
+            targetPage = `${regionKey}-outcall.html`;
+          } else if (
+            currentFilter === 'swedish' ||
+            currentFilter === 'thai' ||
+            currentFilter === 'aroma' ||
+            currentFilter === 'chinese' ||
+            currentFilter === 'foot' ||
+            currentFilter === 'waxing'
+          ) {
+            // 중앙화된 함수로 테마 페이지 URL 생성
+            targetPage = window.getThemePageUrl
+              ? window.getThemePageUrl(currentFilter, selectedRegion, '')
+              : null;
+            if (!targetPage) {
+              // 함수가 null을 반환하면 기본 패턴 사용
+              targetPage = `${regionKey}-${currentFilter}.html`;
+            }
+          } else {
+            targetPage = `${regionKey}.html`;
+          }
+
+          // 현재 페이지와 같으면 이동하지 않음
+          if (currentFileName !== targetPage) {
+            window.location.href = targetPage;
+          } else {
+            // 같은 페이지면 필터만 업데이트
+            if (typeof displayFilteredResults === 'function') {
+              displayFilteredResults();
+            }
+          }
+          return;
+        }
+      }
+    });
+  }
+
+  if (districtSelect) {
+    districtSelect.addEventListener('change', function () {
+      const selectedRegion = regionSelect.value;
+      const selectedDistrict = districtSelect.value;
+
+      // 현재 페이지 파일명 가져오기
+      const currentPath = window.location.pathname;
+      const currentFileName = currentPath.split('/').pop();
+
+      // districtMap에서 해당 지역과 구 찾기
+      for (const [regionKey, regionData] of Object.entries(districtMap)) {
+        if (regionData.regionName === selectedRegion) {
+          // 구 키 찾기
+          for (const [districtKey, districtName] of Object.entries(
+            regionData.districts
+          )) {
+            if (districtName === selectedDistrict) {
+              // 이동할 페이지 결정
+              let targetPage = '';
+
+              if (currentFilter === 'massage') {
+                targetPage = `${regionKey}-${districtKey}-massage.html`;
+              } else if (currentFilter === 'outcall') {
+                targetPage = `${regionKey}-${districtKey}-outcall.html`;
+              } else if (
+                currentFilter === 'swedish' ||
+                currentFilter === 'thai' ||
+                currentFilter === 'aroma' ||
+                currentFilter === 'chinese' ||
+                currentFilter === 'foot' ||
+                currentFilter === 'waxing'
+              ) {
+                // 중앙화된 함수로 테마 페이지 URL 생성 (구는 고려하지 않음)
+                targetPage = window.getThemePageUrl
+                  ? window.getThemePageUrl(
+                      currentFilter,
+                      selectedRegion,
+                      selectedDistrict
+                    )
+                  : null;
+                if (!targetPage) {
+                  // 함수가 null을 반환하면 기본 패턴 사용
+                  targetPage = `${regionKey}-${districtKey}-${currentFilter}.html`;
+                }
+              } else {
+                targetPage = `${regionKey}-${districtKey}.html`;
+              }
+
+              // 현재 페이지와 같으면 이동하지 않음
+              if (currentFileName !== targetPage) {
+                window.location.href = targetPage;
+              } else {
+                // 같은 페이지면 필터만 업데이트
+                if (typeof displayFilteredResults === 'function') {
+                  displayFilteredResults();
+                }
+              }
+              return;
+            }
+          }
+          break;
+        }
+      }
+    });
+  }
+
+  // 필터 버튼 이벤트 리스너 추가 (페이지 이동)
+  const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const filter = btn.getAttribute('data-filter');
+      if (filter) {
+        // 현재 페이지 분석
+        const currentPath = window.location.pathname;
+        const currentFileName = currentPath
+          .split('/')
+          .pop()
+          .replace('.html', '');
+        const parts = currentFileName.split('-');
+
+        // districtMap에서 현재 지역과 구 찾기
+        let regionKey = '';
+        let districtKey = '';
+
+        for (const [key, value] of Object.entries(districtMap)) {
+          if (value.regionName === currentRegion) {
+            regionKey = key;
+            // 구 찾기
+            for (const [dKey, dName] of Object.entries(value.districts)) {
+              if (dName === currentDistrict) {
+                districtKey = dKey;
+                break;
+              }
+            }
+            break;
+          }
+        }
+
+        // 필터에 따른 페이지 이동
+        if (regionKey) {
+          if (filter === 'all') {
+            if (districtKey) {
+              window.location.href = `${regionKey}-${districtKey}.html`;
+            } else {
+              window.location.href = `${regionKey}.html`;
+            }
+          } else if (filter === 'massage' || filter === 'outcall') {
+            if (districtKey) {
+              window.location.href = `${regionKey}-${districtKey}-${filter}.html`;
+            } else {
+              window.location.href = `${regionKey}-${filter}.html`;
+            }
+          } else if (
+            filter === 'swedish' ||
+            filter === 'thai' ||
+            filter === 'aroma' ||
+            filter === 'chinese' ||
+            filter === 'foot' ||
+            filter === 'waxing'
+          ) {
+            // 중앙화된 함수로 테마 페이지 URL 생성
+            const targetThemePage = window.getThemePageUrl
+              ? window.getThemePageUrl(filter, currentRegion, currentDistrict)
+              : null;
+            if (targetThemePage) {
+              window.location.href = targetThemePage;
+              return;
+            }
+            // 함수가 null을 반환하면 기본 패턴 사용
+            if (districtKey) {
+              window.location.href = `${regionKey}-${districtKey}-${filter}.html`;
+            } else {
+              window.location.href = `${regionKey}-${filter}.html`;
+            }
+          }
+        } else {
+          // districtMap에 없는 지역의 경우 (테마 페이지들: swedish, thai, aroma 등)
+          if (filter === 'all') {
+            // 전체 필터 클릭 시 index.html로 이동
+            window.location.href = 'index.html';
+            return;
+          } else if (filter === 'massage') {
+            window.location.href = 'massage.html';
+          } else if (filter === 'outcall') {
+            window.location.href = 'outcall.html';
+          } else if (
+            filter === 'swedish' ||
+            filter === 'thai' ||
+            filter === 'aroma' ||
+            filter === 'chinese' ||
+            filter === 'foot' ||
+            filter === 'waxing'
+          ) {
+            // 중앙화된 함수로 테마 페이지 URL 생성
+            const targetThemePage = window.getThemePageUrl
+              ? window.getThemePageUrl(filter, currentRegion, currentDistrict)
+              : null;
+            if (targetThemePage) {
+              window.location.href = targetThemePage;
+              return;
+            }
+            // 함수가 null을 반환하면 기본 테마 페이지로 이동
+            const defaultThemePages = {
+              swedish: 'swedish.html',
+              thai: 'thai.html',
+              aroma: 'aroma.html',
+              chinese: 'chinese.html',
+              foot: 'foot.html',
+              waxing: 'waxing.html',
+            };
+            if (defaultThemePages[filter]) {
+              window.location.href = defaultThemePages[filter];
+            }
+          }
+        }
+      }
+    });
+  });
+
+  // footer-links 텍스트 업데이트
+  if (typeof updateFooterLinkText === 'function') {
+    updateFooterLinkText();
+  }
+
+  // 파일명 분석
+  const currentPath = window.location.pathname;
+  const currentFileName = currentPath.split('/').pop().replace('.html', '');
+  const parts = currentFileName.split('-');
+
+  // index.html, massage.html, outcall.html 처리
+  if (
+    currentFileName === 'index' ||
+    currentFileName === '' ||
+    currentFileName === 'massage' ||
+    currentFileName === 'outcall' ||
+    currentFileName === 'swedish' ||
+    currentFileName === 'thai' ||
+    currentFileName === 'aroma' ||
+    currentFileName === 'chinese' ||
+    currentFileName === 'foot' ||
+    currentFileName === 'waxing'
+  ) {
+    // 필터 설정
+    if (currentFileName === 'massage') {
+      currentFilter = 'massage';
+    } else if (currentFileName === 'outcall') {
+      currentFilter = 'outcall';
+    } else if (currentFileName === 'swedish') {
+      currentFilter = 'swedish';
+    } else if (currentFileName === 'thai') {
+      currentFilter = 'thai';
+    } else if (currentFileName === 'aroma') {
+      currentFilter = 'aroma';
+    } else if (currentFileName === 'chinese') {
+      currentFilter = 'chinese';
+    } else if (currentFileName === 'foot') {
+      currentFilter = 'foot';
+    } else if (currentFileName === 'waxing') {
+      currentFilter = 'waxing';
+    } else {
+      currentFilter = 'all';
+    }
+
+    console.log('Current filter set to:', currentFilter);
+
+    // 필터 버튼 활성화 상태 설정
+    const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
+    filterButtons.forEach((btn) => {
+      btn.classList.remove('active');
+      if (btn.dataset.filter === currentFilter) {
+        btn.classList.add('active');
+      }
+    });
+  }
+  // districtMap은 함수 상단에서 이미 정의되었습니다.
+
   // ------------------------------------
   // 메인 처리 로직
   // ------------------------------------
@@ -2671,11 +3408,27 @@ function initializeApp() {
     // 필터 감지 (공통 로직)
     let detectedFilter = 'all';
     if (parts.length >= 2) {
-      if (parts[1] === 'massage' || parts[1] === 'outcall') {
+      if (
+        parts[1] === 'massage' ||
+        parts[1] === 'outcall' ||
+        parts[1] === 'swedish' ||
+        parts[1] === 'thai' ||
+        parts[1] === 'aroma' ||
+        parts[1] === 'chinese' ||
+        parts[1] === 'foot' ||
+        parts[1] === 'waxing'
+      ) {
         detectedFilter = parts[1];
       } else if (
         parts.length >= 3 &&
-        (parts[2] === 'massage' || parts[2] === 'outcall')
+        (parts[2] === 'massage' ||
+          parts[2] === 'outcall' ||
+          parts[2] === 'swedish' ||
+          parts[2] === 'thai' ||
+          parts[2] === 'aroma' ||
+          parts[2] === 'chinese' ||
+          parts[2] === 'foot' ||
+          parts[2] === 'waxing')
       ) {
         detectedFilter = parts[2];
       }
@@ -2722,6 +3475,27 @@ function initializeApp() {
   // 결과 제목 업데이트
   updateResultsTitle();
 
+  // 테마 페이지별 currentFilter 자동 설정
+  const themePath = window.location.pathname;
+  const themeFileName = themePath.split('/').pop();
+  const themeFileMap = {
+    'swedish.html': 'swedish',
+    'thai.html': 'thai',
+    'aroma.html': 'aroma',
+    'chinese.html': 'chinese',
+    'foot.html': 'foot',
+    'waxing.html': 'waxing',
+  };
+
+  if (themeFileMap[themeFileName]) {
+    currentFilter = themeFileMap[themeFileName];
+  }
+
+  // window.currentFilter가 설정되어 있으면 우선 사용
+  if (window.currentFilter && typeof window.currentFilter !== 'undefined') {
+    currentFilter = window.currentFilter;
+  }
+
   // 필터링된 결과 표시
   if (typeof displayFilteredResults === 'function') {
     displayFilteredResults();
@@ -2760,6 +3534,44 @@ function handleTypeFilterClick(e) {
 
     // 버튼 활성화 상태 토글
     typeFilterBtn.classList.toggle('active', !isVisible);
+
+    // 테마 필터 섹션이 보여질 때 필터 섹션 바로 아래에 고정되도록 위치 조정
+    if (!isVisible) {
+      // 필터 섹션의 실제 높이를 계산하여 위치 조정
+      const filterSection = document.querySelector('.filter-section');
+      if (filterSection) {
+        // 약간의 지연을 두고 계산하여 DOM 업데이트 완료 후 위치 계산
+        setTimeout(() => {
+          // 필터 섹션의 실제 높이 (offsetHeight 사용)
+          const filterSectionHeight = filterSection.offsetHeight;
+          // 필터 섹션의 getBoundingClientRect로 현재 viewport에서의 위치 확인
+          const filterSectionRect = filterSection.getBoundingClientRect();
+
+          // 필터 섹션이 sticky로 고정되어 있는지 확인 (top이 1px 근처인지)
+          const isFilterSticky = filterSectionRect.top <= 10;
+
+          if (isFilterSticky) {
+            // 필터 섹션이 sticky로 고정되어 있으면: 헤더 높이(80px) + 필터 섹션 높이 - 여백 조정
+            const headerHeight = 80;
+            const topOffset = -85; // 위쪽 여백 줄이기
+            themeFilterSection.style.top = `${
+              headerHeight + filterSectionHeight + topOffset
+            }px`;
+          } else {
+            // 필터 섹션이 sticky가 아니면: 필터 섹션의 viewport 기준 bottom 위치 - 여백 조정
+            const filterSectionBottom =
+              filterSectionRect.top + filterSectionHeight;
+            const topOffset = -85; // 위쪽 여백 줄이기
+            themeFilterSection.style.top = `${
+              filterSectionBottom + topOffset
+            }px`;
+          }
+        }, 10);
+      } else {
+        // 필터 섹션을 찾을 수 없는 경우 기본값 사용 (여백 조정)
+        themeFilterSection.style.top = '80px';
+      }
+    }
 
     console.log('Type filter toggled:', !isVisible);
   }
@@ -2807,7 +3619,13 @@ function generateFilterLink(filter) {
     currentPage === 'index' ||
     currentPage === '' ||
     currentPage === 'massage' ||
-    currentPage === 'outcall'
+    currentPage === 'outcall' ||
+    currentPage === 'swedish' ||
+    currentPage === 'thai' ||
+    currentPage === 'aroma' ||
+    currentPage === 'chinese' ||
+    currentPage === 'foot' ||
+    currentPage === 'waxing'
   ) {
     if (filter === 'all') {
       return 'index.html';
@@ -2815,6 +3633,18 @@ function generateFilterLink(filter) {
       return 'massage.html';
     } else if (filter === 'outcall') {
       return 'outcall.html';
+    } else if (filter === 'swedish') {
+      return 'swedish.html';
+    } else if (filter === 'thai') {
+      return 'thai.html';
+    } else if (filter === 'aroma') {
+      return 'aroma.html';
+    } else if (filter === 'chinese') {
+      return 'chinese.html';
+    } else if (filter === 'foot') {
+      return 'foot.html';
+    } else if (filter === 'waxing') {
+      return 'waxing.html';
     }
   }
 
@@ -2823,7 +3653,16 @@ function generateFilterLink(filter) {
   let district = parts[1] || '';
 
   // district가 filter와 같은 경우 (예: jeju-massage에서 massage는 district가 아님)
-  if (district === 'massage' || district === 'outcall') {
+  if (
+    district === 'massage' ||
+    district === 'outcall' ||
+    district === 'swedish' ||
+    district === 'thai' ||
+    district === 'aroma' ||
+    district === 'chinese' ||
+    district === 'foot' ||
+    district === 'waxing'
+  ) {
     district = '';
   }
 
@@ -2851,19 +3690,63 @@ function updateResultsTitle() {
 
   let title = '';
 
-  // 구가 있으면 구만 표시, 없으면 지역 표시
-  if (currentDistrict) {
-    title += currentDistrict;
-  } else if (currentRegion) {
-    title += currentRegion;
-  }
+  // 테마 필터가 먼저 처리
+  const themeNames = {
+    swedish: '스웨디시',
+    thai: '타이마사지',
+    aroma: '아로마마사지',
+    waxing: '왁싱',
+    chinese: '중국마사지',
+    foot: '발마사지',
+  };
 
-  if (currentFilter && currentFilter !== 'all') {
-    const filterNames = { massage: '마사지', outcall: '출장마사지' };
-    title += ' ' + (filterNames[currentFilter] || currentFilter);
-    title += ' 업체'; // 필터가 있으면 " 업체"만 추가
+  if (currentFilter && themeNames[currentFilter]) {
+    // 테마 필터인 경우 지역/구 정보 포함
+    const themeName = themeNames[currentFilter];
+    // 구가 있으면 구만 표시, 없으면 지역 표시
+    if (currentDistrict) {
+      title = `${currentDistrict} ${themeName} 업체`;
+    } else if (currentRegion) {
+      title = `${currentRegion} ${themeName} 업체`;
+    } else {
+      title = `${themeName} 업체`;
+    }
+  } else if (currentFilter && currentFilter !== 'all') {
+    // 다른 필터 (massage, outcall 등)
+    const filterNames = {
+      massage: '마사지',
+      outcall: '출장마사지',
+      swedish: '스웨디시',
+      thai: '타이마사지',
+      aroma: '아로마마사지',
+      chinese: '중국마사지',
+      foot: '발마사지',
+      waxing: '왁싱',
+    };
+    const filterName = filterNames[currentFilter] || currentFilter;
+
+    // 구가 있으면 구만 표시, 없으면 지역 표시
+    if (currentDistrict) {
+      title = `${currentDistrict} ${filterName} 업체`;
+    } else if (currentRegion) {
+      title = `${currentRegion} ${filterName} 업체`;
+    } else {
+      title = `${filterName} 업체`;
+    }
   } else {
-    title += ' 마사지사이트 업체'; // 필터가 없으면 " 마사지사이트 업체" 추가
+    // 전체인 경우
+    const isMainPage =
+      window.location.pathname.includes('index.html') ||
+      window.location.pathname === '/' ||
+      window.location.pathname === '';
+
+    if (currentDistrict) {
+      title = `${currentDistrict} 마사지사이트 업체`;
+    } else if (currentRegion) {
+      title = `${currentRegion} 마사지사이트 업체`;
+    } else {
+      title = isMainPage ? '전체 마사지사이트 업체' : '전체 마사지 업체';
+    }
   }
 
   console.log('Current region:', currentRegion);
@@ -2880,21 +3763,68 @@ function initializeThemeFilter() {
   const themeFilterSection = document.getElementById('themeFilterSection');
 
   themeBoxes.forEach((box) => {
-    box.addEventListener('click', function () {
-      // 모든 테마 박스에서 active 클래스 제거
-      themeBoxes.forEach((b) => b.classList.remove('active'));
-      // 클릭된 박스에 active 클래스 추가
-      this.classList.add('active');
+    // onclick 속성 제거
+    if (box.getAttribute('onclick')) {
+      box.removeAttribute('onclick');
+      box.onclick = null;
+    }
 
-      const selectedTheme = this.dataset.theme;
-      console.log('Selected theme:', selectedTheme);
+    // 기존 이벤트 리스너가 없을 때만 추가
+    const hasEventListener = box.getAttribute('data-has-listener');
+    if (!hasEventListener) {
+      box.setAttribute('data-has-listener', 'true');
+      box.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
 
-      // 필터 적용 로직 (필요에 따라 수정)
-      applyThemeFilter(selectedTheme);
+        const selectedTheme = this.dataset.theme;
+        console.log('Selected theme:', selectedTheme);
 
-      // 드롭다운 숨기기
-      hideThemeDropdown();
-    });
+        // 모든 테마 박스에서 active 클래스 제거
+        themeBoxes.forEach((b) => {
+          b.classList.remove('active');
+          // 다른 박스의 onclick도 제거
+          if (b !== this) {
+            b.removeAttribute('onclick');
+            b.onclick = null;
+          }
+        });
+        // 클릭된 박스에 active 클래스 추가
+        this.classList.add('active');
+
+        // 테마별 페이지로 이동 (전체 제외)
+        if (selectedTheme !== 'all') {
+          // 중앙화된 함수로 테마 페이지 URL 생성
+          const targetPage = window.getThemePageUrl
+            ? window.getThemePageUrl(
+                selectedTheme,
+                currentRegion,
+                currentDistrict
+              )
+            : null;
+          if (targetPage) {
+            window.location.href = targetPage;
+            return;
+          }
+        }
+
+        // 전체 선택 시 필터 적용
+        currentFilter = selectedTheme;
+        displayFilteredResults();
+
+        // 드롭다운 숨기기
+        const themeFilterSection =
+          document.getElementById('themeFilterSection');
+        if (themeFilterSection) {
+          themeFilterSection.style.display = 'none';
+        }
+
+        const typeFilterBtn = document.getElementById('typeFilterBtn');
+        if (typeFilterBtn) {
+          typeFilterBtn.classList.add('active');
+        }
+      });
+    }
   });
 }
 
