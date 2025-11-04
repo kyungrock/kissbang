@@ -139,7 +139,7 @@ textarea,
 }
 
 .header-content {
-  max-width: 520px;
+  max-width: 490px;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
@@ -212,6 +212,48 @@ textarea,
   gap: 15px;
   overflow-x: hidden;
   touch-action: pan-y;
+}
+
+/* 업체 검색 입력창 */
+.text-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 0 15px;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.text-search-box:focus-within {
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.shop-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 15px 0;
+  padding-right: 40px;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+  font-family: 'GmarketSans', sans-serif;
+}
+
+.shop-search-input::placeholder {
+  color: #999;
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px;
+  color: #667eea;
+  font-size: 1.1rem;
+  pointer-events: none;
 }
 
 /* 통합 검색창 */

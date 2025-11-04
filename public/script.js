@@ -746,6 +746,7 @@ const resultsCount = document.getElementById('resultsCount');
 let currentFilter = 'all';
 let currentRegion = '';
 let currentDistrict = '';
+let currentSearchQuery = ''; // 검색어 저장
 let currentCountry = 'overall';
 
 // 검색 디바운싱을 위한 타이머
@@ -851,17 +852,6 @@ function initializeApp() {
         districtSelect.style.opacity = '1';
       }
     }
-  }
-
-  // 검색 토글 버튼 이벤트 리스너 (검색창으로 스크롤)
-  const searchToggle = document.getElementById('searchToggle');
-  const searchSection = document.querySelector('.search-section');
-
-  if (searchToggle && searchSection) {
-    searchToggle.addEventListener('click', function () {
-      // 검색창으로 부드럽게 스크롤
-      searchSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
   }
 
   // 검색 버튼 이벤트 리스너 (searchBtn이 존재할 때만)
@@ -1654,6 +1644,62 @@ function displayFilteredResults() {
     }
   }
 
+  // 검색어 필터 적용 (2글자 이상인 경우)
+  if (currentSearchQuery && currentSearchQuery.trim().length >= 2) {
+    const searchTerm = currentSearchQuery.trim().toLowerCase();
+    filteredShops = filteredShops.filter((shop) => {
+      // 업체명 검색
+      if (shop.name && shop.name.toLowerCase().includes(searchTerm)) {
+        return true;
+      }
+      // 설명 검색
+      if (
+        shop.description &&
+        shop.description.toLowerCase().includes(searchTerm)
+      ) {
+        return true;
+      }
+      // 서비스 검색
+      if (shop.services && Array.isArray(shop.services)) {
+        if (
+          shop.services.some((service) =>
+            service.toLowerCase().includes(searchTerm)
+          )
+        ) {
+          return true;
+        }
+      }
+      // 주소 검색
+      if (shop.address && shop.address.toLowerCase().includes(searchTerm)) {
+        return true;
+      }
+      if (
+        shop.detailAddress &&
+        shop.detailAddress.toLowerCase().includes(searchTerm)
+      ) {
+        return true;
+      }
+      // 지역/구 검색
+      if (shop.region && shop.region.toLowerCase().includes(searchTerm)) {
+        return true;
+      }
+      if (shop.district && shop.district.toLowerCase().includes(searchTerm)) {
+        return true;
+      }
+      // 태그 검색
+      if (shop.tags && Array.isArray(shop.tags)) {
+        if (shop.tags.some((tag) => tag.toLowerCase().includes(searchTerm))) {
+          return true;
+        }
+      }
+      // 키워드 검색
+      if (shop.keywords && shop.keywords.toLowerCase().includes(searchTerm)) {
+        return true;
+      }
+      return false;
+    });
+  }
+
   displayMassageShops(filteredShops);
 
   // 결과 헤더 업데이트
@@ -1663,6 +1709,11 @@ function displayFilteredResults() {
     window.location.pathname === '/' ||
     window.location.pathname === '';
   let title = isMainPage ? '전체 마사지사이트 업체' : '전체 마사지 업체';
+
+  // 검색어가 있으면 제목에 검색어 표시
+  if (currentSearchQuery && currentSearchQuery.trim().length >= 2) {
+    title = `"${currentSearchQuery}" 검색 결과`;
+  }
 
   // 필터별 제목 설정
   if (currentFilter === 'massage') {
@@ -3984,4 +4035,59 @@ document.addEventListener('DOMContentLoaded', function () {
   initializeThemeFilter();
   hideThemeDropdownOnOutsideClick();
   hideThemeDropdownOnScroll();
+
+  // 검색 입력창 이벤트 리스너 추가
+  initializeSearchFunctionality();
 });
+
+// 검색 기능 초기화
+function initializeSearchFunctionality() {
+  const searchInput = document.getElementById('shopSearchInput');
+  if (!searchInput) return;
+
+  let searchTimeout;
+
+  // 입력 이벤트 리스너 (디바운싱 적용)
+  searchInput.addEventListener('input', function (e) {
+    const query = e.target.value.trim();
+    currentSearchQuery = query;
+
+    // 타이머 클리어
+    clearTimeout(searchTimeout);
+
+    // 2글자 이상일 때만 검색 실행
+    if (query.length >= 2) {
+      searchTimeout = setTimeout(() => {
+        displayFilteredResults();
+      }, 300); // 300ms 디바운싱
+    } else if (query.length === 0) {
+      // 검색어가 없으면 필터만 적용
+      currentSearchQuery = '';
+      displayFilteredResults();
+    } else {
+      // 1글자일 때는 검색하지 않음 (빈 결과 표시)
+      currentSearchQuery = '';
+      displayFilteredResults();
+    }
+  });
+
+  // Enter 키 이벤트
+  searchInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const query = e.target.value.trim();
+      currentSearchQuery = query;
+      if (query.length >= 2) {
+        displayFilteredResults();
+      }
+    }
+  });
+
+  // 검색어 지우기 (X 버튼 클릭 시)
+  searchInput.addEventListener('search', function () {
+    if (this.value === '') {
+      currentSearchQuery = '';
+      displayFilteredResults();
+    }
+  });
+}

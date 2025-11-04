@@ -242,7 +242,7 @@ function loadHeader() {
       }
 
       .header-content {
-        max-width: 1200px;
+        max-width: 490px;
         margin: 0 auto;
         padding: 5px 20px;
         display: flex;
@@ -363,6 +363,47 @@ function loadHeader() {
         }
       }
     });
+
+    // 검색 토글 버튼 이벤트 리스너 추가
+    const searchToggle = document.getElementById('searchToggle');
+    const searchSection = document.querySelector('.search-section');
+    const shopSearchInput = document.getElementById('shopSearchInput');
+
+    if (searchToggle) {
+      searchToggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // 검색 섹션이 있으면 스크롤
+        if (searchSection) {
+          // 헤더 높이를 고려하여 스크롤 위치 계산
+          const header = document.getElementById('mainHeader');
+          const headerHeight = header ? header.offsetHeight : 75;
+
+          // 검색 섹션의 위치 계산
+          const searchSectionTop =
+            searchSection.getBoundingClientRect().top + window.pageYOffset;
+
+          // 헤더 아래로 스크롤 (헤더 높이 + 약간의 여백)
+          window.scrollTo({
+            top: searchSectionTop - headerHeight - 10,
+            behavior: 'smooth',
+          });
+
+          // 스크롤 후 입력창에 포커스
+          setTimeout(() => {
+            if (shopSearchInput) {
+              shopSearchInput.focus();
+            }
+          }, 500);
+        } else {
+          // 검색 섹션이 없으면 바로 포커스
+          if (shopSearchInput) {
+            shopSearchInput.focus();
+          }
+        }
+      });
+    }
 
     initializeAuth();
     console.log('헤더 컴포넌트 로드 완료');

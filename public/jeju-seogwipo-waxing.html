@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="./" />
-    <title>
-      서귀포 왁싱 - 마사지천국 | 서귀포 왁싱 업체 예약 플랫폼
-    </title>
+    <title>서귀포 왁싱 - 마사지천국 | 서귀포 왁싱 업체 예약 플랫폼</title>
     <meta
       name="description"
       content="서귀포 왁싱 마사지천국, 서귀포 왁싱 업체를 한눈에! 전문 관리사가 제공하는 프리미엄 왁싱 서비스를 찾아보세요."
@@ -37,6 +35,17 @@
 
     <section class="search-section">
       <div class="search-container">
+        <!-- 업체 검색 입력창 -->
+        <div class="text-search-box">
+          <input
+            type="text"
+            id="shopSearchInput"
+            class="shop-search-input"
+            placeholder="검색어를 입력하세요"
+            autocomplete="off"
+          />
+          <i class="fas fa-search search-icon"></i>
+        </div>
         <!-- 지역별 검색 -->
         <div class="location-search">
           <div class="search-box">
@@ -245,7 +254,7 @@
             updateDistrictOptions('제주');
           }
         }
-        
+
         const districtSelect = document.getElementById('districtSelect');
         if (districtSelect) {
           districtSelect.value = '서귀포';
