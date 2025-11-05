@@ -477,6 +477,7 @@ function loadHeader() {
               searchSection.style.paddingRight = '8px';
               searchSection.style.boxSizing = 'border-box';
               searchSection.style.position = 'relative';
+              searchSection.style.overflowX = 'hidden';
 
               // search-container도 함께 고정
               const searchContainer =
@@ -488,9 +489,14 @@ function loadHeader() {
                 searchContainer.style.maxWidth = '100%';
                 searchContainer.style.minWidth = '100%';
                 searchContainer.style.transform = 'translateX(0)';
+                searchContainer.style.margin = '0';
                 searchContainer.style.marginLeft = '0';
                 searchContainer.style.marginRight = '0';
+                searchContainer.style.paddingLeft = '0';
+                searchContainer.style.paddingRight = '0';
                 searchContainer.style.boxSizing = 'border-box';
+                searchContainer.style.position = 'relative';
+                searchContainer.style.overflowX = 'hidden';
               }
             }
           } else if (isSmallScreen) {
@@ -514,18 +520,20 @@ function loadHeader() {
             document.documentElement.scrollLeft = 0;
 
             // 310px 이하에서 추가 위치 고정
-            const isVerySmallScreen = window.innerWidth <= 310;
-            if (isVerySmallScreen && searchSection) {
+            const isVerySmallScreenAfter = window.innerWidth <= 310;
+            if (isVerySmallScreenAfter && searchSection) {
               searchSection.style.left = '0';
               searchSection.style.right = '0';
               searchSection.style.width = '100%';
               searchSection.style.maxWidth = '100%';
               searchSection.style.minWidth = '100%';
               searchSection.style.transform = 'translateX(0)';
+              searchSection.style.margin = '0';
               searchSection.style.marginLeft = '0';
               searchSection.style.marginRight = '0';
               searchSection.style.boxSizing = 'border-box';
               searchSection.style.position = 'relative';
+              searchSection.style.overflowX = 'hidden';
 
               // 모든 자식 요소도 위치 고정
               const searchContainer =
@@ -537,9 +545,14 @@ function loadHeader() {
                 searchContainer.style.maxWidth = '100%';
                 searchContainer.style.minWidth = '100%';
                 searchContainer.style.transform = 'translateX(0)';
+                searchContainer.style.margin = '0';
                 searchContainer.style.marginLeft = '0';
                 searchContainer.style.marginRight = '0';
+                searchContainer.style.paddingLeft = '0';
+                searchContainer.style.paddingRight = '0';
                 searchContainer.style.boxSizing = 'border-box';
+                searchContainer.style.position = 'relative';
+                searchContainer.style.overflowX = 'hidden';
               }
 
               // text-search-box도 고정
@@ -549,9 +562,25 @@ function loadHeader() {
                 textSearchBox.style.width = '100%';
                 textSearchBox.style.maxWidth = '100%';
                 textSearchBox.style.transform = 'translateX(0)';
+                textSearchBox.style.margin = '0';
                 textSearchBox.style.marginLeft = '0';
                 textSearchBox.style.marginRight = '0';
+                textSearchBox.style.left = '0';
+                textSearchBox.style.right = '0';
                 textSearchBox.style.boxSizing = 'border-box';
+              }
+              
+              // location-search도 고정
+              const locationSearch =
+                searchSection.querySelector('.location-search');
+              if (locationSearch) {
+                locationSearch.style.width = '100%';
+                locationSearch.style.maxWidth = '100%';
+                locationSearch.style.transform = 'translateX(0)';
+                locationSearch.style.margin = '0';
+                locationSearch.style.marginLeft = '0';
+                locationSearch.style.marginRight = '0';
+                locationSearch.style.boxSizing = 'border-box';
               }
             }
 
