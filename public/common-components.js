@@ -436,6 +436,44 @@ function loadHeader() {
 
         // 검색 섹션이 있으면 제일 위로 스크롤하여 보이게 하고 입력창에 포커스
         if (searchSection) {
+          // 화면 크기 확인 (290px 이하 여부)
+          const isVerySmallScreen = window.innerWidth <= 290;
+          const isTinyScreen = window.innerWidth <= 280;
+
+          // 290px 이하일 때 search-section 위치 고정 (틀어짐 방지)
+          if (isVerySmallScreen || isTinyScreen) {
+            searchSection.style.left = '0';
+            searchSection.style.right = '0';
+            searchSection.style.width = '100%';
+            searchSection.style.maxWidth = '100%';
+            searchSection.style.minWidth = '100%';
+            searchSection.style.transform = 'translateX(0)';
+            searchSection.style.margin = '0';
+            searchSection.style.marginLeft = '0';
+            searchSection.style.marginRight = '0';
+            searchSection.style.boxSizing = 'border-box';
+            searchSection.style.position = 'relative';
+            searchSection.style.overflowX = 'hidden';
+
+            // search-container 위치 고정
+            const searchContainer =
+              searchSection.querySelector('.search-container');
+            if (searchContainer) {
+              searchContainer.style.left = '0';
+              searchContainer.style.right = '0';
+              searchContainer.style.width = '100%';
+              searchContainer.style.maxWidth = '100%';
+              searchContainer.style.minWidth = '100%';
+              searchContainer.style.transform = 'translateX(0)';
+              searchContainer.style.margin = '0 auto';
+              searchContainer.style.marginLeft = '0';
+              searchContainer.style.marginRight = '0';
+              searchContainer.style.boxSizing = 'border-box';
+              searchContainer.style.position = 'relative';
+              searchContainer.style.overflowX = 'hidden';
+            }
+          }
+
           // 헤더 높이를 고려하여 스크롤 위치 계산 (검색 섹션을 제일 위로)
           const header = document.getElementById('mainHeader');
           const headerHeight = header ? header.offsetHeight : 75;
@@ -454,8 +492,30 @@ function loadHeader() {
             behavior: 'smooth',
           });
 
-          // 스크롤 완료 후 입력창에 포커스
+          // 스크롤 완료 후 가로 스크롤 방지 및 입력창에 포커스
           setTimeout(() => {
+            // 290px 이하일 때 가로 스크롤 방지 및 위치 재고정
+            if (isVerySmallScreen || isTinyScreen) {
+              // 가로 스크롤 강제로 0으로 고정
+              if (window.scrollX !== 0) {
+                window.scrollTo(0, window.scrollY);
+              }
+              document.body.scrollLeft = 0;
+              document.documentElement.scrollLeft = 0;
+
+              // search-section 위치 재고정
+              searchSection.style.left = '0';
+              searchSection.style.right = '0';
+              searchSection.style.transform = 'translateX(0)';
+              const searchContainer =
+                searchSection.querySelector('.search-container');
+              if (searchContainer) {
+                searchContainer.style.left = '0';
+                searchContainer.style.right = '0';
+                searchContainer.style.transform = 'translateX(0)';
+              }
+            }
+
             // 입력창에 포커스 (커서만 깜박이게)
             if (shopSearchInput) {
               shopSearchInput.focus();

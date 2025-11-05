@@ -1979,6 +1979,150 @@ textarea,
   /* 320px 이하에서도 동일한 스타일 적용 */
 }
 
+/* 280px 이하 화면에서 search-section 틀어짐 방지 */
+@media (max-width: 280px) {
+  .search-section {
+    padding: 10px 6px !important;
+    margin: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    transform: translateX(0) !important;
+    overflow-x: hidden !important;
+  }
+
+  .search-container {
+    padding: 0 !important;
+    margin: 0 auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: translateX(0) !important;
+    position: relative !important;
+    overflow-x: hidden !important;
+  }
+
+  .text-search-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 8px !important;
+    margin: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: translateX(0) !important;
+  }
+
+  .location-search {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translateX(0) !important;
+    overflow-x: hidden !important;
+  }
+
+  .search-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    transform: translateX(0) !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+    position: relative !important;
+  }
+
+  html {
+    overflow-x: hidden !important;
+    position: relative !important;
+  }
+}
+
+/* 290px 이하 화면에서 search-section 틀어짐 방지 */
+@media (max-width: 290px) {
+  .search-section {
+    padding: 10px 6px !important;
+    margin: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    transform: translateX(0) !important;
+    overflow-x: hidden !important;
+  }
+
+  .search-container {
+    padding: 0 !important;
+    margin: 0 auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: translateX(0) !important;
+    position: relative !important;
+    overflow-x: hidden !important;
+  }
+
+  .text-search-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 8px !important;
+    margin: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: translateX(0) !important;
+  }
+
+  .location-search {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translateX(0) !important;
+    overflow-x: hidden !important;
+  }
+
+  .search-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    transform: translateX(0) !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+    position: relative !important;
+  }
+
+  html {
+    overflow-x: hidden !important;
+    position: relative !important;
+  }
+}
+
 /* 300px 이하 화면에서 추가 보정 */
 @media (max-width: 300px) {
   .search-section {
