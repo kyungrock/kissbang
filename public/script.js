@@ -4340,4 +4340,50 @@ function initializeSearchFunctionality() {
       displayFilteredResults();
     }
   });
+
+  // 검색 아이콘 클릭 이벤트
+  const searchIcon = document.querySelector('.text-search-box .search-icon');
+  if (searchIcon) {
+    // 클릭 이벤트를 강제로 활성화
+    searchIcon.style.pointerEvents = 'auto';
+    searchIcon.style.cursor = 'pointer';
+    
+    // 클릭 이벤트 리스너
+    searchIcon.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const query = searchInput.value.trim();
+      currentSearchQuery = query;
+      
+      // 검색 실행 (1글자 이상이면 검색)
+      if (query.length >= 1) {
+        displayFilteredResults();
+      } else if (query.length === 0) {
+        // 검색어가 없으면 필터만 적용
+        currentSearchQuery = '';
+        displayFilteredResults();
+      }
+    });
+    
+    // 마우스 다운 이벤트도 추가 (더 확실한 클릭 감지)
+    searchIcon.addEventListener('mousedown', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    
+    // 터치 이벤트 추가 (모바일 지원)
+    searchIcon.addEventListener('touchend', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const query = searchInput.value.trim();
+      currentSearchQuery = query;
+      
+      if (query.length >= 1) {
+        displayFilteredResults();
+      } else if (query.length === 0) {
+        currentSearchQuery = '';
+        displayFilteredResults();
+      }
+    });
+  }
 }

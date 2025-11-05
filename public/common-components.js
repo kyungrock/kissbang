@@ -248,6 +248,21 @@ function loadHeader() {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+      }
+
+      @media (max-width: 480px) {
+        .header-content {
+          padding: 5px 15px;
+        }
+      }
+
+      @media (max-width: 320px) {
+        .header-content {
+          padding: 5px 10px;
+        }
       }
 
       .logo {
@@ -353,16 +368,57 @@ function loadHeader() {
     `;
 
     // 스크롤 이벤트 리스너 추가
-    window.addEventListener('scroll', function () {
-      const header = document.getElementById('mainHeader');
-      if (header) {
-        if (window.scrollY > 50) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
+    window.addEventListener(
+      'scroll',
+      function () {
+        const header = document.getElementById('mainHeader');
+        if (header) {
+          if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
         }
-      }
-    });
+
+        // 가로 스크롤 방지
+        if (window.scrollX !== 0) {
+          window.scrollTo(0, window.scrollY);
+        }
+
+        // 310px 이하에서 search-section 위치 고정
+        const isVerySmallScreen = window.innerWidth <= 310;
+        if (isVerySmallScreen) {
+          const searchSection = document.querySelector('.search-section');
+          if (searchSection) {
+            searchSection.style.left = '0';
+            searchSection.style.right = '0';
+            searchSection.style.width = '100%';
+            searchSection.style.maxWidth = '100%';
+            searchSection.style.minWidth = '100%';
+            searchSection.style.transform = 'translateX(0)';
+            searchSection.style.marginLeft = '0';
+            searchSection.style.marginRight = '0';
+            searchSection.style.boxSizing = 'border-box';
+            searchSection.style.position = 'relative';
+
+            const searchContainer =
+              searchSection.querySelector('.search-container');
+            if (searchContainer) {
+              searchContainer.style.left = '0';
+              searchContainer.style.right = '0';
+              searchContainer.style.width = '100%';
+              searchContainer.style.maxWidth = '100%';
+              searchContainer.style.minWidth = '100%';
+              searchContainer.style.transform = 'translateX(0)';
+              searchContainer.style.marginLeft = '0';
+              searchContainer.style.marginRight = '0';
+              searchContainer.style.boxSizing = 'border-box';
+            }
+          }
+        }
+      },
+      { passive: true }
+    );
 
     // 검색 토글 버튼 이벤트 리스너 추가
     const searchToggle = document.getElementById('searchToggle');
@@ -374,28 +430,167 @@ function loadHeader() {
         e.preventDefault();
         e.stopPropagation();
 
+        // 가로 스크롤 방지
+        document.body.style.overflowX = 'hidden';
+        document.documentElement.style.overflowX = 'hidden';
+
         // 검색 섹션이 있으면 스크롤
         if (searchSection) {
           // 헤더 높이를 고려하여 스크롤 위치 계산
           const header = document.getElementById('mainHeader');
           const headerHeight = header ? header.offsetHeight : 75;
 
-          // 검색 섹션의 위치 계산
-          const searchSectionTop =
-            searchSection.getBoundingClientRect().top + window.pageYOffset;
+          // 현재 스크롤 위치와 viewport 정보 가져오기
+          const currentScrollY =
+            window.pageYOffset || document.documentElement.scrollTop;
+          const searchSectionRect = searchSection.getBoundingClientRect();
 
-          // 헤더 아래로 스크롤 (헤더 높이 + 약간의 여백)
+          // 검색 섹션의 절대 위치 계산
+          const searchSectionTop = searchSectionRect.top + currentScrollY;
+
+          // 목표 스크롤 위치 (헤더 높이 + 여백 고려)
+          let targetScrollTop = searchSectionTop - headerHeight - 10;
+
+          // 음수 값 방지 (최소값: 0)
+          targetScrollTop = Math.max(0, targetScrollTop);
+
+          // 작은 화면에서는 더 여유 있게 계산
+          const isSmallScreen = window.innerWidth <= 480;
+          const isVerySmallScreen = window.innerWidth <= 310;
+          const isExtraSmallScreen = window.innerWidth <= 300;
+
+          if (isVerySmallScreen || isExtraSmallScreen) {
+            // 310px 이하 또는 300px 이하에서는 스크롤 위치를 최소화하고 강제로 왼쪽 정렬
+            targetScrollTop = Math.max(0, searchSectionTop - headerHeight);
+
+            // search-section 강제 위치 고정
+            if (searchSection) {
+              searchSection.style.left = '0';
+              searchSection.style.right = '0';
+              searchSection.style.width = '100%';
+              searchSection.style.maxWidth = '100%';
+              searchSection.style.minWidth = '100%';
+              searchSection.style.transform = 'translateX(0)';
+              searchSection.style.margin = '0';
+              searchSection.style.marginLeft = '0';
+              searchSection.style.marginRight = '0';
+              searchSection.style.paddingLeft = '8px';
+              searchSection.style.paddingRight = '8px';
+              searchSection.style.boxSizing = 'border-box';
+              searchSection.style.position = 'relative';
+              searchSection.style.overflowX = 'hidden';
+
+              // search-container도 함께 고정
+              const searchContainer =
+                searchSection.querySelector('.search-container');
+              if (searchContainer) {
+                searchContainer.style.left = '0';
+                searchContainer.style.right = '0';
+                searchContainer.style.width = '100%';
+                searchContainer.style.maxWidth = '100%';
+                searchContainer.style.minWidth = '100%';
+                searchContainer.style.transform = 'translateX(0)';
+                searchContainer.style.margin = '0';
+                searchContainer.style.marginLeft = '0';
+                searchContainer.style.marginRight = '0';
+                searchContainer.style.paddingLeft = '0';
+                searchContainer.style.paddingRight = '0';
+                searchContainer.style.boxSizing = 'border-box';
+                searchContainer.style.position = 'relative';
+                searchContainer.style.overflowX = 'hidden';
+              }
+            }
+          } else if (isSmallScreen) {
+            targetScrollTop = Math.max(0, searchSectionTop - headerHeight - 5);
+          }
+
+          // 스크롤 실행 (가로 스크롤 방지)
           window.scrollTo({
-            top: searchSectionTop - headerHeight - 10,
+            top: targetScrollTop,
+            left: 0,
             behavior: 'smooth',
           });
 
-          // 스크롤 후 입력창에 포커스
+          // 스크롤 완료 후 확인 및 가로 스크롤 재방지
           setTimeout(() => {
+            // 가로 스크롤 강제로 0으로 고정
+            if (window.scrollX !== 0) {
+              window.scrollTo(0, window.scrollY);
+            }
+            document.body.scrollLeft = 0;
+            document.documentElement.scrollLeft = 0;
+
+            // 310px 이하 또는 300px 이하에서 추가 위치 고정
+            const isVerySmallScreenAfter = window.innerWidth <= 310;
+            const isExtraSmallScreenAfter = window.innerWidth <= 300;
+            if ((isVerySmallScreenAfter || isExtraSmallScreenAfter) && searchSection) {
+              searchSection.style.left = '0';
+              searchSection.style.right = '0';
+              searchSection.style.width = '100%';
+              searchSection.style.maxWidth = '100%';
+              searchSection.style.minWidth = '100%';
+              searchSection.style.transform = 'translateX(0)';
+              searchSection.style.margin = '0';
+              searchSection.style.marginLeft = '0';
+              searchSection.style.marginRight = '0';
+              searchSection.style.boxSizing = 'border-box';
+              searchSection.style.position = 'relative';
+              searchSection.style.overflowX = 'hidden';
+
+              // 모든 자식 요소도 위치 고정
+              const searchContainer =
+                searchSection.querySelector('.search-container');
+              if (searchContainer) {
+                searchContainer.style.left = '0';
+                searchContainer.style.right = '0';
+                searchContainer.style.width = '100%';
+                searchContainer.style.maxWidth = '100%';
+                searchContainer.style.minWidth = '100%';
+                searchContainer.style.transform = 'translateX(0)';
+                searchContainer.style.margin = '0';
+                searchContainer.style.marginLeft = '0';
+                searchContainer.style.marginRight = '0';
+                searchContainer.style.paddingLeft = '0';
+                searchContainer.style.paddingRight = '0';
+                searchContainer.style.boxSizing = 'border-box';
+                searchContainer.style.position = 'relative';
+                searchContainer.style.overflowX = 'hidden';
+              }
+
+              // text-search-box도 고정
+              const textSearchBox =
+                searchSection.querySelector('.text-search-box');
+              if (textSearchBox) {
+                textSearchBox.style.width = '100%';
+                textSearchBox.style.maxWidth = '100%';
+                textSearchBox.style.transform = 'translateX(0)';
+                textSearchBox.style.margin = '0';
+                textSearchBox.style.marginLeft = '0';
+                textSearchBox.style.marginRight = '0';
+                textSearchBox.style.left = '0';
+                textSearchBox.style.right = '0';
+                textSearchBox.style.boxSizing = 'border-box';
+              }
+              
+              // location-search도 고정
+              const locationSearch =
+                searchSection.querySelector('.location-search');
+              if (locationSearch) {
+                locationSearch.style.width = '100%';
+                locationSearch.style.maxWidth = '100%';
+                locationSearch.style.transform = 'translateX(0)';
+                locationSearch.style.margin = '0';
+                locationSearch.style.marginLeft = '0';
+                locationSearch.style.marginRight = '0';
+                locationSearch.style.boxSizing = 'border-box';
+              }
+            }
+
+            // 입력창에 포커스
             if (shopSearchInput) {
               shopSearchInput.focus();
             }
-          }, 500);
+          }, 600);
         } else {
           // 검색 섹션이 없으면 바로 포커스
           if (shopSearchInput) {
