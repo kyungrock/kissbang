@@ -456,10 +456,11 @@ function loadHeader() {
 
           // 작은 화면에서는 더 여유 있게 계산
           const isSmallScreen = window.innerWidth <= 480;
-          const isVerySmallScreen = window.innerWidth <= 310;
-          const isExtraSmallScreen = window.innerWidth <= 300;
+          const isVerySmallScreen = window.innerWidth <= 320;
+          const isExtraSmallScreen = window.innerWidth <= 310;
+          const isTinyScreen = window.innerWidth <= 300;
 
-          if (isVerySmallScreen || isExtraSmallScreen) {
+          if (isVerySmallScreen || isExtraSmallScreen || isTinyScreen) {
             // 310px 이하 또는 300px 이하에서는 스크롤 위치를 최소화하고 강제로 왼쪽 정렬
             targetScrollTop = Math.max(0, searchSectionTop - headerHeight);
 
@@ -520,10 +521,11 @@ function loadHeader() {
             document.body.scrollLeft = 0;
             document.documentElement.scrollLeft = 0;
 
-            // 310px 이하 또는 300px 이하에서 추가 위치 고정
-            const isVerySmallScreenAfter = window.innerWidth <= 310;
-            const isExtraSmallScreenAfter = window.innerWidth <= 300;
-            if ((isVerySmallScreenAfter || isExtraSmallScreenAfter) && searchSection) {
+            // 320px 이하에서 추가 위치 고정
+            const isVerySmallScreenAfter = window.innerWidth <= 320;
+            const isExtraSmallScreenAfter = window.innerWidth <= 310;
+            const isTinyScreenAfter = window.innerWidth <= 300;
+            if ((isVerySmallScreenAfter || isExtraSmallScreenAfter || isTinyScreenAfter) && searchSection) {
               searchSection.style.left = '0';
               searchSection.style.right = '0';
               searchSection.style.width = '100%';
