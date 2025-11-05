@@ -1671,13 +1671,16 @@ function displayFilteredResults() {
   }
 
   // 지역/구 필터 적용 (지역이 선택된 경우에만)
+  // 출장마사지는 구를 무시하고 지역만으로 필터링
   if (currentRegion) {
-    if (currentDistrict) {
+    if (currentDistrict && currentFilter !== 'outcall') {
+      // 일반 마사지: 지역과 구 모두 필터링
       filteredShops = filteredShops.filter(
         (shop) =>
           shop.region === currentRegion && shop.district === currentDistrict
       );
     } else {
+      // 출장마사지 또는 구가 없는 경우: 지역만 필터링
       filteredShops = filteredShops.filter(
         (shop) => shop.region === currentRegion
       );
@@ -1876,10 +1879,10 @@ function generateRandomDistance() {
 
 // 업체명에서 동 추출하여 새로운 이름 생성
 function createShopDisplayName(shop) {
-  // 출장마사지의 경우 지역 + 업체명 표시
+  // 출장마사지의 경우 지역(구 제외) + 업체명 표시
   if (shop.type === '출장마사지') {
-    const dongName = extractDongFromAddress(shop.address);
-    const region = dongName || shop.region || '출장마사지';
+    // 지역만 사용 (상세지역 제외)
+    const region = shop.region || '출장마사지';
 
     // 업체명에서 지역 부분 제거하고 순수 업체명만 추출
     let shopName = shop.name;
@@ -1888,6 +1891,10 @@ function createShopDisplayName(shop) {
     }
     if (shopName.includes('제주도')) {
       shopName = shopName.replace('제주도', '').trim();
+    }
+    // 지역명도 제거 (예: "제주"가 업체명에 포함된 경우)
+    if (region && shopName.includes(region)) {
+      shopName = shopName.replace(region, '').trim();
     }
 
     return `${region} ${shopName}`;
@@ -3442,10 +3449,20 @@ function initializeApp() {
     currentDistrict = regionData.districts[parts[1]] || '';
 
     // URL 파라미터에서 district 읽기 (표시용)
+    // 출장마사지 페이지인 경우에는 district를 필터링에 사용하지 않음
     const urlParams = new URLSearchParams(window.location.search);
     const urlDistrict = urlParams.get('district');
+
+    // 출장마사지 페이지 여부 확인
+    const isOutcallPage =
+      parts.includes('outcall') || window.location.pathname.includes('outcall');
+
     if (urlDistrict && !currentDistrict) {
-      currentDistrict = urlDistrict;
+      // 출장마사지 페이지가 아니면 district 설정
+      if (!isOutcallPage) {
+        currentDistrict = urlDistrict;
+      }
+      // 출장마사지 페이지는 district를 표시용으로만 사용 (필터링에는 사용 안 함)
     }
 
     console.log('Current district set to:', currentDistrict || '(empty)');
@@ -3479,6 +3496,9 @@ function initializeApp() {
       }
     }
     currentFilter = detectedFilter;
+
+    // 출장마사지 페이지인 경우 currentDistrict는 표시용으로만 사용 (필터링에는 사용 안 함)
+    // 이미 위에서 구 필터 적용 시 currentFilter !== 'outcall' 조건으로 처리됨
 
     // UI 업데이트
     if (regionSelect) {
@@ -3859,9 +3879,9 @@ function updateResultsTitle() {
 
     // 출장마사지는 구를 표시하되 필터링에는 사용하지 않음 (표시용)
     if (currentFilter === 'outcall') {
-      // 출장마사지: 지역 + (구가 있으면 구도 표시) + 출장마사지
-      if (currentDistrict && currentRegion) {
-        title = `${currentRegion} ${currentDistrict} ${filterName} 업체`;
+      // 출장마사지: 상세지역이 있으면 상세지역만 표시, 없으면 지역만 표시
+      if (currentDistrict) {
+        title = `${currentDistrict} ${filterName} 업체`;
       } else if (currentRegion) {
         title = `${currentRegion} ${filterName} 업체`;
       } else {
@@ -4224,11 +4244,19 @@ window.initializeNearbyShopsTitle = function () {
   const isOutcall = shopBadge && shopBadge.textContent.includes('출장마사지');
   const theme = isOutcall ? 'outcall' : 'massage';
 
+  // 출장마사지의 경우 상세지역(district) 무시하고 지역(region)만 사용
+  const finalDistrict = isOutcall ? '' : district;
+
   // 클릭 이벤트 설정
   if (region && window.goToRegionPageWithTheme) {
     nearbyShopsTitle.onclick = function () {
-      console.log('다른샵보기 클릭:', { region, district, theme });
-      window.goToRegionPageWithTheme(region, district, theme);
+      console.log('다른샵보기 클릭:', {
+        region,
+        district: finalDistrict,
+        theme,
+        isOutcall,
+      });
+      window.goToRegionPageWithTheme(region, finalDistrict, theme);
     };
     // 커서 포인터 스타일 추가
     nearbyShopsTitle.style.cursor = 'pointer';
