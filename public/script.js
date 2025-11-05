@@ -4347,11 +4347,10 @@ function initializeSearchFunctionality() {
     // 클릭 이벤트를 강제로 활성화
     searchIcon.style.pointerEvents = 'auto';
     searchIcon.style.cursor = 'pointer';
+    searchIcon.style.touchAction = 'manipulation';
     
-    // 클릭 이벤트 리스너
-    searchIcon.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+    // 검색 실행 함수
+    function executeSearch() {
       const query = searchInput.value.trim();
       currentSearchQuery = query;
       
@@ -4363,27 +4362,44 @@ function initializeSearchFunctionality() {
         currentSearchQuery = '';
         displayFilteredResults();
       }
+    }
+    
+    // 클릭 이벤트 리스너 (데스크톱)
+    searchIcon.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      executeSearch();
     });
     
-    // 마우스 다운 이벤트도 추가 (더 확실한 클릭 감지)
+    // 터치 시작 감지 (모바일)
+    let touchStartTime = 0;
+    let touchMoved = false;
+    
+    searchIcon.addEventListener('touchstart', function (e) {
+      touchStartTime = Date.now();
+      touchMoved = false;
+      // 터치 시작 시 입력 필드 포커스 제거 (가상 키보드 방지)
+      searchInput.blur();
+    }, { passive: true });
+    
+    searchIcon.addEventListener('touchmove', function (e) {
+      touchMoved = true;
+    }, { passive: true });
+    
+    // 터치 종료 이벤트 (모바일 지원)
+    searchIcon.addEventListener('touchend', function (e) {
+      // 터치가 움직이지 않았고, 짧은 시간 내에 끝났으면 클릭으로 간주
+      if (!touchMoved && (Date.now() - touchStartTime) < 300) {
+        e.preventDefault();
+        e.stopPropagation();
+        executeSearch();
+      }
+    }, { passive: false });
+    
+    // 마우스 다운 이벤트 (데스크톱)
     searchIcon.addEventListener('mousedown', function (e) {
       e.preventDefault();
       e.stopPropagation();
-    });
-    
-    // 터치 이벤트 추가 (모바일 지원)
-    searchIcon.addEventListener('touchend', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const query = searchInput.value.trim();
-      currentSearchQuery = query;
-      
-      if (query.length >= 1) {
-        displayFilteredResults();
-      } else if (query.length === 0) {
-        currentSearchQuery = '';
-        displayFilteredResults();
-      }
     });
   }
 }

@@ -262,6 +262,9 @@ textarea,
   color: #333;
   outline: none;
   font-family: 'GmarketSans', sans-serif;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .shop-search-input::placeholder {
@@ -282,19 +285,24 @@ textarea,
   align-items: center;
   justify-content: center;
   margin: -10px -10px -10px 0;
-  z-index: 10;
+  z-index: 20 !important;
   pointer-events: auto !important;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .text-search-box .search-icon {
   pointer-events: auto !important;
   cursor: pointer !important;
-  z-index: 15 !important;
+  z-index: 20 !important;
+}
+
+.text-search-box {
+  position: relative;
 }
 
 .search-icon:hover {
@@ -1907,6 +1915,9 @@ textarea,
     min-width: 40px !important;
     min-height: 40px !important;
     right: 8px !important;
+    z-index: 20 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
   }
 
   .shop-search-input {
