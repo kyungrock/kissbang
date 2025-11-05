@@ -430,9 +430,9 @@ function loadHeader() {
         e.preventDefault();
         e.stopPropagation();
 
-        // 검색 섹션이 있으면 스크롤하여 보이게 하고 입력창에 포커스
+        // 검색 섹션이 있으면 제일 위로 스크롤하여 보이게 하고 입력창에 포커스
         if (searchSection) {
-          // 헤더 높이를 고려하여 스크롤 위치 계산
+          // 헤더 높이를 고려하여 스크롤 위치 계산 (검색 섹션을 제일 위로)
           const header = document.getElementById('mainHeader');
           const headerHeight = header ? header.offsetHeight : 75;
           const searchSectionRect = searchSection.getBoundingClientRect();
@@ -440,25 +440,22 @@ function loadHeader() {
             window.pageYOffset || document.documentElement.scrollTop;
           const searchSectionTop = searchSectionRect.top + currentScrollY;
 
-          // 목표 스크롤 위치 (헤더 높이 + 여백 고려)
-          let targetScrollTop = Math.max(
-            0,
-            searchSectionTop - headerHeight - 10
-          );
+          // 목표 스크롤 위치 (헤더 바로 아래에 검색 섹션이 오도록)
+          let targetScrollTop = Math.max(0, searchSectionTop - headerHeight);
 
-          // 스크롤 실행
+          // 제일 위로 스크롤 실행
           window.scrollTo({
             top: targetScrollTop,
             left: 0,
             behavior: 'smooth',
           });
 
-          // 스크롤 완료 후 입력창에 포커스
+          // 스크롤 완료 후 입력창에 포커스 (커서만 깜박이게)
           setTimeout(() => {
             if (shopSearchInput) {
               shopSearchInput.focus();
             }
-          }, 300);
+          }, 400);
         } else {
           // 검색 섹션이 없으면 바로 포커스
           if (shopSearchInput) {
