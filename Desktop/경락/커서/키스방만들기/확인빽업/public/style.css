@@ -283,11 +283,27 @@ textarea,
   justify-content: center;
   margin: -10px -10px -10px 0;
   z-index: 10;
+  pointer-events: auto !important;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  touch-action: manipulation;
+}
+
+.text-search-box .search-icon {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  z-index: 15 !important;
 }
 
 .search-icon:hover {
   color: #5a6fd8;
   transform: scale(1.1);
+}
+
+.search-icon:active {
+  transform: scale(0.95);
 }
 
 /* 통합 검색창 */
