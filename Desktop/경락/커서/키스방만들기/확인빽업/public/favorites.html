@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관심업체 - 키스포유</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f6fa;
+      }
+
+      .favorites-header {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        color: white;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .back-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid white;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: all 0.3s;
+      }
+
+      .favorites-header h1 {
+        margin: 0;
+        font-size: 24px;
+        flex: 1;
+      }
+
+      .favorites-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .shop-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .shop-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .shop-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .shop-image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 48px;
+      }
+
+      .favorite-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: #ff4757;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+      }
+
+      .favorite-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .shop-content {
+        padding: 20px;
+      }
+
+      .shop-name {
+        font-size: 18px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 8px;
+      }
+
+      .shop-location {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .shop-rating {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #ffc107;
+        font-size: 14px;
+      }
+
+      .empty-state {
+        padding: 60px 20px;
+        text-align: center;
+        color: #666;
+        background: white;
+        border-radius: 12px;
+      }
+
+      .empty-state i {
+        font-size: 64px;
+        color: #ddd;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div class="favorites-header">
+      <button class="back-btn" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h1><i class="fas fa-heart"></i> 관심업체</h1>
+    </div>
+
+    <!-- 컨테이너 -->
+    <div class="favorites-container">
+      <div class="shop-grid" id="favoriteGrid">
+        <!-- 관심업체가 여기 표시됩니다 -->
+      </div>
+    </div>
+
+    <script src="api-auth.js"></script>
+    <script>
+      // 관심업체 데이터
+      function getFavorites() {
+        const currentUser = authManager.getCurrentUser();
+        if (!currentUser) return [];
+
+        const favorites = JSON.parse(
+          localStorage.getItem(`favorites_${currentUser.id}`) || '[]'
+        );
+        return favorites;
+      }
+
+      // 관심업체 제거
+      function removeFavorite(shopId) {
+        const currentUser = authManager.getCurrentUser();
+        if (!currentUser) return;
+
+        let favorites = getFavorites();
+        favorites = favorites.filter((f) => f.id !== shopId);
+
+        localStorage.setItem(
+          `favorites_${currentUser.id}`,
+          JSON.stringify(favorites)
+        );
+
+        renderFavorites();
+        alert('관심업체에서 제거되었습니다.');
+      }
+
+      // 목록 렌더링
+      function renderFavorites() {
+        const grid = document.getElementById('favoriteGrid');
+        const favorites = getFavorites();
+
+        if (favorites.length === 0) {
+          grid.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-heart-broken"></i>
+              <h3>등록된 관심업체가 없습니다</h3>
+              <p>마음에 드는 업체를 관심업체로 등록해보세요!</p>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = favorites
+          .map((shop) => {
+            return `
+            <div class="shop-card">
+              <button class="favorite-btn" onclick="event.stopPropagation(); removeFavorite(${
+                shop.id
+              })">
+                <i class="fas fa-heart"></i>
+              </button>
+              <div class="shop-image">
+                <i class="fas fa-spa"></i>
+              </div>
+              <div class="shop-content">
+                <div class="shop-name">${shop.name}</div>
+                <div class="shop-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  ${shop.region || '위치 정보 없음'}
+                </div>
+                <div class="shop-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <span style="color: #666;">(4.0)</span>
+                </div>
+              </div>
+            </div>
+          `;
+          })
+          .join('');
+      }
+
+      // 로그인 확인
+      const currentUser = authManager.getCurrentUser();
+      if (!currentUser) {
+        alert('로그인이 필요합니다.');
+        window.location.href = 'login.html';
+      } else {
+        renderFavorites();
+      }
+    </script>
+  </body>
+</html>

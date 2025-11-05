@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="./" />
+    <title>
+      울산 남구마사지 - 마사지천국 | 울산 남구 마사지사이트 업체 예약 플랫폼
+    </title>
+    <meta
+      name="description"
+      content="울산 남구마사지 마사지천국, 울산 남구마사지, 울산 남구출장마사지 등 울산 남구 전 지역 마사지 업체를 한눈에! 태국마사지, 한국마사지, 스파, 왁싱까지. 울산 남구 최저가 마사지 업체를 찾아보세요."
+    />
+    <meta
+      name="keywords"
+      content="울산 남구마사지, 울산 남구마사지사이트, 울산 남구출장마사지, 마사지사이트, 마사지, 아로마마사지, 타이마사지, 스웨디시, 1인샵, 왁싱, 출장마사지, 마사지예약, 마사지천국"
+    />
+    <meta name="author" content="마사지천국" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Gmarket Sans 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- 햄버거 메뉴 스타일 -->
+    <!-- 스타일은 hamburger-menu-component.html에 포함됨 -->
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header-container"></div>
+
+    <section class="search-section">
+      <div class="search-container">
+        <div class="location-search">
+          <div class="search-box">
+            <select id="regionSelect" class="search-select">
+              <option value="">지역을 선택하세요</option>
+            </select>
+          </div>
+          <div class="search-box">
+            <select id="districtSelect" class="search-select">
+              <option value="">세부 지역을 선택하세요</option>
+            </select>
+          </div>
+          <div class="search-divider"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="filter-section">
+      <div class="filter-container">
+        <a class="filter-btn" data-filter="all">전체</a>
+        <a class="filter-btn" data-filter="massage">마사지</a>
+        <a class="filter-btn" data-filter="outcall">출장마사지</a>
+        <div class="type-filter-dropdown">
+          <button class="filter-btn type-filter-btn" id="typeFilterBtn">
+            테마보기
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="type-dropdown-menu" id="typeDropdownMenu">
+            <div class="type-dropdown-item" data-type="swedish">스웨디시</div>
+            <div class="type-dropdown-item" data-type="thai">타이마사지</div>
+            <div class="type-dropdown-item" data-type="aroma">아로마마사지</div>
+            <div class="type-dropdown-item" data-type="waxing">왁싱</div>
+            <div class="type-dropdown-item" data-type="chinese">중국마사지</div>
+            <div class="type-dropdown-item" data-type="foot">발마사지</div>
+          </div>
+        </div>
+        <button class="info-btn" onclick="openRelatedInfoModal(event)">
+          관련정보
+        </button>
+      </div>
+    </section>
+
+    <section
+      class="country-filter-section"
+      id="massageCountryFilterSection"
+      style="display: none"
+    >
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="country-filter-section"
+      id="outcallCountryFilterSection"
+      style="display: none"
+    >
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 출장마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="theme-filter-section"
+      id="themeFilterSection"
+      style="display: none"
+    >
+      <div class="theme-filter-container">
+        <h3 class="theme-filter-title">테마별 마사지</h3>
+        <div class="theme-boxes">
+          <div class="theme-box active" data-theme="all">
+            <span class="theme-name">전체</span>
+          </div>
+          <div class="theme-box" data-theme="swedish">
+            <span class="theme-name">스웨디시</span>
+          </div>
+          <div class="theme-box" data-theme="thai">
+            <span class="theme-name">타이마사지</span>
+          </div>
+          <div class="theme-box" data-theme="aroma">
+            <span class="theme-name">아로마마사지</span>
+          </div>
+          <div class="theme-box" data-theme="waxing">
+            <span class="theme-name">왁싱</span>
+          </div>
+          <div class="theme-box" data-theme="chinese">
+            <span class="theme-name">중국마사지</span>
+          </div>
+          <div class="theme-box" data-theme="foot">
+            <span class="theme-name">발마사지</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="main-content">
+      <div class="results-header">
+        <h1 id="resultsTitle">울산 남구 마사지사이트 업체</h1>
+        <span id="resultsCount" class="results-count">총 0개</span>
+      </div>
+      <div id="massageList" class="massage-list">
+        <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <div class="footer-link-row">
+            <a href="#" class="footer-link" onclick="openDetailsModal(event)"
+              >울산 남구마사지정보</a
+            >
+          </div>
+          <div class="footer-divider-line"></div>
+          <div class="footer-link-row">
+            <a href="#" class="footer-link" onclick="openAboutModal(event)"
+              >회사소개</a
+            >
+            <span class="footer-divider">|</span>
+            <a href="#" class="footer-link" onclick="openTermsModal(event)"
+              >이용약관</a
+            >
+          </div>
+        </div>
+        <div class="footer-info">
+          <p>상호명 : 마사지천국</p>
+          <p>
+            고객센터 :
+            <a href="tel:0507-1859-6384" class="footer-phone">0507-1859-6384</a>
+            <a href="tel:0507-1859-6384" class="footer-contact-btn"
+              >[ 입점 문의 ]</a
+            >
+          </p>
+        </div>
+        <div class="footer-copyright">
+          <p>&copy; 2024 마사지천국. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="common-components.js"></script>
+    <script src="script.js"></script>
+
+    <!-- 관련정보 모달 -->
+    <div id="relatedInfoModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>관련정보</h2>
+          <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- 관련정보 내용은 ulsan.html과 동일한 구조로 필요시 추가 -->
+          <div class="terms-section">
+            <h3>🏝️ 울산 남구 마사지사이트 업체 주변 놀거리 소개</h3>
+            <p>
+              <strong>울산 남구 마사지사이트 업체</strong>를 방문하신 후에는
+              울산도의 아름다운 자연과 다양한 관광 명소들을 즐기실 수 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 페이지 로드 시 초기화
+      document.addEventListener('DOMContentLoaded', function () {
+        // 지역 선택 설정
+        const regionSelect = document.getElementById('regionSelect');
+        if (regionSelect) {
+          regionSelect.value = '울산';
+          if (typeof updateDistrictOptions === 'function') {
+            updateDistrictOptions('울산');
+          }
+          const districtSelect = document.getElementById('districtSelect');
+          if (districtSelect) {
+            districtSelect.disabled = false;
+            districtSelect.style.opacity = '1';
+            districtSelect.value = '남구';
+          }
+        }
+
+        if (typeof currentRegion !== 'undefined') {
+          currentRegion = '울산';
+        }
+        if (typeof currentDistrict !== 'undefined') {
+          currentDistrict = '남구';
+        }
+        if (typeof currentFilter !== 'undefined') {
+          currentFilter = 'massage';
+        }
+
+        // 마사지 필터 버튼을 기본으로 활성화
+        const massageFilterBtn = document.querySelector(
+          '[data-filter="massage"]'
+        );
+        if (massageFilterBtn) {
+          massageFilterBtn.classList.add('active');
+        }
+
+        // 필터링된 결과 표시
+        if (typeof displayFilteredResults === 'function') {
+          displayFilteredResults();
+        }
+      });
+    </script>
+    <!-- 햄버거 메뉴 -->
+    <div id="hamburger-menu-container"></div>
+  </body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>왁싱 서비스 - 마사지사이트</title>
+    <meta
+      name="description"
+      content="전국 왁싱 서비스 업체 정보. 전문 관리사가 제공하는 위생적이고 안전한 왁싱 서비스로 깔끔한 피부를 경험해보세요."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header-container"></div>
+
+    <!-- 검색 섹션 -->
+    <section class="search-section">
+      <div class="search-container">
+        <!-- 업체 검색 입력창 -->
+        <div class="text-search-box">
+          <input
+            type="text"
+            id="shopSearchInput"
+            class="shop-search-input"
+            placeholder="검색어를 입력하세요"
+            autocomplete="off"
+          />
+          <i class="fas fa-search search-icon"></i>
+        </div>
+        <!-- 지역별 검색 -->
+        <div class="location-search">
+          <div class="search-box">
+            <select id="regionSelect" class="search-select">
+              <option value="">지역을 선택하세요</option>
+            </select>
+          </div>
+          <div class="search-box">
+            <select id="districtSelect" class="search-select">
+              <option value="">세부 지역을 선택하세요</option>
+            </select>
+          </div>
+          <div class="search-divider"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="filter-section">
+      <div class="filter-container">
+        <a class="filter-btn" data-filter="all">전체</a>
+        <a class="filter-btn" data-filter="massage">마사지</a>
+        <a class="filter-btn" data-filter="outcall">출장마사지</a>
+        <div class="type-filter-dropdown">
+          <button class="filter-btn type-filter-btn" id="typeFilterBtn">
+            테마보기
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="type-dropdown-menu" id="typeDropdownMenu">
+            <div class="type-dropdown-item" data-type="swedish">스웨디시</div>
+            <div class="type-dropdown-item" data-type="thai">타이마사지</div>
+            <div class="type-dropdown-item" data-type="aroma">아로마마사지</div>
+            <div class="type-dropdown-item" data-type="waxing">왁싱</div>
+            <div class="type-dropdown-item" data-type="chinese">중국마사지</div>
+            <div class="type-dropdown-item" data-type="foot">발마사지</div>
+          </div>
+        </div>
+        <button class="info-btn" onclick="openRelatedInfoModal(event)">
+          관련정보
+        </button>
+      </div>
+    </section>
+
+    <section
+      class="country-filter-section"
+      id="massageCountryFilterSection"
+      style="display: none"
+    >
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="country-filter-section"
+      id="outcallCountryFilterSection"
+      style="display: none"
+    >
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 출장마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="theme-filter-section"
+      id="themeFilterSection"
+      style="display: none"
+    >
+      <div class="theme-filter-container">
+        <h3 class="theme-filter-title">테마별 마사지</h3>
+        <div class="theme-boxes">
+          <div class="theme-box active" data-theme="all">
+            <span class="theme-name">전체</span>
+          </div>
+          <div class="theme-box" data-theme="swedish">
+            <span class="theme-name">스웨디시</span>
+          </div>
+          <div class="theme-box" data-theme="thai">
+            <span class="theme-name">타이마사지</span>
+          </div>
+          <div class="theme-box" data-theme="aroma">
+            <span class="theme-name">아로마마사지</span>
+          </div>
+          <div class="theme-box" data-theme="waxing">
+            <span class="theme-name">왁싱</span>
+          </div>
+          <div class="theme-box" data-theme="chinese">
+            <span class="theme-name">중국마사지</span>
+          </div>
+          <div class="theme-box" data-theme="foot">
+            <span class="theme-name">발마사지</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+      <div class="results-header">
+        <h1 id="resultsTitle">왁싱 서비스 업체</h1>
+        <span class="results-count" id="resultsCount">총 4개</span>
+      </div>
+
+      <!-- 업체 목록 -->
+      <div class="massage-list" id="massageList">
+        <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
+      </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <div class="footer-link-row">
+            <a href="#" class="footer-link" onclick="openDetailsModal(event)"
+              >상세정보</a
+            >
+          </div>
+          <div class="footer-divider-line"></div>
+          <div class="footer-link-row">
+            <a href="#" class="footer-link" onclick="openAboutModal(event)"
+              >회사소개</a
+            >
+            <span class="footer-divider">|</span>
+            <a href="#" class="footer-link" onclick="openTermsModal(event)"
+              >이용약관</a
+            >
+          </div>
+        </div>
+        <div class="footer-info">
+          <p>상호명 : 마사지천국</p>
+          <p>
+            고객센터 :
+            <a href="tel:0507-1859-6384" class="footer-phone">0507-1859-6384</a>
+            <a href="tel:0507-1859-6384" class="footer-contact-btn"
+              >[ 입점 문의 ]</a
+            >
+          </p>
+        </div>
+        <div class="footer-copyright">
+          <p>&copy; 2024 마사지천국. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 회사소개 모달 -->
+    <div class="modal" id="aboutModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>회사소개</h2>
+          <button class="modal-close" onclick="closeModal('aboutModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <strong>마사지사이트</strong>는 전국 마사지 업체 정보를 제공하는
+            종합 플랫폼입니다.
+          </p>
+          <div class="info-section">
+            <h3>주요 서비스</h3>
+            <p>• 전국 마사지 업체 검색 및 정보 제공</p>
+            <p>• 지역별, 서비스별 맞춤 검색</p>
+            <p>• 실시간 업체 정보 및 리뷰 제공</p>
+          </div>
+          <div class="highlight">
+            <p>고객님의 건강한 휴식을 위해 최선을 다하겠습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 이용약관 모달 -->
+    <div class="modal" id="termsModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>이용약관</h2>
+          <button class="modal-close" onclick="closeModal('termsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>제1조 (목적)</h3>
+            <p>
+              본 약관은 마사지사이트가 제공하는 서비스의 이용조건 및 절차에 관한
+              사항을 규정함을 목적으로 합니다.
+            </p>
+          </div>
+          <div class="terms-section">
+            <h3>제2조 (정의)</h3>
+            <p>
+              1. "서비스"란 마사지사이트가 제공하는 모든 서비스를 의미합니다.
+            </p>
+            <p>
+              2. "이용자"란 서비스에 접속하여 본 약관에 따라 서비스를 이용하는
+              회원 및 비회원을 의미합니다.
+            </p>
+          </div>
+          <div class="terms-section">
+            <h3>제3조 (약관의 효력 및 변경)</h3>
+            <p>
+              본 약관은 서비스 화면에 게시하거나 기타의 방법으로 이용자에게
+              공지함으로써 효력이 발생합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 상세정보 모달 -->
+    <div class="modal" id="detailsModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>왁싱 서비스 상세정보</h2>
+          <button class="modal-close" onclick="closeModal('detailsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="info-highlight">
+            <h4>왁싱 서비스 안내</h4>
+            <ul>
+              <li>전문 관리사가 제공하는 위생적인 왁싱 서비스</li>
+              <li>고품질 왁스 사용으로 안전한 제모</li>
+              <li>오래 지속되는 깔끔한 효과</li>
+              <li>개인 맞춤형 케어 서비스</li>
+            </ul>
+          </div>
+
+          <div class="service-categories">
+            <h4>왁싱 서비스 종류</h4>
+            <div class="service-grid">
+              <div class="service-item">
+                <i class="fas fa-cut"></i>
+                <span>브라질리언</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-cut"></i>
+                <span>비키니</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-cut"></i>
+                <span>아래쪽</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-cut"></i>
+                <span>겨드랑이</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-cut"></i>
+                <span>다리</span>
+              </div>
+              <div class="service-item">
+                <i class="fas fa-cut"></i>
+                <span>팔</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="service-details">
+            <div class="service-detail-item">
+              <h5><i class="fas fa-cut"></i> 왁싱 서비스 효과</h5>
+              <p>
+                따뜻한 왁스를 사용하여 모근까지 완전히 제거하여 오래 지속되는
+                깔끔한 효과를 제공합니다. 피부 자극을 최소화하면서도 효과적인
+                제모가 가능합니다.
+              </p>
+            </div>
+
+            <div class="service-detail-item">
+              <h5><i class="fas fa-user-md"></i> 전문 관리사</h5>
+              <p>
+                왁싱 전문 자격증을 보유한 관리사가 위생적이고 안전한 환경에서
+                고객님의 피부 상태에 맞는 맞춤형 서비스를 제공합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 관련정보 모달 -->
+    <div class="modal" id="relatedInfoModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>왁싱 서비스 관련정보</h2>
+          <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="therapist-info">
+            <h4>왁싱 관리사 정보</h4>
+            <ul>
+              <li>전원 <strong>왁싱 전문 자격증</strong> 보유</li>
+              <li>위생 관리 교육 이수</li>
+              <li>20대~30대 전문 관리사</li>
+              <li>고객 맞춤형 케어 서비스</li>
+            </ul>
+          </div>
+
+          <div class="responsibility-info">
+            <div class="responsibility-item">
+              <h5><i class="fas fa-shield-alt"></i> 안전 관리</h5>
+              <ul>
+                <li>정기적인 시설 점검 및 소독</li>
+                <li>관리사 건강 검진 및 교육</li>
+                <li>고객 개인정보 보호</li>
+                <li>위생적인 왁스 사용</li>
+              </ul>
+            </div>
+
+            <div class="responsibility-item">
+              <h5><i class="fas fa-heart"></i> 서비스 품질</h5>
+              <ul>
+                <li>고객 맞춤형 왁싱 서비스 제공</li>
+                <li>지속적인 서비스 품질 개선</li>
+                <li>고객 피드백 적극 반영</li>
+                <li>최고급 왁스 사용</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="notice-box">
+            <p>
+              <strong>주의사항:</strong> 왁싱 서비스는 성인만 이용 가능하며,
+              미성년자 출입을 금지합니다. 피부 알레르기나 민감한 피부의 경우
+              서비스 이용 전 관리사에게 상담하시기 바랍니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="common-components.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // 왁싱 페이지 전용 설정
+      // initializeApp이 실행된 후에 필터 적용
+      setTimeout(function () {
+        // 현재 필터를 왁싱으로 설정
+        currentFilter = 'waxing';
+        window.currentFilter = 'waxing';
+
+        // 결과 제목 업데이트
+        const resultsTitle = document.getElementById('resultsTitle');
+        if (resultsTitle) {
+          resultsTitle.textContent = '왁싱 업체';
+        }
+
+        // 필터링된 결과 표시
+        if (typeof displayFilteredResults === 'function') {
+          displayFilteredResults();
+        }
+      }, 100);
+    </script>
+
+    <!-- 햄버거 메뉴 -->
+    <div id="hamburger-menu-container"></div>
+  </body>
+</html>
