@@ -4348,12 +4348,17 @@ function initializeSearchFunctionality() {
     searchIcon.style.pointerEvents = 'auto';
     searchIcon.style.cursor = 'pointer';
     searchIcon.style.touchAction = 'manipulation';
-    
+
     // 검색 실행 함수
     function executeSearch() {
+      // 입력 필드 포커스 제거 (가상 키보드 숨김)
+      if (document.activeElement === searchInput) {
+        searchInput.blur();
+      }
+
       const query = searchInput.value.trim();
       currentSearchQuery = query;
-      
+
       // 검색 실행 (1글자 이상이면 검색)
       if (query.length >= 1) {
         displayFilteredResults();
@@ -4363,39 +4368,58 @@ function initializeSearchFunctionality() {
         displayFilteredResults();
       }
     }
-    
+
     // 클릭 이벤트 리스너 (데스크톱)
     searchIcon.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
+      // 입력 필드 포커스 제거 (가상 키보드 숨김)
+      searchInput.blur();
       executeSearch();
     });
-    
+
     // 터치 시작 감지 (모바일)
     let touchStartTime = 0;
     let touchMoved = false;
-    
-    searchIcon.addEventListener('touchstart', function (e) {
-      touchStartTime = Date.now();
-      touchMoved = false;
-      // 터치 시작 시 입력 필드 포커스 제거 (가상 키보드 방지)
-      searchInput.blur();
-    }, { passive: true });
-    
-    searchIcon.addEventListener('touchmove', function (e) {
-      touchMoved = true;
-    }, { passive: true });
-    
+
+    searchIcon.addEventListener(
+      'touchstart',
+      function (e) {
+        touchStartTime = Date.now();
+        touchMoved = false;
+        // 터치 시작 시 입력 필드 포커스 제거 (가상 키보드 방지)
+        searchInput.blur();
+      },
+      { passive: true }
+    );
+
+    searchIcon.addEventListener(
+      'touchmove',
+      function (e) {
+        touchMoved = true;
+      },
+      { passive: true }
+    );
+
     // 터치 종료 이벤트 (모바일 지원)
-    searchIcon.addEventListener('touchend', function (e) {
-      // 터치가 움직이지 않았고, 짧은 시간 내에 끝났으면 클릭으로 간주
-      if (!touchMoved && (Date.now() - touchStartTime) < 300) {
-        e.preventDefault();
-        e.stopPropagation();
-        executeSearch();
-      }
-    }, { passive: false });
-    
+    searchIcon.addEventListener(
+      'touchend',
+      function (e) {
+        // 터치가 움직이지 않았고, 짧은 시간 내에 끝났으면 클릭으로 간주
+        if (!touchMoved && Date.now() - touchStartTime < 300) {
+          e.preventDefault();
+          e.stopPropagation();
+          // 입력 필드 포커스 제거 (가상 키보드 숨김)
+          searchInput.blur();
+          // 약간의 지연 후 검색 실행 (키보드가 완전히 사라진 후)
+          setTimeout(function () {
+            executeSearch();
+          }, 100);
+        }
+      },
+      { passive: false }
+    );
+
     // 마우스 다운 이벤트 (데스크톱)
     searchIcon.addEventListener('mousedown', function (e) {
       e.preventDefault();
