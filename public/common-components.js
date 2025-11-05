@@ -430,183 +430,35 @@ function loadHeader() {
         e.preventDefault();
         e.stopPropagation();
 
-        // 가로 스크롤 방지
-        document.body.style.overflowX = 'hidden';
-        document.documentElement.style.overflowX = 'hidden';
-
-        // 검색 섹션이 있으면 스크롤
+        // 검색 섹션이 있으면 스크롤하여 보이게 하고 입력창에 포커스
         if (searchSection) {
           // 헤더 높이를 고려하여 스크롤 위치 계산
           const header = document.getElementById('mainHeader');
           const headerHeight = header ? header.offsetHeight : 75;
-
-          // 현재 스크롤 위치와 viewport 정보 가져오기
+          const searchSectionRect = searchSection.getBoundingClientRect();
           const currentScrollY =
             window.pageYOffset || document.documentElement.scrollTop;
-          const searchSectionRect = searchSection.getBoundingClientRect();
-
-          // 검색 섹션의 절대 위치 계산
           const searchSectionTop = searchSectionRect.top + currentScrollY;
 
           // 목표 스크롤 위치 (헤더 높이 + 여백 고려)
-          let targetScrollTop = searchSectionTop - headerHeight - 10;
+          let targetScrollTop = Math.max(
+            0,
+            searchSectionTop - headerHeight - 10
+          );
 
-          // 음수 값 방지 (최소값: 0)
-          targetScrollTop = Math.max(0, targetScrollTop);
-
-          // 작은 화면에서는 더 여유 있게 계산
-          const isSmallScreen = window.innerWidth <= 480;
-          const isMobileScreen = window.innerWidth <= 400; // 갤럭시 23 등 포함
-          const isVerySmallScreen = window.innerWidth <= 320;
-          const isExtraSmallScreen = window.innerWidth <= 310;
-          const isTinyScreen = window.innerWidth <= 300;
-
-          // 모바일 화면(480px 이하)에서 search-section 위치 고정
-          if (isSmallScreen && searchSection) {
-            // search-section 강제 위치 고정
-            searchSection.style.left = '0';
-            searchSection.style.right = '0';
-            searchSection.style.width = '100%';
-            searchSection.style.maxWidth = '100%';
-            searchSection.style.minWidth = '100%';
-            searchSection.style.transform = 'translateX(0)';
-            searchSection.style.margin = '0';
-            searchSection.style.marginLeft = '0';
-            searchSection.style.marginRight = '0';
-            searchSection.style.boxSizing = 'border-box';
-            searchSection.style.position = 'relative';
-            searchSection.style.overflowX = 'hidden';
-
-            // search-container도 함께 고정
-            const searchContainer =
-              searchSection.querySelector('.search-container');
-            if (searchContainer) {
-              searchContainer.style.left = '0';
-              searchContainer.style.right = '0';
-              searchContainer.style.width = '100%';
-              searchContainer.style.maxWidth = '100%';
-              searchContainer.style.minWidth = '100%';
-              searchContainer.style.transform = 'translateX(0)';
-              searchContainer.style.margin = '0 auto';
-              searchContainer.style.marginLeft = '0';
-              searchContainer.style.marginRight = '0';
-              searchContainer.style.paddingLeft = '0';
-              searchContainer.style.paddingRight = '0';
-              searchContainer.style.boxSizing = 'border-box';
-              searchContainer.style.position = 'relative';
-              searchContainer.style.overflowX = 'hidden';
-            }
-          }
-
-          if (isVerySmallScreen || isExtraSmallScreen || isTinyScreen) {
-            // 320px 이하에서는 스크롤 위치를 최소화하고 강제로 왼쪽 정렬
-            targetScrollTop = Math.max(0, searchSectionTop - headerHeight);
-            if (searchSection) {
-              searchSection.style.paddingLeft = '8px';
-              searchSection.style.paddingRight = '8px';
-            }
-          } else if (isMobileScreen) {
-            // 400px 이하 (갤럭시 23 등)
-            targetScrollTop = Math.max(0, searchSectionTop - headerHeight - 5);
-            if (searchSection) {
-              searchSection.style.paddingLeft = '15px';
-              searchSection.style.paddingRight = '15px';
-            }
-          } else if (isSmallScreen) {
-            targetScrollTop = Math.max(0, searchSectionTop - headerHeight - 5);
-          }
-
-          // 스크롤 실행 (가로 스크롤 방지)
+          // 스크롤 실행
           window.scrollTo({
             top: targetScrollTop,
             left: 0,
             behavior: 'smooth',
           });
 
-          // 스크롤 완료 후 확인 및 가로 스크롤 재방지
+          // 스크롤 완료 후 입력창에 포커스
           setTimeout(() => {
-            // 가로 스크롤 강제로 0으로 고정
-            if (window.scrollX !== 0) {
-              window.scrollTo(0, window.scrollY);
-            }
-            document.body.scrollLeft = 0;
-            document.documentElement.scrollLeft = 0;
-
-            // 모바일 화면(480px 이하)에서 추가 위치 고정
-            const isSmallScreenAfter = window.innerWidth <= 480;
-            const isMobileScreenAfter = window.innerWidth <= 400;
-            const isVerySmallScreenAfter = window.innerWidth <= 320;
-            const isExtraSmallScreenAfter = window.innerWidth <= 310;
-            const isTinyScreenAfter = window.innerWidth <= 300;
-            
-            if (isSmallScreenAfter && searchSection) {
-              searchSection.style.left = '0';
-              searchSection.style.right = '0';
-              searchSection.style.width = '100%';
-              searchSection.style.maxWidth = '100%';
-              searchSection.style.minWidth = '100%';
-              searchSection.style.transform = 'translateX(0)';
-              searchSection.style.margin = '0';
-              searchSection.style.marginLeft = '0';
-              searchSection.style.marginRight = '0';
-              searchSection.style.boxSizing = 'border-box';
-              searchSection.style.position = 'relative';
-              searchSection.style.overflowX = 'hidden';
-
-              // 모든 자식 요소도 위치 고정
-              const searchContainer =
-                searchSection.querySelector('.search-container');
-              if (searchContainer) {
-                searchContainer.style.left = '0';
-                searchContainer.style.right = '0';
-                searchContainer.style.width = '100%';
-                searchContainer.style.maxWidth = '100%';
-                searchContainer.style.minWidth = '100%';
-                searchContainer.style.transform = 'translateX(0)';
-                searchContainer.style.margin = '0';
-                searchContainer.style.marginLeft = '0';
-                searchContainer.style.marginRight = '0';
-                searchContainer.style.paddingLeft = '0';
-                searchContainer.style.paddingRight = '0';
-                searchContainer.style.boxSizing = 'border-box';
-                searchContainer.style.position = 'relative';
-                searchContainer.style.overflowX = 'hidden';
-              }
-
-              // text-search-box도 고정
-              const textSearchBox =
-                searchSection.querySelector('.text-search-box');
-              if (textSearchBox) {
-                textSearchBox.style.width = '100%';
-                textSearchBox.style.maxWidth = '100%';
-                textSearchBox.style.transform = 'translateX(0)';
-                textSearchBox.style.margin = '0';
-                textSearchBox.style.marginLeft = '0';
-                textSearchBox.style.marginRight = '0';
-                textSearchBox.style.left = '0';
-                textSearchBox.style.right = '0';
-                textSearchBox.style.boxSizing = 'border-box';
-              }
-              
-              // location-search도 고정
-              const locationSearch =
-                searchSection.querySelector('.location-search');
-              if (locationSearch) {
-                locationSearch.style.width = '100%';
-                locationSearch.style.maxWidth = '100%';
-                locationSearch.style.transform = 'translateX(0)';
-                locationSearch.style.margin = '0';
-                locationSearch.style.marginLeft = '0';
-                locationSearch.style.marginRight = '0';
-                locationSearch.style.boxSizing = 'border-box';
-              }
-            }
-
-            // 입력창에 포커스
             if (shopSearchInput) {
               shopSearchInput.focus();
             }
-          }, 600);
+          }, 300);
         } else {
           // 검색 섹션이 없으면 바로 포커스
           if (shopSearchInput) {
