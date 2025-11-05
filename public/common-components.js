@@ -456,50 +456,61 @@ function loadHeader() {
 
           // 작은 화면에서는 더 여유 있게 계산
           const isSmallScreen = window.innerWidth <= 480;
+          const isMobileScreen = window.innerWidth <= 400; // 갤럭시 23 등 포함
           const isVerySmallScreen = window.innerWidth <= 320;
           const isExtraSmallScreen = window.innerWidth <= 310;
           const isTinyScreen = window.innerWidth <= 300;
 
-          if (isVerySmallScreen || isExtraSmallScreen || isTinyScreen) {
-            // 310px 이하 또는 300px 이하에서는 스크롤 위치를 최소화하고 강제로 왼쪽 정렬
-            targetScrollTop = Math.max(0, searchSectionTop - headerHeight);
-
+          // 모바일 화면(480px 이하)에서 search-section 위치 고정
+          if (isSmallScreen && searchSection) {
             // search-section 강제 위치 고정
+            searchSection.style.left = '0';
+            searchSection.style.right = '0';
+            searchSection.style.width = '100%';
+            searchSection.style.maxWidth = '100%';
+            searchSection.style.minWidth = '100%';
+            searchSection.style.transform = 'translateX(0)';
+            searchSection.style.margin = '0';
+            searchSection.style.marginLeft = '0';
+            searchSection.style.marginRight = '0';
+            searchSection.style.boxSizing = 'border-box';
+            searchSection.style.position = 'relative';
+            searchSection.style.overflowX = 'hidden';
+
+            // search-container도 함께 고정
+            const searchContainer =
+              searchSection.querySelector('.search-container');
+            if (searchContainer) {
+              searchContainer.style.left = '0';
+              searchContainer.style.right = '0';
+              searchContainer.style.width = '100%';
+              searchContainer.style.maxWidth = '100%';
+              searchContainer.style.minWidth = '100%';
+              searchContainer.style.transform = 'translateX(0)';
+              searchContainer.style.margin = '0 auto';
+              searchContainer.style.marginLeft = '0';
+              searchContainer.style.marginRight = '0';
+              searchContainer.style.paddingLeft = '0';
+              searchContainer.style.paddingRight = '0';
+              searchContainer.style.boxSizing = 'border-box';
+              searchContainer.style.position = 'relative';
+              searchContainer.style.overflowX = 'hidden';
+            }
+          }
+
+          if (isVerySmallScreen || isExtraSmallScreen || isTinyScreen) {
+            // 320px 이하에서는 스크롤 위치를 최소화하고 강제로 왼쪽 정렬
+            targetScrollTop = Math.max(0, searchSectionTop - headerHeight);
             if (searchSection) {
-              searchSection.style.left = '0';
-              searchSection.style.right = '0';
-              searchSection.style.width = '100%';
-              searchSection.style.maxWidth = '100%';
-              searchSection.style.minWidth = '100%';
-              searchSection.style.transform = 'translateX(0)';
-              searchSection.style.margin = '0';
-              searchSection.style.marginLeft = '0';
-              searchSection.style.marginRight = '0';
               searchSection.style.paddingLeft = '8px';
               searchSection.style.paddingRight = '8px';
-              searchSection.style.boxSizing = 'border-box';
-              searchSection.style.position = 'relative';
-              searchSection.style.overflowX = 'hidden';
-
-              // search-container도 함께 고정
-              const searchContainer =
-                searchSection.querySelector('.search-container');
-              if (searchContainer) {
-                searchContainer.style.left = '0';
-                searchContainer.style.right = '0';
-                searchContainer.style.width = '100%';
-                searchContainer.style.maxWidth = '100%';
-                searchContainer.style.minWidth = '100%';
-                searchContainer.style.transform = 'translateX(0)';
-                searchContainer.style.margin = '0';
-                searchContainer.style.marginLeft = '0';
-                searchContainer.style.marginRight = '0';
-                searchContainer.style.paddingLeft = '0';
-                searchContainer.style.paddingRight = '0';
-                searchContainer.style.boxSizing = 'border-box';
-                searchContainer.style.position = 'relative';
-                searchContainer.style.overflowX = 'hidden';
-              }
+            }
+          } else if (isMobileScreen) {
+            // 400px 이하 (갤럭시 23 등)
+            targetScrollTop = Math.max(0, searchSectionTop - headerHeight - 5);
+            if (searchSection) {
+              searchSection.style.paddingLeft = '15px';
+              searchSection.style.paddingRight = '15px';
             }
           } else if (isSmallScreen) {
             targetScrollTop = Math.max(0, searchSectionTop - headerHeight - 5);
@@ -521,11 +532,14 @@ function loadHeader() {
             document.body.scrollLeft = 0;
             document.documentElement.scrollLeft = 0;
 
-            // 320px 이하에서 추가 위치 고정
+            // 모바일 화면(480px 이하)에서 추가 위치 고정
+            const isSmallScreenAfter = window.innerWidth <= 480;
+            const isMobileScreenAfter = window.innerWidth <= 400;
             const isVerySmallScreenAfter = window.innerWidth <= 320;
             const isExtraSmallScreenAfter = window.innerWidth <= 310;
             const isTinyScreenAfter = window.innerWidth <= 300;
-            if ((isVerySmallScreenAfter || isExtraSmallScreenAfter || isTinyScreenAfter) && searchSection) {
+            
+            if (isSmallScreenAfter && searchSection) {
               searchSection.style.left = '0';
               searchSection.style.right = '0';
               searchSection.style.width = '100%';
