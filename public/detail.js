@@ -188,41 +188,107 @@ function extractLocationInfo(address) {
   return location;
 }
 
-// 지도보기 함수 (최적화된 버전)
+// 지도보기 함수 - 지도 선택 모달 열기
 function openMap() {
-  // 중복 실행 방지
-  if (window.mapLoading) {
-    console.log('지도 로딩 중입니다.');
-    return;
-  }
-
-  // address-container에서 실제 주소 가져오기
+  // 주소 가져오기
   const addressContainer = document.querySelector('.address-container span');
   let destinationAddress = '';
 
   if (addressContainer) {
-    // address-container에 있는 주소 텍스트 가져오기
     destinationAddress = addressContainer.textContent.trim();
-    console.log('지도보기 - 가져온 주소:', destinationAddress);
   } else {
     // fallback: shop 데이터에서 주소 가져오기
     const shopId = getShopIdFromUrl();
     const shop = massageShops.find((s) => s.id == shopId);
     if (shop) {
       destinationAddress = shop.address;
-      // 상세주소가 있으면 함께 포함
       if (shop.detailAddress) {
         destinationAddress += ` ${shop.detailAddress}`;
       }
     }
   }
 
-  if (destinationAddress) {
-    // API 키 없이 URL 방식 사용
-    openKakaoMapWithURL(destinationAddress);
-  } else {
+  if (!destinationAddress) {
     alert('주소 정보를 찾을 수 없습니다.');
+    return;
   }
+
+  // 지도 선택 모달 열기
+  openMapSelectModal(destinationAddress);
+}
+
+// 지도 선택 모달 열기
+function openMapSelectModal(address) {
+  // 기존 모달이 있으면 제거
+  const existingModal = document.getElementById('mapSelectModal');
+  if (existingModal) {
+    existingModal.remove();
+  }
+
+  // 모달 생성
+  const modal = document.createElement('div');
+  modal.id = 'mapSelectModal';
+  modal.className = 'modal active';
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 400px;">
+      <div class="modal-header">
+        <h2>지도 선택</h2>
+        <button class="modal-close" onclick="closeMapSelectModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 20px; color: #666; font-size: 0.9rem;">원하는 지도 앱을 선택하세요</p>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <button class="map-select-btn" onclick="openNaverMap('${address.replace(
+            /'/g,
+            "\\'"
+          )}')" style="background: #03C75A; color: white;">
+            <i class="fas fa-map-marked-alt"></i> 네이버지도
+          </button>
+          <button class="map-select-btn" onclick="openKakaoMap('${address.replace(
+            /'/g,
+            "\\'"
+          )}')" style="background: #FEE500; color: #000;">
+            <i class="fas fa-map-marked-alt"></i> 카카오지도
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  document.body.style.overflow = 'hidden';
+
+  // 배경 클릭 시 닫기
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) {
+      closeMapSelectModal();
+    }
+  });
+}
+
+// 지도 선택 모달 닫기
+function closeMapSelectModal() {
+  const modal = document.getElementById('mapSelectModal');
+  if (modal) {
+    modal.remove();
+    document.body.style.overflow = '';
+  }
+}
+
+// 네이버지도 열기
+function openNaverMap(address) {
+  const encodedAddress = encodeURIComponent(address);
+  const mapUrl = `https://map.naver.com/v5/search/${encodedAddress}`;
+  window.open(mapUrl, '_blank');
+  closeMapSelectModal();
+}
+
+// 카카오지도 열기
+function openKakaoMap(address) {
+  const encodedAddress = encodeURIComponent(address);
+  const mapUrl = `https://map.kakao.com/link/search/${encodedAddress}`;
+  window.open(mapUrl, '_blank');
+  closeMapSelectModal();
 }
 
 // 카카오맵 URL 방식 (API 키 없이 사용)

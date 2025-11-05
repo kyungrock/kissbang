@@ -2864,6 +2864,36 @@ textarea,
   text-align: center;
 }
 
+/* 지도 선택 버튼 스타일 */
+.map-select-btn {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-select-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.map-select-btn:active {
+  transform: translateY(0);
+}
+
+.map-select-btn i {
+  font-size: 1.2rem;
+}
+
 .btn-primary {
   background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
   color: white;
