@@ -1,3 +1,43 @@
+// 중앙화된 지역 매핑 데이터 (전역 변수)
+// 모든 지역 정보는 여기서만 관리합니다
+window.districtMap = {
+  jeju: {
+    regionName: '제주',
+    regionEng: 'jeju',
+    districts: {
+      si: '제주시',
+      seogwipo: '서귀포',
+    },
+  },
+  ulsan: {
+    regionName: '울산',
+    regionEng: 'ulsan',
+    districts: {
+      junggu: '중구',
+      namgu: '남구',
+      donggu: '동구',
+      bukgu: '북구',
+      ulju: '울주',
+    },
+  },
+  // 추가 지역들 (필요시 확장)
+  seoul: { regionName: '서울', regionEng: 'seoul', districts: {} },
+  busan: { regionName: '부산', regionEng: 'busan', districts: {} },
+  daegu: { regionName: '대구', regionEng: 'daegu', districts: {} },
+  incheon: { regionName: '인천', regionEng: 'incheon', districts: {} },
+  gwangju: { regionName: '광주', regionEng: 'gwangju', districts: {} },
+  daejeon: { regionName: '대전', regionEng: 'daejeon', districts: {} },
+  sejong: { regionName: '세종', regionEng: 'sejong', districts: {} },
+  gyeonggi: { regionName: '경기', regionEng: 'gyeonggi', districts: {} },
+  gangwon: { regionName: '강원', regionEng: 'gangwon', districts: {} },
+  chungbuk: { regionName: '충북', regionEng: 'chungbuk', districts: {} },
+  chungnam: { regionName: '충남', regionEng: 'chungnam', districts: {} },
+  jeonbuk: { regionName: '전북', regionEng: 'jeonbuk', districts: {} },
+  jeonnam: { regionName: '전남', regionEng: 'jeonnam', districts: {} },
+  gyeongbuk: { regionName: '경북', regionEng: 'gyeongbuk', districts: {} },
+  gyeongnam: { regionName: '경남', regionEng: 'gyeongnam', districts: {} },
+};
+
 // 지역별 구 데이터
 const districtData = {
   서울: [
@@ -1420,8 +1460,8 @@ function displayFilteredResults() {
     );
   }
 
-  // 구 필터 적용
-  if (currentDistrict) {
+  // 구 필터 적용 (출장마사지는 구를 무시하고 지역만으로 검색)
+  if (currentDistrict && currentFilter !== 'outcall') {
     filteredShops = filteredShops.filter(
       (shop) => shop.district === currentDistrict
     );
@@ -2388,26 +2428,8 @@ function detectRegionAndDistrictFromFilename(filename) {
     const nameWithoutExt = filename.replace('.html', '');
     const parts = nameWithoutExt.split('-');
 
-    // districtMap 정의 (지역별 키 매핑)
-    const districtMap = {
-      jeju: {
-        regionName: '제주',
-        districts: {
-          si: '제주시',
-          seogwipo: '서귀포',
-        },
-      },
-      ulsan: {
-        regionName: '울산',
-        districts: {
-          junggu: '중구',
-          namgu: '남구',
-          donggu: '동구',
-          bukgu: '북구',
-          ulju: '울주',
-        },
-      },
-    };
+    // window.districtMap 사용 (중앙화된 지역 매핑)
+    const districtMap = window.districtMap || {};
 
     // 필터 키워드
     const filterKeywords = [
@@ -2752,26 +2774,8 @@ function generateFilterLinkUrl(filter, region, district) {
       }
     }
 
-    // districtMap 정의 (지역별 키 매핑)
-    const districtMap = {
-      jeju: {
-        regionName: '제주',
-        districts: {
-          si: '제주시',
-          seogwipo: '서귀포',
-        },
-      },
-      ulsan: {
-        regionName: '울산',
-        districts: {
-          junggu: '중구',
-          namgu: '남구',
-          donggu: '동구',
-          bukgu: '북구',
-          ulju: '울주',
-        },
-      },
-    };
+    // window.districtMap 사용 (중앙화된 지역 매핑)
+    const districtMap = window.districtMap || {};
 
     // 지역과 세부지역이 모두 있는 경우
     if (region && district) {
@@ -3064,26 +3068,8 @@ function initializeApp() {
   initializeRegionOptions();
   console.log('initializeRegionOptions 완료');
 
-  // districtMap 정의 (지역별 키 매핑) - getThemePageUrl에서 사용
-  const districtMap = {
-    jeju: {
-      regionName: '제주',
-      districts: {
-        si: '제주시',
-        seogwipo: '서귀포',
-      },
-    },
-    ulsan: {
-      regionName: '울산',
-      districts: {
-        junggu: '중구',
-        namgu: '남구',
-        donggu: '동구',
-        bukgu: '북구',
-        ulju: '울주',
-      },
-    },
-  };
+  // window.districtMap 사용 (중앙화된 지역 매핑)
+  const districtMap = window.districtMap || {};
 
   // 지역별 테마 페이지 URL 생성 함수 (중앙화) - initializeApp 내부로 통합
   function getThemePageUrl(theme, region, district) {
@@ -3452,8 +3438,16 @@ function initializeApp() {
     console.log('Parts[1]:', parts[1]);
     console.log('Parts length:', parts.length);
 
-    // 구 설정
+    // 구 설정 (파일명에서)
     currentDistrict = regionData.districts[parts[1]] || '';
+
+    // URL 파라미터에서 district 읽기 (표시용)
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlDistrict = urlParams.get('district');
+    if (urlDistrict && !currentDistrict) {
+      currentDistrict = urlDistrict;
+    }
+
     console.log('Current district set to:', currentDistrict || '(empty)');
 
     // 필터 감지 (공통 로직)
@@ -3734,6 +3728,93 @@ function generateFilterLink(filter) {
   }
 }
 
+// 중앙화된 함수: 지역+테마 필터 페이지로 이동
+// detail.js와 다른 곳에서 사용 가능
+window.goToRegionPageWithTheme = function (region, district, theme) {
+  // window.districtMap 사용 (중앙화된 지역 매핑)
+  const districtMap = window.districtMap || {};
+
+  // 한글 지역명으로 영어 키 찾기
+  let regionEng = '';
+  for (const [key, value] of Object.entries(districtMap)) {
+    if (value.regionName === region) {
+      regionEng = value.regionEng || key;
+      break;
+    }
+  }
+
+  if (!regionEng) {
+    console.warn('알 수 없는 지역:', region);
+    window.location.href = 'index.html';
+    return;
+  }
+
+  // 구별 영어 키 찾기
+  let districtEng = '';
+  if (district) {
+    for (const [key, value] of Object.entries(districtMap)) {
+      if (value.regionName === region) {
+        for (const [dKey, dName] of Object.entries(value.districts || {})) {
+          if (dName === district) {
+            districtEng = dKey;
+            break;
+          }
+        }
+        break;
+      }
+    }
+  }
+
+  let url = '';
+
+  // 출장마사지는 구를 무시하고 지역만으로 이동
+  const isOutcall = theme === 'outcall';
+
+  // 테마가 지정된 경우
+  if (theme && theme !== 'all') {
+    if (isOutcall) {
+      // 출장마사지: 구 무시하고 지역-테마 형식만 사용 (jeju-outcall.html)
+      url = `${regionEng}-${theme}.html`;
+      // district 정보는 URL 파라미터로 추가 (표시용)
+      if (district) {
+        url += `?district=${encodeURIComponent(district)}`;
+      }
+    } else if (districtEng) {
+      // 일반 마사지: 지역-구-테마 형식 (jeju-si-massage.html)
+      url = `${regionEng}-${districtEng}-${theme}.html`;
+      // 상세지역이 있으면 항상 URL 파라미터로 추가
+      if (district) {
+        url += `?district=${encodeURIComponent(district)}`;
+      }
+    } else {
+      // 지역-테마 형식 (jeju-massage.html)
+      // 상세지역이 있으면 URL 파라미터로 추가
+      url = `${regionEng}-${theme}.html`;
+      if (district) {
+        url += `?district=${encodeURIComponent(district)}`;
+      }
+    }
+  } else {
+    // 테마가 없으면 기본 마사지 페이지
+    if (districtEng) {
+      url = `${regionEng}-${districtEng}-massage.html`;
+      // 상세지역이 있으면 항상 URL 파라미터로 추가
+      if (district) {
+        url += `?district=${encodeURIComponent(district)}`;
+      }
+    } else {
+      url = `${regionEng}-massage.html`;
+      // 상세지역이 있으면 URL 파라미터로 추가
+      if (district) {
+        url += `?district=${encodeURIComponent(district)}`;
+      }
+    }
+  }
+
+  console.log('페이지 이동:', url);
+  window.location.href = url;
+};
+
 // 결과 제목 업데이트 함수
 function updateResultsTitle() {
   const resultsTitle = document.getElementById('resultsTitle');
@@ -3776,13 +3857,25 @@ function updateResultsTitle() {
     };
     const filterName = filterNames[currentFilter] || currentFilter;
 
-    // 구가 있으면 구만 표시, 없으면 지역 표시
-    if (currentDistrict) {
-      title = `${currentDistrict} ${filterName} 업체`;
-    } else if (currentRegion) {
-      title = `${currentRegion} ${filterName} 업체`;
+    // 출장마사지는 구를 표시하되 필터링에는 사용하지 않음 (표시용)
+    if (currentFilter === 'outcall') {
+      // 출장마사지: 지역 + (구가 있으면 구도 표시) + 출장마사지
+      if (currentDistrict && currentRegion) {
+        title = `${currentRegion} ${currentDistrict} ${filterName} 업체`;
+      } else if (currentRegion) {
+        title = `${currentRegion} ${filterName} 업체`;
+      } else {
+        title = `${filterName} 업체`;
+      }
     } else {
-      title = `${filterName} 업체`;
+      // 일반 마사지: 구가 있으면 구만 표시, 없으면 지역 표시
+      if (currentDistrict) {
+        title = `${currentDistrict} ${filterName} 업체`;
+      } else if (currentRegion) {
+        title = `${currentRegion} ${filterName} 업체`;
+      } else {
+        title = `${filterName} 업체`;
+      }
     }
   } else {
     // 전체인 경우
@@ -4024,6 +4117,130 @@ function hideThemeDropdown() {
   }
 }
 
+// 중앙화된 함수: nearby-shops-title 클릭 이벤트 자동 설정
+// 출장마사지 페이지는 해당 지역 + 출장마사지 필터로, 일반 페이지는 해당 지역 + 마사지 필터로 이동
+window.initializeNearbyShopsTitle = function () {
+  const nearbyShopsTitle =
+    document.querySelector('.nearby-shops-title') ||
+    document.getElementById('nearbyShopsTitleClickable');
+  if (!nearbyShopsTitle) return;
+
+  // 하드코딩된 onclick 제거
+  nearbyShopsTitle.removeAttribute('onclick');
+  nearbyShopsTitle.onclick = null;
+
+  // 파일명에서 지역 정보 추출
+  const fileName = window.location.pathname
+    .split('/')
+    .pop()
+    .replace('.html', '');
+  const parts = fileName.split('-');
+
+  // window.districtMap 사용 (중앙화된 지역 매핑)
+  const districtMap = window.districtMap || {};
+
+  // 지역 추출 (영어 키 -> 한글 지역명)
+  let region = '';
+  if (parts[0] && districtMap[parts[0]]) {
+    region = districtMap[parts[0]].regionName;
+  }
+
+  // 구 추출 (영어 키 -> 한글 구명)
+  let district = '';
+
+  // 1. 파일명에서 구 정보 추출 시도
+  if (parts[0] && districtMap[parts[0]] && parts[1]) {
+    const regionData = districtMap[parts[0]];
+    // parts[1]이 테마가 아닌 구 이름인지 확인
+    const isTheme = [
+      'massage',
+      'outcall',
+      'swedish',
+      'thai',
+      'aroma',
+      'chinese',
+      'foot',
+      'waxing',
+    ].includes(parts[1]);
+    if (!isTheme && regionData.districts && regionData.districts[parts[1]]) {
+      district = regionData.districts[parts[1]];
+    }
+  }
+
+  // 2. HTML에서 구 정보 추출 시도 (여러 방법 시도)
+  // 방법 1: nearbyShopsDistrict ID로 찾기 (detail.html에서 사용)
+  if (!district) {
+    const nearbyShopsDistrict = document.getElementById('nearbyShopsDistrict');
+    if (nearbyShopsDistrict && nearbyShopsDistrict.textContent.trim()) {
+      district = nearbyShopsDistrict.textContent.trim();
+    }
+  }
+
+  // 방법 2: shop-district 클래스로 찾기 (업체 HTML 페이지에서 사용)
+  if (!district) {
+    const shopDistrict = document.querySelector('.shop-district');
+    if (shopDistrict && shopDistrict.textContent.trim()) {
+      const districtText = shopDistrict.textContent.trim();
+      // "제주시 연동" 같은 경우 "제주시"만 추출
+      // districtMap에서 매칭되는 구 이름 찾기
+      if (region && districtMap[parts[0]]) {
+        const regionData = districtMap[parts[0]];
+        for (const [dKey, dName] of Object.entries(
+          regionData.districts || {}
+        )) {
+          if (districtText.includes(dName)) {
+            district = dName;
+            break;
+          }
+        }
+        // 매칭되지 않으면 전체 텍스트 사용하지 않고, 첫 번째 단어만 사용
+        if (!district) {
+          // "제주시 연동" -> "제주시" 추출
+          const words = districtText.split(' ');
+          if (words.length > 0) {
+            district = words[0];
+          }
+        }
+      } else {
+        district = districtText;
+      }
+    }
+  }
+
+  // 방법 3: nearby-title-line1 클래스로 찾기
+  if (!district) {
+    const nearbyTitleLine1 = document.querySelector('.nearby-title-line1');
+    if (nearbyTitleLine1 && nearbyTitleLine1.textContent.trim()) {
+      district = nearbyTitleLine1.textContent.trim();
+    }
+  }
+
+  // 디버깅 로그
+  console.log('상세지역 추출 결과:', { district, parts, fileName });
+
+  // 출장마사지 페이지 여부 확인 (HTML 요소에서 자동 판단)
+  // .shop-badge 요소의 텍스트 내용을 확인하여 "출장마사지"가 포함되어 있으면 출장마사지 페이지
+  const shopBadge = document.querySelector('.shop-badge');
+  const isOutcall = shopBadge && shopBadge.textContent.includes('출장마사지');
+  const theme = isOutcall ? 'outcall' : 'massage';
+
+  // 클릭 이벤트 설정
+  if (region && window.goToRegionPageWithTheme) {
+    nearbyShopsTitle.onclick = function () {
+      console.log('다른샵보기 클릭:', { region, district, theme });
+      window.goToRegionPageWithTheme(region, district, theme);
+    };
+    // 커서 포인터 스타일 추가
+    nearbyShopsTitle.style.cursor = 'pointer';
+  } else {
+    console.warn('다른샵보기 이벤트 설정 실패:', {
+      region,
+      districtMap: !!window.districtMap,
+      goToRegionPageWithTheme: !!window.goToRegionPageWithTheme,
+    });
+  }
+};
+
 // 페이지 로드 시 드래그 스크롤 초기화
 document.addEventListener('DOMContentLoaded', initFilterDragScroll);
 
@@ -4038,6 +4255,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // 검색 입력창 이벤트 리스너 추가
   initializeSearchFunctionality();
+
+  // nearby-shops-title 자동 설정
+  if (typeof window.initializeNearbyShopsTitle === 'function') {
+    window.initializeNearbyShopsTitle();
+  }
 });
 
 // 검색 기능 초기화

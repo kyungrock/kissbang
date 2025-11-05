@@ -2,8 +2,6 @@
 
 // 성인 인증 관련 함수 제거됨
 
-
-
 // 로딩 상태 관리
 let isPageLoaded = false;
 
@@ -832,8 +830,37 @@ function displayNearbyShops(currentShop) {
   nearbyShopsTitle.textContent = '다른샵보기';
 
   // 제목 클릭 이벤트 추가
-  nearbyShopsTitleClickable.onclick = () =>
-    goToRegionPage(currentShop.region, currentShop.district);
+  // 출장마사지 업체인 경우 테마 필터를 출장마사지로 지정
+  if (currentShop.type && currentShop.type.includes('출장마사지')) {
+    nearbyShopsTitleClickable.onclick = () => {
+      // 중앙화된 함수 사용 (script.js에 정의됨)
+      if (typeof window.goToRegionPageWithTheme === 'function') {
+        window.goToRegionPageWithTheme(
+          currentShop.region,
+          currentShop.district,
+          'outcall'
+        );
+      } else {
+        // fallback: 기존 함수 사용
+        goToRegionPage(currentShop.region, currentShop.district);
+      }
+    };
+  } else {
+    // 일반 업체는 해당 지역 + 마사지 필터로 이동
+    nearbyShopsTitleClickable.onclick = () => {
+      // 중앙화된 함수 사용 (script.js에 정의됨)
+      if (typeof window.goToRegionPageWithTheme === 'function') {
+        window.goToRegionPageWithTheme(
+          currentShop.region,
+          currentShop.district,
+          'massage'
+        );
+      } else {
+        // fallback: 기존 함수 사용
+        goToRegionPage(currentShop.region, currentShop.district);
+      }
+    };
+  }
 }
 
 // 주변 업체 클릭 시 상세 페이지로 이동
