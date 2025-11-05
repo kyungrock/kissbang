@@ -250,6 +250,12 @@ function openMapSelectModal(address) {
           )}')" style="background: #FEE500; color: #000;">
             <i class="fas fa-map-marked-alt"></i> 카카오지도
           </button>
+          <button class="map-select-btn" onclick="openTmap('${address.replace(
+            /'/g,
+            "\\'"
+          )}')" style="background: #FF6B6B; color: white;">
+            <i class="fas fa-map-marked-alt"></i> 티맵
+          </button>
         </div>
       </div>
     </div>
@@ -288,6 +294,29 @@ function openKakaoMap(address) {
   const encodedAddress = encodeURIComponent(address);
   const mapUrl = `https://map.kakao.com/link/search/${encodedAddress}`;
   window.open(mapUrl, '_blank');
+  closeMapSelectModal();
+}
+
+// 티맵 열기
+function openTmap(address) {
+  const encodedAddress = encodeURIComponent(address);
+  // 티맵 앱 스킴 시도
+  const tmapAppUrl = `tmap://search?name=${encodedAddress}`;
+  const tmapWebUrl = `https://tmapapi.sktelecom.com/main/map.html?search=${encodedAddress}`;
+
+  // 앱이 설치되어 있으면 앱으로, 없으면 웹으로
+  const link = document.createElement('a');
+  link.href = tmapAppUrl;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  // 1초 후 웹으로 fallback
+  setTimeout(() => {
+    window.open(tmapWebUrl, '_blank');
+  }, 1000);
+
   closeMapSelectModal();
 }
 
