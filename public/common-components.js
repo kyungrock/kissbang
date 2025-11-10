@@ -344,7 +344,7 @@ function loadHeader() {
             <!-- 검색 아이콘 버튼 -->
             <button
               class="header-search-btn"
-              onclick="scrollToSearchBox()"
+              id="header-search-btn"
               style="
                 background: rgba(255, 255, 255, 0.2);
                 color: white;
@@ -401,6 +401,7 @@ function loadHeader() {
       window.addEventListener('resize', applySearchLayoutFix);
       window.__searchLayoutFixListenerAdded = true;
     }
+    bindHeaderSearchButton();
     console.log('헤더 컴포넌트 로드 완료');
   }
 }
@@ -508,9 +509,15 @@ function applySearchLayoutFix() {
 
 // 검색 박스로 스크롤하는 함수
 function scrollToSearchBox() {
-  const searchBox = document.querySelector('.text-search-box');
+  const searchBox =
+    document.getElementById('text-search-box') ||
+    document.querySelector('.text-search-box');
+
   if (searchBox) {
     applySearchLayoutFix();
+
+    searchBox.style.display =
+      getComputedStyle(searchBox).display === 'none' ? 'flex' : '';
 
     const searchInput = document.getElementById('shopSearchInput');
     if (searchInput) {
@@ -526,6 +533,32 @@ function scrollToSearchBox() {
         searchInput.setSelectionRange(length, length);
       }
     }
+
+    requestAnimationFrame(() => {
+      if (window.innerWidth >= 1024) {
+        const header = document.getElementById('mainHeader');
+        const headerHeight = header ? header.offsetHeight : 0;
+        const { top } = searchBox.getBoundingClientRect();
+        const targetTop = window.pageYOffset + top - headerHeight - 20;
+        window.scrollTo({
+          top: targetTop > 0 ? targetTop : 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+      } else {
+        searchBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  }
+}
+
+function bindHeaderSearchButton() {
+  const button = document.getElementById('header-search-btn');
+  if (button) {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      scrollToSearchBox();
+    });
   }
 }
 
