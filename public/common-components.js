@@ -535,7 +535,7 @@ function scrollToSearchBox() {
     }
 
     requestAnimationFrame(() => {
-      if (window.innerWidth >= 1024) {
+      if (window.innerWidth >= 2500) {
         const header = document.getElementById('mainHeader');
         const headerHeight = header ? header.offsetHeight : 0;
         const { top } = searchBox.getBoundingClientRect();
