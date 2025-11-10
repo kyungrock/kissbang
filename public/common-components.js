@@ -512,34 +512,12 @@ function scrollToSearchBox() {
   if (searchBox) {
     applySearchLayoutFix();
 
-    let isDesktopScreen;
-    if (window.matchMedia) {
-      const minWidthQuery = window.matchMedia('(min-width: 280px)');
-      const pointerFineQuery = window.matchMedia('(pointer: fine)');
-      isDesktopScreen =
-        (minWidthQuery.matches && pointerFineQuery.matches) ||
-        window.innerWidth > 280;
-    } else {
-      isDesktopScreen = window.innerWidth > 280;
-    }
     const searchInput = document.getElementById('shopSearchInput');
-    const searchSection = document.querySelector('.search-section');
-
-    const focusInput = (preventScroll = false) => {
-      applySearchLayoutFix();
-
-      if (!searchInput) {
-        return;
-      }
-
-      if (preventScroll) {
-        const focusOptions = { preventScroll: true };
-        try {
-          searchInput.focus(focusOptions);
-        } catch (error) {
-          searchInput.focus();
-        }
-      } else {
+    if (searchInput) {
+      const focusOptions = { preventScroll: true };
+      try {
+        searchInput.focus(focusOptions);
+      } catch (error) {
         searchInput.focus();
       }
 
@@ -547,43 +525,6 @@ function scrollToSearchBox() {
         const length = searchInput.value.length;
         searchInput.setSelectionRange(length, length);
       }
-    };
-
-    if (isDesktopScreen) {
-      const header = document.getElementById('mainHeader');
-      const defaultHeaderHeight = window.innerWidth <= 280 ? 60 : 75;
-      const headerHeight =
-        header && header.offsetHeight
-          ? header.offsetHeight
-          : defaultHeaderHeight;
-      const targetElement = searchSection || searchBox;
-      const elementPosition =
-        targetElement.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = Math.max(elementPosition - headerHeight - 16, 0);
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-
-      setTimeout(() => {
-        // 스크롤 후 위치 보정 (헤더에 가려지지 않도록)
-        const currentElementPosition =
-          targetElement.getBoundingClientRect().top + window.pageYOffset;
-        const correctedOffset = Math.max(
-          currentElementPosition - headerHeight - 8,
-          0
-        );
-
-        window.scrollTo({
-          top: correctedOffset,
-          behavior: 'auto',
-        });
-
-        focusInput(false);
-      }, 350);
-    } else {
-      focusInput(true);
     }
   }
 }
