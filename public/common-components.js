@@ -391,69 +391,16 @@ function loadHeader() {
         if (window.scrollX !== 0) {
           window.scrollTo(0, window.scrollY);
         }
-
-        // 화면 크기에 따른 위치 고정
-        const screenWidth = window.innerWidth;
-        const isVerySmallScreen = screenWidth <= 290;
-        const isSmallScreen = screenWidth <= 400;
-        
-        if (isSmallScreen) {
-          const searchSection = document.querySelector('.search-section');
-          if (searchSection) {
-            // 290px 이하에서는 더 작은 padding
-            if (isVerySmallScreen) {
-              searchSection.style.padding = '10px 6px';
-            } else {
-              searchSection.style.padding = '15px';
-            }
-            
-            searchSection.style.left = '0';
-            searchSection.style.right = '0';
-            searchSection.style.width = '100%';
-            searchSection.style.maxWidth = '100%';
-            searchSection.style.minWidth = '100%';
-            searchSection.style.transform = 'translateX(0)';
-            searchSection.style.margin = '0';
-            searchSection.style.marginLeft = '0';
-            searchSection.style.marginRight = '0';
-            searchSection.style.boxSizing = 'border-box';
-            searchSection.style.position = 'relative';
-
-            const searchContainer =
-              searchSection.querySelector('.search-container');
-            if (searchContainer) {
-              searchContainer.style.left = 'auto';
-              searchContainer.style.right = 'auto';
-              searchContainer.style.width = '100%';
-              searchContainer.style.maxWidth = '100%';
-              searchContainer.style.minWidth = '100%';
-              searchContainer.style.transform = 'translateX(0)';
-              searchContainer.style.margin = '0 auto';
-              searchContainer.style.marginLeft = 'auto';
-              searchContainer.style.marginRight = 'auto';
-              searchContainer.style.boxSizing = 'border-box';
-              searchContainer.style.position = 'relative';
-              
-              // 290px 이하에서 추가 보정
-              if (isVerySmallScreen) {
-                const containerWidth = searchContainer.offsetWidth;
-                const viewportWidth = window.innerWidth;
-                const expectedLeft = (viewportWidth - containerWidth) / 2;
-                const rect = searchContainer.getBoundingClientRect();
-                
-                if (Math.abs(rect.left - expectedLeft) > 5) {
-                  searchContainer.style.left = expectedLeft + 'px';
-                  searchContainer.style.transform = 'translateX(0)';
-                }
-              }
-            }
-          }
-        }
       },
       { passive: true }
     );
 
     initializeAuth();
+    applySearchLayoutFix();
+    if (!window.__searchLayoutFixListenerAdded) {
+      window.addEventListener('resize', applySearchLayoutFix);
+      window.__searchLayoutFixListenerAdded = true;
+    }
     console.log('헤더 컴포넌트 로드 완료');
   }
 }
@@ -496,97 +443,90 @@ function logout() {
   }
 }
 
+// 작은 화면에서 검색 영역 레이아웃 보정
+function applySearchLayoutFix() {
+  const searchSection = document.querySelector('.search-section');
+  const searchContainer = document.querySelector('.search-container');
+
+  if (!searchSection || !searchContainer) {
+    return;
+  }
+
+  const screenWidth = window.innerWidth;
+  const resetProps = [
+    'padding',
+    'margin',
+    'left',
+    'right',
+    'width',
+    'maxWidth',
+    'minWidth',
+    'boxSizing',
+    'position',
+    'transform',
+    'overflowX',
+  ];
+
+  const resetInlineStyles = (element) => {
+    resetProps.forEach((prop) => {
+      element.style[prop] = '';
+    });
+  };
+
+  if (screenWidth <= 400) {
+    const isVerySmallScreen = screenWidth <= 285;
+    const sectionPadding = isVerySmallScreen ? '10px 6px' : '15px';
+
+    searchSection.style.padding = sectionPadding;
+    searchSection.style.margin = '0 auto';
+    searchSection.style.left = '';
+    searchSection.style.right = '';
+    searchSection.style.width = '100%';
+    searchSection.style.maxWidth = '100%';
+    searchSection.style.minWidth = '100%';
+    searchSection.style.boxSizing = 'border-box';
+    searchSection.style.position = 'relative';
+    searchSection.style.transform = 'translateX(0)';
+    searchSection.style.overflowX = 'hidden';
+
+    searchContainer.style.padding = '0';
+    searchContainer.style.margin = '0 auto';
+    searchContainer.style.left = '';
+    searchContainer.style.right = '';
+    searchContainer.style.width = '100%';
+    searchContainer.style.maxWidth = '100%';
+    searchContainer.style.minWidth = '100%';
+    searchContainer.style.boxSizing = 'border-box';
+    searchContainer.style.position = 'relative';
+    searchContainer.style.transform = 'translateX(0)';
+    searchContainer.style.overflowX = 'hidden';
+  } else {
+    resetInlineStyles(searchSection);
+    resetInlineStyles(searchContainer);
+  }
+}
+
 // 검색 박스로 스크롤하는 함수
 function scrollToSearchBox() {
   const searchBox = document.querySelector('.text-search-box');
   if (searchBox) {
-    // 화면 크기에 따른 센터 고정
-    const screenWidth = window.innerWidth;
-    const isVerySmallScreen = screenWidth <= 290;
-    const isSmallScreen = screenWidth <= 400;
-    
-    const searchSection = document.querySelector('.search-section');
-    const searchContainer = document.querySelector('.search-container');
-    
-    if (isSmallScreen && searchSection) {
-      // 290px 이하 화면에서는 더 작은 padding
-      if (isVerySmallScreen) {
-        searchSection.style.padding = '10px 6px';
-      } else {
-        searchSection.style.padding = '15px';
-      }
-      
-      searchSection.style.margin = '0';
-      searchSection.style.left = '0';
-      searchSection.style.right = '0';
-      searchSection.style.width = '100%';
-      searchSection.style.maxWidth = '100%';
-      searchSection.style.minWidth = '100%';
-      searchSection.style.boxSizing = 'border-box';
-      searchSection.style.position = 'relative';
-      searchSection.style.transform = 'translateX(0)';
-      searchSection.style.overflowX = 'hidden';
-    }
-    
-    if (isSmallScreen && searchContainer) {
-      searchContainer.style.padding = '0';
-      searchContainer.style.margin = '0 auto';
-      searchContainer.style.marginLeft = 'auto';
-      searchContainer.style.marginRight = 'auto';
-      searchContainer.style.width = '100%';
-      searchContainer.style.maxWidth = '100%';
-      searchContainer.style.minWidth = '100%';
-      searchContainer.style.boxSizing = 'border-box';
-      searchContainer.style.left = 'auto';
-      searchContainer.style.right = 'auto';
-      searchContainer.style.transform = 'translateX(0)';
-      searchContainer.style.position = 'relative';
-      searchContainer.style.overflowX = 'hidden';
-    }
+    applySearchLayoutFix();
 
-    // 헤더 높이를 고려한 오프셋 계산
-    const headerHeight = 75; // body padding-top과 동일
-    const elementPosition = searchBox.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
-
-    // 스크롤 완료 후 위치 재확인 및 검색 입력창에 포커스
-    setTimeout(() => {
-      // 작은 화면에서 다시 한번 센터 고정 확인 (290px 이하에서 더 강력하게)
-      if (isSmallScreen && searchContainer) {
-        // 강제로 센터 정렬
-        searchContainer.style.margin = '0 auto';
-        searchContainer.style.marginLeft = 'auto';
-        searchContainer.style.marginRight = 'auto';
-        searchContainer.style.transform = 'translateX(0)';
-        searchContainer.style.left = 'auto';
-        searchContainer.style.right = 'auto';
-        
-        // 290px 이하에서는 추가 확인
-        if (isVerySmallScreen) {
-          // 실제 위치 확인 후 보정
-          const rect = searchContainer.getBoundingClientRect();
-          const containerWidth = searchContainer.offsetWidth;
-          const viewportWidth = window.innerWidth;
-          const expectedLeft = (viewportWidth - containerWidth) / 2;
-          
-          if (Math.abs(rect.left - expectedLeft) > 5) {
-            // 5px 이상 차이나면 강제 보정
-            searchContainer.style.left = expectedLeft + 'px';
-            searchContainer.style.transform = 'translateX(0)';
-          }
-        }
-      }
-      
-      const searchInput = document.getElementById('shopSearchInput');
-      if (searchInput) {
+    const searchInput = document.getElementById('shopSearchInput');
+    if (searchInput) {
+      const focusOptions = { preventScroll: true };
+      try {
+        searchInput.focus(focusOptions);
+      } catch (error) {
+        // preventScroll을 지원하지 않는 브라우저 대비
         searchInput.focus();
       }
-    }, 500);
+
+      if (typeof searchInput.setSelectionRange === 'function') {
+        const length = searchInput.value.length;
+        searchInput.setSelectionRange(length, length);
+      }
+    }
   }
 }
 
