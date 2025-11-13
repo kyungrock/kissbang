@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="./" />
+    <title>
+      경남 산청 왁싱 - 마사지천국 | 경남 산청 왁싱 업체 예약 플랫폼
+    </title>
+    <meta name="description" content="경남 산청 왁싱 마사지천국, 자갈치, 남포동, 중앙동 왁싱 등 경남 산청 전 지역 왁싱 업체를 한눈에! 경남 산청 최저가 왁싱 업체를 찾아보세요."
+    />
+    <meta name="keywords" content="경남 산청 왁싱, 자갈치, 남포동, 중앙동 왁싱, 경남 산청마사지, 왁싱예약, 마사지천국"
+    />
+    <meta name="author" content="마사지천국" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="header-container"></div>
+
+    <section class="search-section">
+      <div class="search-container">
+        <div class="text-search-box">
+          <input
+            type="text"
+            id="shopSearchInput"
+            class="shop-search-input"
+            placeholder="경남 산청 지역 또는 키워드를 입력하세요"
+            autocomplete="off"
+          />
+          <i class="fas fa-search search-icon"></i>
+        </div>
+        <div class="location-search">
+          <div class="search-box">
+            <select id="regionSelect" class="search-select">
+              <option value="">지역을 선택하세요</option>
+            </select>
+          </div>
+          <div class="search-box">
+            <select id="districtSelect" class="search-select">
+              <option value="">세부 지역을 선택하세요</option>
+            </select>
+          </div>
+          <div class="search-divider"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="filter-section">
+      <div class="filter-container">
+        <a class="filter-btn" data-filter="all">전체</a>
+        <a class="filter-btn" data-filter="massage">마사지</a>
+        <a class="filter-btn" data-filter="outcall">출장마사지</a>
+        <div class="type-filter-dropdown">
+          <button class="filter-btn type-filter-btn" id="typeFilterBtn">
+            테마보기
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="type-dropdown-menu" id="typeDropdownMenu">
+            <div class="type-dropdown-item" data-type="swedish">스웨디시</div>
+            <div class="type-dropdown-item" data-type="thai">타이마사지</div>
+            <div class="type-dropdown-item" data-type="aroma">아로마마사지</div>
+            <div class="type-dropdown-item" data-type="waxing">왁싱</div>
+            <div class="type-dropdown-item" data-type="chinese">중국마사지</div>
+            <div class="type-dropdown-item" data-type="foot">발마사지</div>
+          </div>
+        </div>
+        <button class="info-btn" onclick="openRelatedInfoModal(event)">
+          관련정보
+        </button>
+      </div>
+    </section>
+
+    <section
+      class="country-filter-section"
+      id="massageCountryFilterSection"
+      style="display: none"
+    >
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="country-filter-section"
+      id="outcallCountryFilterSection"
+      style="display: none"
+    >
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 출장마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="theme-filter-section"
+      id="themeFilterSection"
+      style="display: none"
+    >
+      <div class="theme-filter-container">
+        <h3 class="theme-filter-title">테마별 마사지</h3>
+        <div class="theme-boxes">
+          <div class="theme-box active" data-theme="all">
+            <span class="theme-name">전체</span>
+          </div>
+          <div class="theme-box" data-theme="swedish">
+            <span class="theme-name">스웨디시</span>
+          </div>
+          <div class="theme-box" data-theme="thai">
+            <span class="theme-name">타이마사지</span>
+          </div>
+          <div class="theme-box" data-theme="aroma">
+            <span class="theme-name">아로마마사지</span>
+          </div>
+          <div class="theme-box" data-theme="waxing">
+            <span class="theme-name">왁싱</span>
+          </div>
+          <div class="theme-box" data-theme="chinese">
+            <span class="theme-name">중국마사지</span>
+          </div>
+          <div class="theme-box" data-theme="foot">
+            <span class="theme-name">발마사지</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="main-content">
+      <div class="results-header">
+        <h1 id="resultsTitle">경남 산청 왁싱 업체</h1>
+        <span id="resultsCount" class="results-count">총 0개</span>
+      </div>
+      <div id="massageList" class="massage-list"></div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <div class="footer-link-row">
+            <a href="#" class="footer-link" onclick="openDetailsModal(event)"
+              >경남 산청 왁싱정보</a
+            >
+          </div>
+          <div class="footer-divider-line"></div>
+          <div class="footer-link-row">
+            <a href="#" class="footer-link" onclick="openAboutModal(event)"
+              >회사소개</a
+            >
+            <span class="footer-divider">|</span>
+            <a href="#" class="footer-link" onclick="openTermsModal(event)"
+              >이용약관</a
+            >
+          </div>
+        </div>
+        <div class="footer-info">
+          <p>상호명 : 마사지천국</p>
+          <p>
+            고객센터 :
+            <a href="tel:0507-1859-6384" class="footer-phone">0507-1859-6384</a>
+            <a href="tel:0507-1859-6384" class="footer-contact-btn"
+              >[ 입점 문의 ]</a
+            >
+          </p>
+        </div>
+        <div class="footer-copyright">
+          <p>&copy; 2024 마사지천국. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <div id="hamburger-menu-container"></div>
+
+    <div id="aboutModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>회사소개 (About Us)</h2>
+          <button class="modal-close" onclick="closeModal('aboutModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <strong>마사지천국</strong>는 전국 어디서든 믿을 수 있는 마사지
+            정보를 쉽고 빠르게 찾을 수 있도록 만들어진
+            <strong>전국 마사지 플랫폼</strong>입니다.
+          </p>
+          <p>
+            저희는 단순히 업체 정보를 나열하는 것이 아니라,
+            <strong>이용자 중심의 편리한 검색 시스템</strong>과
+            <strong>투명한 정보 제공</strong>을 통해 고객과 업소 모두가 만족할
+            수 있는 건강한 플랫폼 생태계를 만들고자 합니다.
+          </p>
+          <div class="info-section">
+            <h3>🌍 전국 기반 서비스</h3>
+            <p>
+              지역별, 카테고리별로 원하는 마사지 업소를 쉽게 찾을 수 있습니다.
+            </p>
+          </div>
+          <div class="info-section">
+            <h3>✅ 신뢰성 있는 정보 제공</h3>
+            <p>
+              실제 이용 후기, 가격, 위치, 영업시간 등 검증된 정보를 제공합니다.
+            </p>
+          </div>
+          <div class="info-section">
+            <h3>🤝 소비자와 업소를 연결</h3>
+            <p>
+              고객은 필요한 서비스를 편리하게 찾고, 업소는 홍보 기회를 얻어 더
+              많은 고객과 만날 수 있습니다.
+            </p>
+          </div>
+          <p class="highlight">
+            <strong>마사지천국</strong>는 앞으로도 고객의 편의를 최우선으로
+            생각하며,<br />건강과 휴식을 동시에 책임지는
+            <strong>대한민국 대표 마사지 플랫폼</strong>이 되겠습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="termsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>이용약관 (Terms of Service)</h2>
+          <button class="modal-close" onclick="closeModal('termsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>제 1 조 (목적)</h3>
+            <p>
+              이 약관은 "마사지천국"(이하 "회사"라 함)가 제공하는 마사지 관련
+              정보 플랫폼 서비스(이하 "서비스")의 이용조건 및 절차, 회사와
+              이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
+            </p>
+          </div>
+          <div class="terms-section">
+            <h3>제 2 조 (용어의 정의)</h3>
+            <ul>
+              <li>
+                "이용자"란 본 약관에 따라 회사가 제공하는 서비스를 이용하는 회원
+                및 비회원을 말합니다.
+              </li>
+              <li>
+                "회원"이란 회사에 개인정보를 제공하여 회원등록을 한 자로서,
+                지속적으로 서비스를 이용할 수 있는 자를 말합니다.
+              </li>
+              <li>
+                "업체회원"이란 마사지 업소 및 관련 사업체로서, 회사와 계약을
+                맺고 서비스에 정보를 등록하는 회원을 말합니다.
+              </li>
+            </ul>
+          </div>
+          <div class="terms-section">
+            <h3>제 3 조 (약관의 효력 및 변경)</h3>
+            <ul>
+              <li>
+                본 약관은 서비스 화면에 게시하거나 기타의 방법으로 공지함으로써
+                효력이 발생합니다.
+              </li>
+              <li>
+                회사는 관련 법령을 위배하지 않는 범위에서 본 약관을 개정할 수
+                있으며, 변경 시 사전 공지합니다.
+              </li>
+            </ul>
+          </div>
+          <div class="terms-section">
+            <h3>제 4 조 (서비스의 제공 및 변경)</h3>
+            <p>회사는 다음과 같은 서비스를 제공합니다.</p>
+            <ul>
+              <li>전국 마사지 업소 정보 제공</li>
+              <li>업체별 가격, 위치, 후기 등의 정보 열람</li>
+              <li>회원 리뷰 및 평가 기능</li>
+              <li>업체 홍보 및 광고 서비스</li>
+            </ul>
+            <p>
+              회사는 서비스의 내용 및 운영 방식을 변경할 수 있으며, 변경 시 사전
+              공지합니다.
+            </p>
+          </div>
+          <div class="terms-section">
+            <h3>제 5 조 (회원의 의무)</h3>
+            <ul>
+              <li>회원은 본 약관 및 관련 법령을 준수하여야 합니다.</li>
+              <li>
+                회원은 허위 정보를 기재하거나 타인의 정보를 도용해서는 안
+                됩니다.
+              </li>
+              <li>
+                회원은 서비스 이용 시 회사 및 제3자의 권리를 침해해서는 안
+                됩니다.
+              </li>
+            </ul>
+          </div>
+          <div class="terms-section">
+            <h3>제 6 조 (회사의 의무)</h3>
+            <ul>
+              <li>회사는 안정적으로 서비스를 제공하기 위해 최선을 다합니다.</li>
+              <li>
+                회사는 회원의 개인정보를 본인의 동의 없이 제3자에게 제공하지
+                않습니다.
+              </li>
+              <li>
+                회사는 불법적인 콘텐츠 및 부적절한 정보가 유통되지 않도록 관리할
+                책임이 있습니다.
+              </li>
+            </ul>
+          </div>
+          <div class="terms-section">
+            <h3>제 7 조 (책임의 한계)</h3>
+            <ul>
+              <li>
+                회사는 업소의 실제 서비스(마사지 시술 등)에 대해 직접적인 책임을
+                지지 않습니다.
+              </li>
+              <li>
+                이용자와 업소 간에 발생한 문제는 당사자 간의 협의로 해결함을
+                원칙으로 합니다.
+              </li>
+              <li>회사는 플랫폼을 통한 정보 제공과 중개 역할에 국한합니다.</li>
+            </ul>
+          </div>
+          <div class="terms-section">
+            <h3>제 8 조 (이용 계약의 해지 및 서비스 중지)</h3>
+            <ul>
+              <li>
+                회원은 언제든지 탈퇴를 요청할 수 있으며, 회사는 지체 없이 이를
+                처리합니다.
+              </li>
+              <li>
+                회사는 다음 사유가 발생한 경우 사전 통보 후 서비스 제공을 중단할
+                수 있습니다.
+                <ul>
+                  <li>시스템 점검, 천재지변 등 불가피한 사유</li>
+                  <li>회원이 법령 또는 약관을 위반한 경우</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="terms-section">
+            <h3>제 9 조 (준거법 및 관할)</h3>
+            <p>
+              본 약관에 명시되지 않은 사항은 관계 법령 및 상관례에 따르며,
+              서비스 이용과 관련하여 분쟁이 발생할 경우 회사 본사 소재지를
+              관할하는 법원을 제1심 관할 법원으로 합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="detailsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>상세정보</h2>
+          <button class="modal-close" onclick="closeModal('detailsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>마사지사이트 마사지천국 - 전국 마사지 예약의 중심</h3>
+            <p>
+              마사지천국는 최고의 <strong>마사지사이트</strong>로,
+              <strong>서울마사지사이트</strong>,
+              <strong>경남마사지사이트</strong>, 경남 등 전국 마사지 업체를
+              한눈에 볼 수 있는 예약 플랫폼입니다.
+              <strong>아로마마사지</strong>, <strong>타이마사지</strong>,
+              <strong>스웨디시</strong>, <strong>1인샵</strong>,
+              <strong>왁싱</strong> 등 다양한 마사지 서비스를 지역별로 간편하게
+              예약할 수 있습니다.
+            </p>
+            <p>
+              마사지천국는 고객의 편의를 위해 엄선된 업체를 제공하며, 최저가
+              보장과 실시간 예약 시스템으로 편리함을 더합니다.
+              <strong>서울마사지사이트</strong>에서는 프리미엄
+              <strong>스웨디시</strong>와 <strong>아로마마사지</strong>를,
+              <strong>경남마사지사이트</strong>에서는 전통
+              <strong>타이마사지</strong>와 <strong>왁싱</strong> 서비스를
+              만나보세요. 영남권의 중심인 <strong>경남마사지사이트</strong>에서
+              특별한 <strong>타이마사지</strong> 경험을 즐길 수 있습니다.
+            </p>
+            <p>
+              지금 마사지천국 <strong>마사지사이트</strong>에서 당신에게 맞는
+              마사지 서비스를 찾아 지역에 맞게 예약하세요.
+            </p>
+          </div>
+          <div class="terms-section">
+            <h3>휴식과 힐링</h3>
+            <p>
+              바쁜 일상 속에서 <strong>마사지</strong>는 몸과 마음을 동시에
+              회복시키는 최적의 방법입니다. <strong>마사지사이트</strong>를 통해
+              서울, 경남, 경남 등 지역별 <strong>아로마마사지</strong>와
+              <strong>스웨디시</strong>를 찾아 편안한 휴식을 즐겨보세요.
+            </p>
+          </div>
+          <div class="terms-section">
+            <h3>이용 안내</h3>
+            <p>
+              본 서비스는 정보 제공 목적으로만 사용되며, 실제 서비스 이용 시에는
+              각 업소의 이용약관을 확인하시기 바랍니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="common-components.js"></script>
+    <script src="script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        if (typeof currentRegion !== 'undefined') {
+          currentRegion = '경남';
+        }
+
+        const regionSelect = document.getElementById('regionSelect');
+        if (regionSelect) {
+          regionSelect.value = '경남';
+          if (typeof updateDistrictOptions === 'function') {
+            updateDistrictOptions('경남');
+          }
+          const districtSelect = document.getElementById('districtSelect');
+          if (districtSelect) {
+            districtSelect.value = '산청';
+            districtSelect.disabled = false;
+            districtSelect.style.opacity = '1';
+          }
+          if (typeof currentDistrict !== 'undefined') {
+            currentDistrict = '산청';
+          }
+        }
+
+        // 왁싱 테마 필터 활성화
+        const themeFilterSection =
+          document.getElementById('themeFilterSection');
+        // 초기에는 숨김 상태로 유지 (버튼 클릭 시 토글되도록)
+        if (themeFilterSection) {
+          themeFilterSection.style.display = 'none';
+        }
+
+        const waxingThemeBox = document.querySelector('[data-theme="waxing"]');
+        if (waxingThemeBox) {
+          document.querySelectorAll('.theme-box').forEach((box) => {
+            box.classList.remove('active');
+          });
+          waxingThemeBox.classList.add('active');
+        }
+
+        // typeFilterBtn에 active 클래스 추가하여 활성화 상태 표시
+        const typeFilterBtn = document.getElementById('typeFilterBtn');
+        if (typeFilterBtn) {
+          typeFilterBtn.classList.add('active');
+        }
+
+        if (typeof currentFilter !== 'undefined') {
+          currentFilter = 'waxing';
+        }
+        window.currentFilter = 'waxing';
+        window.currentTheme = 'waxing';
+
+        if (typeof displayFilteredResults === 'function') {
+          displayFilteredResults();
+        } else if (Array.isArray(window.massageShops)) {
+          const shops = massageShops.filter(
+            (shop) => shop.region === '경남' && shop.district === '산청'
+          );
+          if (typeof displayMassageShops === 'function') {
+            displayMassageShops(shops);
+          }
+          if (typeof updateResultsHeader === 'function') {
+            updateResultsHeader('경남 산청 왁싱 업체', shops.length);
+          }
+        }
+
+        const resultsTitle = document.getElementById('resultsTitle');
+        if (resultsTitle) {
+          resultsTitle.textContent = '경남 산청 왁싱 업체';
+        }
+      });
+    </script>
+
+    <div id="relatedInfoModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>관련정보</h2>
+          <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+                  <div class="terms-section">
+            <h3>💆 경남 산청 왁싱 소개</h3>
+            <p>
+              <strong>경남 산청 왁싱</strong>는 지리산국립공원이 있는 자연 관광지로, 산청한방약초축제가 유명한 지역입니다. 천연 왁스를 사용한 안전하고 효과적인 제모 서비스입니다. 경남 산청에서는 이러한 전문 왁싱 서비스를 제공하고 있으며, 각 지역마다 전문 왁싱 업체가 운영되고 있습니다.
+            </p>
+            <p>
+              경남 산청 왁싱는 단순한 피로 회복을 넘어서 몸과 마음의 완전한 힐링을 추구합니다. 전문 관리사들이 제공하는 다양한 왁싱 기법을 통해 일상의 스트레스와 피로를 완전히 해소하고, 산청의 여유로운 분위기 속에서 진정한 휴식을 경험할 수 있습니다.
+            </p>
+
+            <h4>✨ 경남 산청 왁싱의 특징과 내용</h4>
+            <p>
+              <strong>경남 산청 왁싱</strong>는 산청만의 독특한 특성을 가지고 있습니다. 전문 왁싱 서비스를 제공하며, 고객의 만족도를 최우선으로 생각합니다. 산청의 지역적 특색과 왁싱의 전문성이 결합되어 최고의 힐링 경험을 선사합니다.
+            </p>
+            <div class="info-highlight">
+              <h4>🌟 왁싱의 핵심 특징</h4>
+              <ul>
+                <li><strong>프리미엄 왁싱:</strong> 왁싱의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+                <li><strong>위생 관리 철저:</strong> 왁싱의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+                <li><strong>다양한 코스 선택:</strong> 왁싱의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+                <li><strong>피부 자극 최소화:</strong> 왁싱의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+                <li><strong>빠른 시술:</strong> 왁싱의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+                <li><strong>지속력 우수:</strong> 왁싱의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+              </ul>
+            </div>
+
+            <h4>🗺️ 경남 산청 왁싱 추천 행정구간</h4>
+            <p>
+              <strong>산청</strong>은 다양한 행정구간으로 구성되어 있으며, 각 지역마다 전문 왁싱 업체들이 운영되고 있습니다. 산청의 주요 행정구간별 왁싱 특색을 소개합니다.
+            </p>
+            <div class="info-highlight">
+              <h4>🏛️ 산청 주요 행정구간</h4>
+              <ul>
+                <li><strong>산청읍:</strong> 다양한 왁싱 코스와 프로그램을 제공하여 고객의 선택권이 넓습니다.</li>
+                <li><strong>차량면:</strong> 왁싱 업체들이 집중되어 있어 비교 선택이 용이합니다.</li>
+                <li><strong>오부면:</strong> 산청 왁싱 업체가 위치해 있으며, 전문 왁싱 서비스를 제공합니다.</li>
+                <li><strong>생초면:</strong> 전문 관리사가 정성스럽게 왁싱 시술을 제공하여 만족도가 높습니다.</li>
+                <li><strong>금서면:</strong> 산청 왁싱 업체가 위치해 있으며, 전문 왁싱 서비스를 제공합니다.</li>
+                <li><strong>삼장면:</strong> 전문 자격증을 보유한 관리사가 왁싱 시술을 제공합니다.</li>
+                <li><strong>시천면:</strong> 전문 관리사가 정성스럽게 왁싱 시술을 제공하여 만족도가 높습니다.</li>
+              </ul>
+            </div>
+
+            <h4>🎨 경남 산청 왁싱 후 추천 관광지 및 놀이</h4>
+            <p>
+              <strong>경남 산청 왁싱</strong>를 받은 후에는 경남의 다양한 관광지와 놀이 시설을 즐기실 수 있습니다. 왁싱로 풀린 몸과 마음으로 경남의 특별한 경험을 더욱 풍성하게 만들어보세요.
+            </p>
+
+            <div class="info-highlight">
+              <h4>🌊 해안 휴양지</h4>
+              <ul>
+                <li><strong>통영 해상케이블카:</strong> 남해안의 아름다운 해상 케이블카로, 통영의 전경을 감상할 수 있습니다.</li>
+                <li><strong>거제 바람의 언덕:</strong> 거제도의 대표 관광지로, 아름다운 해안 전망을 즐길 수 있습니다.</li>
+                <li><strong>남해 지리산 바람개비:</strong> 남해도의 대표 관광지로, 해안 전망과 함께 즐길 수 있습니다.</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🌊 역사 문화 유적지</h4>
+              <ul>
+                <li><strong>진주성:</strong> 임진왜란의 역사가 살아있는 성으로, 진주 촉석루가 유명합니다.</li>
+                <li><strong>창녕 우포늪:</strong> 국내 최대의 자연늪으로, 생태 관광지입니다.</li>
+                <li><strong>함안 가야문화:</strong> 가야문화의 중심지로, 함안박물관이 있습니다.</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🌊 자연 관광지</h4>
+              <ul>
+                <li><strong>지리산국립공원:</strong> 하동, 산청, 함양에 걸쳐 있는 국립공원으로, 등산과 자연 감상을 즐길 수 있습니다.</li>
+                <li><strong>창원 용지공원:</strong> 창원의 대표 공원으로, 산책과 휴식을 즐길 수 있습니다.</li>
+                <li><strong>거제 해금강:</strong> 거제도의 아름다운 해안 절경으로, 유람선 관광이 가능합니다.</li>
+              </ul>
+            </div>
+
+            <h4>🍽️ 경남 산청 왁싱 후 추천 음식 및 경로</h4>
+            <p>
+              <strong>경남 산청 왁싱</strong>를 받은 후에는 경남의 맛있는 음식으로 에너지를 보충하세요. 왁싱로 활력을 회복한 후 경남의 특별한 맛을 즐기시면 더욱 완벽한 하루가 됩니다.
+            </p>
+
+            <div class="info-highlight">
+              <h4>🦀 경남 해산물 전문 음식점</h4>
+              <ul>
+                <li><strong>통영 멍게:</strong> 통영에서 잡은 신선한 멍게 요리를 즐길 수 있습니다.</li>
+                <li><strong>거제 전복:</strong> 거제도에서 잡은 신선한 전복 요리를 즐길 수 있습니다.</li>
+                <li><strong>남해 꽃게:</strong> 남해도에서 잡은 신선한 꽃게 요리를 즐길 수 있습니다.</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🦀 경남 전통 음식</h4>
+              <ul>
+                <li><strong>진주 비빔밥:</strong> 진주의 대표 음식으로, 전통 비빔밥을 맛볼 수 있습니다.</li>
+                <li><strong>밀양 밀양아리랑 떡볶이:</strong> 밀양의 대표 음식으로, 특별한 떡볶이를 맛볼 수 있습니다.</li>
+                <li><strong>창원 아구찜:</strong> 창원의 대표 음식으로, 매콤한 아구찜을 맛볼 수 있습니다.</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🦀 경남 카페 및 디저트</h4>
+              <ul>
+                <li><strong>통영 해안가 카페:</strong> 남해안을 조망하며 커피를 마실 수 있는 카페입니다.</li>
+                <li><strong>거제 바람의 언덕 카페:</strong> 거제도의 전경을 보며 디저트를 즐길 수 있는 카페입니다.</li>
+                <li><strong>창원 주남저수지 카페:</strong> 주남저수지를 조망하며 힐링 카페를 즐길 수 있습니다.</li>
+              </ul>
+            </div>
+
+            <h4>💬 경남 산청 왁싱 실제 고객 후기</h4>
+            <p>
+              <strong>경남 산청 왁싱</strong>를 실제로 이용하신 고객님들의 생생한 후기와 특별한 사연들을 소개합니다. 산청에서 왁싱를 받으신 분들의 솔직한 경험담을 통해 더욱 신뢰할 수 있는 정보를 제공합니다.
+            </p>
+            <div class="review-stories">
+              <div class="review-story">
+                <h6>✨ "정말 좋았어요" - 김○○님</h6>
+                <p>
+                  "전문 관리사분이 부드럽게 시술해주셔서 통증이 거의 없었습니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "만족스러운 경험이었습니다" - 박○○님</h6>
+                <p>
+                  "피부 자극이 없어서 민감한 피부인 저도 안심하고 받을 수 있었어요."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "피로가 완전히 해소되었어요" - 이○○님</h6>
+                <p>
+                  "제모 효과가 오래 지속되어서 자주 받고 싶어요."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "전문적인 서비스였습니다" - 최○○님</h6>
+                <p>
+                  "위생적인 시설과 전문적인 서비스에 감동했습니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "정기적으로 받고 있어요" - 정○○님</h6>
+                <p>
+                  "위생적인 시설과 전문적인 서비스에 감동했습니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "강력 추천합니다" - 강○○님</h6>
+                <p>
+                  "위생적인 시설과 전문적인 서비스에 감동했습니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "에너지가 회복되었어요" - 조○○님</h6>
+                <p>
+                  "제모 효과가 오래 지속되어서 자주 받고 싶어요."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "완벽한 경험이었습니다" - 한○○님</h6>
+                <p>
+                  "위생적인 시설과 전문적인 서비스에 감동했습니다."
+                </p>
+              </div>
+            </div>
+
+            <h4>💎 경남 산청 왁싱 받으면 좋은 점</h4>
+            <p>
+              <strong>경남 산청 왁싱</strong>를 받으면 다양한 긍정적인 효과를 경험할 수 있습니다. 왁싱의 특별한 기법으로 전신 건강에도 많은 도움이 됩니다.
+            </p>
+            <div class="info-highlight">
+              <h4>🏥 신체적 건강 효과</h4>
+              <ul>
+                <li><strong>피부 매끄러움:</strong> 왁싱를 통해 피부 매끄러움을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+                <li><strong>모발 재생 지연:</strong> 왁싱를 통해 모발 재생 지연을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+                <li><strong>피부 각질 제거:</strong> 왁싱를 통해 피부 각질 제거을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+                <li><strong>피부톤 개선:</strong> 왁싱를 통해 피부톤 개선을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+                <li><strong>자극 최소화:</strong> 왁싱를 통해 자극 최소화을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+                <li><strong>편리한 관리:</strong> 왁싱를 통해 편리한 관리을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+              </ul>
+            </div>
+            <div class="info-highlight">
+              <h4>🧘 정신적 건강 효과</h4>
+              <ul>
+                <li><strong>스트레스 해소:</strong> 왁싱는 신체적 스트레스뿐만 아니라 정신적 스트레스도 해소해줍니다. 일상의 고민과 걱정을 잠시 잊을 수 있습니다.</li>
+                <li><strong>에너지 충전:</strong> 왁싱 후 몸과 마음이 재충전되어 새로운 에너지로 일상을 시작할 수 있습니다.</li>
+                <li><strong>감정 안정:</strong> 왁싱는 교감신경을 안정시켜 감정을 조절하고 마음의 평화를 찾는 데 도움이 됩니다.</li>
+              </ul>
+            </div>
+
+            <h4>🎁 경남 산청 왁싱 서비스 소개</h4>
+            <p>
+              <strong>경남 산청 왁싱 업체</strong>에서는 산청만의 특별한 왁싱 서비스와 상품을 제공하여 고객님들의 만족도를 극대화하고 있습니다.
+            </p>
+            <div class="service-categories">
+              <h4>🌟 경남 산청 왁싱 업체 제공 서비스</h4>
+              <div class="service-grid">
+                <div class="service-item"><i class="fas fa-spa"></i><span>상체 왁싱</span></div>
+                <div class="service-item"><i class="fas fa-spa"></i><span>하체 왁싱</span></div>
+                <div class="service-item"><i class="fas fa-spa"></i><span>전신 왁싱</span></div>
+                <div class="service-item"><i class="fas fa-spa"></i><span>부분 왁싱</span></div>
+                <div class="service-item"><i class="fas fa-spa"></i><span>이브로우 왁싱</span></div>
+                <div class="service-item"><i class="fas fa-spa"></i><span>브라질리안 왁싱</span></div>
+              </div>
+              <div class="service-details">
+                <div class="service-detail-item">
+                  <h5>✨ 상체 왁싱</h5>
+                  <p>
+                    상체 왁싱 서비스로 고객에게 최적의 왁싱 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 왁싱의 효과를 극대화합니다.
+                  </p>
+                </div>
+                <div class="service-detail-item">
+                  <h5>✨ 하체 왁싱</h5>
+                  <p>
+                    하체 왁싱 서비스로 고객에게 최적의 왁싱 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 왁싱의 효과를 극대화합니다.
+                  </p>
+                </div>
+                <div class="service-detail-item">
+                  <h5>✨ 전신 왁싱</h5>
+                  <p>
+                    전신 왁싱 서비스로 고객에게 최적의 왁싱 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 왁싱의 효과를 극대화합니다.
+                  </p>
+                </div>
+                <div class="service-detail-item">
+                  <h5>✨ 부분 왁싱</h5>
+                  <p>
+                    부분 왁싱 서비스로 고객에게 최적의 왁싱 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 왁싱의 효과를 극대화합니다.
+                  </p>
+                </div>
+                <div class="service-detail-item">
+                  <h5>✨ 이브로우 왁싱</h5>
+                  <p>
+                    이브로우 왁싱 서비스로 고객에게 최적의 왁싱 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 왁싱의 효과를 극대화합니다.
+                  </p>
+                </div>
+                <div class="service-detail-item">
+                  <h5>✨ 브라질리안 왁싱</h5>
+                  <p>
+                    브라질리안 왁싱 서비스로 고객에게 최적의 왁싱 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 왁싱의 효과를 극대화합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

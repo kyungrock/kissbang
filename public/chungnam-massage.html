@@ -4,60 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="./" />
-    <title>충남마사지 추천 - 충남 마사지 업체 모음 | 마사지천국</title>
-
-    <meta
-      name="description"
-      content="충남마사지 추천 업체 정보. 충남 전 지역 마사지샵 가격, 위치, 리뷰 정보. 충남 최고의 마사지를 마사지천국에서 찾아보세요."
+    <title>충남 마사지 - 마사지천국 | 충남 마사지 업체 예약 플랫폼</title>
+    <meta name="description" content="충남 마사지 마사지천국, 충남 마사지, 충남진 마사지 등 충남 전 지역 마사지 업체를 한눈에! 충남 최저가 마사지 업체를 찾아보세요."
     />
-    <meta
-      name="keywords"
-      content="충남마사지, 충남건마, 충남스웨디시, 충남1인샵, 충남아로마, 마사지천국"
+    <meta name="keywords" content="충남 마사지, 충남 마사지, 충남진 마사지, 충남마사지, 마사지예약, 마사지천국"
     />
-    <meta
-      name="robots"
-      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-    />
-    <link rel="canonical" href="https://msg1000.com/chungnam-massage.html" />
-
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="충남마사지 추천 - 충남 마사지 업체 모음 | 마사지천국"
-    />
-    <meta
-      property="og:url"
-      content="https://msg1000.com/chungnam-massage.html"
-    />
-    <meta property="og:site_name" content="마사지천국" />
-
+    <meta name="author" content="마사지천국" />
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
+    <!-- Gmarket Sans 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- 햄버거 메뉴 스타일 -->
+    <!-- 스타일은 hamburger-menu-component.html에 포함됨 -->
   </head>
   <body>
     <!-- 헤더 -->
-    <header class="header">
-      <div class="header-content">
-        <h1
-          class="logo"
-          onclick="window.location.href='index.html'"
-          style="cursor: pointer"
-        >
-          <i class="fas fa-spa"></i>
-          마사지천국
-        </h1>
-        <div class="search-toggle" id="searchToggle">
-          <i class="fas fa-search"></i>
-        </div>
-      </div>
-    </header>
+    <div id="header-container"></div>
 
-    <!-- 검색 섹션 -->
     <section class="search-section">
       <div class="search-container">
+        <!-- 업체 검색 입력창 -->
+        <div class="text-search-box">
+          <input
+            type="text"
+            id="shopSearchInput"
+            class="shop-search-input"
+            placeholder="충남 지역 또는 키워드를 입력하세요"
+            autocomplete="off"
+          />
+          <i class="fas fa-search search-icon"></i>
+        </div>
         <div class="location-search">
           <div class="search-box">
             <select id="regionSelect" class="search-select">
@@ -66,27 +50,39 @@
           </div>
           <div class="search-box">
             <select id="districtSelect" class="search-select">
-              <option value="">구를 선택하세요</option>
+              <option value="">세부 지역을 선택하세요</option>
             </select>
           </div>
-          <button id="searchBtn" class="search-btn">
-            <i class="fas fa-search"></i>
-            검색
-          </button>
+          <div class="search-divider"></div>
         </div>
       </div>
     </section>
 
     <section class="filter-section">
       <div class="filter-container">
-        <button class="filter-btn active" data-filter="all">전체</button>
-        <button class="filter-btn" data-filter="massage">마사지</button>
-        <button class="filter-btn" data-filter="outcall">출장마사지</button>
-        <button class="filter-btn" data-filter="waxing">왁싱</button>
+        <a class="filter-btn" data-filter="all">전체</a>
+        <a class="filter-btn" data-filter="massage">마사지</a>
+        <a class="filter-btn" data-filter="outcall">출장마사지</a>
+        <div class="type-filter-dropdown">
+          <button class="filter-btn type-filter-btn" id="typeFilterBtn">
+            테마보기
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="type-dropdown-menu" id="typeDropdownMenu">
+            <div class="type-dropdown-item" data-type="swedish">스웨디시</div>
+            <div class="type-dropdown-item" data-type="thai">타이마사지</div>
+            <div class="type-dropdown-item" data-type="aroma">아로마마사지</div>
+            <div class="type-dropdown-item" data-type="waxing">왁싱</div>
+            <div class="type-dropdown-item" data-type="chinese">중국마사지</div>
+            <div class="type-dropdown-item" data-type="foot">발마사지</div>
+          </div>
+        </div>
+        <button class="info-btn" onclick="openRelatedInfoModal(event)">
+          관련정보
+        </button>
       </div>
     </section>
 
-    <!-- 국가별 마사지 필터 -->
     <section
       class="country-filter-section"
       id="massageCountryFilterSection"
@@ -99,60 +95,24 @@
             <span class="country-name">전체</span>
           </div>
           <div class="country-box" data-country="korea">
-            <img
-              src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg"
-              alt="한국"
-              class="country-flag"
-              onerror="this.onerror=null; this.style.display='none';"
-              loading="lazy"
-            />
             <span class="country-name">한국</span>
           </div>
           <div class="country-box" data-country="thai">
-            <img
-              src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/태국.jpg"
-              alt="태국"
-              class="country-flag"
-              onerror="this.onerror=null; this.style.display='none';"
-              loading="lazy"
-            />
             <span class="country-name">태국</span>
           </div>
           <div class="country-box" data-country="china">
-            <img
-              src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg"
-              alt="중국"
-              class="country-flag"
-              onerror="this.onerror=null; this.style.display='none';"
-              loading="lazy"
-            />
             <span class="country-name">중국</span>
           </div>
           <div class="country-box" data-country="russia">
-            <img
-              src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/러시아-1.jpg"
-              alt="러시아"
-              class="country-flag"
-              onerror="this.onerror=null; this.style.display='none';"
-              loading="lazy"
-            />
             <span class="country-name">러시아</span>
           </div>
           <div class="country-box" data-country="japan">
-            <img
-              src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg"
-              alt="일본"
-              class="country-flag"
-              onerror="this.onerror=null; this.style.display='none';"
-              loading="lazy"
-            />
             <span class="country-name">일본</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 국가별 출장마사지 필터 -->
     <section
       class="country-filter-section"
       id="outcallCountryFilterSection"
@@ -165,72 +125,67 @@
             <span class="country-name">전체</span>
           </div>
           <div class="country-box" data-country="korea">
-            <img
-              src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg"
-              alt="한국"
-              class="country-flag"
-              onerror="this.onerror=null; this.style.display='none';"
-              loading="lazy"
-            />
             <span class="country-name">한국</span>
           </div>
           <div class="country-box" data-country="thai">
-            <img
-              src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/태국.jpg"
-              alt="태국"
-              class="country-flag"
-              onerror="this.onerror=null; this.style.display='none';"
-              loading="lazy"
-            />
             <span class="country-name">태국</span>
           </div>
           <div class="country-box" data-country="china">
-            <img
-              src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg"
-              alt="중국"
-              class="country-flag"
-              onerror="this.onerror=null; this.style.display='none';"
-              loading="lazy"
-            />
             <span class="country-name">중국</span>
           </div>
           <div class="country-box" data-country="russia">
-            <img
-              src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/러시아-1.jpg"
-              alt="러시아"
-              class="country-flag"
-              onerror="this.onerror=null; this.style.display='none';"
-              loading="lazy"
-            />
             <span class="country-name">러시아</span>
           </div>
           <div class="country-box" data-country="japan">
-            <img
-              src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg"
-              alt="일본"
-              class="country-flag"
-              onerror="this.onerror=null; this.style.display='none';"
-              loading="lazy"
-            />
             <span class="country-name">일본</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 업체 목록 -->
+    <section
+      class="theme-filter-section"
+      id="themeFilterSection"
+      style="display: none"
+    >
+      <div class="theme-filter-container">
+        <h3 class="theme-filter-title">테마별 마사지</h3>
+        <div class="theme-boxes">
+          <div class="theme-box active" data-theme="all">
+            <span class="theme-name">전체</span>
+          </div>
+          <div class="theme-box" data-theme="swedish">
+            <span class="theme-name">스웨디시</span>
+          </div>
+          <div class="theme-box" data-theme="thai">
+            <span class="theme-name">타이마사지</span>
+          </div>
+          <div class="theme-box" data-theme="aroma">
+            <span class="theme-name">아로마마사지</span>
+          </div>
+          <div class="theme-box" data-theme="waxing">
+            <span class="theme-name">왁싱</span>
+          </div>
+          <div class="theme-box" data-theme="chinese">
+            <span class="theme-name">중국마사지</span>
+          </div>
+          <div class="theme-box" data-theme="foot">
+            <span class="theme-name">발마사지</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <main class="main-content">
       <div class="results-header">
-        <h2 id="resultsTitle">충남마사지 전체 업체</h2>
+        <h1 id="resultsTitle">충남 마사지 업체</h1>
         <span id="resultsCount" class="results-count">총 0개</span>
       </div>
-
       <div id="massageList" class="massage-list">
         <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
       </div>
     </main>
 
-    <!-- 푸터 -->
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-links">
@@ -266,6 +221,9 @@
       </div>
     </footer>
 
+    <!-- 햄버거 메뉴 -->
+    <div id="hamburger-menu-container"></div>
+
     <!-- 회사소개 모달 -->
     <div id="aboutModal" class="modal">
       <div class="modal-content">
@@ -287,6 +245,34 @@
             <strong>이용자 중심의 편리한 검색 시스템</strong>과
             <strong>투명한 정보 제공</strong>을 통해 고객과 업소 모두가 만족할
             수 있는 건강한 플랫폼 생태계를 만들고자 합니다.
+          </p>
+
+          <div class="info-section">
+            <h3>🌍 전국 기반 서비스</h3>
+            <p>
+              지역별, 카테고리별로 원하는 마사지 업소를 쉽게 찾을 수 있습니다.
+            </p>
+          </div>
+
+          <div class="info-section">
+            <h3>✅ 신뢰성 있는 정보 제공</h3>
+            <p>
+              실제 이용 후기, 가격, 위치, 영업시간 등 검증된 정보를 제공합니다.
+            </p>
+          </div>
+
+          <div class="info-section">
+            <h3>🤝 소비자와 업소를 연결</h3>
+            <p>
+              고객은 필요한 서비스를 편리하게 찾고, 업소는 홍보 기회를 얻어 더
+              많은 고객과 만날 수 있습니다.
+            </p>
+          </div>
+
+          <p class="highlight">
+            <strong>마사지천국</strong>는 앞으로도 고객의 편의를 최우선으로
+            생각하며,<br />건강과 휴식을 동시에 책임지는
+            <strong>대한민국 대표 마사지 플랫폼</strong>이 되겠습니다.
           </p>
         </div>
       </div>
@@ -310,40 +296,811 @@
               이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
             </p>
           </div>
+
+          <div class="terms-section">
+            <h3>제 2 조 (용어의 정의)</h3>
+            <ul>
+              <li>
+                "이용자"란 본 약관에 따라 회사가 제공하는 서비스를 이용하는 회원
+                및 비회원을 말합니다.
+              </li>
+              <li>
+                "회원"이란 회사에 개인정보를 제공하여 회원등록을 한 자로서,
+                지속적으로 서비스를 이용할 수 있는 자를 말합니다.
+              </li>
+              <li>
+                "업체회원"이란 마사지 업소 및 관련 사업체로서, 회사와 계약을
+                맺고 서비스에 정보를 등록하는 회원을 말합니다.
+              </li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 3 조 (약관의 효력 및 변경)</h3>
+            <ul>
+              <li>
+                본 약관은 서비스 화면에 게시하거나 기타의 방법으로 공지함으로써
+                효력이 발생합니다.
+              </li>
+              <li>
+                회사는 관련 법령을 위배하지 않는 범위에서 본 약관을 개정할 수
+                있으며, 변경 시 사전 공지합니다.
+              </li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 4 조 (서비스의 제공 및 변경)</h3>
+            <p>회사는 다음과 같은 서비스를 제공합니다.</p>
+            <ul>
+              <li>전국 마사지 업소 정보 제공</li>
+              <li>업체별 가격, 위치, 후기 등의 정보 열람</li>
+              <li>회원 리뷰 및 평가 기능</li>
+              <li>업체 홍보 및 광고 서비스</li>
+            </ul>
+            <p>
+              회사는 서비스의 내용 및 운영 방식을 변경할 수 있으며, 변경 시 사전
+              공지합니다.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 5 조 (회원의 의무)</h3>
+            <ul>
+              <li>회원은 본 약관 및 관련 법령을 준수하여야 합니다.</li>
+              <li>
+                회원은 허위 정보를 기재하거나 타인의 정보를 도용해서는 안
+                됩니다.
+              </li>
+              <li>
+                회원은 서비스 이용 시 회사 및 제3자의 권리를 침해해서는 안
+                됩니다.
+              </li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 6 조 (회사의 의무)</h3>
+            <ul>
+              <li>회사는 안정적으로 서비스를 제공하기 위해 최선을 다합니다.</li>
+              <li>
+                회사는 회원의 개인정보를 본인의 동의 없이 제3자에게 제공하지
+                않습니다.
+              </li>
+              <li>
+                회사는 불법적인 콘텐츠 및 부적절한 정보가 유통되지 않도록 관리할
+                책임이 있습니다.
+              </li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 7 조 (책임의 한계)</h3>
+            <ul>
+              <li>
+                회사는 업소의 실제 서비스(마사지 시술 등)에 대해 직접적인 책임을
+                지지 않습니다.
+              </li>
+              <li>
+                이용자와 업소 간에 발생한 문제는 당사자 간의 협의로 해결함을
+                원칙으로 합니다.
+              </li>
+              <li>회사는 플랫폼을 통한 정보 제공과 중개 역할에 국한합니다.</li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 8 조 (이용 계약의 해지 및 서비스 중지)</h3>
+            <ul>
+              <li>
+                회원은 언제든지 탈퇴를 요청할 수 있으며, 회사는 지체 없이 이를
+                처리합니다.
+              </li>
+              <li>
+                회사는 다음 사유가 발생한 경우 사전 통보 후 서비스 제공을 중단할
+                수 있습니다.
+                <ul>
+                  <li>시스템 점검, 천재지변 등 불가피한 사유</li>
+                  <li>회원이 법령 또는 약관을 위반한 경우</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="terms-section">
+            <h3>제 9 조 (준거법 및 관할)</h3>
+            <p>
+              본 약관에 명시되지 않은 사항은 관계 법령 및 상관례에 따르며,
+              서비스 이용과 관련하여 분쟁이 발생할 경우 회사 본사 소재지를
+              관할하는 법원을 제1심 관할 법원으로 합니다.
+            </p>
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- 상세정보 모달 -->
+    <div id="detailsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>상세정보</h2>
+          <button class="modal-close" onclick="closeModal('detailsModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>마사지사이트 마사지천국 - 전국 마사지 예약의 중심</h3>
+            <p>
+              마사지천국는 최고의 <strong>마사지사이트</strong>로,
+              <strong>서울마사지사이트</strong>,
+              <strong>충남마사지사이트</strong>, 충남 등 전국 마사지 업체를
+              한눈에 볼 수 있는 예약 플랫폼입니다.
+              <strong>아로마마사지</strong>, <strong>타이마사지</strong>,
+              <strong>스웨디시</strong>, <strong>1인샵</strong>,
+              <strong>왁싱</strong> 등 다양한 마사지 서비스를 지역별로 간편하게
+              예약할 수 있습니다.
+            </p>
+            <p>
+              마사지천국는 고객의 편의를 위해 엄선된 업체를 제공하며, 최저가
+              보장과 실시간 예약 시스템으로 편리함을 더합니다.
+              <strong>서울마사지사이트</strong>에서는 프리미엄
+              <strong>스웨디시</strong>와 <strong>아로마마사지</strong>를,
+              <strong>충남마사지사이트</strong>에서는 전통
+              <strong>타이마사지</strong>와 <strong>왁싱</strong> 서비스를
+              만나보세요. 영남권의 중심인 <strong>충남마사지사이트</strong>에서
+              특별한 <strong>1인샵</strong> 경험을 즐길 수 있습니다.
+            </p>
+            <p>
+              지금 마사지천국 <strong>마사지사이트</strong>에서 당신에게 맞는
+              마사지 서비스를 찾아 지역에 맞게 예약하세요.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h3>휴식과 힐링</h3>
+            <p>
+              바쁜 일상 속에서 <strong>마사지</strong>는 몸과 마음을 동시에
+              회복시키는 최적의 방법입니다. <strong>마사지사이트</strong>를 통해
+              서울, 충남, 충남 등 지역별 <strong>아로마마사지</strong>와
+              <strong>스웨디시</strong>를 찾아 편안한 휴식을 즐겨보세요.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h3>이용 안내</h3>
+            <p>
+              본 서비스는 정보 제공 목적으로만 사용되며, 실제 서비스 이용 시에는
+              각 업소의 이용약관을 확인하시기 바랍니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="common-components.js"></script>
     <script src="script.js"></script>
     <script>
-      // 페이지 로드 시 충남 지역 자동 선택
       document.addEventListener('DOMContentLoaded', function () {
-        // 지역 선택을 "충남"로 설정
+        if (typeof currentRegion !== 'undefined') {
+          currentRegion = '충남';
+        }
+
         const regionSelect = document.getElementById('regionSelect');
         if (regionSelect) {
           regionSelect.value = '충남';
-
-          // 구 옵션 업데이트
           if (typeof updateDistrictOptions === 'function') {
             updateDistrictOptions('충남');
           }
-
-          // 전역 변수 설정
-          if (typeof currentRegion !== 'undefined') {
-            currentRegion = '충남';
+          const districtSelect = document.getElementById('districtSelect');
+          if (districtSelect) {
+            ;
+            districtSelect.disabled = false;
+            districtSelect.style.opacity = '1';
+          }
+          if (typeof currentDistrict !== 'undefined') {
+            ;
           }
         }
 
-        // displayFilteredResults()를 사용하여 필터 로직 적용
-        if (typeof displayFilteredResults === 'function') {
-          displayFilteredResults();
-        } else {
-          // 폴백: 충남 지역 업체만 필터링하여 표시
-          const shops = massageShops.filter((shop) => shop.region === '충남');
-          displayMassageShops(shops);
-          updateResultsHeader('충남마사지 전체 업체', shops.length);
+        // 마사지 필터 버튼을 기본으로 활성화
+        const massageFilterBtn = document.querySelector('[data-filter="massage"]'
+        );
+        if (massageFilterBtn) {
+          document.querySelectorAll('.filter-btn').forEach((btn) => {
+            btn.classList.remove('active');
+          });
+          massageFilterBtn.classList.add('active');
+
+          if (typeof currentFilter !== 'undefined') {
+            currentFilter = 'massage';
+          }
+          window.currentFilter = 'massage';
+
+          if (typeof displayFilteredResults === 'function') {
+            displayFilteredResults();
+          } else if (Array.isArray(window.massageShops)) {
+            const shops = massageShops.filter(
+              (shop) => shop.region === '충남' && shop.type === 'massage'
+            );
+            if (typeof displayMassageShops === 'function') {
+              displayMassageShops(shops);
+            }
+            if (typeof updateResultsHeader === 'function') {
+              updateResultsHeader('충남 마사지 업체', shops.length);
+            }
+          }
+
+          // resultsTitle을 "충남 마사지 업체"로 업데이트
+          const resultsTitle = document.getElementById('resultsTitle');
+          if (resultsTitle) {
+            resultsTitle.textContent = '충남 마사지 업체';
+          }
         }
       });
     </script>
+
+    <!-- 관련정보 모달 -->
+    <div id="relatedInfoModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>관련정보</h2>
+          <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- 1. 충남 마사지 소개글 -->
+          <div class="terms-section">
+            <h3>🌊 충남 마사지 소개</h3>
+            <p>
+              <strong>충남 마사지</strong>는 서해안의 아름다운 자연과 역사가 살아 숨쉬는 충청남도에서 제공되는 전문 마사지 서비스입니다. 충남은 천안, 아산, 공주, 보령, 서산 등 다양한 도시들이 모여있어 각 지역마다 특색 있는 마사지 문화를 형성하고 있습니다. 특히 수도권과 가까운 접근성과 서해안의 휴양지 분위기를 동시에 즐길 수 있어 많은 분들이 찾는 지역입니다.
+            </p>
+            <p>
+              충남 마사지는 단순한 피로 회복을 넘어서 몸과 마음의 완전한 힐링을 추구합니다. 전문 관리사들이 제공하는 다양한 마사지 기법을 통해 일상의 스트레스와 피로를 완전히 해소하고, 충남의 여유로운 분위기 속에서 진정한 휴식을 경험할 수 있습니다.
+            </p>
+          </div>
+
+          <!-- 2. 충남 마사지의 특징과 내용 -->
+          <div class="terms-section">
+            <h3>✨ 충남 마사지의 특징과 내용</h3>
+            <p>
+              <strong>충남 마사지</strong>는 충청남도만의 독특한 특성을 가지고 있습니다. 서해안의 신선한 바다 공기와 함께하는 힐링 경험, 그리고 각 도시별로 차별화된 마사지 서비스를 제공합니다.
+            </p>
+
+            <div class="info-highlight">
+              <h4>🌟 충남 마사지의 핵심 특징</h4>
+              <ul>
+                <li>
+                  <strong>지역별 특색:</strong> 천안은 교통의 요지로 접근성이 뛰어나며, 아산은 온천과 함께하는 힐링 마사지가 유명합니다. 공주는 백제 문화와 함께하는 전통 마사지, 보령과 서산은 해안 휴양지 분위기의 마사지 서비스를 제공합니다.
+                </li>
+                <li>
+                  <strong>다양한 마사지 종류:</strong> 스웨디시 마사지, 타이 마사지, 아로마 마사지, 발 마사지, 중국 경락 마사지, 왁싱 등 다양한 서비스를 한 곳에서 선택할 수 있습니다.
+                </li>
+                <li>
+                  <strong>전문 관리사:</strong> 충남 마사지 업체들은 전문 자격증을 보유한 경험 많은 관리사들이 서비스를 제공하며, 지속적인 교육을 통해 최신 마사지 기법을 습득하고 있습니다.
+                </li>
+                <li>
+                  <strong>합리적인 가격:</strong> 수도권 대비 합리적인 가격대를 형성하고 있어 가성비 좋은 마사지 서비스를 받을 수 있습니다.
+                </li>
+                <li>
+                  <strong>편리한 접근성:</strong> 천안역, 아산역 등 KTX 역과 가까워 수도권에서도 쉽게 접근 가능하며, 각 도시 내 대중교통이 잘 발달되어 있습니다.
+                </li>
+                <li>
+                  <strong>주차 시설 완비:</strong> 대부분의 충남 마사지 업체가 넓은 주차장을 갖추고 있어 자가용 이용객에게도 편리합니다.
+                </li>
+                <li>
+                  <strong>24시간 운영:</strong> 많은 업체들이 24시간 운영되어 언제든지 이용할 수 있으며, 특히 야간 근무자나 출장객에게 편리합니다.
+                </li>
+                <li>
+                  <strong>휴양지 분위기:</strong> 서해안의 여유로운 분위기 속에서 마사지를 받을 수 있어 일상의 피로를 완전히 잊을 수 있습니다.
+                </li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🎯 충남 지역별 마사지 특색</h4>
+              <ul>
+                <li>
+                  <strong>천안:</strong> 충남의 중심 도시로 가장 많은 마사지 업체가 집중되어 있습니다. 천안역 인근과 불당동, 신부동 등에 고급 마사지 업체들이 위치해 있으며, 다양한 가격대의 서비스를 제공합니다.
+                </li>
+                <li>
+                  <strong>아산:</strong> 온천과 함께하는 힐링 마사지가 유명합니다. 아산온천지구와 인근에 위치한 마사지 업체들은 온천 후 마사지를 받기에 최적의 환경을 제공합니다.
+                </li>
+                <li>
+                  <strong>공주:</strong> 백제 문화의 고도로, 전통과 현대가 어우러진 마사지 서비스를 제공합니다. 공주 시내와 공주대 인근에 마사지 업체들이 위치해 있습니다.
+                </li>
+                <li>
+                  <strong>보령:</strong> 대천해수욕장과 가까운 해안 휴양지 분위기의 마사지 서비스를 제공합니다. 여름철 휴가철에 특히 인기가 높습니다.
+                </li>
+                <li>
+                  <strong>서산:</strong> 서해안의 아름다운 풍경과 함께하는 마사지 서비스를 제공합니다. 해안가 근처의 마사지 업체들은 바다 전망을 보며 마사지를 받을 수 있는 특별한 경험을 제공합니다.
+                </li>
+                <li>
+                  <strong>당진:</strong> 산업단지와 가까워 출장객들에게 편리하며, 합리적인 가격의 마사지 서비스를 제공합니다.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 3. 충남 행정구간 소개 -->
+          <div class="terms-section">
+            <h3>🗺️ 충남 행정구간 소개</h3>
+            <p>
+              <strong>충남</strong>은 15개 시·군으로 구성되어 있으며, 각 지역마다 고유한 특색과 마사지 문화를 가지고 있습니다. 충남의 주요 행정구간을 소개합니다.
+            </p>
+
+            <div class="info-highlight">
+              <h4>🏛️ 충남 주요 시·군</h4>
+              <ul>
+                <li>
+                  <strong>천안시:</strong> 충남의 중심 도시로 동남구와 서북구로 나뉘어 있습니다. 천안역, 불당동, 신부동, 쌍용동 등에 마사지 업체가 집중되어 있으며, 교통의 요지로 접근성이 뛰어납니다.
+                </li>
+                <li>
+                  <strong>아산시:</strong> 온천지구로 유명하며, 온양온천과 아산온천 인근에 힐링 마사지 업체들이 위치해 있습니다. 온천과 마사지를 함께 즐길 수 있는 특별한 경험을 제공합니다.
+                </li>
+                <li>
+                  <strong>공주시:</strong> 백제의 고도로, 공주 시내와 공주대 인근에 마사지 업체들이 있습니다. 역사와 문화를 느끼며 마사지를 받을 수 있습니다.
+                </li>
+                <li>
+                  <strong>보령시:</strong> 대천해수욕장이 있는 해안 휴양지로, 대천동과 보령시내에 마사지 업체들이 위치해 있습니다. 여름철 휴가철에 특히 인기가 높습니다.
+                </li>
+                <li>
+                  <strong>서산시:</strong> 서해안의 아름다운 풍경을 자랑하며, 서산시내와 해안가 근처에 마사지 업체들이 있습니다. 바다 전망을 보며 마사지를 받을 수 있는 특별한 경험을 제공합니다.
+                </li>
+                <li>
+                  <strong>당진시:</strong> 산업단지가 발달한 지역으로, 당진시내와 산업단지 인근에 마사지 업체들이 위치해 있습니다. 출장객들에게 편리한 위치입니다.
+                </li>
+                <li>
+                  <strong>논산시:</strong> 논산시내와 계룡시 인근에 마사지 업체들이 있으며, 지역 주민들을 위한 실용적인 서비스를 제공합니다.
+                </li>
+                <li>
+                  <strong>계룡시:</strong> 계룡산과 가까운 지역으로, 자연 속에서의 힐링 마사지를 경험할 수 있습니다.
+                </li>
+                <li>
+                  <strong>태안군:</strong> 태안해안국립공원이 있는 휴양지로, 태안읍과 해안가에 마사지 업체들이 위치해 있습니다. 자연 속에서의 완전한 휴식을 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>부여군:</strong> 백제 문화의 중심지로, 부여읍과 정림사지 인근에 마사지 업체들이 있습니다.
+                </li>
+                <li>
+                  <strong>서천군:</strong> 서해안의 조용한 휴양지로, 서천읍과 해안가에 마사지 업체들이 위치해 있습니다.
+                </li>
+                <li>
+                  <strong>금산군:</strong> 인삼의 고장으로, 금산읍에 마사지 업체들이 있으며, 인삼과 함께하는 건강 마사지를 경험할 수 있습니다.
+                </li>
+                <li>
+                  <strong>청양군:</strong> 조용한 농촌 지역으로, 청양읍에 마사지 업체들이 있습니다.
+                </li>
+                <li>
+                  <strong>홍성군:</strong> 홍성읍과 광천온천 인근에 마사지 업체들이 위치해 있습니다.
+                </li>
+                <li>
+                  <strong>예산군:</strong> 예산읍에 마사지 업체들이 있으며, 지역 주민들을 위한 서비스를 제공합니다.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 4. 충남 관광 및 놀이 추천 -->
+          <div class="terms-section">
+            <h3>🎨 충남 마사지 후 추천 관광지 및 놀이</h3>
+            <p>
+              <strong>충남 마사지</strong>를 받은 후에는 충남의 다양한 관광지와 놀이 시설을 즐기실 수 있습니다. 마사지로 풀린 몸과 마음으로 충남의 특별한 경험을 더욱 풍성하게 만들어보세요.
+            </p>
+
+            <div class="info-highlight">
+              <h4>🌊 해안 휴양지</h4>
+              <ul>
+                <li>
+                  <strong>대천해수욕장 (보령):</strong> 충남의 대표 해수욕장으로, 마사지 후 해변을 산책하며 바다를 감상할 수 있습니다. 여름철에는 해수욕과 함께 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>만리포해수욕장 (태안):</strong> 아름다운 백사장과 함께하는 해안 휴양지로, 마사지 후 해안가를 산책하며 일몰을 감상할 수 있습니다.
+                </li>
+                <li>
+                  <strong>안면도 (태안):</strong> 태안해안국립공원 내의 아름다운 섬으로, 마사지 후 자연 속에서 힐링 타임을 보낼 수 있습니다.
+                </li>
+                <li>
+                  <strong>서산 해미읍성:</strong> 조선시대 읍성으로, 마사지 후 역사 탐방을 즐길 수 있습니다.
+                </li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🏛️ 역사 문화 유적지</h4>
+              <ul>
+                <li>
+                  <strong>공주 공산성:</strong> 백제의 역사를 느낄 수 있는 유적지로, 마사지 후 역사 탐방을 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>부여 정림사지:</strong> 백제 문화의 중심지로, 마사지 후 문화 체험을 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>공주 무령왕릉:</strong> 백제 무령왕의 무덤으로, 마사지 후 역사 탐방을 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>아산 현충사:</strong> 이순신 장군을 기리는 사당으로, 마사지 후 역사 교육을 받을 수 있습니다.
+                </li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🌳 자연 관광지</h4>
+              <ul>
+                <li>
+                  <strong>계룡산국립공원:</strong> 충남의 대표 산으로, 마사지 후 가벼운 등산을 즐기며 자연을 감상할 수 있습니다.
+                </li>
+                <li>
+                  <strong>태안해안국립공원:</strong> 아름다운 해안 절경을 자랑하는 국립공원으로, 마사지 후 해안 도로를 따라 드라이브를 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>금산 인삼랜드:</strong> 인삼의 고장 금산에서 인삼 체험을 즐길 수 있으며, 마사지 후 건강한 휴식을 취할 수 있습니다.
+                </li>
+                <li>
+                  <strong>아산 외암마을:</strong> 전통 한옥 마을로, 마사지 후 전통 문화를 체험할 수 있습니다.
+                </li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🎢 놀이 및 체험 시설</h4>
+              <ul>
+                <li>
+                  <strong>천안 불당동 테마파크:</strong> 마사지 후 가족과 함께 즐길 수 있는 테마파크입니다.
+                </li>
+                <li>
+                  <strong>아산 스파비스 리조트:</strong> 온천과 함께하는 리조트로, 마사지 후 온천을 즐기며 완전한 힐링을 경험할 수 있습니다.
+                </li>
+                <li>
+                  <strong>보령 머드축제:</strong> 여름철에 열리는 머드축제로, 마사지 후 특별한 체험을 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>서산 해미읍성 축제:</strong> 조선시대 축제를 재현한 이벤트로, 마사지 후 역사 체험을 즐길 수 있습니다.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 5. 충남 음식 추천 및 경로 -->
+          <div class="terms-section">
+            <h3>🍽️ 충남 마사지 후 추천 음식 및 경로</h3>
+            <p>
+              <strong>충남 마사지</strong>를 받은 후에는 충남의 맛있는 음식으로 에너지를 보충하세요. 충남은 서해안의 신선한 해산물과 각 지역의 특색 있는 음식으로 유명합니다.
+            </p>
+
+            <div class="info-highlight">
+              <h4>🦀 해산물 전문 음식점</h4>
+              <ul>
+                <li>
+                  <strong>보령 대천해수욕장 게장거리:</strong> 충남 마사지 업체에서 차로 20분 거리의 대천해수욕장 게장거리에서 신선한 게장과 해산물을 맛보세요. 특히 꽃게장과 대게가 유명합니다.
+                </li>
+                <li>
+                  <strong>태안 만리포 해산물 식당:</strong> 충남 마사지 업체에서 차로 30분 거리의 만리포 해산물 식당에서 신선한 회와 해산물 요리를 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>서산 해미 해산물 시장:</strong> 충남 마사지 업체에서 차로 15분 거리의 해미 해산물 시장에서 신선한 해산물을 구매하고 바로 요리해 먹을 수 있습니다.
+                </li>
+                <li>
+                  <strong>당진 새만금 해산물:</strong> 충남 마사지 업체에서 차로 25분 거리의 새만금 해산물 식당에서 특별한 해산물 요리를 맛볼 수 있습니다.
+                </li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🍖 충남 전통 음식</h4>
+              <ul>
+                <li>
+                  <strong>천안 불당동 막국수 거리:</strong> 충남 마사지 업체에서 도보 5분 거리의 막국수 거리에서 충남의 대표 음식인 막국수를 맛보세요. 시원한 국물이 마사지 후 몸을 시원하게 해줍니다.
+                </li>
+                <li>
+                  <strong>아산 온양온천 순두부 마을:</strong> 충남 마사지 업체에서 차로 10분 거리의 순두부 마을에서 부드러운 순두부를 맛볼 수 있습니다.
+                </li>
+                <li>
+                  <strong>공주 한정식 전문점:</strong> 충남 마사지 업체에서 차로 15분 거리의 한정식 전문점에서 백제 문화를 느낄 수 있는 전통 한정식을 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>부여 백제 한정식:</strong> 충남 마사지 업체에서 차로 20분 거리의 백제 한정식 전문점에서 역사와 함께하는 특별한 식사를 즐길 수 있습니다.
+                </li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>☕ 충남 카페 및 디저트</h4>
+              <ul>
+                <li>
+                  <strong>천안 불당동 카페 거리:</strong> 충남 마사지 업체에서 도보 3분 거리의 카페 거리에서 마사지 후 휴식을 취하며 커피를 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>아산 온천지구 힐링 카페:</strong> 충남 마사지 업체에서 차로 8분 거리의 힐링 카페에서 온천 분위기를 느끼며 디저트를 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>보령 해안가 카페:</strong> 충남 마사지 업체에서 차로 15분 거리의 해안가 카페에서 바다 전망을 보며 커피를 마실 수 있습니다.
+                </li>
+                <li>
+                  <strong>태안 일몰 카페:</strong> 충남 마사지 업체에서 차로 25분 거리의 일몰 카페에서 아름다운 일몰을 보며 특별한 시간을 보낼 수 있습니다.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 6. 충남 마사지 후기 -->
+          <div class="terms-section">
+            <h3>💬 충남 마사지 실제 고객 후기</h3>
+            <p>
+              <strong>충남 마사지</strong>를 실제로 이용하신 고객님들의 생생한 후기와 특별한 사연들을 소개합니다. 충남에서 마사지를 받으신 분들의 솔직한 경험담을 통해 더욱 신뢰할 수 있는 정보를 제공합니다.
+            </p>
+
+            <div class="review-stories">
+              <div class="review-story">
+                <h6>✨ "충남 마사지 정말 만족스러웠어요" - 김○○님</h6>
+                <p>
+                  "천안에서 출장 중 충남 마사지 업체를 방문했는데, 정말 만족스러웠어요. 관리사분이 친절하게 설명해주시고, 시술도 정말 부드럽게 해주셔서 피로가 완전히 풀렸습니다. 특히 천안역과 가까워서 접근성이 좋았고, 주차도 편리해서 다음에도 또 방문할 예정입니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>💫 "아산 온천 후 마사지 완벽했어요" - 박○○님</h6>
+                <p>
+                  "아산 온천을 다녀온 후 충남 마사지 업체에서 마사지를 받았는데, 정말 완벽한 조합이었어요. 온천으로 몸을 따뜻하게 한 후 마사지로 근육을 풀어주니 하루 종일의 피로가 완전히 사라졌습니다. 아산 온천지구 인근에 마사지 업체가 많아서 편리했어요."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>🌟 "보령 해수욕장 후 힐링 마사지" - 이○○님</h6>
+                <p>
+                  "보령 대천해수욕장에서 해수욕을 즐긴 후 충남 마사지 업체에서 마사지를 받았는데, 정말 힐링이 되었어요. 해안가 근처의 마사지 업체에서 바다 전망을 보며 마사지를 받을 수 있어서 특별한 경험이었습니다. 여름 휴가철에 특히 추천합니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>💆 "공주 백제 문화와 함께하는 마사지" - 최○○님</h6>
+                <p>
+                  "공주에서 백제 문화를 체험한 후 충남 마사지 업체에서 마사지를 받았는데, 역사와 힐링을 동시에 즐길 수 있어서 좋았어요. 공주 시내의 마사지 업체들이 깨끗하고 전문적이어서 만족스러웠습니다. 다음에도 공주 여행 시 꼭 다시 방문할 예정입니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "서산 해안가 마사지 특별했어요" - 정○○님</h6>
+                <p>
+                  "서산 해안가 근처의 충남 마사지 업체에서 마사지를 받았는데, 바다 전망을 보며 마사지를 받을 수 있어서 정말 특별했어요. 서해안의 여유로운 분위기 속에서 마사지를 받으니 일상의 스트레스가 완전히 사라졌습니다. 해안가 드라이브 후 마사지를 받으니 완벽한 하루였어요."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>💐 "태안 자연 속 힐링 마사지" - 강○○님</h6>
+                <p>
+                  "태안해안국립공원을 둘러본 후 충남 마사지 업체에서 마사지를 받았는데, 자연 속에서의 힐링 마사지가 정말 좋았어요. 태안읍의 마사지 업체들이 조용하고 편안한 분위기를 제공해서 완전한 휴식을 취할 수 있었습니다. 자연과 함께하는 마사지를 원하시는 분들에게 추천합니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>🌟 "당진 출장 중 편리한 마사지" - 조○○님</h6>
+                <p>
+                  "당진 출장 중 충남 마사지 업체를 방문했는데, 산업단지와 가까워서 접근성이 좋았어요. 출장 후 피로를 풀기 위해 마사지를 받았는데, 합리적인 가격에 좋은 서비스를 받을 수 있어서 만족스러웠습니다. 출장객들에게 특히 추천합니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>💑 "천안 가족 여행 중 마사지" - 윤○○님</h6>
+                <p>
+                  "천안 가족 여행 중 충남 마사지 업체에서 마사지를 받았는데, 가족 모두 만족스러웠어요. 천안 불당동의 마사지 업체들이 많아서 선택의 폭이 넓었고, 가격도 합리적이어서 좋았습니다. 여행 중 피로를 풀기에 최적이었어요."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. 충남 마사지 받으면 좋은 점 -->
+          <div class="terms-section">
+            <h3>💎 충남 마사지 받으면 좋은 점</h3>
+            <p>
+              <strong>충남 마사지</strong>를 받으면 다양한 긍정적인 효과를 경험할 수 있습니다. 단순한 피로 회복을 넘어서 신체적, 정신적 건강에 많은 도움이 됩니다.
+            </p>
+
+            <div class="info-highlight">
+              <h4>🏥 신체적 건강 효과</h4>
+              <ul>
+                <li>
+                  <strong>근육 이완 및 통증 완화:</strong> 일상생활이나 업무로 인해 뭉친 근육을 풀어주어 목, 어깨, 허리 등의 통증을 완화합니다.
+                </li>
+                <li>
+                  <strong>혈액순환 개선:</strong> 마사지를 통해 혈액순환이 개선되어 전신의 피로 회복에 도움이 되며, 냉증 개선에도 효과적입니다.
+                </li>
+                <li>
+                  <strong>면역력 강화:</strong> 정기적인 마사지는 림프 순환을 촉진하여 면역력을 강화하고 질병 예방에 도움이 됩니다.
+                </li>
+                <li>
+                  <strong>수면 질 개선:</strong> 마사지 후 편안한 상태에서 숙면을 취할 수 있어 수면의 질이 향상되고 불면증 개선에 도움이 됩니다.
+                </li>
+                <li>
+                  <strong>관절 가동성 향상:</strong> 특히 타이 마사지와 스트레칭 마사지는 관절의 가동 범위를 넓혀 유연성을 향상시킵니다.
+                </li>
+                <li>
+                  <strong>부종 완화:</strong> 발 마사지와 림프 마사지는 부종을 완화하고 다리 피로를 해소하는 데 효과적입니다.
+                </li>
+                <li>
+                  <strong>피부 개선:</strong> 아로마 마사지는 천연 오일을 사용하여 피부 보습과 탄력 개선에 도움이 됩니다.
+                </li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🧘 정신적 건강 효과</h4>
+              <ul>
+                <li>
+                  <strong>스트레스 해소:</strong> 마사지는 신체적 스트레스뿐만 아니라 정신적 스트레스도 해소해주어 일상의 고민과 걱정을 잠시 잊을 수 있습니다.
+                </li>
+                <li>
+                  <strong>우울감 완화:</strong> 정기적인 마사지는 세로토닌과 도파민 분비를 촉진하여 우울감을 완화하고 기분을 개선하는 데 도움이 됩니다.
+                </li>
+                <li>
+                  <strong>집중력 향상:</strong> 마사지 후 뇌의 혈류가 개선되어 집중력과 인지 기능이 향상되며, 업무 효율성이 높아집니다.
+                </li>
+                <li>
+                  <strong>자신감 회복:</strong> 몸의 피로가 해소되면 정신적으로도 자신감이 회복되고 긍정적인 에너지를 얻을 수 있습니다.
+                </li>
+                <li>
+                  <strong>감정 안정:</strong> 마사지는 교감신경을 안정시켜 감정을 조절하고 마음의 평화를 찾는 데 도움이 됩니다.
+                </li>
+                <li>
+                  <strong>에너지 충전:</strong> 마사지 후 몸과 마음이 재충전되어 새로운 에너지로 일상을 시작할 수 있습니다.
+                </li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🌟 충남 마사지의 특별한 장점</h4>
+              <ul>
+                <li>
+                  <strong>서해안의 여유로운 분위기:</strong> 충남의 서해안 휴양지 분위기 속에서 마사지를 받으면 일상의 피로를 완전히 잊을 수 있습니다.
+                </li>
+                <li>
+                  <strong>합리적인 가격:</strong> 수도권 대비 합리적인 가격대를 형성하고 있어 가성비 좋은 마사지 서비스를 받을 수 있습니다.
+                </li>
+                <li>
+                  <strong>편리한 접근성:</strong> 천안역, 아산역 등 KTX 역과 가까워 수도권에서도 쉽게 접근 가능합니다.
+                </li>
+                <li>
+                  <strong>다양한 선택지:</strong> 천안, 아산, 공주, 보령, 서산 등 다양한 도시에서 각 지역의 특색에 맞는 마사지 서비스를 선택할 수 있습니다.
+                </li>
+                <li>
+                  <strong>관광과 함께:</strong> 마사지 후 충남의 관광지와 맛집을 함께 즐길 수 있어 하루 종일 특별한 경험을 할 수 있습니다.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 8. 충남 마사지 서비스 -->
+          <div class="terms-section">
+            <h3>🎁 충남 마사지 서비스 소개</h3>
+            <p>
+              <strong>충남 마사지 업체</strong>에서는 충남만의 특별한 마사지 서비스와 상품을 제공하여 고객님들의 만족도를 극대화하고 있습니다. 충남 마사지 업체의 다양한 서비스를 통해 충남 생활의 특별함을 더욱 풍성하게 만나보세요.
+            </p>
+
+            <div class="service-categories">
+              <h4>🌟 충남 마사지 업체 제공 서비스</h4>
+              <div class="service-grid">
+                <div class="service-item">
+                  <i class="fas fa-spa"></i>
+                  <span>스웨디시 마사지</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-hands"></i>
+                  <span>타이 마사지</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-leaf"></i>
+                  <span>아로마 마사지</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-cut"></i>
+                  <span>왁싱</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-hand-holding-heart"></i>
+                  <span>중국 경락 마사지</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-walking"></i>
+                  <span>발 마사지</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-home"></i>
+                  <span>출장 마사지</span>
+                </div>
+                <div class="service-item">
+                  <i class="fas fa-user"></i>
+                  <span>1인샵 마사지</span>
+                </div>
+              </div>
+
+              <div class="service-details">
+                <div class="service-detail-item">
+                  <h5>✨ 스웨디시 마사지</h5>
+                  <p>
+                    유럽식 전통 마사지 기법으로 근육을 부드럽게 이완시켜 피로를 완전히 해소합니다. 60분, 90분, 120분 코스가 있으며, 전신 마사지와 부위별 마사지를 선택할 수 있습니다.
+                  </p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>💫 타이 마사지</h5>
+                  <p>
+                    태국 전통 마사지 기법으로 스트레칭과 압박을 결합하여 깊은 근육까지 효과적으로 이완시킵니다. 관절 가동성 향상과 유연성 개선에 특히 효과적입니다.
+                  </p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>🌟 아로마 마사지</h5>
+                  <p>
+                    천연 아로마 오일을 사용하여 피부 보습과 향기 요법의 효과를 동시에 누릴 수 있습니다. 라벤더, 유칼립투스, 로즈마리 등 다양한 오일 중 선택 가능합니다.
+                  </p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>💆 왁싱</h5>
+                  <p>
+                    전문 관리사가 제공하는 위생적이고 안전한 제모 서비스로, 오래 지속되는 깔끔한 효과를 제공합니다. 브라질리언 왁싱, 비키니 왁싱, 다리 왁싱 등 다양한 부위 서비스를 제공합니다.
+                  </p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>✨ 중국 경락 마사지</h5>
+                  <p>
+                    중국 전통 경락 이론에 기반한 마사지로, 경혈을 자극하여 에너지 흐름을 개선하고 통증을 완화합니다. 특히 목, 어깨, 허리 통증에 효과적입니다.
+                  </p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>💐 발 마사지</h5>
+                  <p>
+                    하루 종일 서 있거나 걸어다닌 발의 피로를 완전히 해소하는 전문 발 마사지입니다. 반사구 이론에 기반하여 전신 건강에도 도움이 됩니다.
+                  </p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>💑 출장 마사지</h5>
+                  <p>
+                    호텔이나 숙소로 직접 방문하여 마사지 서비스를 제공하는 출장 마사지입니다. 출장객이나 여행객에게 특히 편리하며, 프라이빗한 공간에서 마사지를 받을 수 있습니다.
+                  </p>
+                </div>
+
+                <div class="service-detail-item">
+                  <h5>🌟 1인샵 마사지</h5>
+                  <p>
+                    개인 공간에서 집중적인 케어를 받을 수 있는 1인샵 마사지입니다. 프라이빗한 환경에서 편안하게 마사지를 받을 수 있으며, 맞춤형 서비스를 제공합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🎯 충남 마사지 업체 서비스의 특별함</h4>
+              <ul>
+                <li>
+                  <strong>전문 관리사:</strong> 충남 마사지 업체의 모든 관리사는 전문 자격증을 보유한 경험 많은 전문가입니다.
+                </li>
+                <li>
+                  <strong>위생 관리:</strong> 충남 마사지 업체의 시설은 철저한 위생 관리로 안전한 환경을 제공합니다.
+                </li>
+                <li>
+                  <strong>개인 맞춤 서비스:</strong> 충남 마사지 업체에서는 고객의 상태와 목적에 맞는 맞춤형 서비스를 제공합니다.
+                </li>
+                <li>
+                  <strong>편리한 예약 시스템:</strong> 전화 예약과 온라인 예약을 모두 지원하여 편리하게 예약할 수 있습니다.
+                </li>
+                <li>
+                  <strong>주차 시설 완비:</strong> 대부분의 업체가 넓은 주차장을 갖추고 있어 자가용 이용객에게도 편리합니다.
+                </li>
+                <li>
+                  <strong>24시간 운영:</strong> 많은 업체들이 24시간 운영되어 언제든지 이용할 수 있습니다.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 햄버거 메뉴 -->
+    <div id="hamburger-menu-container"></div>
   </body>
 </html>

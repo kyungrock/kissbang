@@ -4,16 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="./" />
-    <title>
-      울산 중구마사지 - 마사지천국 | 울산 중구 마사지사이트 업체 예약 플랫폼
-    </title>
-    <meta
-      name="description"
-      content="울산 중구마사지 마사지천국, 울산 중구마사지, 울산 중구출장마사지 등 울산 중구 전 지역 마사지 업체를 한눈에! 태국마사지, 한국마사지, 스파, 왁싱까지. 울산 중구 최저가 마사지 업체를 찾아보세요."
+    <title>울산 중구 마사지 - 마사지천국 | 울산 중구 마사지 업체 예약 플랫폼</title>
+    <meta name="description" content="울산 중구 마사지 마사지천국, 자갈치, 남포동, 중앙동 마사지 등 울산 중구 전 지역 마사지 업체를 한눈에! 울산 중구 최저가 마사지 업체를 찾아보세요."
     />
-    <meta
-      name="keywords"
-      content="울산 중구마사지, 울산 중구마사지사이트, 울산 중구출장마사지, 마사지사이트, 마사지, 아로마마사지, 타이마사지, 스웨디시, 1인샵, 왁싱, 출장마사지, 마사지예약, 마사지천국"
+    <meta name="keywords" content="울산 중구 마사지, 자갈치, 남포동, 중앙동 마사지, 울산 중구마사지, 마사지예약, 마사지천국"
     />
     <meta name="author" content="마사지천국" />
     <link rel="stylesheet" href="style.css" />
@@ -21,11 +15,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
+    <!-- Gmarket Sans 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@300;500;700&display=swap"
       rel="stylesheet"
     />
-
     <!-- 햄버거 메뉴 스타일 -->
     <!-- 스타일은 hamburger-menu-component.html에 포함됨 -->
   </head>
@@ -35,7 +31,17 @@
 
     <section class="search-section">
       <div class="search-container">
-        <!-- 지역별 검색 -->
+        <!-- 업체 검색 입력창 -->
+        <div class="text-search-box">
+          <input
+            type="text"
+            id="shopSearchInput"
+            class="shop-search-input"
+            placeholder="울산 중구 지역 또는 키워드를 입력하세요"
+            autocomplete="off"
+          />
+          <i class="fas fa-search search-icon"></i>
+        </div>
         <div class="location-search">
           <div class="search-box">
             <select id="regionSelect" class="search-select">
@@ -82,24 +88,27 @@
       id="massageCountryFilterSection"
       style="display: none"
     >
-      <div class="filter-container">
-        <div class="filter-title">마사지 국가별</div>
-        <div class="country-filter-buttons">
-          <button class="country-filter-btn" data-country="all">전체</button>
-          <button class="country-filter-btn" data-country="korean">한국</button>
-          <button class="country-filter-btn" data-country="thai">태국</button>
-          <button class="country-filter-btn" data-country="chinese">
-            중국
-          </button>
-          <button class="country-filter-btn" data-country="vietnamese">
-            베트남
-          </button>
-          <button class="country-filter-btn" data-country="filipino">
-            필리핀
-          </button>
-          <button class="country-filter-btn" data-country="russian">
-            러시아
-          </button>
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
         </div>
       </div>
     </section>
@@ -109,24 +118,27 @@
       id="outcallCountryFilterSection"
       style="display: none"
     >
-      <div class="filter-container">
-        <div class="filter-title">출장마사지 국가별</div>
-        <div class="country-filter-buttons">
-          <button class="country-filter-btn" data-country="all">전체</button>
-          <button class="country-filter-btn" data-country="korean">한국</button>
-          <button class="country-filter-btn" data-country="thai">태국</button>
-          <button class="country-filter-btn" data-country="chinese">
-            중국
-          </button>
-          <button class="country-filter-btn" data-country="vietnamese">
-            베트남
-          </button>
-          <button class="country-filter-btn" data-country="filipino">
-            필리핀
-          </button>
-          <button class="country-filter-btn" data-country="russian">
-            러시아
-          </button>
+      <div class="country-filter-container">
+        <h3 class="country-filter-title">국가별 출장마사지</h3>
+        <div class="country-boxes">
+          <div class="country-box active" data-country="overall">
+            <span class="country-name">전체</span>
+          </div>
+          <div class="country-box" data-country="korea">
+            <span class="country-name">한국</span>
+          </div>
+          <div class="country-box" data-country="thai">
+            <span class="country-name">태국</span>
+          </div>
+          <div class="country-box" data-country="china">
+            <span class="country-name">중국</span>
+          </div>
+          <div class="country-box" data-country="russia">
+            <span class="country-name">러시아</span>
+          </div>
+          <div class="country-box" data-country="japan">
+            <span class="country-name">일본</span>
+          </div>
         </div>
       </div>
     </section>
@@ -166,10 +178,9 @@
 
     <main class="main-content">
       <div class="results-header">
-        <h1 id="resultsTitle">울산 중구 마사지사이트 업체</h1>
+        <h1 id="resultsTitle">울산 중구 마사지 업체</h1>
         <span id="resultsCount" class="results-count">총 0개</span>
       </div>
-
       <div id="massageList" class="massage-list">
         <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
       </div>
@@ -180,7 +191,7 @@
         <div class="footer-links">
           <div class="footer-link-row">
             <a href="#" class="footer-link" onclick="openDetailsModal(event)"
-              >울산 중구 마사지사이트 정보</a
+              >울산 중구마사지정보</a
             >
           </div>
           <div class="footer-divider-line"></div>
@@ -209,6 +220,9 @@
         </div>
       </div>
     </footer>
+
+    <!-- 햄버거 메뉴 -->
+    <div id="hamburger-menu-container"></div>
 
     <!-- 회사소개 모달 -->
     <div id="aboutModal" class="modal">
@@ -415,7 +429,51 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- 동적으로 생성됩니다 -->
+          <div class="terms-section">
+            <h3>마사지사이트 마사지천국 - 전국 마사지 예약의 중심</h3>
+            <p>
+              마사지천국는 최고의 <strong>마사지사이트</strong>로,
+              <strong>서울마사지사이트</strong>,
+              <strong>울산마사지사이트</strong>, 울산 등 전국 마사지 업체를
+              한눈에 볼 수 있는 예약 플랫폼입니다.
+              <strong>아로마마사지</strong>, <strong>타이마사지</strong>,
+              <strong>스웨디시</strong>, <strong>1인샵</strong>,
+              <strong>왁싱</strong> 등 다양한 마사지 서비스를 지역별로 간편하게
+              예약할 수 있습니다.
+            </p>
+            <p>
+              마사지천국는 고객의 편의를 위해 엄선된 업체를 제공하며, 최저가
+              보장과 실시간 예약 시스템으로 편리함을 더합니다.
+              <strong>서울마사지사이트</strong>에서는 프리미엄
+              <strong>스웨디시</strong>와 <strong>아로마마사지</strong>를,
+              <strong>울산마사지사이트</strong>에서는 전통
+              <strong>타이마사지</strong>와 <strong>왁싱</strong> 서비스를
+              만나보세요. 영남권의 중심인 <strong>울산마사지사이트</strong>에서
+              특별한 <strong>1인샵</strong> 경험을 즐길 수 있습니다.
+            </p>
+            <p>
+              지금 마사지천국 <strong>마사지사이트</strong>에서 당신에게 맞는
+              마사지 서비스를 찾아 지역에 맞게 예약하세요.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h3>휴식과 힐링</h3>
+            <p>
+              바쁜 일상 속에서 <strong>마사지</strong>는 몸과 마음을 동시에
+              회복시키는 최적의 방법입니다. <strong>마사지사이트</strong>를 통해
+              서울, 울산, 울산 등 지역별 <strong>아로마마사지</strong>와
+              <strong>스웨디시</strong>를 찾아 편안한 휴식을 즐겨보세요.
+            </p>
+          </div>
+
+          <div class="terms-section">
+            <h3>이용 안내</h3>
+            <p>
+              본 서비스는 정보 제공 목적으로만 사용되며, 실제 서비스 이용 시에는
+              각 업소의 이용약관을 확인하시기 바랍니다.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -423,12 +481,359 @@
     <script src="common-components.js"></script>
     <script src="script.js"></script>
     <script>
-      // 페이지 로드 시 초기화
       document.addEventListener('DOMContentLoaded', function () {
-        initializeApp();
+        if (typeof currentRegion !== 'undefined') {
+          currentRegion = '울산';
+        }
+
+        const regionSelect = document.getElementById('regionSelect');
+        if (regionSelect) {
+          regionSelect.value = '울산';
+          if (typeof updateDistrictOptions === 'function') {
+            updateDistrictOptions('울산');
+          }
+          const districtSelect = document.getElementById('districtSelect');
+          if (districtSelect) {
+            districtSelect.value = '중구';
+            districtSelect.disabled = false;
+            districtSelect.style.opacity = '1';
+          }
+          if (typeof currentDistrict !== 'undefined') {
+            currentDistrict = '중구';
+          }
+        }
+
+        // 마사지 필터 버튼을 기본으로 활성화
+        const massageFilterBtn = document.querySelector('[data-filter="massage"]'
+        );
+        if (massageFilterBtn) {
+          document.querySelectorAll('.filter-btn').forEach((btn) => {
+            btn.classList.remove('active');
+          });
+          massageFilterBtn.classList.add('active');
+
+          if (typeof currentFilter !== 'undefined') {
+            currentFilter = 'massage';
+          }
+          window.currentFilter = 'massage';
+
+          if (typeof displayFilteredResults === 'function') {
+            displayFilteredResults();
+          } else if (Array.isArray(window.massageShops)) {
+            const shops = massageShops.filter(
+              (shop) => shop.region === '울산' && shop.district === '중구' && shop.type === 'massage'
+            );
+            if (typeof displayMassageShops === 'function') {
+              displayMassageShops(shops);
+            }
+            if (typeof updateResultsHeader === 'function') {
+              updateResultsHeader('울산 중구 마사지 업체', shops.length);
+            }
+          }
+
+          // resultsTitle을 "울산 중구 마사지 업체"로 업데이트
+          const resultsTitle = document.getElementById('resultsTitle');
+          if (resultsTitle) {
+            resultsTitle.textContent = '울산 중구 마사지 업체';
+          }
+        }
       });
     </script>
 
+    <!-- 관련정보 모달 -->
+    <div id="relatedInfoModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>관련정보</h2>
+          <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+                  <div class="terms-section">
+            <h3>💆 울산 중구 마사지 소개</h3>
+            <p>
+              <strong>울산 중구 마사지</strong>는 울산의 중심 지역으로, 태화강과 상업지역이 발달한 지역입니다. 다양한 마사지 기법을 조합한 종합 힐링 서비스입니다. 울산 중구에서는 이러한 전문 마사지 서비스를 제공하고 있으며, 각 지역마다 전문 마사지 업체가 운영되고 있습니다.
+            </p>
+            <p>
+              울산 중구 마사지는 단순한 피로 회복을 넘어서 몸과 마음의 완전한 힐링을 추구합니다. 전문 관리사들이 제공하는 다양한 마사지 기법을 통해 일상의 스트레스와 피로를 완전히 해소하고, 중구의 여유로운 분위기 속에서 진정한 휴식을 경험할 수 있습니다.
+            </p>
+
+            <h4>✨ 울산 중구 마사지의 특징과 내용</h4>
+            <p>
+              <strong>울산 중구 마사지</strong>는 중구만의 독특한 특성을 가지고 있습니다. 전문 마사지 서비스를 제공하며, 고객의 만족도를 최우선으로 생각합니다. 중구의 지역적 특색과 마사지의 전문성이 결합되어 최고의 힐링 경험을 선사합니다.
+            </p>
+            <div class="info-highlight">
+              <h4>🌟 마사지의 핵심 특징</h4>
+              <ul>
+                <li><strong>전문 자격증 보유:</strong> 마사지의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+                <li><strong>다양한 마사지 스타일:</strong> 마사지의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+                <li><strong>맞춤형 시술:</strong> 마사지의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+                <li><strong>깨끗한 시설:</strong> 마사지의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+                <li><strong>경험 많은 관리사:</strong> 마사지의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+                <li><strong>완전한 휴식:</strong> 마사지의 핵심 특징으로, 고객에게 최적의 서비스를 제공합니다. 전문 관리사가 정성스럽게 시술하여 만족도를 극대화합니다.</li>
+              </ul>
+            </div>
+
+            <h4>🗺️ 울산 중구 마사지 추천 행정구간</h4>
+            <p>
+              <strong>중구</strong>은 다양한 행정구간으로 구성되어 있으며, 각 지역마다 전문 마사지 업체들이 운영되고 있습니다. 중구의 주요 행정구간별 마사지 특색을 소개합니다.
+            </p>
+            <div class="info-highlight">
+              <h4>🏛️ 중구 주요 행정구간</h4>
+              <ul>
+                <li><strong>시내 중심:</strong> 전문 자격증을 보유한 관리사가 마사지 시술을 제공합니다.</li>
+                <li><strong>성안동:</strong> 중구 마사지 업체가 위치해 있으며, 전문 마사지 서비스를 제공합니다.</li>
+                <li><strong>북정동:</strong> 전문 자격증을 보유한 관리사가 마사지 시술을 제공합니다.</li>
+                <li><strong>교동:</strong> 접근성이 좋고 다양한 가격대의 마사지 서비스를 선택할 수 있습니다.</li>
+                <li><strong>옥교동:</strong> 중구 마사지 업체가 위치해 있으며, 전문 마사지 서비스를 제공합니다.</li>
+                <li><strong>성안동:</strong> 편안한 환경에서 전문적인 마사지 서비스를 받을 수 있습니다.</li>
+                <li><strong>태화동:</strong> 편안한 환경에서 전문적인 마사지 서비스를 받을 수 있습니다.</li>
+              </ul>
+            </div>
+
+            <h4>🎨 울산 중구 마사지 후 추천 관광지 및 놀이</h4>
+            <p>
+              <strong>울산 중구 마사지</strong>를 받은 후에는 울산의 다양한 관광지와 놀이 시설을 즐기실 수 있습니다. 마사지로 풀린 몸과 마음으로 울산의 특별한 경험을 더욱 풍성하게 만들어보세요.
+            </p>
+
+            <div class="info-highlight">
+              <h4>🌊 자연 관광지</h4>
+              <ul>
+                <li><strong>울산 태화강:</strong> 울산을 흐르는 강으로, 강변 산책로와 자전거 도로가 잘 조성되어 있습니다.</li>
+                <li><strong>울산 대공원:</strong> 울산의 대표 공원으로, 산책과 휴식을 즐길 수 있습니다.</li>
+                <li><strong>울산 바위:</strong> 울산의 대표 자연 명소로, 등산과 자연 감상을 즐길 수 있습니다.</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🌊 문화 유적지</h4>
+              <ul>
+                <li><strong>울산 대곡리 반구대 암각화:</strong> 선사시대 암각화로, 유네스코 세계문화유산입니다.</li>
+                <li><strong>울산 박물관:</strong> 울산의 역사와 문화를 감상할 수 있는 박물관입니다.</li>
+                <li><strong>울산 근대역사관:</strong> 울산의 근대 문화유산을 감상할 수 있는 박물관입니다.</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🌊 쇼핑 및 엔터테인먼트</h4>
+              <ul>
+                <li><strong>울산 시내 상업지역:</strong> 울산의 대표 상업지역으로, 쇼핑과 식사를 즐길 수 있습니다.</li>
+                <li><strong>울산 CGV:</strong> 최신 영화를 감상할 수 있는 멀티플렉스입니다.</li>
+                <li><strong>울산 롯데시네마:</strong> 다양한 영화와 이벤트를 즐길 수 있는 영화관입니다.</li>
+              </ul>
+            </div>
+
+            <h4>🍽️ 울산 중구 마사지 후 추천 음식 및 경로</h4>
+            <p>
+              <strong>울산 중구 마사지</strong>를 받은 후에는 울산의 맛있는 음식으로 에너지를 보충하세요. 마사지로 활력을 회복한 후 울산의 특별한 맛을 즐기시면 더욱 완벽한 하루가 됩니다.
+            </p>
+
+            <div class="info-highlight">
+              <h4>🦀 울산 전통 음식</h4>
+              <ul>
+                <li><strong>울산 회:</strong> 울산의 대표 음식으로, 신선한 회를 맛볼 수 있습니다.</li>
+                <li><strong>울산 멍게:</strong> 울산의 대표 해산물로, 멍게 요리를 즐길 수 있습니다.</li>
+                <li><strong>울산 떡볶이:</strong> 울산만의 특별한 떡볶이 맛을 즐길 수 있습니다.</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🦀 울산 카페 및 디저트</h4>
+              <ul>
+                <li><strong>울산 태화강 카페:</strong> 태화강을 조망하며 커피를 마실 수 있는 카페입니다.</li>
+                <li><strong>울산 대공원 카페:</strong> 대공원을 조망하며 디저트를 즐길 수 있는 카페입니다.</li>
+                <li><strong>울산 전통찻집:</strong> 전통 차와 한과를 즐길 수 있는 찻집입니다.</li>
+              </ul>
+            </div>
+
+            <div class="info-highlight">
+              <h4>🦀 울산 맛집</h4>
+              <ul>
+                <li><strong>울산 한정식 전문점:</strong> 전통 한정식을 맛볼 수 있는 전문점입니다.</li>
+                <li><strong>울산 회 전문점:</strong> 신선한 회와 해산물을 즐길 수 있습니다.</li>
+                <li><strong>울산 고기집:</strong> 울산의 유명한 고기집에서 맛있는 고기를 즐길 수 있습니다.</li>
+              </ul>
+            </div>
+
+            <h4>💬 울산 중구 마사지 실제 고객 후기</h4>
+            <p>
+              <strong>울산 중구 마사지</strong>를 실제로 이용하신 고객님들의 생생한 후기와 특별한 사연들을 소개합니다. 중구에서 마사지를 받으신 분들의 솔직한 경험담을 통해 더욱 신뢰할 수 있는 정보를 제공합니다.
+            </p>
+            <div class="review-stories">
+              <div class="review-story">
+                <h6>✨ "정말 좋았어요" - 김○○님</h6>
+                <p>
+                  "전문 관리사분이 정성스럽게 시술해주셔서 몸과 마음이 모두 편안해졌어요."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "만족스러운 경험이었습니다" - 박○○님</h6>
+                <p>
+                  "다양한 마사지 기법을 조합해서 받을 수 있어서 만족스러웠습니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "피로가 완전히 해소되었어요" - 이○○님</h6>
+                <p>
+                  "하루 종일 쌓인 피로가 한 번에 사라져서 정말 좋았어요."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "전문적인 서비스였습니다" - 최○○님</h6>
+                <p>
+                  "개인 맞춤 서비스로 제 상태에 맞게 시술해주셔서 효과가 뛰어났습니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "정기적으로 받고 있어요" - 정○○님</h6>
+                <p>
+                  "다양한 마사지 기법을 조합해서 받을 수 있어서 만족스러웠습니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "강력 추천합니다" - 강○○님</h6>
+                <p>
+                  "개인 맞춤 서비스로 제 상태에 맞게 시술해주셔서 효과가 뛰어났습니다."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "에너지가 회복되었어요" - 조○○님</h6>
+                <p>
+                  "전문 관리사분이 정성스럽게 시술해주셔서 몸과 마음이 모두 편안해졌어요."
+                </p>
+              </div>
+
+              <div class="review-story">
+                <h6>✨ "완벽한 경험이었습니다" - 한○○님</h6>
+                <p>
+                  "편안한 환경에서 받는 마사지가 정말 힐링이었어요."
+                </p>
+              </div>
+            </div>
+
+            <h4>💎 울산 중구 마사지 받으면 좋은 점</h4>
+            <p>
+              <strong>울산 중구 마사지</strong>를 받으면 다양한 긍정적인 효과를 경험할 수 있습니다. 마사지의 특별한 기법으로 전신 건강에도 많은 도움이 됩니다.
+            </p>
+            <div class="info-highlight">
+              <h4>🏥 신체적 건강 효과</h4>
+              <ul>
+                <li><strong>근육 이완:</strong> 마사지를 통해 근육 이완을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+                <li><strong>혈액순환 개선:</strong> 마사지를 통해 혈액순환 개선을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+                <li><strong>스트레스 해소:</strong> 마사지를 통해 스트레스 해소을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+                <li><strong>수면 질 개선:</strong> 마사지를 통해 수면 질 개선을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+                <li><strong>에너지 회복:</strong> 마사지를 통해 에너지 회복을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+                <li><strong>전신 건강 개선:</strong> 마사지를 통해 전신 건강 개선을(를) 경험할 수 있습니다. 전문 관리사의 정성스러운 시술로 최적의 효과를 얻을 수 있습니다.</li>
+              </ul>
+            </div>
+            <div class="info-highlight">
+              <h4>🧘 정신적 건강 효과</h4>
+              <ul>
+                <li><strong>스트레스 해소:</strong> 마사지는 신체적 스트레스뿐만 아니라 정신적 스트레스도 해소해줍니다. 일상의 고민과 걱정을 잠시 잊을 수 있습니다.</li>
+                <li><strong>에너지 충전:</strong> 마사지 후 몸과 마음이 재충전되어 새로운 에너지로 일상을 시작할 수 있습니다.</li>
+                <li><strong>감정 안정:</strong> 마사지는 교감신경을 안정시켜 감정을 조절하고 마음의 평화를 찾는 데 도움이 됩니다.</li>
+              </ul>
+            </div>
+
+            <h4>🎁 울산 중구 마사지 서비스 소개</h4>
+            <p>
+              <strong>울산 중구 마사지 업체</strong>에서는 중구만의 특별한 마사지 서비스와 상품을 제공하여 고객님들의 만족도를 극대화하고 있습니다.
+            </p>
+            <div class="service-categories">
+              <h4>🌟 울산 중구 마사지 업체 제공 서비스</h4>
+              <div class="service-grid">
+                <div class="service-item"><i class="fas fa-spa"></i><span>전신 마사지</span></div>
+                <div class="service-item"><i class="fas fa-spa"></i><span>등 마사지</span></div>
+                <div class="service-item"><i class="fas fa-spa"></i><span>다리 마사지</span></div>
+                <div class="service-item"><i class="fas fa-spa"></i><span>팔 마사지</span></div>
+                <div class="service-item"><i class="fas fa-spa"></i><span>발 마사지</span></div>
+                <div class="service-item"><i class="fas fa-spa"></i><span>헤드 마사지</span></div>
+              </div>
+              <div class="service-details">
+                <div class="service-detail-item">
+                  <h5>✨ 전신 마사지</h5>
+                  <p>
+                    전신 마사지 서비스로 고객에게 최적의 마사지 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 마사지의 효과를 극대화합니다.
+                  </p>
+                </div>
+                <div class="service-detail-item">
+                  <h5>✨ 등 마사지</h5>
+                  <p>
+                    등 마사지 서비스로 고객에게 최적의 마사지 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 마사지의 효과를 극대화합니다.
+                  </p>
+                </div>
+                <div class="service-detail-item">
+                  <h5>✨ 다리 마사지</h5>
+                  <p>
+                    다리 마사지 서비스로 고객에게 최적의 마사지 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 마사지의 효과를 극대화합니다.
+                  </p>
+                </div>
+                <div class="service-detail-item">
+                  <h5>✨ 팔 마사지</h5>
+                  <p>
+                    팔 마사지 서비스로 고객에게 최적의 마사지 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 마사지의 효과를 극대화합니다.
+                  </p>
+                </div>
+                <div class="service-detail-item">
+                  <h5>✨ 발 마사지</h5>
+                  <p>
+                    발 마사지 서비스로 고객에게 최적의 마사지 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 마사지의 효과를 극대화합니다.
+                  </p>
+                </div>
+                <div class="service-detail-item">
+                  <h5>✨ 헤드 마사지</h5>
+                  <p>
+                    헤드 마사지 서비스로 고객에게 최적의 마사지 경험을 제공합니다. 전문 관리사가 정성스럽게 시술하여 마사지의 효과를 극대화합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+            </div>
+          </div>
+
+          <!-- 8. 울산 중구 마사지 선택 팁 -->
+          <div class="terms-section">
+            <h3>💡 울산 중구 마사지 선택 팁</h3>
+            <p>
+              <strong>울산 중구 마사지</strong> 업체를 선택할 때는 접근성과 중구만의 특별한 서비스를 고려해야 합니다.
+            </p>
+
+            <div class="info-highlight">
+              <h4>✅ 중구 마사지 업체 선택 체크리스트</h4>
+              <ul>
+                <li>
+                  <strong>위치 접근성:</strong> 태화강, 동촌유원지, 이시아폴리스 등 중구 명소와 가까운 거리에 있는 업체를 선택하면 관광과 함께 즐길 수 있습니다.
+                </li>
+                <li>
+                  <strong>대중교통 연계:</strong> 대구역이나 지하철역과 가까운 업체는 접근성이 뛰어나며, 출장객들에게 편리합니다.
+                </li>
+                <li>
+                  <strong>관리사 전문성:</strong> 전문 자격증을 보유한 관리사가 시술하는 업체를 선택하는 것이 안전하고 효과적입니다.
+                </li>
+                <li>
+                  <strong>중구 명소 연계:</strong> 태화강, 동촌유원지, 이시아폴리스 등 중구 명소와 함께 즐길 수 있는 위치의 업체를 추천합니다.
+                </li>
+                <li>
+                  <strong>가격 투명성:</strong> 숨겨진 비용 없이 명확한 가격을 제시하는 업체를 선택하세요.
+                </li>
+                <li>
+                  <strong>고객 리뷰:</strong> 실제 이용 고객들의 상세한 리뷰를 참고하여 서비스 품질을 확인하세요.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- 햄버거 메뉴 -->
     <div id="hamburger-menu-container"></div>
   </body>

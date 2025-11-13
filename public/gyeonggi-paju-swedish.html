@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <base href="./" />
+ <title>경기 스웨디시 - 마사지천국 | 경기 스웨디시 업체 예약 플랫폼</title>
+ <meta name="description" content="경기 파주 스웨디시 마사지 마사지천국, 자갈치, 남포동, 중앙동 스웨디시 마사지 등 경기 파주 전 지역 스웨디시 마사지 업체를 한눈에! 경기 파주 최저가 스웨디시 업체를 찾아보세요."
+ />
+ <meta name="keywords" content="경기 파주 스웨디시 마사지, 자갈치, 남포동, 중앙동 스웨디시 마사지, 경기 파주마사지, 스웨디시 마사지예약, 마사지천국"
+ />
+ <meta name="author" content="마사지천국" />
+ <link rel="stylesheet" href="style.css" />
+ <link
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+ rel="stylesheet"
+ />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link
+ href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@300;500;700&display=swap"
+ rel="stylesheet"
+ />
+ </head>
+ <body>
+ <div id="header-container"></div>
+
+ <section class="search-section">
+ <div class="search-container">
+ <div class="text-search-box">
+ <input
+ type="text"
+ id="shopSearchInput"
+ class="shop-search-input"
+ placeholder="경기 파주 지역 또는 키워드를 입력하세요"
+ autocomplete="off"
+ />
+ <i class="fas fa-search search-icon"></i>
+ </div>
+ <div class="location-search">
+ <div class="search-box">
+ <select id="regionSelect" class="search-select">
+ <option value="">지역을 선택하세요</option>
+ </select>
+ </div>
+ <div class="search-box">
+ <select id="districtSelect" class="search-select">
+ <option value="">세부 지역을 선택하세요</option>
+ </select>
+ </div>
+ <div class="search-divider"></div>
+ </div>
+ </div>
+ </section>
+
+ <section class="filter-section">
+ <div class="filter-container">
+ <a class="filter-btn" data-filter="all">전체</a>
+ <a class="filter-btn" data-filter="massage">마사지</a>
+ <a class="filter-btn" data-filter="outcall">출장마사지</a>
+ <div class="type-filter-dropdown">
+ <button class="filter-btn type-filter-btn" id="typeFilterBtn">
+ 테마보기
+ <i class="fas fa-chevron-down"></i>
+ </button>
+ <div class="type-dropdown-menu" id="typeDropdownMenu">
+ <div class="type-dropdown-item" data-type="swedish">스웨디시</div>
+ <div class="type-dropdown-item" data-type="thai">타이마사지</div>
+ <div class="type-dropdown-item" data-type="aroma">아로마마사지</div>
+ <div class="type-dropdown-item" data-type="waxing">왁싱</div>
+ <div class="type-dropdown-item" data-type="chinese">중국마사지</div>
+ <div class="type-dropdown-item" data-type="foot">발마사지</div>
+ </div>
+ </div>
+ <button class="info-btn" onclick="openRelatedInfoModal(event)">
+ 관련정보
+ </button>
+ </div>
+ </section>
+
+ <section
+ class="country-filter-section"
+ id="massageCountryFilterSection"
+ style="display: none"
+ >
+ <div class="country-filter-container">
+ <h3 class="country-filter-title">국가별 마사지</h3>
+ <div class="country-boxes">
+ <div class="country-box active" data-country="overall">
+ <span class="country-name">전체</span>
+ </div>
+ <div class="country-box" data-country="korea">
+ <span class="country-name">한국</span>
+ </div>
+ <div class="country-box" data-country="thai">
+ <span class="country-name">태국</span>
+ </div>
+ <div class="country-box" data-country="china">
+ <span class="country-name">중국</span>
+ </div>
+ <div class="country-box" data-country="russia">
+ <span class="country-name">러시아</span>
+ </div>
+ <div class="country-box" data-country="japan">
+ <span class="country-name">일본</span>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <section
+ class="country-filter-section"
+ id="outcallCountryFilterSection"
+ style="display: none"
+ >
+ <div class="country-filter-container">
+ <h3 class="country-filter-title">국가별 출장마사지</h3>
+ <div class="country-boxes">
+ <div class="country-box active" data-country="overall">
+ <span class="country-name">전체</span>
+ </div>
+ <div class="country-box" data-country="korea">
+ <span class="country-name">한국</span>
+ </div>
+ <div class="country-box" data-country="thai">
+ <span class="country-name">태국</span>
+ </div>
+ <div class="country-box" data-country="china">
+ <span class="country-name">중국</span>
+ </div>
+ <div class="country-box" data-country="russia">
+ <span class="country-name">러시아</span>
+ </div>
+ <div class="country-box" data-country="japan">
+ <span class="country-name">일본</span>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <section
+ class="theme-filter-section"
+ id="themeFilterSection"
+ style="display: none"
+ >
+ <div class="theme-filter-container">
+ <h3 class="theme-filter-title">테마별 마사지</h3>
+ <div class="theme-boxes">
+ <div class="theme-box active" data-theme="all">
+ <span class="theme-name">전체</span>
+ </div>
+ <div class="theme-box" data-theme="swedish">
+ <span class="theme-name">스웨디시</span>
+ </div>
+ <div class="theme-box" data-theme="thai">
+ <span class="theme-name">타이마사지</span>
+ </div>
+ <div class="theme-box" data-theme="aroma">
+ <span class="theme-name">아로마마사지</span>
+ </div>
+ <div class="theme-box" data-theme="waxing">
+ <span class="theme-name">왁싱</span>
+ </div>
+ <div class="theme-box" data-theme="chinese">
+ <span class="theme-name">중국마사지</span>
+ </div>
+ <div class="theme-box" data-theme="foot">
+ <span class="theme-name">발마사지</span>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <main class="main-content">
+ <div class="results-header">
+ <h1 id="resultsTitle">경기 파주 스웨디시 마사지 업체</h1>
+ <span id="resultsCount" class="results-count">총 0개</span>
+ </div>
+ <div id="massageList" class="massage-list"></div>
+ </main>
+
+ <footer class="footer">
+ <div class="footer-content">
+ <div class="footer-links">
+ <div class="footer-link-row">
+ <a href="#" class="footer-link" onclick="openDetailsModal(event)"
+ >경기 파주 스웨디시정보</a
+ >
+ </div>
+ <div class="footer-divider-line"></div>
+ <div class="footer-link-row">
+ <a href="#" class="footer-link" onclick="openAboutModal(event)"
+ >회사소개</a
+ >
+ <span class="footer-divider">|</span>
+ <a href="#" class="footer-link" onclick="openTermsModal(event)"
+ >이용약관</a
+ >
+ </div>
+ </div>
+ <div class="footer-info">
+ <p>상호명 : 마사지천국</p>
+ <p>
+ 고객센터 :
+ <a href="tel:0507-1859-6384" class="footer-phone">0507-1859-6384</a>
+ <a href="tel:0507-1859-6384" class="footer-contact-btn"
+ >[ 입점 문의 ]</a
+ >
+ </p>
+ </div>
+ <div class="footer-copyright">
+ <p>&copy; 2024 마사지천국. All rights reserved.</p>
+ </div>
+ </div>
+ </footer>
+
+ <div id="hamburger-menu-container"></div>
+
+ <div id="aboutModal" class="modal">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h2>회사소개 (About Us)</h2>
+ <button class="modal-close" onclick="closeModal('aboutModal')">
+ &times;
+ </button>
+ </div>
+ <div class="modal-body">
+ <p>
+ <strong>마사지천국</strong>는 전국 어디서든 믿을 수 있는 마사지
+ 정보를 쉽고 빠르게 찾을 수 있도록 만들어진
+ <strong>전국 마사지 플랫폼</strong>입니다.
+ </p>
+ <p>
+ 저희는 단순히 업체 정보를 나열하는 것이 아니라,
+ <strong>이용자 중심의 편리한 검색 시스템</strong>과
+ <strong>투명한 정보 제공</strong>을 통해 고객과 업소 모두가 만족할
+ 수 있는 건강한 플랫폼 생태계를 만들고자 합니다.
+ </p>
+ <div class="info-section">
+ <h3>🌍 전국 기반 서비스</h3>
+ <p>
+ 지역별, 카테고리별로 원하는 마사지 업소를 쉽게 찾을 수 있습니다.
+ </p>
+ </div>
+ <div class="info-section">
+ <h3>✅ 신뢰성 있는 정보 제공</h3>
+ <p>
+ 실제 이용 후기, 가격, 위치, 영업시간 등 검증된 정보를 제공합니다.
+ </p>
+ </div>
+ <div class="info-section">
+ <h3>🤝 소비자와 업소를 연결</h3>
+ <p>
+ 고객은 필요한 서비스를 편리하게 찾고, 업소는 홍보 기회를 얻어 더
+ 많은 고객과 만날 수 있습니다.
+ </p>
+ </div>
+ <p class="highlight">
+ <strong>마사지천국</strong>는 앞으로도 고객의 편의를 최우선으로
+ 생각하며,<br />건강과 휴식을 동시에 책임지는
+ <strong>대한민국 대표 마사지 플랫폼</strong>이 되겠습니다.
+ </p>
+ </div>
+ </div>
+ </div>
+
+ <div id="termsModal" class="modal">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h2>이용약관 (Terms of Service)</h2>
+ <button class="modal-close" onclick="closeModal('termsModal')">
+ &times;
+ </button>
+ </div>
+ <div class="modal-body">
+ <div class="terms-section">
+ <h3>제 1 조 (목적)</h3>
+ <p>
+ 이 약관은 "마사지천국"(이하 "회사"라 함)가 제공하는 마사지 관련
+ 정보 플랫폼 서비스(이하 "서비스")의 이용조건 및 절차, 회사와
+ 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
+ </p>
+ </div>
+ <div class="terms-section">
+ <h3>제 2 조 (용어의 정의)</h3>
+ <ul>
+ <li>
+ "이용자"란 본 약관에 따라 회사가 제공하는 서비스를 이용하는 회원
+ 및 비회원을 말합니다.
+ </li>
+ <li>
+ "회원"이란 회사에 개인정보를 제공하여 회원등록을 한 자로서,
+ 지속적으로 서비스를 이용할 수 있는 자를 말합니다.
+ </li>
+ <li>
+ "업체회원"이란 마사지 업소 및 관련 사업체로서, 회사와 계약을
+ 맺고 서비스에 정보를 등록하는 회원을 말합니다.
+ </li>
+ </ul>
+ </div>
+ <div class="terms-section">
+ <h3>제 3 조 (약관의 효력 및 변경)</h3>
+ <ul>
+ <li>
+ 본 약관은 서비스 화면에 게시하거나 기타의 방법으로 공지함으로써
+ 효력이 발생합니다.
+ </li>
+ <li>
+ 회사는 관련 법령을 위배하지 않는 범위에서 본 약관을 개정할 수
+ 있으며, 변경 시 사전 공지합니다.
+ </li>
+ </ul>
+ </div>
+ <div class="terms-section">
+ <h3>제 4 조 (서비스의 제공 및 변경)</h3>
+ <p>회사는 다음과 같은 서비스를 제공합니다.</p>
+ <ul>
+ <li>전국 마사지 업소 정보 제공</li>
+ <li>업체별 가격, 위치, 후기 등의 정보 열람</li>
+ <li>회원 리뷰 및 평가 기능</li>
+ <li>업체 홍보 및 광고 서비스</li>
+ </ul>
+ <p>
+ 회사는 서비스의 내용 및 운영 방식을 변경할 수 있으며, 변경 시 사전
+ 공지합니다.
+ </p>
+ </div>
+ <div class="terms-section">
+ <h3>제 5 조 (회원의 의무)</h3>
+ <ul>
+ <li>회원은 본 약관 및 관련 법령을 준수하여야 합니다.</li>
+ <li>
+ 회원은 허위 정보를 기재하거나 타인의 정보를 도용해서는 안
+ 됩니다.
+ </li>
+ <li>
+ 회원은 서비스 이용 시 회사 및 제3자의 권리를 침해해서는 안
+ 됩니다.
+ </li>
+ </ul>
+ </div>
+ <div class="terms-section">
+ <h3>제 6 조 (회사의 의무)</h3>
+ <ul>
+ <li>회사는 안정적으로 서비스를 제공하기 위해 최선을 다합니다.</li>
+ <li>
+ 회사는 회원의 개인정보를 본인의 동의 없이 제3자에게 제공하지
+ 않습니다.
+ </li>
+ <li>
+ 회사는 불법적인 콘텐츠 및 부적절한 정보가 유통되지 않도록 관리할
+ 책임이 있습니다.
+ </li>
+ </ul>
+ </div>
+ <div class="terms-section">
+ <h3>제 7 조 (책임의 한계)</h3>
+ <ul>
+ <li>
+ 회사는 업소의 실제 서비스(마사지 시술 등)에 대해 직접적인 책임을
+ 지지 않습니다.
+ </li>
+ <li>
+ 이용자와 업소 간에 발생한 문제는 당사자 간의 협의로 해결함을
+ 원칙으로 합니다.
+ </li>
+ <li>회사는 플랫폼을 통한 정보 제공과 중개 역할에 국한합니다.</li>
+ </ul>
+ </div>
+ <div class="terms-section">
+ <h3>제 8 조 (이용 계약의 해지 및 서비스 중지)</h3>
+ <ul>
+ <li>
+ 회원은 언제든지 탈퇴를 요청할 수 있으며, 회사는 지체 없이 이를
+ 처리합니다.
+ </li>
+ <li>
+ 회사는 다음 사유가 발생한 경우 사전 통보 후 서비스 제공을 중단할
+ 수 있습니다.
+ <ul>
+ <li>시스템 점검, 천재지변 등 불가피한 사유</li>
+ <li>회원이 법령 또는 약관을 위반한 경우</li>
+ </ul>
+ </li>
+ </ul>
+ </div>
+ <div class="terms-section">
+ <h3>제 9 조 (준거법 및 관할)</h3>
+ <p>
+ 본 약관에 명시되지 않은 사항은 관계 법령 및 상관례에 따르며,
+ 서비스 이용과 관련하여 분쟁이 발생할 경우 회사 본사 소재지를
+ 관할하는 법원을 제1심 관할 법원으로 합니다.
+ </p>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div id="detailsModal" class="modal">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h2>상세정보</h2>
+ <button class="modal-close" onclick="closeModal('detailsModal')">
+ &times;
+ </button>
+ </div>
+ <div class="modal-body">
+ <div class="terms-section">
+ <h3>마사지사이트 마사지천국 - 전국 마사지 예약의 중심</h3>
+ <p>
+ 마사지천국는 최고의 <strong>마사지사이트</strong>로,
+ <strong>서울마사지사이트</strong>,
+ <strong>경기마사지사이트</strong>, 경기 등 전국 마사지 업체를
+ 한눈에 볼 수 있는 예약 플랫폼입니다.
+ <strong>아로마마사지</strong>, <strong>타이마사지</strong>,
+ <strong>스웨디시</strong>, <strong>1인샵</strong>,
+ <strong>왁싱</strong> 등 다양한 마사지 서비스를 지역별로 간편하게
+ 예약할 수 있습니다.
+ </p>
+ <p>
+ 마사지천국는 고객의 편의를 위해 엄선된 업체를 제공하며, 최저가
+ 보장과 실시간 예약 시스템으로 편리함을 더합니다.
+ <strong>서울마사지사이트</strong>에서는 프리미엄
+ <strong>스웨디시</strong>와 <strong>아로마마사지</strong>를,
+ <strong>경기마사지사이트</strong>에서는 전통
+ <strong>타이마사지</strong>와 <strong>왁싱</strong> 서비스를
+ 만나보세요. 영남권의 중심인 <strong>경기마사지사이트</strong>에서
+ 특별한 <strong>스웨디시</strong> 경험을 즐길 수 있습니다.
+ </p>
+ <p>
+ 지금 마사지천국 <strong>마사지사이트</strong>에서 당신에게 맞는
+ 마사지 서비스를 찾아 지역에 맞게 예약하세요.
+ </p>
+ </div>
+ <div class="terms-section">
+ <h3>휴식과 힐링</h3>
+ <p>
+ 바쁜 일상 속에서 <strong>마사지</strong>는 몸과 마음을 동시에
+ 회복시키는 최적의 방법입니다. <strong>마사지사이트</strong>를 통해
+ 서울, 경기, 경기 등 지역별 <strong>아로마마사지</strong>와
+ <strong>스웨디시</strong>를 찾아 편안한 휴식을 즐겨보세요.
+ </p>
+ </div>
+ <div class="terms-section">
+ <h3>이용 안내</h3>
+ <p>
+ 본 서비스는 정보 제공 목적으로만 사용되며, 실제 서비스 이용 시에는
+ 각 업소의 이용약관을 확인하시기 바랍니다.
+ </p>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <script src="common-components.js"></script>
+ <script src="script.js"></script>
+ <script>
+ document.addEventListener('DOMContentLoaded', function () {
+ if (typeof currentRegion !== 'undefined') {
+ currentRegion = '경기';
+ }
+
+ const regionSelect = document.getElementById('regionSelect');
+ if (regionSelect) {
+ regionSelect.value = '경기';
+ if (typeof updateDistrictOptions === 'function') {
+ updateDistrictOptions('경기');
+ }
+ const districtSelect = document.getElementById('districtSelect');
+ if (districtSelect) {
+ districtSelect.value = '파주';
+ districtSelect.disabled = false;
+ districtSelect.style.opacity = '1';
+ }
+ if (typeof currentDistrict !== 'undefined') {
+ currentDistrict = '파주';
+ }
+ }
+
+ // 스웨디시 테마 필터 활성화
+ const themeFilterSection =
+ document.getElementById('themeFilterSection');
+ if (themeFilterSection) {
+ themeFilterSection.style.display = 'none';
+ }
+
+ const swedishThemeBox = document.querySelector(
+ '[data-theme="swedish"]'
+ );
+ if (swedishThemeBox) {
+ document.querySelectorAll('.theme-box').forEach((box) => {
+ box.classList.remove('active');
+ });
+ swedishThemeBox.classList.add('active');
+ }
+ // typeFilterBtn에 active 클래스 추가하여 활성화 상태 표시
+ const typeFilterBtn = document.getElementById('typeFilterBtn');
+ if (typeFilterBtn) {
+ typeFilterBtn.classList.add('active');
+ }
+
+ if (typeof currentFilter !== 'undefined') {
+ currentFilter = 'swedish';
+ }
+ window.currentFilter = 'swedish';
+ window.currentTheme = 'swedish';
+
+ if (typeof displayFilteredResults === 'function') {
+ displayFilteredResults();
+ } else if (Array.isArray(window.massageShops)) {
+ const shops = massageShops.filter(
+ (shop) => shop.region === '경기' && shop.district === '파주'
+ );
+ if (typeof displayMassageShops === 'function') {
+ displayMassageShops(shops);
+ }
+ if (typeof updateResultsHeader === 'function') {
+ updateResultsHeader('경기 파주 스웨디시 마사지 업체', shops.length);
+ }
+ }
+
+ const resultsTitle = document.getElementById('resultsTitle');
+ if (resultsTitle) {
+ resultsTitle.textContent = '경기 파주 스웨디시 마사지 업체';
+ }
+ });
+ </script>
+
+ <div id="relatedInfoModal" class="modal">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h2>관련정보</h2>
+ <button class="modal-close" onclick="closeModal('relatedInfoModal')">
+ &times;
+ </button>
+ </div>
+ <div class="modal-body">
+ <!-- 1. 경기 파주 스웨디시 업체 소개 -->
+ <div class="terms-section">
+ <h3>🏢 경기 파주 스웨디시 업체 소개</h3>
+ <p>
+ <strong>경기 파주 스웨디시 업체</strong>는 경기도 파주시에 위치한 전문 마사지 서비스를 제공하는 업체들입니다. 파주시는 경기도의 주요 지역으로 다양한 마사지 업체들이 고품질 서비스를 제공하며, 특히 각 지역별로 특색 있는 마사지 서비스가 발달해 있습니다.
+ </p>
+
+ <div class="info-highlight">
+ <h4>✨ 경기 파주 스웨디시 업체의 특징</h4>
+ <ul>
+ <li>
+ <strong>다양한 서비스:</strong> 파주시의 마사지 업체들은 아로마 마사지, 타이 마사지, 스웨디시 마사지, 출장 마사지, 발 마사지, 왁싱, 중국 마사지 등 다양한 서비스를 제공합니다.
+ </li>
+ <li>
+ <strong>접근성 우수:</strong> 지하철과 버스 등 대중교통이 발달하여 접근이 편리하며, 주차 시설도 완비되어 있어 자가용 이용객에게도 편리합니다.
+ </li>
+ <li>
+ <strong>전문 관리사:</strong> 전문 자격증을 보유한 경험 많은 관리사들이 고객에게 최상의 서비스를 제공합니다.
+ </li>
+ <li>
+ <strong>24시간 운영:</strong> 많은 업체들이 24시간 운영되어 언제든지 이용할 수 있습니다.
+ </li>
+ </ul>
+ </div>
+ </div>
+ <div class="info-highlight">
+ <h4>📍 파주시 주요 행정동별 마사지 업체 분포</h4>
+ <ul>
+ <li><strong>문산읍:</strong> 파주시 문산읍 지역의 마사지 업체들이 위치해 있으며, 지역 특성에 맞는 다양한 마사지 서비스를 제공합니다.</li>
+ <li><strong>조리읍:</strong> 파주시 조리읍 지역의 마사지 업체들이 위치해 있으며, 지역 특성에 맞는 다양한 마사지 서비스를 제공합니다.</li>
+ <li><strong>법원읍:</strong> 파주시 법원읍 지역의 마사지 업체들이 위치해 있으며, 지역 특성에 맞는 다양한 마사지 서비스를 제공합니다.</li>
+ <li><strong>교하동:</strong> 파주시 교하동 지역의 마사지 업체들이 위치해 있으며, 지역 특성에 맞는 다양한 마사지 서비스를 제공합니다.</li>
+ <li><strong>운정동:</strong> 파주시 운정동 지역의 마사지 업체들이 위치해 있으며, 지역 특성에 맞는 다양한 마사지 서비스를 제공합니다.</li>
+ <li><strong>금촌동:</strong> 파주시 금촌동 지역의 마사지 업체들이 위치해 있으며, 지역 특성에 맞는 다양한 마사지 서비스를 제공합니다.</li>
+ <li><strong>아동동:</strong> 파주시 아동동 지역의 마사지 업체들이 위치해 있으며, 지역 특성에 맞는 다양한 마사지 서비스를 제공합니다.</li>
+ <li><strong>야당동:</strong> 파주시 야당동 지역의 마사지 업체들이 위치해 있으며, 지역 특성에 맞는 다양한 마사지 서비스를 제공합니다.</li>
+ <li><strong>와동동:</strong> 파주시 와동동 지역의 마사지 업체들이 위치해 있으며, 지역 특성에 맞는 다양한 마사지 서비스를 제공합니다.</li>
+ <li><strong>문발동:</strong> 파주시 문발동 지역의 마사지 업체들이 위치해 있으며, 지역 특성에 맞는 다양한 마사지 서비스를 제공합니다.</li>
+ </ul>
+ </div>
+ </div>
+
+           <!-- 2. 경기 스웨디시 주변 놀거리 소개 -->
+          <div class="terms-section">
+            <h3>🎯 경기 스웨디시 주변 놀거리 소개</h3>
+            <p>
+              <strong>경기 스웨디시</strong>를 방문하신 후에는 경기의 다양한 문화와 엔터테인먼트를 즐기실 수 있습니다. 스웨디시 마사지 후로 풀린 몸과 마음으로 경기의 특별한 경험을 더욱 풍성하게 만들어보세요.
+            </p>
+            <div class="info-highlight">
+              <h4>🎮 놀이시설 & 엔터테인먼트</h4>
+              <ul>
+                <li><strong>에버랜드:</strong> 가족 단위 방문객을 위한 대형 테마파크로, 다양한 놀이기구와 공연을 즐길 수 있습니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+                <li><strong>한국민속촌:</strong> 전통 문화를 체험할 수 있는 테마파크로, 한국의 전통 생활을 경험할 수 있습니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+                <li><strong>수원화성:</strong> 조선 후기의 대표적인 성곽으로, 역사 탐방과 산책을 즐길 수 있습니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+                <li><strong>아쿠아플라넷 일산:</strong> 대형 수족관으로, 다양한 바다 생물을 관람할 수 있습니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+                <li><strong>라페스타:</strong> 일산의 대형 쇼핑몰로, 쇼핑과 식사를 즐기기에 좋습니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+                <li><strong>스타필드 하남:</strong> 대형 복합 쇼핑몰로, 쇼핑과 엔터테인먼트를 한 번에 즐길 수 있습니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+              </ul>
+            </div>
+          </div>
+
+           <!-- 3. 경기 스웨디시 추천 관광지 및 코스 소개 -->
+          <div class="terms-section">
+            <h3>🗺️ 경기 스웨디시 추천 관광지 및 코스 소개</h3>
+            <p>
+              <strong>경기 스웨디시</strong> 주변에는 경기의 대표적인 관광지와 힐링 코스가 다양하게 준비되어 있습니다. 스웨디시 마사지 후 주변 명소를 탐방하며 완벽한 하루를 보내보세요.
+            </p>
+            <div class="info-highlight">
+              <h4>🌳 자연 & 힐링 코스</h4>
+              <ul>
+                <li><strong>남한산성:</strong> 경기도의 대표적인 산성으로, 가벼운 등산과 역사 탐방을 즐길 수 있습니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+                <li><strong>팔당호:</strong> 경기도의 아름다운 호수로, 산책과 낚시를 즐기기에 좋은 곳입니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+                <li><strong>용인 자연휴양림:</strong> 자연 속에서 휴식을 즐길 수 있는 휴양림입니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+                <li><strong>가평 쁘띠프랑스:</strong> 프랑스 문화를 체험할 수 있는 테마파크입니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+                <li><strong>양평 두물머리:</strong> 한강과 북한강이 만나는 곳으로, 아름다운 경관을 감상할 수 있습니다. 스웨디시 마사지 후 방문하기 좋은 곳입니다.</li>
+              </ul>
+            </div>
+            <div class="info-highlight">
+              <h4>🏛️ 문화 & 역사 코스</h4>
+              <ul>
+                <li><strong>역사 유적지:</strong> 경기의 역사를 체험할 수 있는 유적지로, 스웨디시 마사지 후 역사 탐방을 즐기기에 좋습니다.</li>
+                <li><strong>박물관:</strong> 경기의 문화와 역사를 한눈에 볼 수 있는 박물관입니다.</li>
+                <li><strong>전통 마을:</strong> 경기의 전통 문화를 체험할 수 있는 마을입니다.</li>
+              </ul>
+            </div>
+          </div>
+
+           <!-- 4. 경기 스웨디시 추천 음식 맛집 -->
+          <div class="terms-section">
+            <h3>🍽️ 경기 스웨디시 추천 음식 맛집</h3>
+            <p>
+              <strong>경기 스웨디시</strong> 주변에는 다양한 음식점과 맛집이 즐비합니다. 스웨디시 마사지 후 맛있는 식사를 즐기며 완벽한 하루를 완성해보세요.
+            </p>
+            <div class="info-highlight">
+              <h4>🍖 고기 & 구이</h4>
+              <ul>
+                <li><strong>수원왕갈비:</strong> 경기도의 대표 음식인 수원 왕갈비를 맛볼 수 있는 전문 식당가입니다. 스웨디시 마사지 후 특별한 식사를 즐기기에 좋습니다.</li>
+                <li><strong>이천 쌀밥거리:</strong> 이천의 특산품인 쌀로 만든 다양한 음식을 맛볼 수 있습니다. 스웨디시 마사지 후 특별한 식사를 즐기기에 좋습니다.</li>
+                <li><strong>가평 두부마을:</strong> 가평의 유명한 두부 요리를 맛볼 수 있는 마을입니다. 스웨디시 마사지 후 특별한 식사를 즐기기에 좋습니다.</li>
+                <li><strong>양평 한우거리:</strong> 양평의 한우를 맛볼 수 있는 전문 식당가입니다. 스웨디시 마사지 후 특별한 식사를 즐기기에 좋습니다.</li>
+                <li><strong>용인 보리밥거리:</strong> 전통 보리밥과 함께하는 다양한 반찬을 즐길 수 있습니다. 스웨디시 마사지 후 특별한 식사를 즐기기에 좋습니다.</li>
+              </ul>
+            </div>
+            <div class="info-highlight">
+              <h4>🍜 한식 & 전통음식</h4>
+              <ul>
+                <li><strong>한정식 전문점:</strong> 정갈한 한정식을 맛볼 수 있는 고급 한식당입니다.</li>
+                <li><strong>전통 찜방:</strong> 경기의 전통 찜 요리를 맛볼 수 있는 식당입니다.</li>
+                <li><strong>국수 전문점:</strong> 지역 특색 국수를 맛볼 수 있는 전문 식당입니다.</li>
+              </ul>
+            </div>
+            <div class="info-highlight">
+              <h4>☕ 카페 & 디저트</h4>
+              <ul>
+                <li><strong>전망 카페:</strong> 아름다운 경관을 감상하며 커피를 즐길 수 있는 카페입니다.</li>
+                <li><strong>디저트 전문점:</strong> 고급 디저트를 맛볼 수 있는 전문 카페입니다.</li>
+                <li><strong>브런치 카페:</strong> 푸짐한 브런치를 즐길 수 있는 카페입니다.</li>
+              </ul>
+            </div>
+          </div>
+
+ <!-- 5. 경기 파주 스웨디시 업체 후기 -->
+ <div class="terms-section">
+ <h3>💬 경기 파주 스웨디시 업체 후기</h3>
+ <p>
+ <strong>경기 파주 스웨디시 업체</strong>를 이용하신 고객들의 생생한 후기를 모았습니다.
+ </p>
+ <div class="info-highlight">
+ <h4>⭐ 고객 후기 모음</h4>
+ <ul>
+ <li><strong>김○○님 (30대, 여성):</strong> "경기 마사지 업체를 이용했는데, 관리사분이 정말 전문적이셨어요. 하루 종일 앉아서 일하다가 생긴 목과 어깨 통증이 한 번에 해소되었습니다."</li>
+ <li><strong>이○○님 (40대, 남성):</strong> "출장으로 경기에 왔다가 마사지를 받았습니다. 호텔에서 출장 서비스를 받았는데, 시간 약속도 정확하고 서비스 품질도 훌륭했습니다."</li>
+ <li><strong>박○○님 (20대, 여성):</strong> "아로마 마사지를 받았어요. 향기로운 오일과 함께 받는 마사지가 정말 힐링이 되었습니다."</li>
+ <li><strong>최○○님 (30대, 남성):</strong> "고급 마사지 업체를 방문했는데, 프리미엄 서비스가 정말 인상적이었습니다."</li>
+ <li><strong>정○○님 (50대, 여성):</strong> "정기적으로 마사지를 받고 있습니다. 나이가 들면서 생긴 관절 통증이 마사지를 받은 후 많이 완화되었어요."</li>
+ <li><strong>강○○님 (20대, 남성):</strong> "타이 마사지를 받았는데, 스트레칭과 압박이 적절하게 조합되어 정말 효과적이었습니다."</li>
+ <li><strong>윤○○님 (40대, 여성):</strong> "프라이빗 마사지 업체를 이용했어요. 사생활 보호가 잘 되고 조용한 분위기에서 집중적으로 케어를 받을 수 있어서 만족스러웠습니다."</li>
+ </ul>
+ </div>
+ </div>
+
+ <!-- 6. 제공 서비스 종류 및 상세안내 -->
+ <div class="terms-section">
+ <h3>💆 경기 파주 스웨디시 업체 제공 서비스 종류 및 상세안내</h3>
+ <p>
+ <strong>경기 파주 스웨디시 업체</strong>에서는 전문 스웨디시 서비스를 제공하고 있습니다.</p>
+ <div class="info-highlight">
+ <h4>🌿 아로마 마사지</h4>
+ <p>천연 에센셜 오일을 사용하여 피부 보습과 향기 요법의 효과를 동시에 누릴 수 있는 마사지입니다.</p>
+ <div class="info-highlight">
+ <h4>🇸🇪 스웨디시</h4>
+ <p>
+ 서양식 전신 마사지로 근육 이완과 혈액순환 개선에 효과적입니다.
+ </p>
+ <ul>
+ <li>긴 스트로크와 원형 마사지 기법 사용</li>
+ <li>전신 근육의 균형 잡기</li>
+ <li>스트레스 해소 및 수면 질 개선</li>
+ <li>부드럽고 안정적인 마사지</li>
+ <li>전문 자격증을 보유한 관리사 시술</li>
+ <li>개인 맞춤형 압력 조절</li>
+ </ul>
+ </div>
+ </div></div>
+ </div></div>
+ </div>
+ </div></div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </body>
+</html>
