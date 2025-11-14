@@ -161,6 +161,25 @@ textarea,
     'Font Awesome 6 Brands' !important;
 }
 
+/* 레이아웃 변경 방지: main-content 초기 크기 고정 */
+.main-content {
+  min-height: 200px; /* 최소 높이 설정으로 레이아웃 시프트 방지 */
+  contain: layout style paint; /* CSS containment으로 리플로우 최소화 */
+}
+
+/* 폰트 로드 전에도 레이아웃 유지 */
+body {
+  font-display: swap;
+  font-family: 'Gmarket Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+}
+
+/* 헤더 고정 크기로 레이아웃 시프트 방지 */
+.header {
+  min-height: 60px;
+  contain: layout style paint;
+}
+
 /* 헤더 스타일 */
 .header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

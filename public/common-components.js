@@ -591,20 +591,35 @@ function scrollToSearchBox() {
       }
     }
 
+    // 리플로우 최소화: 배치 읽기/쓰기 분리
     requestAnimationFrame(() => {
-      if (window.innerWidth >= 2500) {
+      // 읽기 작업 먼저
+      const screenWidth = window.innerWidth;
+      let headerHeight = 0;
+      let searchBoxTop = 0;
+      
+      if (screenWidth >= 2500) {
         const header = document.getElementById('mainHeader');
-        const headerHeight = header ? header.offsetHeight : 0;
-        const { top } = searchBox.getBoundingClientRect();
-        const targetTop = window.pageYOffset + top - headerHeight - 20;
-        window.scrollTo({
-          top: targetTop > 0 ? targetTop : 0,
-          left: 0,
-          behavior: 'smooth',
-        });
-      } else {
-        searchBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (header) {
+          headerHeight = header.offsetHeight;
+        }
+        const rect = searchBox.getBoundingClientRect();
+        searchBoxTop = rect.top;
       }
+      
+      // 쓰기 작업은 다음 프레임에서
+      requestAnimationFrame(() => {
+        if (screenWidth >= 2500) {
+          const targetTop = window.pageYOffset + searchBoxTop - headerHeight - 20;
+          window.scrollTo({
+            top: targetTop > 0 ? targetTop : 0,
+            left: 0,
+            behavior: 'smooth',
+          });
+        } else {
+          searchBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
     });
   }
 }
