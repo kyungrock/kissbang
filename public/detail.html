@@ -30,13 +30,21 @@
     />
     <meta property="og:url" content="" />
     <meta property="og:site_name" content="마사지천국" />
+    <link rel="canonical" href="https://msg1000.com/detail.html" />
+<link rel="preload" href="style.css" as="style" />
 
-    <link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
-  </head>
+  
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="마사지천국" />
+    <meta name="twitter:description" content="마사지천국에서 지역별 마사지 정보를 확인하세요." />
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630?text=마사지천국" />
+</head>
   <body>
           <form class="phone-verification-form" onsubmit="return false;">
             <div class="form-group">
@@ -164,7 +172,7 @@
     <!-- 업체 이미지 섹션 -->
     <section class="shop-image-section">
       <div class="shop-image-container">
-        <img id="shopImage" src="" alt="업체 이미지" class="shop-main-image" />
+        <img loading="lazy" id="shopImage" src="" alt="업체 이미지" class="shop-main-image" />
         <div class="image-overlay">
           <div class="shop-badge" id="shopType"></div>
         </div>
@@ -182,7 +190,7 @@
             </div>
           </div>
           <div class="shop-flag">
-            <img
+            <img loading="lazy"
               src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg"
               alt="한국 국기"
               class="flag-image"
@@ -526,7 +534,7 @@
     </div>
 
     <!-- 카카오맵 API 키 없이 URL 방식 사용 -->
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <script src="detail.js"></script>
     <script>
       // 즉시 실행 (DOMContentLoaded보다 빠름)

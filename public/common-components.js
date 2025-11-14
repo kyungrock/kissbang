@@ -223,6 +223,58 @@ const authManager = new AuthManager();
 // ===========================================
 
 // 헤더 컴포넌트 로드 함수
+function ensureMainLandmarkId() {
+  const candidates = [
+    document.getElementById('main-content'),
+    document.querySelector('main'),
+    document.querySelector('[role="main"]'),
+  ].filter(Boolean);
+
+  if (!candidates.length) {
+    return null;
+  }
+
+  const target = candidates[0];
+  if (!target.id) {
+    target.id = 'main-content';
+  } else if (target.id !== 'main-content') {
+    target.id = 'main-content';
+  }
+
+  if (!target.hasAttribute('tabindex')) {
+    target.setAttribute('tabindex', '-1');
+  }
+
+  return target.id;
+}
+
+function insertSkipLink() {
+  const targetId = ensureMainLandmarkId();
+  if (!targetId || !document.body) {
+    return;
+  }
+
+  const existing = document.querySelector('.skip-nav-link');
+  if (existing) {
+    existing.setAttribute('href', `#${targetId}`);
+    return;
+  }
+
+  const skipLink = document.createElement('a');
+  skipLink.className = 'skip-nav-link';
+  skipLink.href = `#${targetId}`;
+  skipLink.textContent = '본문으로 바로가기';
+  skipLink.setAttribute('aria-label', '본문 내용으로 바로가기');
+  skipLink.addEventListener('click', function (event) {
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.focus();
+    }
+  });
+
+  document.body.insertAdjacentElement('afterbegin', skipLink);
+}
+
 function loadHeader() {
   const headerContainer = document.getElementById('header-container');
   if (headerContainer) {
@@ -310,7 +362,7 @@ function loadHeader() {
 
     // 헤더 HTML 직접 삽입
     headerContainer.innerHTML = `
-      <header class="header" id="mainHeader">
+      <header class="header" id="mainHeader" role="banner">
         <div class="header-content">
           <div
             class="logo"
@@ -328,6 +380,8 @@ function loadHeader() {
               ></span>
               <button
                 onclick="logout()"
+                type="button"
+                aria-label="로그아웃"
                 style="
                   background: rgba(255, 255, 255, 0.2);
                   color: white;
@@ -345,6 +399,8 @@ function loadHeader() {
             <button
               class="header-search-btn"
               id="header-search-btn"
+              type="button"
+              aria-label="검색 창 열기"
               style="
                 background: rgba(255, 255, 255, 0.2);
                 color: white;
@@ -365,6 +421,11 @@ function loadHeader() {
             <button
               class="hamburger-btn"
               onclick="toggleSideMenu()"
+              type="button"
+              id="hamburgerToggleBtn"
+              aria-label="전체 메뉴 열기"
+              aria-controls="sideMenu"
+              aria-expanded="false"
               style="margin-left: 10px"
             >
               <i class="fas fa-bars"></i>
@@ -386,15 +447,11 @@ function loadHeader() {
             header.classList.remove('scrolled');
           }
         }
-
-        // 가로 스크롤 방지
-        if (window.scrollX !== 0) {
-          window.scrollTo(0, window.scrollY);
-        }
       },
       { passive: true }
     );
 
+    insertSkipLink();
     initializeAuth();
     applySearchLayoutFix();
     if (!window.__searchLayoutFixListenerAdded) {
@@ -699,7 +756,12 @@ function loadHamburgerMenu() {
         <!-- 메뉴 헤더 -->
         <div class="side-menu-header">
           <h2 style="margin: 0; font-size: 20px"><i class="fas fa-spa"></i> 메뉴</h2>
-          <button class="side-menu-close" onclick="toggleSideMenu()">
+          <button
+            class="side-menu-close"
+            onclick="toggleSideMenu()"
+            type="button"
+            aria-label="메뉴 닫기"
+          >
             <i class="fas fa-times"></i>
           </button>
         </div>
@@ -738,8 +800,12 @@ function toggleSideMenu() {
   const overlay = document.getElementById('sideMenuOverlay');
 
   if (menu && overlay) {
-    menu.classList.toggle('active');
+    const isActive = menu.classList.toggle('active');
     overlay.classList.toggle('active');
+    const toggleButton = document.getElementById('hamburgerToggleBtn');
+    if (toggleButton) {
+      toggleButton.setAttribute('aria-expanded', String(isActive));
+    }
     console.log('햄버거 메뉴 토글됨');
   } else {
     console.log('메뉴 요소를 찾을 수 없습니다');

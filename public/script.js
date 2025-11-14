@@ -330,235 +330,29 @@ window.districtMap = {
   },
 };
 
-// 지역별 구 데이터
-const districtData = {
-  서울: [
-    '강남',
-    '강동',
-    '강북',
-    '강서',
-    '관악',
-    '광진',
-    '구로',
-    '금천',
-    '노원',
-    '도봉',
-    '동대문',
-    '동작',
-    '마포',
-    '서대문',
-    '서초',
-    '성동',
-    '성북',
-    '송파',
-    '양천',
-    '영등포',
-    '용산',
-    '은평',
-    '종로',
-    '중구',
-    '중랑',
-  ],
-  부산: [
-    '중구',
-    '서구',
-    '동구',
-    '영도',
-    '부산진',
-    '동래',
-    '남구',
-    '북구',
-    '해운대',
-    '사하',
-    '금정',
-    '강서',
-    '연제',
-    '수영',
-    '사상',
-    '기장',
-  ],
-  대구: ['중구', '동구', '서구', '남구', '북구', '수성구', '달서구', '달성군'],
-  인천: [
-    '중구',
-    '동구',
-    '미추홀',
-    '연수',
-    '남동',
-    '부평',
-    '계양',
-    '서구',
-    '강화',
-    '옹진',
-  ],
-  광주: ['동구', '서구', '남구', '북구', '광산'],
-  대전: ['동구', '중구', '서구', '유성', '대덕'],
-  울산: ['중구', '남구', '동구', '북구', '울주'],
-  세종: ['세종특별자치시'],
-  경기: [
-    '수원',
-    '성남',
-    '의정부',
-    '안양',
-    '부천',
-    '광명',
-    '평택',
-    '과천',
-    '오산',
-    '시흥',
-    '군포',
-    '의왕',
-    '하남',
-    '용인',
-    '파주',
-    '이천',
-    '안성',
-    '김포',
-    '화성',
-    '광주',
-    '여주',
-    '양평',
-    '고양',
-    '동두천',
-    '가평',
-    '연천',
-  ],
-  강원: [
-    '춘천',
-    '원주',
-    '강릉',
-    '동해',
-    '태백',
-    '속초',
-    '삼척',
-    '홍천',
-    '횡성',
-    '영월',
-    '평창',
-    '정선',
-    '철원',
-    '화천',
-    '양구',
-    '인제',
-    '고성',
-    '양양',
-  ],
-  충북: [
-    '청주',
-    '충주',
-    '제천',
-    '보은',
-    '옥천',
-    '영동',
-    '증평',
-    '진천',
-    '괴산',
-    '음성',
-    '단양',
-  ],
-  충남: [
-    '천안',
-    '공주',
-    '보령',
-    '아산',
-    '서산',
-    '논산',
-    '계룡',
-    '당진',
-    '금산',
-    '부여',
-    '서천',
-    '청양',
-    '홍성',
-    '예산',
-    '태안',
-  ],
-  전북: [
-    '전주',
-    '군산',
-    '익산',
-    '정읍',
-    '남원',
-    '김제',
-    '완주',
-    '진안',
-    '무주',
-    '장수',
-    '임실',
-    '순창',
-    '고창',
-    '부안',
-  ],
-  전남: [
-    '목포',
-    '여수',
-    '순천',
-    '나주',
-    '광양',
-    '담양',
-    '곡성',
-    '구례',
-    '고흥',
-    '보성',
-    '화순',
-    '장흥',
-    '강진',
-    '해남',
-    '영암',
-    '무안',
-    '함평',
-    '영광',
-    '장성',
-    '완도',
-    '진도',
-    '신안',
-  ],
-  경북: [
-    '포항',
-    '경주',
-    '김천',
-    '안동',
-    '구미',
-    '영주',
-    '영천',
-    '상주',
-    '문경',
-    '경산',
-    '군위',
-    '의성',
-    '청송',
-    '영양',
-    '영덕',
-    '청도',
-    '고령',
-    '성주',
-    '칠곡',
-    '예천',
-    '봉화',
-    '울진',
-    '울릉',
-  ],
-  경남: [
-    '창원',
-    '진주',
-    '통영',
-    '사천',
-    '김해',
-    '밀양',
-    '거제',
-    '양산',
-    '의령',
-    '함안',
-    '창녕',
-    '고성',
-    '남해',
-    '하동',
-    '산청',
-    '함양',
-    '거창',
-    '합천',
-  ],
-  제주: ['제주시', '서귀포'],
-};
+let districtDataCache = null;
+function getDistrictData() {
+  if (districtDataCache) {
+    return districtDataCache;
+  }
+
+  const map = window.districtMap || {};
+  const computed = {};
+
+  Object.values(map).forEach((region) => {
+    if (!region || !region.regionName) {
+      return;
+    }
+    const regionName = region.regionName;
+    const districts = region.districts
+      ? Object.values(region.districts)
+      : [];
+    computed[regionName] = districts;
+  });
+
+  districtDataCache = computed;
+  return districtDataCache;
+}
 
 // 마사지 업체 데이터
 const massageShops = [
@@ -1129,6 +923,7 @@ function initializeRegionOptions() {
     '제주',
   ];
 
+  const districtData = getDistrictData();
   console.log('districtData:', districtData);
   const regions = Object.keys(districtData).sort((a, b) => {
     const indexA = customOrder.indexOf(a);
@@ -1565,6 +1360,7 @@ function updateDistrictOptions(region) {
   // 옵션만 업데이트 (아이콘 보존)
   districtSelect.innerHTML = '<option value="">세부 지역을 선택하세요</option>';
 
+  const districtData = getDistrictData();
   if (region && districtData[region]) {
     console.log('District data for', region, ':', districtData[region]);
     districtData[region].forEach((district) => {

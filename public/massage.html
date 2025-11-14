@@ -15,6 +15,7 @@
       name="keywords"
       content="마사지, 아로마마사지, 타이마사지, 스웨디시, 1인샵, 왁싱, 출장마사지, 마사지예약, 마사지천국, 최저가마사지, 서울마사지, 부산마사지, 제주마사지"
     />
+    <link rel="canonical" href="https://msg1000.com/massage.html" />
     <meta name="author" content="마사지천국" />
     <meta name="robots" content="index, follow" />
 
@@ -58,6 +59,8 @@
     />
 
     <!-- 스타일시트 -->
+    <link rel="preload" href="style.css" as="style" />
+
     <link rel="stylesheet" href="style.css" />
 
     <!-- Gmarket Sans 폰트 -->
@@ -291,7 +294,7 @@
     </section>
 
     <!-- 업체 목록 -->
-    <main class="main-content">
+    <main tabindex="-1" id="main-content" class="main-content">
       <div class="results-header">
         <h1 id="resultsTitle">마사지 업체</h1>
         <span id="resultsCount" class="results-count">총 0개</span>
@@ -548,8 +551,8 @@
       </div>
     </div>
 
-    <script src="common-components.js"></script>
-    <script src="script.js"></script>
+    <script src="common-components.js" defer></script>
+    <script src="script.js" defer></script>
     <script>
       // 페이지 로드 시 마사지 필터 활성화
       document.addEventListener('DOMContentLoaded', function () {

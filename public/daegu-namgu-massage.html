@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="./" />
     <title>대구 남구 마사지 - 마사지천국 | 대구 남구 마사지 업체 예약 플랫폼</title>
-    <meta name="description" content="대구 남구 마사지 마사지천국, 대명동, 봉덕동, 이천동 마사지 등 대구 남구 전 지역 마사지 업체를 한눈에! 대구 남구 최저가 마사지 업체를 찾아보세요."
+        <meta
+      name="description"
+      content="남구 시내 중심, 대명동, 봉덕동, 이천동, 수성못, 중동 일대 마사지 가격과 후기 정보를 마사지천국에서 빠르게 확인해 보세요."
     />
-    <meta name="keywords" content="대구 남구 마사지, 대명동, 봉덕동, 이천동 마사지, 대구 남구마사지, 마사지예약, 마사지천국"
+        <meta
+      name="keywords"
+      content="대구 남구 마사지, 남구 마사지 마사지, 남구 마사지 추천, 남구 마사지 예약, 남구 시내 중심 마사지, 남구 대명동 마사지, 남구 봉덕동 마사지, 남구 이천동 마사지, 남구 수성못 마사지, 남구 중동 마사지"
     />
+    <link rel="canonical" href="https://msg1000.com/daegu-namgu-massage.html" />
     <meta name="author" content="마사지천국" />
+    <link rel="preload" href="style.css" as="style" />
+
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -24,7 +31,21 @@
     />
     <!-- 햄버거 메뉴 스타일 -->
     <!-- 스타일은 hamburger-menu-component.html에 포함됨 -->
-  </head>
+  
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="대구 남구 마사지 - 마사지천국 | 대구 남구 마사지 업체 예약 플랫폼" />
+    <meta property="og:description" content="남구 시내 중심, 대명동, 봉덕동, 이천동, 수성못, 중동 일대 마사지 가격과 후기 정보를 마사지천국에서 빠르게 확인해 보세요." />
+    <meta property="og:image" content="https://via.placeholder.com/1200x630?text=마사지천국" />
+    <meta property="og:url" content="https://msg1000.com/daegu-namgu-massage.html" />
+    <meta property="og:site_name" content="마사지천국" />
+    <meta property="og:locale" content="ko_KR" />
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="대구 남구 마사지 - 마사지천국 | 대구 남구 마사지 업체 예약 플랫폼" />
+    <meta name="twitter:description" content="남구 시내 중심, 대명동, 봉덕동, 이천동, 수성못, 중동 일대 마사지 가격과 후기 정보를 마사지천국에서 빠르게 확인해 보세요." />
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630?text=마사지천국" />
+</head>
   <body>
     <!-- 헤더 -->
     <div id="header-container"></div>
@@ -176,7 +197,7 @@
       </div>
     </section>
 
-    <main class="main-content">
+    <main tabindex="-1" id="main-content" class="main-content">
       <div class="results-header">
         <h1 id="resultsTitle">대구 남구 마사지 업체</h1>
         <span id="resultsCount" class="results-count">총 0개</span>
@@ -478,8 +499,8 @@
       </div>
     </div>
 
-    <script src="common-components.js"></script>
-    <script src="script.js"></script>
+    <script src="common-components.js" defer></script>
+    <script src="script.js" defer></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         if (typeof currentRegion !== 'undefined') {

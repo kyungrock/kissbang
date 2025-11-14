@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>이벤트 - 키스포유</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>이벤트 - 키스포유</title><link rel="canonical" href="https://msg1000.com/event.html" />
+<link rel="preload" href="style.css" as="style" />
+
+<link rel="stylesheet" href="style.css" />
     <!-- 햄버거 메뉴 스타일 -->
     <!-- 스타일은 hamburger-menu-component.html에 포함됨 -->
     <link
@@ -236,10 +238,26 @@
         }
       }
     </style>
-  </head>
+  
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="이벤트 - 키스포유" />
+    <meta property="og:description" content="마사지천국에서 지역별 마사지 정보를 확인하세요." />
+    <meta property="og:image" content="https://via.placeholder.com/1200x630?text=마사지천국" />
+    <meta property="og:url" content="https://msg1000.com/event.html" />
+    <meta property="og:site_name" content="마사지천국" />
+    <meta property="og:locale" content="ko_KR" />
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="이벤트 - 키스포유" />
+    <meta name="twitter:description" content="마사지천국에서 지역별 마사지 정보를 확인하세요." />
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630?text=마사지천국" />
+</head>
   <body>
     <!-- 헤더 -->
     <div id="header-container"></div>
+
+    <main id="main-content" tabindex="-1">
     <!-- 메인 헤더 -->
     <div class="event-header">
       <h1><i class="fas fa-gift"></i> 이벤트</h1>
@@ -272,7 +290,7 @@
     <!-- 햄버거 메뉴 -->
     <div id="hamburger-menu-container"></div>
 
-    <script src="common-components.js"></script>
+    <script src="common-components.js" defer></script>
     <script src="api-auth.js"></script>
     <script>
       // 이벤트 데이터
@@ -420,5 +438,6 @@
       // 초기화
       renderEvents();
     </script>
+      </main>
   </body>
 </html>
