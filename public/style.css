@@ -2421,12 +2421,14 @@ body {
 
 .address-container {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 0;
   padding: 6px 0;
   border-bottom: 1px solid #e9ecef;
   background: transparent;
   transition: background-color 0.3s;
+  text-align: left;
+  justify-content: flex-start;
 }
 
 .address-container:last-child {
@@ -2449,6 +2451,8 @@ body {
   text-overflow: ellipsis;
   display: inline-block;
   vertical-align: middle;
+  margin: 0;
+  padding: 0;
 }
 
 .shop-header {
@@ -2555,12 +2559,14 @@ body {
 
 .info-item {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 0;
   padding: 12px 0;
   border-bottom: 1px solid #e0e0e0;
   background: transparent;
   transition: none;
+  text-align: left;
+  justify-content: flex-start;
 }
 
 .info-item:last-child {
@@ -2577,6 +2583,7 @@ body {
   width: 16px;
   text-align: center;
   flex-shrink: 0;
+  margin-right: 0;
 }
 
 .info-item div {
@@ -2584,6 +2591,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  text-align: left;
+  padding: 0;
+  margin: 0;
 }
 
 .info-label {
@@ -2591,6 +2601,9 @@ body {
   color: #ff0000;
   font-weight: 500;
   line-height: 1.2;
+  text-align: left;
+  margin: 0;
+  padding: 0;
 }
 
 .info-value {
@@ -2598,6 +2611,9 @@ body {
   color: #333;
   font-weight: 600;
   line-height: 1.2;
+  text-align: left;
+  margin: 0;
+  padding: 0;
 }
 
 .info-value a {
@@ -3210,9 +3226,10 @@ body {
 
   .info-item {
     padding: 4px 0;
-    gap: 8px;
+    gap: 0;
     text-align: left !important;
     justify-content: flex-start !important;
+    align-items: flex-start !important;
     font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       Roboto, sans-serif;
     font-weight: 600;
@@ -3230,6 +3247,7 @@ body {
   .info-item i {
     font-size: 0.9rem;
     width: 14px;
+    margin-right: 0;
   }
 
   .info-label {
@@ -3243,7 +3261,10 @@ body {
   /* address-container 모바일 최적화 */
   .address-container {
     padding: 4px 0;
-    gap: 8px;
+    gap: 0;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
   }
 
   .address-container span {
