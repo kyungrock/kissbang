@@ -245,7 +245,7 @@
           <div class="info-item">
             <div>
               <span class="info-label">전화번호</span>
-              <span class="info-value">
+              <span class="info-value" id="shopPhone">
                 <a href="tel:0507-1859-6960">0507-1859-6960</a>
               </span>
             </div>
@@ -913,8 +913,57 @@
       }
 
       function callShop() {
-        if (confirm(`전화를 걸까요?\n${shopData.phone}`)) {
-          window.location.href = `tel:${shopData.phone}`;
+        // info-value (shopPhone) 요소에서 전화번호 가져오기
+        const phoneElement = document.getElementById('shopPhone');
+        if (!phoneElement) {
+          alert('전화번호를 찾을 수 없습니다.');
+          console.error('shopPhone 요소를 찾을 수 없습니다.');
+          return;
+        }
+        
+        // a 태그 내부 텍스트 또는 직접 텍스트에서 전화번호 가져오기
+        const phoneLink = phoneElement.querySelector('a');
+        let phoneNumber = null;
+        
+        if (phoneLink) {
+          phoneNumber = phoneLink.textContent || phoneLink.innerText;
+          // textContent가 없으면 href 속성에서 가져오기
+          if (!phoneNumber || phoneNumber.trim() === '') {
+            const href = phoneLink.getAttribute('href');
+            if (href && href.startsWith('tel:')) {
+              phoneNumber = href.replace('tel:', '');
+            }
+          }
+        } else {
+          phoneNumber = phoneElement.textContent || phoneElement.innerText;
+        }
+        
+        // 전화번호가 없는 경우 처리
+        if (!phoneNumber || phoneNumber.trim() === '') {
+          alert('전화번호가 설정되지 않았습니다.');
+          console.error('전화번호가 없습니다. phoneElement:', phoneElement);
+          return;
+        }
+        
+        // 전화번호 정리 (공백, 괄호 제거, 하이픈은 유지)
+        phoneNumber = phoneNumber.trim().replace(/\s+/g, '').replace(/[()]/g, '');
+        
+        // 하이픈 제거 (tel: 링크는 하이픈 없이도 작동)
+        phoneNumber = phoneNumber.replace(/-/g, '');
+        
+        if (!phoneNumber || phoneNumber === '') {
+          alert('전화번호가 없습니다.');
+          return;
+        }
+        
+        // 디버깅
+        console.log('전화번호:', phoneNumber);
+        
+        if (confirm(`전화를 걸까요?\n${phoneNumber}`)) {
+          // tel: 링크로 전화 걸기
+          const telLink = `tel:${phoneNumber}`;
+          console.log('전화 연결:', telLink);
+          window.location.href = telLink;
         }
       }
 

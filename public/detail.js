@@ -90,8 +90,11 @@ function displayShopInfo(shop) {
   }
 
   // 나머지 정보 표시
-  elements.shopDescription.textContent = shop.description;
-  elements.shopPhone.textContent = shop.phone;
+  elements.shopDescription.textContent = shop.description || '';
+  // 전화번호 표시 (shop.phone이 없으면 빈 문자열)
+  if (elements.shopPhone) {
+    elements.shopPhone.textContent = shop.phone || '';
+  }
 
   // 운영시간 표시 (operatingHours가 있으면 사용, 없으면 기본값)
   if (elements.shopHours) {
@@ -782,9 +785,43 @@ function closeMapModal() {
 
 // 전화 걸기
 function callShop() {
-  const phoneNumber = document.getElementById('shopPhone').textContent;
+  // info-value (shopPhone) 요소에서 전화번호 가져오기
+  const phoneElement = document.getElementById('shopPhone');
+  if (!phoneElement) {
+    alert('전화번호를 찾을 수 없습니다.');
+    console.error('shopPhone 요소를 찾을 수 없습니다.');
+    return;
+  }
+  
+  // a 태그 내부 텍스트 또는 직접 텍스트에서 전화번호 가져오기
+  const phoneLink = phoneElement.querySelector('a');
+  let phoneNumber = null;
+  
+  if (phoneLink) {
+    phoneNumber = phoneLink.textContent || phoneLink.innerText;
+  } else {
+    phoneNumber = phoneElement.textContent || phoneElement.innerText;
+  }
+  
+  // 전화번호가 없는 경우 처리
+  if (!phoneNumber || phoneNumber.trim() === '') {
+    alert('전화번호가 설정되지 않았습니다.');
+    console.error('전화번호가 없습니다. phoneElement:', phoneElement);
+    return;
+  }
+  
+  // 전화번호 정리 (공백, 특수문자 제거)
+  phoneNumber = phoneNumber.trim().replace(/\s+/g, '').replace(/[()]/g, '');
+  
+  if (!phoneNumber || phoneNumber === '') {
+    alert('전화번호가 없습니다.');
+    return;
+  }
+  
   if (confirm(`전화를 걸까요?\n${phoneNumber}`)) {
-    window.location.href = `tel:${phoneNumber}`;
+    // tel: 링크로 전화 걸기
+    const telLink = `tel:${phoneNumber}`;
+    window.location.href = telLink;
   }
 }
 
