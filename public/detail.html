@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -30,13 +30,17 @@
     />
     <meta property="og:url" content="" />
     <meta property="og:site_name" content="마사지천국" />
+    <link rel="canonical" href="https://msg1000.com/detail.html" />
+<link rel="preload" href="style.min.css" as="style" />
 
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
-  </head>
+<link rel="stylesheet" href="style.min.css" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="마사지천국" />
+    <meta name="twitter:description" content="마사지천국에서 지역별 마사지 정보를 확인하세요." />
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630?text=마사지천국" />
+</head>
   <body>
           <form class="phone-verification-form" onsubmit="return false;">
             <div class="form-group">
@@ -140,22 +144,22 @@
     <header class="header">
       <div class="header-content">
         <button class="back-btn" onclick="goBack()">
-          <i class="fas fa-arrow-left"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
         </button>
         <div
           class="logo"
           onclick="window.location.href='index.html'"
           style="cursor: pointer"
         >
-          <i class="fas fa-spa"></i>
+          <span class="fas fa-spa" style="display:inline-block;vertical-align:middle;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 464c-114.7 0-208-93.3-208-208S141.3 48 256 48s208 93.3 208 208-93.3 208-208 208z"/><path d="M256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128-57.3-128-128-128zm0 208c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80z"/></svg></span>
           마사지천국
         </div>
         <div class="header-actions">
           <button class="map-btn" onclick="openMap()">
-            <i class="fas fa-map-marker-alt"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;"><path d="M172.268 501.67C272.268 401.67 384 272.67 384 192C384 86 298 0 192 0S0 86 0 192c0 80.67 111.732 209.67 211.732 309.67L192 512l-19.732-10.33zM192 256c-35.346 0-64-28.654-64-64s28.654-64 64-64s64 28.654 64 64s-28.654 64-64 64z"/></svg>
           </button>
           <button class="share-btn" onclick="shareShop()">
-            <i class="fas fa-share-alt"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;"><path d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304C0 417.3 81.5 467.9 100.2 478.1c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-7.5-4.3-14.4-9.8-19.5C108.8 431.9 96 414.4 96 384c0-53 43-96 96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"/></svg>
           </button>
         </div>
       </div>
@@ -164,7 +168,7 @@
     <!-- 업체 이미지 섹션 -->
     <section class="shop-image-section">
       <div class="shop-image-container">
-        <img id="shopImage" src="" alt="업체 이미지" class="shop-main-image" />
+        <img loading="lazy" id="shopImage" src="" alt="업체 이미지" class="shop-main-image" />
         <div class="image-overlay">
           <div class="shop-badge" id="shopType"></div>
         </div>
@@ -182,7 +186,7 @@
             </div>
           </div>
           <div class="shop-flag">
-            <img
+            <img loading="lazy"
               src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg"
               alt="한국 국기"
               class="flag-image"
@@ -201,7 +205,6 @@
 
         <div class="info-grid">
           <div class="info-item">
-            <i class="fas fa-map-marker-alt"></i>
             <div>
               <span class="info-label">주소</span>
               <span class="info-value" id="shopAddress"></span>
@@ -209,7 +212,6 @@
           </div>
 
           <div class="info-item">
-            <i class="fas fa-phone"></i>
             <div>
               <span class="info-label">전화번호</span>
               <span class="info-value" id="shopPhone"></span>
@@ -217,7 +219,6 @@
           </div>
 
           <div class="info-item">
-            <i class="fas fa-clock"></i>
             <div>
               <span class="info-label">운영시간</span>
               <span class="info-value" id="shopHours"
@@ -227,7 +228,6 @@
           </div>
 
           <div class="info-item">
-            <i class="fas fa-won-sign"></i>
             <div>
               <span class="info-label">최저가</span>
               <span class="info-value" id="shopPrice"></span>
@@ -281,11 +281,9 @@
         <div class="booking-info">
           <div class="booking-actions">
             <button class="call-btn" onclick="callShop()">
-              <i class="fas fa-phone"></i>
               전화 예약
             </button>
             <button class="map-btn" onclick="openMap()">
-              <i class="fas fa-map-marker-alt"></i>
               지도보기
             </button>
             <div class="nearby-shops-title" id="nearbyShopsTitleClickable">
@@ -293,7 +291,6 @@
                 제주시
               </div>
               <div class="nearby-title-line2">
-                <i class="fas fa-map-marker-alt"></i>
                 <span id="nearbyShopsTitle">다른샵보기</span>
               </div>
             </div>
@@ -526,7 +523,7 @@
     </div>
 
     <!-- 카카오맵 API 키 없이 URL 방식 사용 -->
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <script src="detail.js"></script>
     <script>
       // 즉시 실행 (DOMContentLoaded보다 빠름)

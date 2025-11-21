@@ -80,6 +80,37 @@ body {
   position: relative;
 }
 
+.skip-nav-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 10000;
+  background: #1f2937;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.skip-nav-link:focus {
+  left: 50%;
+  top: 10px;
+  width: auto;
+  height: auto;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#main-content:focus {
+  outline: 3px solid #667eea;
+  outline-offset: 6px;
+  scroll-margin-top: 90px;
+}
+
 /* 모든 요소에 Gmarket Sans 폰트 적용 (아이콘 제외) */
 *:not(.fas):not(.fa):not([class*='fa-']) {
   font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -128,6 +159,25 @@ textarea,
 [class*='fa-'] {
   font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Pro',
     'Font Awesome 6 Brands' !important;
+}
+
+/* 레이아웃 변경 방지: main-content 초기 크기 고정 */
+.main-content {
+  min-height: 200px; /* 최소 높이 설정으로 레이아웃 시프트 방지 */
+  contain: layout style paint; /* CSS containment으로 리플로우 최소화 */
+}
+
+/* 폰트 로드 전에도 레이아웃 유지 */
+body {
+  font-display: swap;
+  font-family: 'Gmarket Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+}
+
+/* 헤더 고정 크기로 레이아웃 시프트 방지 */
+.header {
+  min-height: 60px;
+  contain: layout style paint;
 }
 
 /* 헤더 스타일 */
@@ -2371,12 +2421,14 @@ textarea,
 
 .address-container {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 0;
   padding: 6px 0;
   border-bottom: 1px solid #e9ecef;
   background: transparent;
   transition: background-color 0.3s;
+  text-align: left;
+  justify-content: flex-start;
 }
 
 .address-container:last-child {
@@ -2399,6 +2451,8 @@ textarea,
   text-overflow: ellipsis;
   display: inline-block;
   vertical-align: middle;
+  margin: 0;
+  padding: 0;
 }
 
 .shop-header {
@@ -2505,12 +2559,14 @@ textarea,
 
 .info-item {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 0;
   padding: 12px 0;
   border-bottom: 1px solid #e0e0e0;
   background: transparent;
   transition: none;
+  text-align: left;
+  justify-content: flex-start;
 }
 
 .info-item:last-child {
@@ -2527,6 +2583,7 @@ textarea,
   width: 16px;
   text-align: center;
   flex-shrink: 0;
+  margin-right: 0;
 }
 
 .info-item div {
@@ -2534,6 +2591,9 @@ textarea,
   display: flex;
   flex-direction: column;
   gap: 2px;
+  text-align: left;
+  padding: 0;
+  margin: 0;
 }
 
 .info-label {
@@ -2541,6 +2601,9 @@ textarea,
   color: #ff0000;
   font-weight: 500;
   line-height: 1.2;
+  text-align: left;
+  margin: 0;
+  padding: 0;
 }
 
 .info-value {
@@ -2548,6 +2611,9 @@ textarea,
   color: #333;
   font-weight: 600;
   line-height: 1.2;
+  text-align: left;
+  margin: 0;
+  padding: 0;
 }
 
 .info-value a {
@@ -3160,9 +3226,10 @@ textarea,
 
   .info-item {
     padding: 4px 0;
-    gap: 8px;
+    gap: 0;
     text-align: left !important;
     justify-content: flex-start !important;
+    align-items: flex-start !important;
     font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       Roboto, sans-serif;
     font-weight: 600;
@@ -3180,6 +3247,7 @@ textarea,
   .info-item i {
     font-size: 0.9rem;
     width: 14px;
+    margin-right: 0;
   }
 
   .info-label {
@@ -3193,7 +3261,10 @@ textarea,
   /* address-container 모바일 최적화 */
   .address-container {
     padding: 4px 0;
-    gap: 8px;
+    gap: 0;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
   }
 
   .address-container span {

@@ -330,740 +330,220 @@ window.districtMap = {
   },
 };
 
-// 지역별 구 데이터
-const districtData = {
-  서울: [
-    '강남',
-    '강동',
-    '강북',
-    '강서',
-    '관악',
-    '광진',
-    '구로',
-    '금천',
-    '노원',
-    '도봉',
-    '동대문',
-    '동작',
-    '마포',
-    '서대문',
-    '서초',
-    '성동',
-    '성북',
-    '송파',
-    '양천',
-    '영등포',
-    '용산',
-    '은평',
-    '종로',
-    '중구',
-    '중랑',
-  ],
-  부산: [
-    '중구',
-    '서구',
-    '동구',
-    '영도',
-    '부산진',
-    '동래',
-    '남구',
-    '북구',
-    '해운대',
-    '사하',
-    '금정',
-    '강서',
-    '연제',
-    '수영',
-    '사상',
-    '기장',
-  ],
-  대구: ['중구', '동구', '서구', '남구', '북구', '수성구', '달서구', '달성군'],
-  인천: [
-    '중구',
-    '동구',
-    '미추홀',
-    '연수',
-    '남동',
-    '부평',
-    '계양',
-    '서구',
-    '강화',
-    '옹진',
-  ],
-  광주: ['동구', '서구', '남구', '북구', '광산'],
-  대전: ['동구', '중구', '서구', '유성', '대덕'],
-  울산: ['중구', '남구', '동구', '북구', '울주'],
-  세종: ['세종특별자치시'],
-  경기: [
-    '수원',
-    '성남',
-    '의정부',
-    '안양',
-    '부천',
-    '광명',
-    '평택',
-    '과천',
-    '오산',
-    '시흥',
-    '군포',
-    '의왕',
-    '하남',
-    '용인',
-    '파주',
-    '이천',
-    '안성',
-    '김포',
-    '화성',
-    '광주',
-    '여주',
-    '양평',
-    '고양',
-    '동두천',
-    '가평',
-    '연천',
-  ],
-  강원: [
-    '춘천',
-    '원주',
-    '강릉',
-    '동해',
-    '태백',
-    '속초',
-    '삼척',
-    '홍천',
-    '횡성',
-    '영월',
-    '평창',
-    '정선',
-    '철원',
-    '화천',
-    '양구',
-    '인제',
-    '고성',
-    '양양',
-  ],
-  충북: [
-    '청주',
-    '충주',
-    '제천',
-    '보은',
-    '옥천',
-    '영동',
-    '증평',
-    '진천',
-    '괴산',
-    '음성',
-    '단양',
-  ],
-  충남: [
-    '천안',
-    '공주',
-    '보령',
-    '아산',
-    '서산',
-    '논산',
-    '계룡',
-    '당진',
-    '금산',
-    '부여',
-    '서천',
-    '청양',
-    '홍성',
-    '예산',
-    '태안',
-  ],
-  전북: [
-    '전주',
-    '군산',
-    '익산',
-    '정읍',
-    '남원',
-    '김제',
-    '완주',
-    '진안',
-    '무주',
-    '장수',
-    '임실',
-    '순창',
-    '고창',
-    '부안',
-  ],
-  전남: [
-    '목포',
-    '여수',
-    '순천',
-    '나주',
-    '광양',
-    '담양',
-    '곡성',
-    '구례',
-    '고흥',
-    '보성',
-    '화순',
-    '장흥',
-    '강진',
-    '해남',
-    '영암',
-    '무안',
-    '함평',
-    '영광',
-    '장성',
-    '완도',
-    '진도',
-    '신안',
-  ],
-  경북: [
-    '포항',
-    '경주',
-    '김천',
-    '안동',
-    '구미',
-    '영주',
-    '영천',
-    '상주',
-    '문경',
-    '경산',
-    '군위',
-    '의성',
-    '청송',
-    '영양',
-    '영덕',
-    '청도',
-    '고령',
-    '성주',
-    '칠곡',
-    '예천',
-    '봉화',
-    '울진',
-    '울릉',
-  ],
-  경남: [
-    '창원',
-    '진주',
-    '통영',
-    '사천',
-    '김해',
-    '밀양',
-    '거제',
-    '양산',
-    '의령',
-    '함안',
-    '창녕',
-    '고성',
-    '남해',
-    '하동',
-    '산청',
-    '함양',
-    '거창',
-    '합천',
-  ],
-  제주: ['제주시', '서귀포'],
-};
+// districtData는 window.districtMap에서 자동 생성 (중앙화)
+function getDistrictData() {
+  const districtData = {};
+  const districtMap = window.districtMap || {};
 
-// 마사지 업체 데이터
-const massageShops = [
-  {
-    id: 1,
-    name: '연동 프라이빗',
-    type: '마사지, 왁싱, 스웨디시',
-    country: 'korea, china',
-    region: '제주',
-    district: '제주시',
-    address: '제주특별자치도 제주시 연동 261-18',
-    detailAddress: '제원 시내 부근 (정확한 위치는 예약 시 안내)',
-    phone: '0507-1859-7062',
-    rating: 4.9,
-    reviewCount: 142,
-    price: '120,000원~',
-    description:
-      '제주도 프라이빗 마사지샵. 20대 전문 힐링 관리사들이 정성스럽게 맞이해드리며, 스웨디시·아로마·로미로미·슈얼 등 다양한 프로그램으로 최상의 힐링을 제공합니다. 전원 한국인 여성 관리사, 프라이빗 1인샵 운영, 주차 가능.',
-    image:
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=250&fit=crop&crop=center',
-    services: [
-      '스웨디시',
-      '아로마',
-      '로미로미',
-      '슈얼 마사지',
-      '프리미엄 왁싱',
-      '전문 힐링 케어',
-    ],
-    subway: '제원 시내',
-    operatingHours: '오전 10시 ~ 새벽 6시 (폰 꺼진 경우 마감, 랜덤 휴무)',
-    staffInfo:
-      '전원 20대~30대 초반 한국인 여성 관리사 (예: 소율(24), 제니(20), 연우(25), 지우(25), 서아(23), 세나(29), 다엘(22), 꽃님(27), 유주(25), 예리(21) 등)',
-    features: [
-      '전원 한국인 여성 관리사',
-      '프라이빗 1인샵 운영',
-      '주차 가능',
-      '무향·무취 최고급 수용성 바디 오일 사용',
-    ],
-    keywords:
-      '제주도건마, 제주도마사지, 제주도1인샵, 제주도스웨디시, 제주도아로마마사지, 제주도로미로미, 제주도슈얼마사지',
-    courses: [
-      {
-        category: '스웨디시 프로그램',
-        items: [
-          {
-            name: 'A코스',
-            duration: '40분',
-            price: '120,000원',
-            description: '스웨디시 + 센슈얼 + HP',
-          },
-          {
-            name: 'B코스',
-            duration: '60분',
-            price: '150,000원',
-            description: '스웨디시 + 비디슈얼 + HP',
-          },
-          {
-            name: 'C코스',
-            duration: '70분',
-            price: '180,000원',
-            description: '스웨디시 + 비디슈얼 + HP',
-          },
-        ],
-      },
-      {
-        category: '프리미엄 왁싱',
-        items: [
-          {
-            name: 'A코스',
-            duration: '상담',
-            price: '상담 문의',
-            description: '고급 브라질리언',
-          },
-          {
-            name: 'B코스',
-            duration: '상담',
-            price: '상담 문의',
-            description: '고급 브라질리언 +@',
-          },
-        ],
-      },
-    ],
-    membershipInfo:
-      '기존가 130,000원 → 회원가 120,000원 (사전 예약 및 현금 결제 시 적용)',
-    reviews: [
-      {
-        name: '김**',
-        date: '2024-09-20',
-        rating: 5,
-        comment:
-          '제주에서 이런 곳을 찾다니! 관리사님들이 너무 친절하시고 실력도 최고예요. 스웨디시 받았는데 몸이 정말 가벼워졌어요.',
-      },
-      {
-        name: '박**',
-        date: '2024-09-15',
-        rating: 5,
-        comment:
-          '프라이빗 1인샵이라 편안하게 받을 수 있었어요. 무향 오일이라 샤워 후에도 깔끔하고 좋았습니다. 강추!',
-      },
-      {
-        name: '이**',
-        date: '2024-09-10',
-        rating: 5,
-        comment:
-          '20대 관리사분들이 정말 전문적이에요. 제주 여행 올 때마다 들릴 예정입니다. 주차도 편리해요.',
-      },
-      {
-        name: '최**',
-        date: '2024-09-05',
-        rating: 5,
-        comment:
-          '소율님께 받았는데 정말 실력이 대단해요! 아로마 마사지 받고 나서 스트레스가 완전히 사라졌어요. 제주도 여행의 하이라이트였습니다.',
-      },
-      {
-        name: '정**',
-        date: '2024-08-28',
-        rating: 5,
-        comment:
-          '연우님과 지우님이 정말 친절하시고 전문적이에요. 프리미엄 왁싱도 받았는데 무향이라 샤워 후에도 깔끔했어요. 다음에도 꼭 올게요!',
-      },
-      {
-        name: '한**',
-        date: '2024-08-20',
-        rating: 5,
-        comment:
-          '제주도 여행 중 우연히 발견한 곳인데 정말 대박이에요! 서아님께 받은 로미로미 마사지가 너무 좋았어요. 회원가도 적용해주셔서 감사했습니다.',
-      },
-      {
-        name: '윤**',
-        date: '2024-08-15',
-        rating: 5,
-        comment:
-          '세나님과 다엘님이 정말 예쁘고 실력도 좋아요! 슈얼 마사지 받았는데 몸이 정말 편해졌어요. 제주도에서 가장 좋은 마사지샵이에요.',
-      },
-      {
-        name: '강**',
-        date: '2024-08-10',
-        rating: 5,
-        comment:
-          '꽃님님께 받은 스웨디시가 정말 최고예요! 20대 관리사분들이라 대화도 잘 통하고 편안했어요. 제주도 여행 필수 코스입니다.',
-      },
-      {
-        name: '조**',
-        date: '2024-08-05',
-        rating: 5,
-        comment:
-          '유주님과 예리님이 정말 친절하시고 실력도 대단해요! 아로마 마사지 받고 나서 피부도 좋아지고 몸도 가벼워졌어요. 강력 추천합니다!',
-      },
-      {
-        name: '임**',
-        date: '2024-07-30',
-        rating: 5,
-        comment:
-          '제이님께 받은 프리미엄 왁싱이 정말 만족스러웠어요! 무향 오일이라 샤워 후에도 깔끔하고 좋았습니다. 제주도 여행 중 최고의 선택이었어요.',
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: '연동 MZ',
-    type: '마사지, 스웨디시',
-    country: 'korea',
-    region: '제주',
-    district: '제주시',
-    address: '제주특별자치도 제주시 연동10길 16',
-    detailAddress: '돔나이트 부근 (주차 문의)',
-    phone: '0507-1859-6671',
-    rating: 4.9,
-    reviewCount: 8,
-    price: '150,000원~',
-    description:
-      '제주 연동 최고의 서비스를 보장하는 MZ입니다. 깨끗하고 쾌적한 시설로 고객님의 지친일상에 활력과 행복으로 보답드리겠습니다. 고객님을 힐링으로 모시겠습니다.',
-    image:
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=250&fit=crop&crop=center',
-    services: [
-      '스웨디시',
-      '왁싱',
-      '스파',
-      '커플마사지',
-      '아로마마사지',
-      '로미로미',
-      '슈얼마사지',
-    ],
-    subway: '돔나이트 부근',
-    operatingHours: '24시간 (랜덤휴무 or 폰OFF)',
-    staffInfo:
-      '전원 한국인 여 쌤들 (예: 유현(24), 서우(23), 체이(25), 지우(27) 등)',
-    features: [
-      '전원 한국인 여성 관리사',
-      '1인샵 운영',
-      '주차 문의',
-      '24시간 운영',
-    ],
-    keywords:
-      '제주1인샵, 제주건마, 제주스웨디시, 제주타이마사지, 제주왁싱, 제주스파, 제주커플마사지, 제주아로마마사지, 제주로미로미, 제주슈얼마사지',
-    courses: [
-      {
-        category: '감성 스웨디시',
-        items: [
-          {
-            name: 'A코스',
-            duration: '60분',
-            price: '150,000원',
-            description: '스페셜스웨디시+림프+감성',
-          },
-          {
-            name: 'B코스',
-            duration: '70분',
-            price: '180,000원',
-            description: '스페셜스웨디시+슈+림프+감성',
-          },
-        ],
-      },
-    ],
-    membershipInfo:
-      '기존가 140,000원 → 회원가 150,000원 (사전 예약 및 현금 결제 시 적용)',
-    reviews: [
-      {
-        name: '김**',
-        date: '2024-09-25',
-        rating: 5,
-        comment:
-          'MZ에서 유현님께 받은 스웨디시가 정말 최고예요! 24시간 운영이라 늦은 시간에도 편하게 이용할 수 있었어요. 돔나이트 부근이라 위치도 좋고 주차도 편리해요.',
-      },
-      {
-        name: '박**',
-        date: '2024-09-20',
-        rating: 5,
-        comment:
-          '서우님과 체이님이 정말 친절하시고 실력도 대단해요! 감성 스웨디시 A코스 받았는데 림프 마사지까지 해주셔서 몸이 정말 가벼워졌어요. 제주 여행의 하이라이트였습니다.',
-      },
-      {
-        name: '이**',
-        date: '2024-09-15',
-        rating: 5,
-        comment:
-          '지우님께 받은 타이마사지가 너무 좋았어요! 20대 관리사분들이라 대화도 잘 통하고 편안했어요. 회원가도 적용해주셔서 감사했습니다. 강력 추천!',
-      },
-      {
-        name: '최**',
-        date: '2024-09-10',
-        rating: 5,
-        comment:
-          'MZ는 정말 깔끔하고 쾌적한 시설이에요. 아로마마사지와 로미로미를 받았는데 정말 힐링되는 시간이었어요. 24시간 운영이라 언제든 이용할 수 있어서 좋아요.',
-      },
-      {
-        name: '정**',
-        date: '2024-09-05',
-        rating: 5,
-        comment:
-          '체이님께 받은 슈얼마사지가 정말 만족스러웠어요! 1인샵이라 프라이빗하게 받을 수 있어서 더 좋았어요. 제주도에서 가장 좋은 마사지샵이에요.',
-      },
-      {
-        name: '한**',
-        date: '2024-08-30',
-        rating: 5,
-        comment:
-          '유현님과 서우님이 정말 예쁘고 실력도 좋아요! 커플마사지 받았는데 둘 다 만족했어요. 돔나이트 근처라 숙소에서 가깝고 주차도 편리해요.',
-      },
-      {
-        name: '윤**',
-        date: '2024-08-25',
-        rating: 5,
-        comment:
-          'MZ에서 왁싱도 받았는데 정말 깔끔하게 해주셨어요! 지우님께 받은 서비스가 너무 만족스러웠어요. 제주도 여행 중 최고의 선택이었어요.',
-      },
-      {
-        name: '강**',
-        date: '2024-08-20',
-        rating: 5,
-        comment:
-          '24시간 운영이라 새벽에 갔는데도 친절하게 맞아주셨어요! 체이님께 받은 스파 서비스가 정말 좋았어요. 제주도 여행 필수 코스입니다.',
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: '제주시 이쁘니출장',
-    type: '출장마사지',
-    country: 'korea, japan',
-    region: '제주',
-    district: '제주시',
-    address: '제주도 전지역',
-    detailAddress: '제주시 30분 이내 신속방문',
-    phone: '0507-1859-6960',
-    rating: 4.8,
-    reviewCount: 16,
-    price: '110,000원~',
-    description:
-      '제주도 전지역 출장마사지 최고의 서비스를 보장하는 이쁘니 출장입니다. 제주도 놀러오신 분들 또는 현지분들께 신속하고 빠른 힐링을 전달해 드립니다. 20대~30대 고퀄리티 관리사가 24시간 서비스합니다.',
-    image:
-      'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&h=250&fit=crop&crop=center',
-    services: [
-      '스웨디시',
-      '아로마마사지',
-      '타이마사지',
-      '로미로미',
-      '슈얼마사지',
-      '출장마사지',
-      '홈타이',
-    ],
-    subway: '제주도 전지역',
-    operatingHours: '24시간 (폰이 꺼진 경우: 마감, 랜덤휴무)',
-    staffInfo: '전원 한국인&일본 여 쌤 (20대 & 힐링샵)',
-    features: [
-      '제주도 전지역 출장 서비스',
-      '20대~30대 고퀄리티 관리사',
-      '제주시 30분 이내 신속방문',
-      '24시간 운영',
-      '천연 수용성 오일 사용',
-      '현금 결제 시 할인 적용',
-    ],
-    keywords:
-      '제주출장마사지, 제주도출장마사지, 제주홈타이, 제주도홈타이, 이쁘니출장, 제주출장, 제주도출장',
-    courses: [
-      {
-        category: '힐링 테라피',
-        items: [
-          {
-            name: 'A코스',
-            duration: '60분',
-            price: '110,000원',
-            description: '힐링 테라피',
-          },
-          {
-            name: 'B코스',
-            duration: '80분',
-            price: '130,000원',
-            description: '힐링 테라피',
-          },
-          {
-            name: 'C코스',
-            duration: '100분',
-            price: '160,000원',
-            description: '힐링 테라피',
-          },
-        ],
-      },
-    ],
-    membershipInfo:
-      '기존가 130,000원 → 회원가 110,000원 (현금 결제 시 적용, 건마시티 회원임을 말씀하셔야 할인가 적용)',
-    reviews: [
-      {
-        name: '김**',
-        date: '2024-09-28',
-        rating: 5,
-        comment:
-          '이쁘니출장에서 받은 출장마사지가 정말 최고예요! 제주시에서 30분 만에 도착해서 놀랐어요. 20대 관리사분께서 정말 부드럽고 실력 좋게 해주셨습니다.',
-      },
-      {
-        name: '박**',
-        date: '2024-09-25',
-        rating: 5,
-        comment:
-          '제주도 여행 중 호텔에서 출장마사지를 받았는데 정말 편했어요! 24시간 운영이라 늦은 시간에도 이용할 수 있었고, 천연 오일 사용해서 피부에도 좋았어요.',
-      },
-      {
-        name: '이**',
-        date: '2024-09-22',
-        rating: 5,
-        comment:
-          '홈타이 서비스가 정말 좋았어요! 제주도 전지역 출장 가능하다고 해서 서귀포시에서도 신청했는데 정말 와주셨어요. 힐링 테라피 C코스 받았는데 100분 동안 정말 힐링되는 시간이었어요.',
-      },
-      {
-        name: '최**',
-        date: '2024-09-20',
-        rating: 5,
-        comment:
-          '일본인 관리사분께서 해주신 타이마사지가 너무 좋았어요! 출장마사지인데도 실내 마사지샵 못지않게 전문적이었어요. 회원가도 적용해주셔서 감사했습니다.',
-      },
-      {
-        name: '정**',
-        date: '2024-09-18',
-        rating: 5,
-        comment:
-          '이쁘니출장은 정말 믿을만해요! 제주도 현지인인데 여러 번 이용했는데 항상 만족스러워요. 20대~30대 관리사분들이라 대화도 잘 통하고 편안했어요.',
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: '연동 A+스웨디시',
-    type: '마사지, 스웨디시',
-    country: 'korea',
-    region: '제주',
-    district: '제주시',
-    address: '제주특별자치도 제주시 연동 293-102',
-    detailAddress: '송월타월 2층',
-    phone: '0507-1859-6407',
-    rating: 4.8,
-    reviewCount: 85581,
-    price: '90,000원~',
-    description:
-      '제주도연동 A+스웨디시 인사 드립니다! 저희 샵은 철저한 관리사 교육으로 실력 및 마인드가 정말 좋습니다. 샵으로 육체적 힐링은 물론 심신의 안정과 내적치유도 도와드리도록 하겠습니다. 감사합니다. ❤',
-    image:
-      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop&crop=center',
-    services: ['A+ 스웨디시', '감성 테라피', '스페셜 스웨디시', '림프 관리'],
-    subway: '송월타월 2층',
-    operatingHours: '24시간 (랜덤휴무 or 폰OFF)',
-    staffInfo:
-      '전원 한국인 여성 힐러 | 20대 & 힐링샵 | 모두 상기 종목 코스 수료 | 은채(20대), 소희(20대), 유미(20대), 겨울(20대), 구름(20대)',
-    features: [
-      '24시간 운영',
-      '전원 한국인 여성 관리사',
-      '20대 전문 관리사',
-      '주차 가능',
-      '건마시티 회원 할인',
-      '송월타월 2층 위치',
-    ],
-    keywords:
-      '제주연동마사지, A+스웨디시, 연동마사지, 제주마사지, 24시간마사지, 건마시티, 송월타월',
-    courses: [
-      {
-        category: 'A+ 코스',
-        items: [
-          {
-            name: 'A 주간',
-            duration: '40분',
-            price: '90,000원',
-            description: 'A+ 스웨디시',
-          },
-          {
-            name: 'A 야간',
-            duration: '40분',
-            price: '100,000원',
-            description: 'A+ 스웨디시',
-          },
-        ],
-      },
-      {
-        category: '감성 테라피',
-        items: [
-          {
-            name: 'B 주간',
-            duration: '60분',
-            price: '140,000원',
-            description: '스페셜 스웨디시 + 림프관리 + 감성',
-          },
-          {
-            name: 'B 야간',
-            duration: '60분',
-            price: '150,000원',
-            description: '스페셜 스웨디시 + 림프관리 + 감성',
-          },
-        ],
-      },
-      {
-        category: '프리미엄 코스',
-        items: [
-          {
-            name: 'C 주간',
-            duration: '70분',
-            price: '170,000원',
-            description: '스페셜 스웨디시 + 슈 + 림프관리 + 감성',
-          },
-          {
-            name: 'C 야간',
-            duration: '70분',
-            price: '180,000원',
-            description: '스페셜 스웨디시 + 슈 + 림프관리 + 감성',
-          },
-        ],
-      },
-    ],
-    membershipInfo:
-      '기존가 120,000원 → 회원가 90,000원 (건마시티 회원임을 말씀하셔야 할인가 적용)',
-    reviews: [
-      {
-        name: '건마시티 회원',
-        date: '2024-12-19',
-        rating: 5,
-        comment:
-          '철저한 관리사 교육으로 실력과 마인드가 정말 좋습니다. 24시간 운영이라 언제든 이용 가능해서 편리해요.',
-      },
-      {
-        name: '김**',
-        date: '2024-12-15',
-        rating: 5,
-        comment:
-          'A+ 스웨디시 정말 좋았어요! 20대 관리사분들이 정말 전문적이고 친절하세요. 송월타월 2층 위치도 찾기 쉬웠어요.',
-      },
-      {
-        name: '박**',
-        date: '2024-12-10',
-        rating: 5,
-        comment:
-          '감성 테라피 B코스 받았는데 정말 힐링되는 시간이었어요. 림프관리까지 해주셔서 몸이 정말 가벼워졌어요.',
-      },
-      {
-        name: '이**',
-        date: '2024-12-05',
-        rating: 5,
-        comment:
-          '24시간 운영이라 새벽에 갔는데도 친절하게 맞아주셨어요! 건마시티 회원 할인도 적용해주셔서 감사했습니다.',
-      },
-      {
-        name: '최**',
-        date: '2024-11-28',
-        rating: 5,
-        comment:
-          '프리미엄 코스 C코스 받았는데 정말 최고예요! 스페셜 스웨디시에 슈까지 해주셔서 완전 힐링되었어요.',
-      },
-    ],
-  },
-];
+  for (const [key, value] of Object.entries(districtMap)) {
+    if (value.regionName && value.districts) {
+      districtData[value.regionName] = Object.values(value.districts);
+    }
+  }
+
+  return districtData;
+}
+
+// shop-card-data.js에서 업체 데이터 로드
+async function loadShopCardsFromDataFile() {
+  // shop-card-data.js가 이미 로드되어 있다면 window.shopCardData 사용
+  if (window.shopCardData) {
+    return window.shopCardData;
+  }
+
+  // 동적으로 스크립트 로드
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'shop-card-data.js';
+    script.onload = () => {
+      resolve(window.shopCardData || []);
+    };
+    script.onerror = () => {
+      console.warn('shop-card-data.js 로드 실패, 빈 배열 반환');
+      resolve([]);
+    };
+    document.head.appendChild(script);
+  });
+}
+
+// company- HTML 파일에서 업체 데이터 추출
+async function loadShopDataFromHTMLFiles() {
+  try {
+    // company- 접두사가 붙은 HTML 파일 목록 가져오기
+    const companyFiles = await getCompanyHTMLFiles();
+    const shops = [];
+
+    // 각 HTML 파일에서 데이터 추출 (최대 100개씩 배치로 처리)
+    const batchSize = 100;
+    for (let i = 0; i < companyFiles.length; i += batchSize) {
+      const batch = companyFiles.slice(i, i + batchSize);
+      const batchShops = await Promise.all(
+        batch.map((file) => extractShopDataFromHTML(file))
+      );
+      shops.push(...batchShops.filter((shop) => shop !== null));
+    }
+
+    return shops;
+  } catch (error) {
+    console.error('HTML 파일에서 업체 데이터 로드 중 오류:', error);
+    return [];
+  }
+}
+
+// company- 접두사가 붙은 HTML 파일 목록 가져오기
+async function getCompanyHTMLFiles() {
+  try {
+    // sitemap.xml이나 파일 목록 API가 있다면 사용
+    // 없으면 현재 페이지에서 company- 파일 목록을 추론
+    // 실제 구현에서는 서버에서 파일 목록을 제공해야 함
+    const response = await fetch('sitemap.xml');
+    if (response.ok) {
+      const text = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(text, 'text/xml');
+      const urls = xmlDoc.querySelectorAll('url loc');
+      const companyFiles = [];
+      urls.forEach((url) => {
+        const href = url.textContent;
+        if (href && href.includes('company-') && href.endsWith('.html')) {
+          const fileName = href.split('/').pop();
+          companyFiles.push(fileName);
+        }
+      });
+      return companyFiles;
+    }
+  } catch (error) {
+    console.warn('sitemap.xml을 찾을 수 없습니다. 기본 파일 목록 사용:', error);
+  }
+
+  // 기본 파일 목록 (shop-card-data.js에서 가져오기)
+  if (window.shopCardData) {
+    return window.shopCardData.map((shop) => shop.file);
+  }
+
+  return [];
+}
+
+// HTML 파일에서 JSON-LD 스키마를 파싱하여 업체 데이터 추출
+async function extractShopDataFromHTML(fileName) {
+  try {
+    const response = await fetch(fileName);
+    if (!response.ok) return null;
+
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    // JSON-LD 스키마 찾기
+    const jsonLdScripts = doc.querySelectorAll(
+      'script[type="application/ld+json"]'
+    );
+    let shopData = null;
+
+    for (const script of jsonLdScripts) {
+      try {
+        const data = JSON.parse(script.textContent);
+        if (data['@type'] === 'HealthAndBeautyBusiness') {
+          shopData = data;
+          break;
+        }
+      } catch (e) {
+        continue;
+      }
+    }
+
+    if (!shopData) return null;
+
+    // shop-card-data.js에서 추가 정보 가져오기
+    const shopCardData = window.shopCardData?.find((s) => s.file === fileName);
+
+    // 업체 데이터 구성
+    const shop = {
+      id: shopCardData?.id || parseInt(fileName.match(/\d+/)?.[0] || '0'),
+      name: shopData.name || '',
+      type: shopCardData?.type || '마사지',
+      country: shopCardData?.country || 'korea',
+      region:
+        shopData.address?.addressRegion
+          ?.replace('특별자치도', '')
+          .replace('광역시', '')
+          .replace('시', '')
+          .trim() || '',
+      district: shopData.address?.addressLocality || '',
+      address:
+        shopData.address?.streetAddress ||
+        shopData.address?.addressLocality ||
+        '',
+      detailAddress: shopCardData?.detailAddress || '',
+      phone: shopData.telephone?.replace(/[^0-9]/g, '') || '',
+      rating: parseFloat(shopData.aggregateRating?.ratingValue || 0),
+      reviewCount: parseInt(shopData.aggregateRating?.reviewCount || 0),
+      price: shopData.priceRange || '',
+      description: shopData.description || '',
+      image: shopData.image || '',
+      services: shopCardData?.services || [],
+      operatingHours: shopData.openingHoursSpecification
+        ? `${shopData.openingHoursSpecification.opens} ~ ${shopData.openingHoursSpecification.closes}`
+        : '',
+      file: fileName,
+      showHealingShop:
+        shopCardData?.showHealingShop !== undefined
+          ? shopCardData.showHealingShop
+          : true,
+      greeting: shopCardData?.greeting,
+    };
+
+    return shop;
+  } catch (error) {
+    console.error(`파일 ${fileName}에서 데이터 추출 중 오류:`, error);
+    return null;
+  }
+}
+
+// 업체 데이터 초기화 및 병합
+async function initializeShopData() {
+  try {
+    // shop-card-data.js에서 기본 데이터 로드
+    const loadedShops = await loadShopCardsFromDataFile();
+
+    // company- HTML 파일에서 상세 데이터 로드
+    const htmlShops = await loadShopDataFromHTMLFiles();
+
+    // 두 데이터 소스 병합
+    const allShops = [];
+
+    // shop-card-data.js의 데이터를 기준으로 병합
+    loadedShops.forEach((cardData) => {
+      const htmlShop = htmlShops.find((s) => s.file === cardData.file);
+      if (htmlShop) {
+        // HTML에서 가져온 상세 데이터와 카드 데이터 병합
+        allShops.push({ ...htmlShop, ...cardData });
+      } else {
+        // HTML 파일이 없으면 카드 데이터만 사용
+        allShops.push(cardData);
+      }
+    });
+
+    // HTML에만 있는 업체 추가
+    htmlShops.forEach((htmlShop) => {
+      if (!allShops.find((s) => s.file === htmlShop.file)) {
+        allShops.push(htmlShop);
+      }
+    });
+
+    // massageShops 배열에 저장
+    massageShops = allShops;
+  } catch (error) {
+    console.error('업체 데이터 초기화 중 오류:', error);
+    // 에러 시 shop-card-data.js만 사용
+    const loadedShops = await loadShopCardsFromDataFile();
+    massageShops = loadedShops;
+  }
+}
+
+// 마사지 업체 데이터 (동적으로 로드됨)
+// 모든 데이터는 company- 접두사가 붙은 HTML 파일에서 동적으로 로드됨
+let massageShops = [];
 
 // DOM 요소들
 const regionSelect = document.getElementById('regionSelect');
@@ -1129,6 +609,7 @@ function initializeRegionOptions() {
     '제주',
   ];
 
+  const districtData = getDistrictData();
   console.log('districtData:', districtData);
   const regions = Object.keys(districtData).sort((a, b) => {
     const indexA = customOrder.indexOf(a);
@@ -1308,7 +789,7 @@ function initializeApp() {
     });
   }
 
-  // 테마 박스 클릭 이벤트
+  // 테마 박스 클릭 이벤트 (중앙화된 로직 사용)
   const themeBoxes = document.querySelectorAll('.theme-box');
   themeBoxes.forEach((box) => {
     // onclick 속성 제거를 위해 기존 이벤트 리스너만 사용
@@ -1340,65 +821,13 @@ function initializeApp() {
       // 선택된 테마로 필터링
       const selectedTheme = this.dataset.theme;
 
-      // 제주 지역에서 테마 클릭 시 해당 페이지로 이동 (기존 로직 유지)
-      if (currentRegion === '제주') {
-        if (selectedTheme === 'all') {
-          // 제주시가 선택된 경우 jeju-si.html로 이동
-          if (currentDistrict === '제주시') {
-            window.location.href = 'jeju-si.html';
-            return;
-          }
-          // 서귀포가 선택된 경우 jeju-seogwipo.html로 이동
-          if (currentDistrict === '서귀포') {
-            window.location.href = 'jeju-seogwipo.html';
-            return;
-          }
-          // 다른 구의 경우 jeju.html로 이동
-          window.location.href = 'jeju.html';
-          return;
-        } else if (selectedTheme === 'massage') {
-          // 제주시가 선택된 경우 jeju-si-massage.html로 이동
-          if (currentDistrict === '제주시') {
-            window.location.href = 'jeju-si-massage.html';
-            return;
-          }
-          // 서귀포가 선택된 경우 jeju-seogwipo-massage.html로 이동
-          if (currentDistrict === '서귀포') {
-            window.location.href = 'jeju-seogwipo-massage.html';
-            return;
-          }
-          // 다른 구의 경우 jeju-massage.html로 이동
-          window.location.href = 'jeju-massage.html';
-          return;
-        } else if (selectedTheme === 'outcall') {
-          // 제주시가 선택된 경우 jeju-si-outcall.html로 이동
-          if (currentDistrict === '제주시') {
-            window.location.href = 'jeju-si-outcall.html';
-            return;
-          }
-          // 서귀포가 선택된 경우 jeju-seogwipo-outcall.html로 이동
-          if (currentDistrict === '서귀포') {
-            window.location.href = 'jeju-seogwipo-outcall.html';
-            return;
-          }
-          // 다른 구의 경우 jeju-outcall.html로 이동
-          window.location.href = 'jeju-outcall.html';
-          return;
-        }
-      }
-
-      // 테마별 페이지로 이동 (전체 제외)
-      if (selectedTheme !== 'all') {
-        const themePages = {
-          swedish: 'swedish.html',
-          thai: 'thai.html',
-          aroma: 'aroma.html',
-          chinese: 'chinese.html',
-          foot: 'foot.html',
-          waxing: 'waxing.html',
-        };
-
-        const targetPage = themePages[selectedTheme];
+      // 중앙화된 함수로 테마 페이지 URL 생성
+      if (selectedTheme !== 'all' && window.getThemePageUrl) {
+        const targetPage = window.getThemePageUrl(
+          selectedTheme,
+          currentRegion,
+          currentDistrict
+        );
         if (targetPage) {
           window.location.href = targetPage;
           return;
@@ -1565,6 +994,7 @@ function updateDistrictOptions(region) {
   // 옵션만 업데이트 (아이콘 보존)
   districtSelect.innerHTML = '<option value="">세부 지역을 선택하세요</option>';
 
+  const districtData = getDistrictData();
   if (region && districtData[region]) {
     console.log('District data for', region, ':', districtData[region]);
     districtData[region].forEach((district) => {
@@ -2192,7 +1622,7 @@ function createShopDisplayName(shop) {
     return `${region} ${shopName}`;
   }
 
-  // 이미 동이 포함된 이름인지 확인
+  // 동 이름이 있고 업체명에 포함되지 않은 경우 동 이름 추가
   const dongName = extractDongFromAddress(shop.address);
   if (dongName && !shop.name.includes(dongName)) {
     // 기존 업체명에서 "제주마사지", "제주도마사지" 등을 제거하고 간단하게
@@ -2201,14 +1631,7 @@ function createShopDisplayName(shop) {
       .replace(/\s+/g, ' ')
       .trim();
 
-    // MZ, 프라이빗 등 간단한 이름만 남기기
-    if (simpleName.includes('MZ')) {
-      return `${dongName} MZ`;
-    } else if (simpleName.includes('프라이빗')) {
-      return `${dongName} 프라이빗`;
-    } else {
-      return `${dongName} ${simpleName}`;
-    }
+    return `${dongName} ${simpleName}`;
   }
   return shop.name;
 }
@@ -2254,12 +1677,22 @@ function createShopCard(shop) {
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
                                 ${
-                                  shop.name.includes('이쁘니출장')
+                                  shop.country && shop.country.includes('japan')
                                     ? `
                                 <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" 
                                      alt="일본 국기" 
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇯🇵'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                                `
+                                    : ''
+                                }
+                                ${
+                                  shop.country && shop.country.includes('china')
+                                    ? `
+                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg" 
+                                     alt="중국 국기" 
+                                     class="flag-image"
+                                     onerror="this.onerror=null; this.innerHTML='🇨🇳'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
                                 `
                                     : ''
                                 }
@@ -2288,12 +1721,16 @@ function createShopCard(shop) {
 
 // 타입 이름 반환
 function getTypeName(shop) {
-  // 프라이빗 업체(id: 1)는 "힐링샵" 표시하지 않음
-  if (shop.id === 1) {
-    return '';
+  // shop-card-data.js에서 showHealingShop 필드 확인
+  if (shop.showHealingShop === false) return '';
+  if (shop.hideHealingShop === true) return '';
+
+  // typeLabel 필드가 있으면 사용
+  if (shop.typeLabel !== undefined && shop.typeLabel !== null) {
+    return shop.typeLabel || '';
   }
-  // 나머지 업체는 "힐링샵"으로 표시
-  return '힐링샵';
+
+  return '힐링샵'; // 기본값
 }
 
 // 테마별 필터링 함수
@@ -2366,9 +1803,9 @@ function filterByType(selectedType) {
 
 // 인사말 반환 (업체별 동적 생성)
 function getGreeting(shop) {
-  // 특정 업체(이쁘니출장) 전용 인사말 오버라이드
-  if (shop && shop.name && shop.name.includes('이쁘니출장')) {
-    return '20대, 30대 관리사 힐링으로 모시겠습니다. 편하게 문의주세요';
+  // shop-card-data.js에서 greeting 필드가 있으면 우선 사용
+  if (shop.greeting) {
+    return shop.greeting;
   }
   // 관리사 나이 정보 추출
   let ageGroup = '20대';
@@ -2496,14 +1933,14 @@ function callShop(phoneNumber) {
 
 // 상세 페이지로 이동
 function goToDetail(shopId) {
-  // SEO 친화적인 URL로 이동
-  const urlMap = {
-    1: 'jeju-massage-private.html',
-    2: 'jeju-massage-mz.html',
-    3: 'jeju-massage-yeppuni.html',
-    4: 'jeju-yeondong-massage.html',
-  };
-  window.location.href = urlMap[shopId] || `shop-${shopId}.html`;
+  // shop-card-data.js에서 file 필드 가져오기
+  let shop =
+    window.shopCardData?.find((s) => s.id === shopId) ||
+    massageShops.find((s) => s.id === shopId);
+
+  // file 필드에서 파일명 가져오기 (company- 접두사 자동 처리)
+  const fileName = shop?.file || `company-shop-${shopId}.html`;
+  window.location.href = fileName;
 }
 
 // 스크롤 애니메이션
@@ -2560,25 +1997,9 @@ function sortShops(shops) {
     if (aIsHealing && !bIsHealing) return -1;
     if (!aIsHealing && bIsHealing) return 1;
 
-    // 2순위: "힐링샵"이 아닌 경우 거리순으로 정렬
-    if (!aIsHealing && !bIsHealing) {
-      // 거리 정보를 추출하여 비교 (더 가까운 거리가 위로)
-      const aDistance = parseFloat(extractDistanceFromCard(a));
-      const bDistance = parseFloat(extractDistanceFromCard(b));
-      return aDistance - bDistance;
-    }
-
     // "힐링샵"끼리는 기존 순서 유지
     return 0;
   });
-}
-
-// 카드에서 거리 정보 추출 (업체 ID 기반으로 일관된 거리 반환)
-function extractDistanceFromCard(shop) {
-  // 업체 ID를 기반으로 일관된 거리 생성 (시드 기반)
-  const seed = shop.id * 123.456; // 시드 값
-  const distance = 0.5 + (seed % 14.5); // 0.5 ~ 15km 범위
-  return Math.round(distance * 10) / 10; // 소수점 첫째자리까지
 }
 
 // 업체 목록 표시 (애니메이션 포함)
@@ -3362,8 +2783,13 @@ function initFilterDragScroll() {
 }
 
 // ✅ 간단한 중앙화된 초기화 함수
-function initializeApp() {
+async function initializeApp() {
   console.log('initializeApp 시작');
+
+  // 업체 데이터 초기화 (shop-card-data.js 로드)
+  await initializeShopData();
+  console.log('initializeShopData 완료');
+
   initializeRegionOptions();
   console.log('initializeRegionOptions 완료');
 
@@ -3860,6 +3286,11 @@ function initializeApp() {
 
   // 타입 필터 버튼 초기화
   initializeTypeFilter();
+
+  // nearby-shops-title 자동 설정 (다른 샵 보기 클릭 이벤트)
+  if (typeof window.initializeNearbyShopsTitle === 'function') {
+    window.initializeNearbyShopsTitle();
+  }
 }
 
 // 타입 필터 버튼 초기화 함수
@@ -4149,11 +3580,11 @@ function updateResultsTitle() {
     const themeName = themeNames[currentFilter];
     // 구가 있으면 구만 표시, 없으면 지역 표시
     if (currentDistrict) {
-      title = `${currentDistrict} ${themeName} 업체`;
+      title = `${currentDistrict} ${themeName}`;
     } else if (currentRegion) {
-      title = `${currentRegion} ${themeName} 업체`;
+      title = `${currentRegion} ${themeName}`;
     } else {
-      title = `${themeName} 업체`;
+      title = themeName;
     }
   } else if (currentFilter && currentFilter !== 'all') {
     // 다른 필터 (massage, outcall 등)
@@ -4173,20 +3604,20 @@ function updateResultsTitle() {
     if (currentFilter === 'outcall') {
       // 출장마사지: 상세지역이 있으면 상세지역만 표시, 없으면 지역만 표시
       if (currentDistrict) {
-        title = `${currentDistrict} ${filterName} 업체`;
+        title = `${currentDistrict} ${filterName}`;
       } else if (currentRegion) {
-        title = `${currentRegion} ${filterName} 업체`;
+        title = `${currentRegion} ${filterName}`;
       } else {
-        title = `${filterName} 업체`;
+        title = filterName;
       }
     } else {
       // 일반 마사지: 구가 있으면 구만 표시, 없으면 지역 표시
       if (currentDistrict) {
-        title = `${currentDistrict} ${filterName} 업체`;
+        title = `${currentDistrict} ${filterName}`;
       } else if (currentRegion) {
-        title = `${currentRegion} ${filterName} 업체`;
+        title = `${currentRegion} ${filterName}`;
       } else {
-        title = `${filterName} 업체`;
+        title = filterName;
       }
     }
   } else {
@@ -4197,11 +3628,11 @@ function updateResultsTitle() {
       window.location.pathname === '';
 
     if (currentDistrict) {
-      title = `${currentDistrict} 마사지사이트 업체`;
+      title = `${currentDistrict} 마사지사이트`;
     } else if (currentRegion) {
-      title = `${currentRegion} 마사지사이트 업체`;
+      title = `${currentRegion} 마사지사이트`;
     } else {
-      title = isMainPage ? '전체 마사지사이트 업체' : '전체 마사지 업체';
+      title = isMainPage ? '전체 마사지사이트' : '전체 마사지';
     }
   }
 
@@ -4442,10 +3873,13 @@ window.initializeNearbyShopsTitle = function () {
   nearbyShopsTitle.onclick = null;
 
   // 파일명에서 지역 정보 추출
-  const fileName = window.location.pathname
-    .split('/')
-    .pop()
-    .replace('.html', '');
+  let fileName = window.location.pathname.split('/').pop().replace('.html', '');
+
+  // company- 접두사 제거 (company-jeju-massage-mz.html -> jeju-massage-mz)
+  if (fileName.startsWith('company-')) {
+    fileName = fileName.replace('company-', '');
+  }
+
   const parts = fileName.split('-');
 
   // window.districtMap 사용 (중앙화된 지역 매핑)
@@ -4455,6 +3889,33 @@ window.initializeNearbyShopsTitle = function () {
   let region = '';
   if (parts[0] && districtMap[parts[0]]) {
     region = districtMap[parts[0]].regionName;
+  }
+
+  // 백업: JSON-LD 스키마에서 지역 정보 추출 시도
+  if (!region) {
+    try {
+      const jsonLdScript = document.querySelector(
+        'script[type="application/ld+json"]'
+      );
+      if (jsonLdScript) {
+        const jsonLd = JSON.parse(jsonLdScript.textContent);
+        if (jsonLd.address && jsonLd.address.addressRegion) {
+          const addressRegion = jsonLd.address.addressRegion;
+          // "제주특별자치도" -> "제주" 매핑
+          for (const [key, value] of Object.entries(districtMap)) {
+            if (
+              value.regionName === addressRegion ||
+              addressRegion.includes(value.regionName)
+            ) {
+              region = value.regionName;
+              break;
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('JSON-LD 파싱 실패:', e);
+    }
   }
 
   // 구 추출 (영어 키 -> 한글 구명)
