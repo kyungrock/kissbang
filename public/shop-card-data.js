@@ -21,7 +21,7 @@ window.shopCardData = [
     services: ['스웨디시', '왁싱'],
     operatingHours: '오전 10시 ~ 새벽 6시 (폰 꺼진 경우 마감, 랜덤 휴무)',
     file: 'company-jeju-massage-private.html',
-    showHealingShop: false,
+    showHealingShop: true,
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ window.shopCardData = [
     services: ['스웨디시', '슈얼마사지'],
     operatingHours: '24시간 (랜덤휴무 or 폰OFF)',
     file: 'company-jeju-massage-mz.html',
-    showHealingShop: false,
+    showHealingShop: true,
   },
   {
     id: 3,

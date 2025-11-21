@@ -1987,19 +1987,28 @@ function displayEmptyState() {
   updateResultsHeader('마사지 업체 검색', 0);
 }
 
+// Fisher-Yates 셔플 알고리즘
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 // 업체 정렬 함수
 function sortShops(shops) {
-  return shops.sort((a, b) => {
-    // 1순위: "힐링샵" 업체를 위로
-    const aIsHealing = getTypeName(a) === '힐링샵';
-    const bIsHealing = getTypeName(b) === '힐링샵';
+  // showHealingShop 값에 따라 그룹 분리
+  const healingShops = shops.filter((shop) => shop.showHealingShop === true);
+  const nonHealingShops = shops.filter((shop) => shop.showHealingShop !== true);
 
-    if (aIsHealing && !bIsHealing) return -1;
-    if (!aIsHealing && bIsHealing) return 1;
+  // 각 그룹 내에서 랜덤 정렬
+  const shuffledHealing = shuffleArray(healingShops);
+  const shuffledNonHealing = shuffleArray(nonHealingShops);
 
-    // "힐링샵"끼리는 기존 순서 유지
-    return 0;
-  });
+  // true 그룹을 상단에, false 그룹을 하단에 배치
+  return [...shuffledHealing, ...shuffledNonHealing];
 }
 
 // 업체 목록 표시 (애니메이션 포함)
