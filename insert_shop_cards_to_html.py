@@ -8,6 +8,7 @@ import sys
 import re
 import json
 import html
+import random
 from pathlib import Path
 import os
 
@@ -644,6 +645,20 @@ def create_shop_display_name(shop):
     
     return shop_name
 
+# 업체 정렬 함수 (showHealingShop 기준으로 정렬하고 각 그룹 내에서 랜덤화)
+def sort_shops(shops):
+    """showHealingShop: true인 항목을 상단에, false인 항목을 하단에 배치하고 각 그룹 내에서 랜덤 정렬"""
+    # showHealingShop 값에 따라 그룹 분리
+    healing_shops = [shop for shop in shops if shop.get('showHealingShop') is True]
+    non_healing_shops = [shop for shop in shops if shop.get('showHealingShop') is not True]
+    
+    # 각 그룹 내에서 랜덤 정렬
+    random.shuffle(healing_shops)
+    random.shuffle(non_healing_shops)
+    
+    # true 그룹을 상단에, false 그룹을 하단에 배치
+    return healing_shops + non_healing_shops
+
 # 업체 카드 HTML 생성
 def create_shop_card_html(shop):
     """업체 카드 HTML 생성 (JavaScript의 createShopCard 함수를 Python으로 변환)"""
@@ -718,7 +733,7 @@ def create_shop_card_html(shop):
     if shop_url:
         # <a> 태그로 감싸서 확실하게 링크 작동
         card_html = f'''        <a href="{html.escape(shop_url)}" style="text-decoration: none; color: inherit; display: block;">
-            <div class="massage-card" data-type="{html.escape(shop_type or '마사지')}" style="cursor: pointer;">
+            <div class="massage-card" data-type="{html.escape(shop_type or '마사지')}" data-show-healing-shop="{str(show_healing_shop).lower()}" style="cursor: pointer;">
             <div class="card-image">
                 <img src="{html.escape(image)}" alt="{html.escape(alt)}" class="shop-image" 
                      onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
@@ -760,7 +775,7 @@ def create_shop_card_html(shop):
     else:
         # URL이 없으면 onclick 사용
         onclick_handler = f"goToDetail({shop.get('id', 0)})"
-        card_html = f'''        <div class="massage-card" data-type="{html.escape(shop_type or '마사지')}" onclick="{onclick_handler}" style="cursor: pointer;">
+        card_html = f'''        <div class="massage-card" data-type="{html.escape(shop_type or '마사지')}" data-show-healing-shop="{str(show_healing_shop).lower()}" onclick="{onclick_handler}" style="cursor: pointer;">
             <div class="card-image">
                 <img src="{html.escape(image)}" alt="{html.escape(alt)}" class="shop-image" 
                      onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
@@ -853,8 +868,11 @@ def insert_shop_cards_to_html(html_file, shops):
         print(f"  ⚠️ 매칭된 업체가 없습니다.")
         return False
     
+    # showHealingShop 기준으로 정렬 및 랜덤화
+    sorted_shops = sort_shops(matching_shops)
+    
     # 업체 카드 HTML 생성
-    cards_html = '\n'.join([create_shop_card_html(shop) for shop in matching_shops])
+    cards_html = '\n'.join([create_shop_card_html(shop) for shop in sorted_shops])
     
     # massageList 내부의 기존 massage-card 요소들만 찾아서 교체 (HTML 구조 유지)
     inserted = False

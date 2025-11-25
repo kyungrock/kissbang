@@ -13,10 +13,13 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
+# 스크립트 파일의 디렉토리 경로 (스크립트 위치 기준)
+SCRIPT_DIR = Path(__file__).parent.absolute()
+
 # shop-card-data.js 파일 읽기
 def read_shop_card_data():
     """shop-card-data.js에서 업체 데이터 추출"""
-    shop_data_file = Path('public/shop-card-data.js')
+    shop_data_file = SCRIPT_DIR / 'public' / 'shop-card-data.js'
     if not shop_data_file.exists():
         print(f"ERROR: {shop_data_file} 파일을 찾을 수 없습니다.")
         return []
@@ -1380,7 +1383,7 @@ def add_jsonld_to_html(html_file, shops):
 
 def main():
     """메인 함수"""
-    public_dir = Path('public')
+    public_dir = SCRIPT_DIR / 'public'
     if not public_dir.exists():
         print("ERROR: public 디렉토리를 찾을 수 없습니다.")
         return

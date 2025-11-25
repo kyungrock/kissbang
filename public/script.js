@@ -531,13 +531,13 @@ async function initializeShopData() {
       }
     });
 
-    // massageShops 배열에 저장
-    massageShops = allShops;
+    // massageShops 배열에 저장 (showHealingShop 기준 정렬 및 랜덤 적용)
+    massageShops = sortShops(allShops);
   } catch (error) {
     console.error('업체 데이터 초기화 중 오류:', error);
-    // 에러 시 shop-card-data.js만 사용
+    // 에러 시 shop-card-data.js만 사용 (showHealingShop 기준 정렬 및 랜덤 적용)
     const loadedShops = await loadShopCardsFromDataFile();
-    massageShops = loadedShops;
+    massageShops = sortShops(loadedShops);
   }
 }
 
@@ -1954,9 +1954,9 @@ function getGreeting(shop) {
 function updateResultsHeader(title, count) {
   // "전체" 문자 제거
   title = title.replace(/\s*전체\s*/g, '');
-  // title 뒤에 " 추천 BEST 10" 추가
+  // title 뒤에 " 추천 BEST 샵" 추가
   if (title && !title.includes('추천 BEST')) {
-    resultsTitle.textContent = `${title} 추천 BEST 10`;
+    resultsTitle.textContent = `${title} 추천 BEST 샵`;
   } else {
     resultsTitle.textContent = title;
   }
@@ -1989,10 +1989,10 @@ function updateResultsTitleByTheme(selectedTheme) {
       const baseTitle = isMainPage
         ? '전체 마사지사이트 업체'
         : '전체 마사지 업체';
-      resultsTitle.textContent = `${baseTitle} 추천 BEST 10`;
+      resultsTitle.textContent = `${baseTitle} 추천 BEST 샵`;
     } else {
-      // 테마 선택 시 "스웨디시 업체 추천 BEST 10" 형식
-      resultsTitle.textContent = `${themeName} 업체 추천 BEST 10`;
+      // 테마 선택 시 "스웨디시 업체 추천 BEST 샵" 형식
+      resultsTitle.textContent = `${themeName} 업체 추천 BEST 샵`;
     }
   }
 }
@@ -2084,17 +2084,113 @@ function sortShops(shops) {
   return [...shuffledHealing, ...shuffledNonHealing];
 }
 
+// 정적 HTML 카드 정렬 실행 여부 플래그 (한 번만 실행되도록)
+let staticCardsSorted = false;
+
+// 정적 HTML 카드 재정렬 함수
+function sortStaticCards() {
+  // 이미 정렬되었으면 건너뛰기
+  if (staticCardsSorted) {
+    return;
+  }
+
+  const massageList = document.getElementById('massageList');
+  if (!massageList || massageList.children.length === 0) {
+    console.log('sortStaticCards: massageList가 없거나 비어있음');
+    return;
+  }
+
+  // 모든 카드 요소 수집 (<a> 태그 또는 <div> 태그)
+  const cards = Array.from(massageList.children).filter((child) => {
+    const hasCard =
+      (child.classList && child.classList.contains('massage-card')) ||
+      (child.querySelector && child.querySelector('.massage-card')) ||
+      (child.tagName === 'A' && child.querySelector('.massage-card'));
+    return hasCard;
+  });
+
+  if (cards.length === 0) {
+    console.log('sortStaticCards: 카드를 찾을 수 없음');
+    return;
+  }
+
+  console.log(`sortStaticCards: ${cards.length}개 카드 발견`);
+
+  // 각 카드의 showHealingShop 값 확인
+  const cardData = cards.map((card) => {
+    // massage-card 요소 찾기
+    const massageCard = card.classList.contains('massage-card')
+      ? card
+      : card.querySelector('.massage-card');
+
+    if (!massageCard) {
+      console.log('sortStaticCards: massage-card 요소를 찾을 수 없음', card);
+      return { card, showHealingShop: false };
+    }
+
+    // data-show-healing-shop 속성에서 값 확인 (우선순위 1)
+    let isHealingShop = false;
+    const dataAttr = massageCard.getAttribute('data-show-healing-shop');
+    if (dataAttr !== null) {
+      isHealingShop = dataAttr === 'true' || dataAttr === 'True';
+    } else {
+      // data 속성이 없으면 shop-type 요소에서 "힐링샵" 텍스트 확인 (하위 호환성)
+      const shopTypeElement = massageCard.querySelector('.shop-type');
+      isHealingShop =
+        shopTypeElement &&
+        shopTypeElement.textContent.trim().includes('힐링샵');
+    }
+
+    return { card, showHealingShop: isHealingShop };
+  });
+
+  // showHealingShop: true인 항목과 false인 항목 분리
+  const healingCards = cardData.filter((item) => item.showHealingShop === true);
+  const nonHealingCards = cardData.filter(
+    (item) => item.showHealingShop !== true
+  );
+
+  console.log(
+    `sortStaticCards: 힐링샵 ${healingCards.length}개, 일반 ${nonHealingCards.length}개`
+  );
+
+  // 각 그룹 내에서 랜덤 정렬 (새 배열 반환)
+  const shuffledHealing = shuffleArray(healingCards);
+  const shuffledNonHealing = shuffleArray(nonHealingCards);
+
+  // 카드 제거
+  cards.forEach((card) => card.remove());
+
+  // 정렬된 순서로 다시 추가 (true 그룹 먼저, false 그룹 나중)
+  const sortedCards = [...shuffledHealing, ...shuffledNonHealing];
+  sortedCards.forEach((item) => {
+    massageList.appendChild(item.card);
+  });
+
+  // 정렬 완료 플래그 설정
+  staticCardsSorted = true;
+
+  console.log(
+    `✅ 정적 HTML 카드 ${sortedCards.length}개 재정렬 완료 (힐링샵: ${healingCards.length}개, 일반: ${nonHealingCards.length}개)`
+  );
+}
+
 // 업체 목록 표시 (애니메이션 포함)
 function displayMassageShops(shops) {
-  // massageList에 정적 HTML이 이미 있으면 동적 생성 건너뛰기
+  // massageList에 정적 HTML이 이미 있으면 동적 생성 건너뛰고 정렬만 수행
   if (massageList && massageList.children.length > 0) {
     const hasStaticCards = Array.from(massageList.children).some(
       (child) =>
         (child.classList && child.classList.contains('massage-card')) ||
-        (child.querySelector && child.querySelector('.massage-card'))
+        (child.querySelector && child.querySelector('.massage-card')) ||
+        (child.tagName === 'A' && child.querySelector('.massage-card'))
     );
     if (hasStaticCards) {
       console.log('정적 HTML이 이미 존재하므로 동적 생성 건너뜀');
+      // 정적 HTML 카드 재정렬 (한 번만 실행)
+      if (!staticCardsSorted) {
+        sortStaticCards();
+      }
       return;
     }
   }
@@ -3753,9 +3849,9 @@ function updateResultsTitle() {
   console.log('Current filter:', currentFilter);
   console.log('Generated title:', title);
 
-  // title 뒤에 " 추천 BEST 10" 추가
+  // title 뒤에 " 추천 BEST 샵" 추가
   if (title) {
-    resultsTitle.textContent = `${title} 추천 BEST 10`;
+    resultsTitle.textContent = `${title} 추천 BEST 샵`;
   } else {
     resultsTitle.textContent = title;
   }
@@ -4144,6 +4240,44 @@ document.addEventListener('DOMContentLoaded', initFilterDragScroll);
 
 // ✅ 새로운 중앙화된 초기화 함수 실행
 document.addEventListener('DOMContentLoaded', initializeApp);
+
+// 정적 HTML 카드 정렬 (페이지 로드 시) - 한 번만 실행
+function initStaticCardSorting() {
+  // 이미 정렬되었으면 건너뛰기
+  if (staticCardsSorted) {
+    return;
+  }
+
+  // massageList가 있고 정적 카드가 있는지 확인
+  const massageList = document.getElementById('massageList');
+  if (!massageList) {
+    return;
+  }
+
+  if (massageList.children.length === 0) {
+    return;
+  }
+
+  // 정적 카드가 있는지 확인
+  const hasStaticCards = Array.from(massageList.children).some(
+    (child) =>
+      (child.classList && child.classList.contains('massage-card')) ||
+      (child.querySelector && child.querySelector('.massage-card')) ||
+      (child.tagName === 'A' && child.querySelector('.massage-card'))
+  );
+
+  if (hasStaticCards) {
+    console.log('정적 HTML 카드 발견, 재정렬 시작...');
+    sortStaticCards();
+  }
+}
+
+// DOMContentLoaded에서 한 번만 실행
+document.addEventListener('DOMContentLoaded', function () {
+  setTimeout(() => {
+    initStaticCardSorting();
+  }, 100);
+});
 
 // 테마 필터 초기화
 document.addEventListener('DOMContentLoaded', function () {
