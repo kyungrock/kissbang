@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -148,7 +148,7 @@
       }
     </style>
   
-    <!-- Open Graph Meta Tags -->
+    
     <meta property="og:type" content="website" />
     <meta property="og:title" content="관심업체 - 키스포유" />
     <meta property="og:description" content="마사지천국에서 지역별 마사지 정보를 확인하세요." />
@@ -156,102 +156,226 @@
     <meta property="og:url" content="https://msg1000.com/favorites.html" />
     <meta property="og:site_name" content="마사지천국" />
     <meta property="og:locale" content="ko_KR" />
-    <!-- Twitter Card Meta Tags -->
+    
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="관심업체 - 키스포유" />
     <meta name="twitter:description" content="마사지천국에서 지역별 마사지 정보를 확인하세요." />
     <meta name="twitter:image" content="https://via.placeholder.com/1200x630?text=마사지천국" />
 </head>
   <body>
-    <!-- 헤더 -->
-    <div class="favorites-header">
-      <button class="back-btn" onclick="window.history.back()">
-        <span class="fas fa-arrow-left" style="display:inline-block;vertical-align:middle;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
-      </button>
-      <h1><i class="fas fa-heart"></i> 관심업체</h1>
-    </div>
-
-    <!-- 컨테이너 -->
-    <div class="favorites-container">
-      <div class="shop-grid" id="favoriteGrid">
-        <!-- 관심업체가 여기 표시됩니다 -->
-      </div>
-    </div>
-
-    <script src="api-auth.js"></script>
-    <script>
-      // 관심업체 데이터
-      function getFavorites() {
-        const currentUser = authManager.getCurrentUser();
-        if (!currentUser) return [];
-
-        const favorites = JSON.parse(
-          localStorage.getItem(`favorites_${currentUser.id}`) || '[]'
-        );
-        return favorites;
-      }
-
-      // 관심업체 제거
-      function removeFavorite(shopId) {
-        const currentUser = authManager.getCurrentUser();
-        if (!currentUser) return;
-
-        let favorites = getFavorites();
-        favorites = favorites.filter((f) => f.id !== shopId);
-
-        localStorage.setItem(
-          `favorites_${currentUser.id}`,
-          JSON.stringify(favorites)
-        );
-
-        renderFavorites();
-        alert('관심업체에서 제거되었습니다.');
-      }
-
-      // 목록 렌더링
-      function renderFavorites() {
-        const grid = document.getElementById('favoriteGrid');
-        const favorites = getFavorites();
-
-        if (favorites.length === 0) {
-          grid.innerHTML = `
-            <div class="empty-state">
-              <i class="fas fa-heart-broken"></i>
-              <h3>등록된 관심업체가 없습니다</h3>
-              <p>마음에 드는 업체를 관심업체로 등록해보세요!</p>
-            </div>
-          `;
-          return;
-        }
-
-        grid.innerHTML = favorites
-          .map((shop) => {
-            return `
-            <div class="shop-card">
-              <button class="favorite-btn" onclick="event.stopPropagation(); removeFavorite(${
-                shop.id
-              })">
-                <i class="fas fa-heart"></i>
-              </button>
-              <div class="shop-image">
-                <span class="fas fa-spa" style="display:inline-block;vertical-align:middle;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 464c-114.7 0-208-93.3-208-208S141.3 48 256 48s208 93.3 208 208-93.3 208-208 208z"/><path d="M256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128-57.3-128-128-128zm0 208c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80z"/></svg></span>
-              </div>
-              <div class="shop-content">
-                <div class="shop-name">${shop.name}</div>
-                <div class="shop-location">
-                  <span class="fas fa-map-marker-alt" style="display:inline-block;vertical-align:middle;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;"><path d="M172.268 501.67C272.268 401.67 384 272.67 384 192C384 86 298 0 192 0S0 86 0 192c0 80.67 111.732 209.67 211.732 309.67L192 512l-19.732-10.33zM192 256c-35.346 0-64-28.654-64-64s28.654-64 64-64s64 28.654 64 64s-28.654 64-64 64z"/></svg></span>
-                  ${shop.region || '위치 정보 없음'}
+    <div id="massageList">
+        <a href="https://www.msg1000.com/company-jeju-massage-private.html" style="text-decoration: none; color: inherit; display: block;">
+            <div class="massage-card" data-type="마사지" style="cursor: pointer;">
+            <div class="card-image">
+                <img src="https://msg1000.com/images/연동마사지_프라이빗.jpg" alt="제주 연동 프라이빗 마사지샵 내부 - 20대 전문 힐링 관리사, 스웨디시·아로마·로미로미·슈얼" class="shop-image" 
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
+                     loading="lazy">
+                <div class="image-overlay">
+                    <div class="shop-type">힐링샵</div>
                 </div>
-                <div class="shop-rating">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <span style="color: #666;">(4.0)</span>
-                </div>
-              </div>
             </div>
+            
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="shop-name-container">
+                        <div class="shop-name">연동 프라이빗</div>
+                        <div class="shop-location-info">
+                            <span class="shop-district">제주시 연동</span>
+                            <div class="location-flag">
+                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-info">
+                    <div class="info-item greeting">
+                        <span>힐링가득한 스웨디시 와 고급 왁싱 편안한 문의</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; flex-wrap: nowrap; overflow: hidden;">
+                    <div class="price-container" style="display: flex; align-items: center; gap: 8px; overflow: hidden; width: 100%; flex: 1; min-width: 0;">
+                        <div class="price" style="flex-shrink: 0; white-space: nowrap;"><span class="price-label">최저가</span> 120,000원~</div>
+                        <div class="shop-address-info" style="font-size: 12px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;">
+                        제주특별자치도 제주시 연동 261-18 | 제원 시내 부근 (정확한 위치는 예약 시 안내) | 0507-1859-7062
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </a>
+
+        <a href="https://www.msg1000.com/company-jeju-massage-mz.html" style="text-decoration: none; color: inherit; display: block;">
+            <div class="massage-card" data-type="마사지" style="cursor: pointer;">
+            <div class="card-image">
+                <img src="https://msg1000.com/images/제주마사지_mz.jpg" alt="제주 연동 MZ 마사지샵 내부 - 24시간 영업, 20대 한국인 관리사, 힐링샵" class="shop-image" 
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
+                     loading="lazy">
+                <div class="image-overlay">
+                    <div class="shop-type">힐링샵</div>
+                </div>
+            </div>
+            
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="shop-name-container">
+                        <div class="shop-name">연동 MZ</div>
+                        <div class="shop-location-info">
+                            <span class="shop-district">제주시 연동</span>
+                            <div class="location-flag">
+                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-info">
+                    <div class="info-item greeting">
+                        <span>최고의 관리사 만족도 100% 힐링샵</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; flex-wrap: nowrap; overflow: hidden;">
+                    <div class="price-container" style="display: flex; align-items: center; gap: 8px; overflow: hidden; width: 100%; flex: 1; min-width: 0;">
+                        <div class="price" style="flex-shrink: 0; white-space: nowrap;"><span class="price-label">최저가</span> 150,000원~</div>
+                        <div class="shop-address-info" style="font-size: 12px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;">
+                        제주특별자치도 제주시 연동10길 16 | 돔나이트 부근 (주차 문의) | 0507-1859-6671
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </a>
+
+        <a href="https://www.msg1000.com/company-jeju-massage-yeppuni.html" style="text-decoration: none; color: inherit; display: block;">
+            <div class="massage-card" data-type="출장마사지" style="cursor: pointer;">
+            <div class="card-image">
+                <img src="https://msg1000.com/images/제주출장마사지_이쁘니출장.jpg" alt="제주도 전지역 출장마사지 이쁘니출장 - 제주시 30분 이내 신속방문, 24시간 운영, 20대~30대 한국인&amp;일본 관리사" class="shop-image" 
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
+                     loading="lazy">
+                <div class="image-overlay">
+                    
+                </div>
+            </div>
+            
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="shop-name-container">
+                        <div class="shop-name">제주 이쁘니출장</div>
+                        <div class="shop-location-info">
+                            <span class="shop-district">제주시</span>
+                            <div class="location-flag">
+                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" alt="일본 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇯🇵'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-info">
+                    <div class="info-item greeting">
+                        <span>20대 관리사로 최고의 힐링제공</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; flex-wrap: nowrap; overflow: hidden;">
+                    <div class="price-container" style="display: flex; align-items: center; gap: 8px; overflow: hidden; width: 100%; flex: 1; min-width: 0;">
+                        <div class="price" style="flex-shrink: 0; white-space: nowrap;"><span class="price-label">최저가</span> 110,000원~</div>
+                        <div class="shop-address-info" style="font-size: 12px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;">
+                        제주도 전지역 | 제주시 30분 이내 신속방문 | 0507-1859-6960
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </a>
+
+        <a href="https://www.msg1000.com/company-jeju-yeondong-massage.html" style="text-decoration: none; color: inherit; display: block;">
+            <div class="massage-card" data-type="마사지" style="cursor: pointer;">
+            <div class="card-image">
+                <img src="https://msg1000.com/images/제주시마사지_a스웨디시.jpg" alt="제주 연동 A+스웨디시 마사지샵 내부 - 24시 영업, 20대 한국인 관리사" class="shop-image" 
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
+                     loading="lazy">
+                <div class="image-overlay">
+                    
+                </div>
+            </div>
+            
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="shop-name-container">
+                        <div class="shop-name">연동 A+스웨디시</div>
+                        <div class="shop-location-info">
+                            <span class="shop-district">제주시 연동</span>
+                            <div class="location-flag">
+                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-info">
+                    <div class="info-item greeting">
+                        <span>최선을 다해서 모시겠습니다! A</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; flex-wrap: nowrap; overflow: hidden;">
+                    <div class="price-container" style="display: flex; align-items: center; gap: 8px; overflow: hidden; width: 100%; flex: 1; min-width: 0;">
+                        <div class="price" style="flex-shrink: 0; white-space: nowrap;"><span class="price-label">최저가</span> 90,000원~</div>
+                        <div class="shop-address-info" style="font-size: 12px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;">
+                        제주특별자치도 제주시 연동 293-102 | 송월타월 2층 | 0507-1859-6407
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </a>
+
+        <a href="https://www.msg1000.com/company-seoul-songpa-mokaspa.html" style="text-decoration: none; color: inherit; display: block;">
+            <div class="massage-card" data-type="마사지" style="cursor: pointer;">
+            <div class="card-image">
+                <img src="https://msg1000.com/images/송파마사지_모카스파.jpg" alt="송파 방이동 모카스파 마사지샵 - 몽촌토성역 도보 5분, 힐링샵" class="shop-image" 
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
+                     loading="lazy">
+                <div class="image-overlay">
+                    <div class="shop-type">힐링샵</div>
+                </div>
+            </div>
+            
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="shop-name-container">
+                        <div class="shop-name">방이동 모카스파</div>
+                        <div class="shop-location-info">
+                            <span class="shop-district">송파구 방이동</span>
+                            <div class="location-flag">
+                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-info">
+                    <div class="info-item greeting">
+                        <span>최고 선물을 선사하겠습니다.</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; flex-wrap: nowrap; overflow: hidden;">
+                    <div class="price-container" style="display: flex; align-items: center; gap: 8px; overflow: hidden; width: 100%; flex: 1; min-width: 0;">
+                        <div class="price" style="flex-shrink: 0; white-space: nowrap;"><span class="price-label">최저가</span> 80,000원~</div>
+                        <div class="shop-address-info" style="font-size: 12px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;">
+                        서울 송파구 올림픽로 지하 383 | 서울 송파구 방이동, 몽촌토성역 도보 5분 | 0507-1859-6900
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </a>
+
+        </div>
           `;
           })
           .join('');
