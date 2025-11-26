@@ -434,7 +434,7 @@
                 
                 <div class="card-info">
                     <div class="info-item greeting">
-                        <span>힐링가득한 스웨디시 와 고급 왁싱 편안한 문의 정말 이것인 한계인건가 아아아자자자가가가가가가</span>
+                        <span>힐링가득한 스웨디시 와 고급 왁싱 편안한 문의</span>
                     </div>
                 </div>
                 
@@ -451,6 +451,19 @@
         </a>
 
         </div><script>
+(function() {
+  if (typeof sortStaticCards === 'function') {
+    sortStaticCards();
+  } else {
+    // sortStaticCards 함수가 아직 로드되지 않았으면 DOMContentLoaded 대기
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof sortStaticCards === 'function') {
+        sortStaticCards();
+      }
+    });
+  }
+})();
+</script><script>
 (function() {
   if (typeof sortStaticCards === 'function') {
     sortStaticCards();
@@ -638,6 +651,8 @@
     <!-- 상세정보 모달 -->
     
     <!-- 상세정보 모달 -->
+    
+    <!-- 상세정보 모달 -->
 
     <div class="modal" id="aboutModal">
       <div class="modal-content">
@@ -737,7 +752,7 @@
         // 결과 제목 업데이트
         const resultsTitle = document.getElementById('resultsTitle');
         if (resultsTitle) {
-          /* /* /* /* /* /* /* /* /* /* /* /* resultsTitle.textContent = '왁싱 추천 BEST 샵'; */ */ */ */ */ */ */ */ */ */ */ */
+          /* /* /* /* /* /* /* /* /* /* /* /* /* resultsTitle.textContent = '왁싱 추천 BEST 샵'; */ */ */ */ */ */ */ */ */ */ */ */ */
         }
 
           const resultsH2 = document.querySelector('h2.visually-hidden');
@@ -756,9 +771,17 @@
  /* // 정적 HTML이 이미 있으므로 동적 생성 비활성화
  /* // 정적 HTML이 이미 있으므로 동적 생성 비활성화
  /* // 정적 HTML이 이미 있으므로 동적 생성 비활성화
+ /* // 정적 HTML이 이미 있으므로 동적 생성 비활성화
  /* if (typeof displayFilteredResults === 'function') {
           displayFilteredResults();
         } */
+ 
+ // massageList에 정적 HTML이 있으면 동적 생성 방지
+ const massageList = document.getElementById('massageList');
+ if (massageList && massageList.children.length > 0) {
+   // 정적 HTML이 이미 있으므로 동적 생성 건너뛰기
+   console.log('정적 HTML이 이미 존재하므로 동적 생성 건너뜀');
+ } */
  
  // massageList에 정적 HTML이 있으면 동적 생성 방지
  const massageList = document.getElementById('massageList');

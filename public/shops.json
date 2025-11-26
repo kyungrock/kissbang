@@ -431,11 +431,183 @@
         "스크럽",
         "건마시티"
       ]
+    },
+    {
+      "id": "seoul_banana_001",
+      "name": "바나나 홈케어",
+      "type": "출장마사지",
+      "region": "서울",
+      "district": "서울·경기·인천 전지역",
+      "address": "서울 경기 인천 전지역",
+      "detailAddress": "홈케어 - 원하는 장소에서 받을 수 있어요",
+      "phone": "0507-1859-6725",
+      "price": "70,000원~",
+      "operatingHours": "24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)",
+      "rating": 4.9,
+      "reviewCount": 28,
+      "image": "images/바나나홈케어.jpg",
+      "description": "서울·경기·인천 전지역 출장마사지 최고의 서비스를 보장하는 바나나 홈케어입니다. 전원 20대 긍정 마인드를 갖춘 실력파 관리사들이 감미로운 손길로 감성힐링을 제공합니다. 타이마사지, 건마, 아로마, 오일 테라피, 스웨디시 등 다양한 프로그램으로 최상의 힐링을 선사합니다.",
+      "services": [
+        "출장마사지",
+        "타이마사지",
+        "건마",
+        "아로마",
+        "오일 테라피",
+        "스웨디시"
+      ],
+      "courses": [
+        {
+          "category": "타이.건마 테라피",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "70,000원",
+              "duration": "60분",
+              "description": "타이.건마 테라피"
+            },
+            {
+              "name": "B코스",
+              "price": "80,000원",
+              "duration": "90분",
+              "description": "타이.건마 테라피"
+            },
+            {
+              "name": "C코스",
+              "price": "100,000원",
+              "duration": "120분",
+              "description": "타이.건마 테라피"
+            },
+            {
+              "name": "D코스",
+              "price": "140,000원",
+              "duration": "150분",
+              "description": "타이.건마 테라피"
+            }
+          ]
+        },
+        {
+          "category": "아로마.오일 테라피",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "80,000원",
+              "duration": "60분",
+              "description": "아로마.오일 테라피"
+            },
+            {
+              "name": "B코스",
+              "price": "90,000원",
+              "duration": "90분",
+              "description": "아로마.오일 테라피"
+            },
+            {
+              "name": "C코스",
+              "price": "110,000원",
+              "duration": "120분",
+              "description": "아로마.오일 테라피"
+            },
+            {
+              "name": "D코스",
+              "price": "140,000원",
+              "duration": "150분",
+              "description": "아로마.오일 테라피"
+            }
+          ]
+        },
+        {
+          "category": "스웨디시 감성 아로마",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "90,000원",
+              "duration": "60분",
+              "description": "스웨디시 감성 아로마"
+            },
+            {
+              "name": "B코스",
+              "price": "110,000원",
+              "duration": "90분",
+              "description": "스웨디시 감성 아로마"
+            },
+            {
+              "name": "C코스",
+              "price": "130,000원",
+              "duration": "120분",
+              "description": "스웨디시 감성 아로마"
+            },
+            {
+              "name": "D코스",
+              "price": "160,000원",
+              "duration": "150분",
+              "description": "스웨디시 감성 아로마"
+            }
+          ]
+        },
+        {
+          "category": "VIP 코스",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "110,000원",
+              "duration": "60분",
+              "description": "VIP 코스"
+            },
+            {
+              "name": "B코스",
+              "price": "130,000원",
+              "duration": "90분",
+              "description": "VIP 코스"
+            },
+            {
+              "name": "C코스",
+              "price": "160,000원",
+              "duration": "120분",
+              "description": "VIP 코스"
+            }
+          ]
+        }
+      ],
+      "staffInfo": "전원 20대 혼혈 실력파 여 쌤들 | 상기 종목 테라피 과정 수료",
+      "reviews": [
+        {
+          "name": "고객님",
+          "rating": 5,
+          "date": "2025-11-25",
+          "comment": "서울 집에서 출장마사지 받았는데 정말 만족스러웠어요. 바나나 홈케어 관리사분이 친절하게 와주셔서 편안하게 타이마사지 받을 수 있었습니다. 20대 관리사분들이라 분위기도 좋고 실력도 좋아서 다음에도 또 부를 예정이에요. 홈케어라 원하는 장소에서 받을 수 있어서 너무 편했어요."
+        }
+      ],
+      "features": [
+        "전원 20대 혼혈 관리사",
+        "24시간 운영",
+        "선입금 없음",
+        "유류비 없음",
+        "건마시티 회원 할인",
+        "홈케어 서비스"
+      ],
+      "coordinates": {
+        "latitude": 37.5665,
+        "longitude": 126.978
+      },
+      "status": "active",
+      "createdAt": "2025-11-25T10:00:00Z",
+      "updatedAt": "2025-11-25T10:00:00Z",
+      "tags": [
+        "서울",
+        "경기",
+        "인천",
+        "출장마사지",
+        "타이마사지",
+        "건마",
+        "아로마",
+        "스웨디시",
+        "홈케어",
+        "건마시티"
+      ]
     }
   ],
   "metadata": {
-    "totalShops": 5,
-    "lastUpdated": "2024-12-19T17:00:00Z",
+    "totalShops": 6,
+    "lastUpdated": "2025-11-25T10:00:00Z",
     "version": "1.0.0",
     "regions": ["제주", "서울"],
     "types": ["korean"],

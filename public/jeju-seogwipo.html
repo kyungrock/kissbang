@@ -471,6 +471,19 @@
     });
   }
 })();
+</script><script>
+(function() {
+  if (typeof sortStaticCards === 'function') {
+    sortStaticCards();
+  } else {
+    // sortStaticCards 함수가 아직 로드되지 않았으면 DOMContentLoaded 대기
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof sortStaticCards === 'function') {
+        sortStaticCards();
+      }
+    });
+  }
+})();
 </script>
                 </a>        
     </main>
@@ -555,6 +568,8 @@
         </div>
       </div>
     </div>
+    <!-- 상세정보 모달 -->
+    
     <!-- 상세정보 모달 -->
     
     <!-- 상세정보 모달 -->
