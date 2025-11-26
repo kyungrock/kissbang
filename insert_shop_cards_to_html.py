@@ -711,10 +711,10 @@ def create_shop_card_html(shop):
     phone = shop.get('phone', '')
     
     address_parts = []
-    if address:
-        address_parts.append(address)
     if detail_address:
         address_parts.append(detail_address)
+    if address:
+        address_parts.append(address)
     if phone:
         address_parts.append(phone)
     
@@ -903,7 +903,22 @@ def insert_shop_cards_to_html(html_file, shops):
             end_pos = start_tag_end + last_close_div + 6  # </div> 길이 6
             
             # massageList 전체를 새로 생성 (기존 내용 완전 삭제)
-            new_massage_list = f'{start_tag}\n{cards_html}\n        </div>'
+            # 인라인 스크립트 추가: 렌더링 전 즉시 랜덤 정렬
+            inline_script = '''<script>
+(function() {
+  if (typeof sortStaticCards === 'function') {
+    sortStaticCards();
+  } else {
+    // sortStaticCards 함수가 아직 로드되지 않았으면 DOMContentLoaded 대기
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof sortStaticCards === 'function') {
+        sortStaticCards();
+      }
+    });
+  }
+})();
+</script>'''
+            new_massage_list = f'{start_tag}\n{cards_html}\n        </div>{inline_script}'
             
             # massageList 전체 교체
             content = content[:start_pos] + new_massage_list + content[end_pos:]
@@ -911,7 +926,20 @@ def insert_shop_cards_to_html(html_file, shops):
             print(f"  ✅ massageList 전체 교체 후 새 카드 {len(matching_shops)}개 등록")
         else:
             # </div>를 찾지 못한 경우, </main> 이전에 직접 삽입
-            new_massage_list = f'{start_tag}\n{cards_html}\n        </div>'
+            inline_script = '''<script>
+(function() {
+  if (typeof sortStaticCards === 'function') {
+    sortStaticCards();
+  } else {
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof sortStaticCards === 'function') {
+        sortStaticCards();
+      }
+    });
+  }
+})();
+</script>'''
+            new_massage_list = f'{start_tag}\n{cards_html}\n        </div>{inline_script}'
             content = content[:start_pos] + new_massage_list + '\n    ' + content[main_end_pos:]
             inserted = True
             print(f"  ✅ massageList 재생성 후 새 카드 {len(matching_shops)}개 등록")
@@ -920,9 +948,22 @@ def insert_shop_cards_to_html(html_file, shops):
     if not inserted:
         pattern2 = r'<div[^>]*id=["\']massageList["\'][^>]*\s*/>'
         if re.search(pattern2, content):
+            inline_script = '''<script>
+(function() {
+  if (typeof sortStaticCards === 'function') {
+    sortStaticCards();
+  } else {
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof sortStaticCards === 'function') {
+        sortStaticCards();
+      }
+    });
+  }
+})();
+</script>'''
             content = re.sub(
                 pattern2,
-                f'<div id="massageList">\n{cards_html}\n        </div>',
+                f'<div id="massageList">\n{cards_html}\n        </div>{inline_script}',
                 content,
                 count=1
             )
@@ -931,9 +972,22 @@ def insert_shop_cards_to_html(html_file, shops):
         
         pattern3 = r'(<div[^>]*id=["\']massageList["\'][^>]*></div>)'
         if re.search(pattern3, content):
+            inline_script = '''<script>
+(function() {
+  if (typeof sortStaticCards === 'function') {
+    sortStaticCards();
+  } else {
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof sortStaticCards === 'function') {
+        sortStaticCards();
+      }
+    });
+  }
+})();
+</script>'''
             content = re.sub(
                 pattern3,
-                f'<div id="massageList">\n{cards_html}\n        </div>',
+                f'<div id="massageList">\n{cards_html}\n        </div>{inline_script}',
                 content,
                 count=1
             )
@@ -948,7 +1002,20 @@ def insert_shop_cards_to_html(html_file, shops):
             body_end = body_match.end()
             
             # body 다음에 바로 massageList 삽입
-            cards_section = f'\n    <div id="massageList">\n{cards_html}\n    </div>'
+            inline_script = '''<script>
+(function() {
+  if (typeof sortStaticCards === 'function') {
+    sortStaticCards();
+  } else {
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof sortStaticCards === 'function') {
+        sortStaticCards();
+      }
+    });
+  }
+})();
+</script>'''
+            cards_section = f'\n    <div id="massageList">\n{cards_html}\n    </div>{inline_script}'
             content = content[:body_end] + cards_section + content[body_end:]
             inserted = True
             print(f"  ✅ body 태그 다음에 massageList 컨테이너 생성 및 카드 삽입")
@@ -1306,12 +1373,21 @@ def main():
     html_files = list(public_dir.glob('*.html'))
     print(f"   ✅ {len(html_files)}개 HTML 파일 발견")
     
+    # 제외할 파일 목록
+    exclude_files = {'notice.html', 'event.html'}
+    
     # 각 HTML 파일 처리
     print("\n3. HTML 파일 처리 중...")
     processed_count = 0
     skipped_count = 0
     
     for html_file in html_files:
+        # notice.html과 event.html은 제외
+        if html_file.name in exclude_files:
+            print(f"   ⏭️ {html_file.name}: 공지사항/이벤트 페이지로 건너뜀")
+            skipped_count += 1
+            continue
+        
         if insert_shop_cards_to_html(html_file, shops):
             processed_count += 1
         else:

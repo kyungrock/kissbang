@@ -1499,7 +1499,25 @@ function displayFilteredResults() {
     });
   }
 
-  displayMassageShops(filteredShops);
+  // 정적 HTML 카드가 있는지 확인
+  const massageList = document.getElementById('massageList');
+  const hasStaticCards =
+    massageList &&
+    massageList.children.length > 0 &&
+    Array.from(massageList.children).some(
+      (child) =>
+        (child.classList && child.classList.contains('massage-card')) ||
+        (child.querySelector && child.querySelector('.massage-card')) ||
+        (child.tagName === 'A' && child.querySelector('.massage-card'))
+    );
+
+  if (hasStaticCards) {
+    // 정적 HTML 카드가 있으면 검색 필터링만 적용
+    filterStaticCards(currentSearchQuery);
+  } else {
+    // 동적 생성 카드인 경우 기존 로직 사용
+    displayMassageShops(filteredShops);
+  }
 
   // 결과 헤더 업데이트
   // 메인 페이지가 아닌 경우 "마사지"로 표시
@@ -2094,11 +2112,16 @@ function sortStaticCards() {
     return;
   }
 
+  // massageList가 존재하는지 확인 (DOM이 준비되지 않았을 수 있음)
   const massageList = document.getElementById('massageList');
   if (!massageList || massageList.children.length === 0) {
     console.log('sortStaticCards: massageList가 없거나 비어있음');
     return;
   }
+
+  // 초기에 카드를 숨김 (렌더링 전 정렬을 위해)
+  massageList.style.opacity = '0';
+  massageList.style.visibility = 'hidden';
 
   // 모든 카드 요소 수집 (<a> 태그 또는 <div> 태그)
   const cards = Array.from(massageList.children).filter((child) => {
@@ -2170,9 +2193,62 @@ function sortStaticCards() {
   // 정렬 완료 플래그 설정
   staticCardsSorted = true;
 
+  // 정렬 완료 후 카드 표시 (렌더링 전 정렬 완료)
+  massageList.style.opacity = '1';
+  massageList.style.visibility = 'visible';
+
   console.log(
     `✅ 정적 HTML 카드 ${sortedCards.length}개 재정렬 완료 (힐링샵: ${healingCards.length}개, 일반: ${nonHealingCards.length}개)`
   );
+}
+
+// 정적 HTML 카드 검색 필터링 함수
+function filterStaticCards(searchQuery) {
+  const massageList = document.getElementById('massageList');
+  if (!massageList) return;
+
+  // 모든 카드 요소 수집
+  const cards = Array.from(massageList.children).filter((child) => {
+    return (
+      (child.classList && child.classList.contains('massage-card')) ||
+      (child.querySelector && child.querySelector('.massage-card')) ||
+      (child.tagName === 'A' && child.querySelector('.massage-card'))
+    );
+  });
+
+  if (cards.length === 0) return;
+
+  const searchTerm = searchQuery ? searchQuery.trim().toLowerCase() : '';
+
+  // 검색어가 없으면 모든 카드 표시
+  if (!searchTerm || searchTerm.length < 2) {
+    cards.forEach((card) => {
+      card.style.display = '';
+    });
+    return;
+  }
+
+  // 각 카드의 텍스트 내용 확인
+  cards.forEach((card) => {
+    const massageCard = card.classList.contains('massage-card')
+      ? card
+      : card.querySelector('.massage-card');
+
+    if (!massageCard) {
+      card.style.display = 'none';
+      return;
+    }
+
+    // 카드의 모든 텍스트 내용 수집
+    const cardText = massageCard.textContent || massageCard.innerText || '';
+    const cardTextLower = cardText.toLowerCase();
+
+    // 검색어와 매칭되는지 확인
+    const matches = cardTextLower.includes(searchTerm);
+
+    // 매칭되면 표시, 아니면 숨김
+    card.style.display = matches ? '' : 'none';
+  });
 }
 
 // 업체 목록 표시 (애니메이션 포함)
@@ -2191,6 +2267,8 @@ function displayMassageShops(shops) {
       if (!staticCardsSorted) {
         sortStaticCards();
       }
+      // 정적 HTML 카드 검색 필터링 적용
+      filterStaticCards(currentSearchQuery);
       return;
     }
   }
@@ -4272,11 +4350,27 @@ function initStaticCardSorting() {
   }
 }
 
-// DOMContentLoaded에서 한 번만 실행
-document.addEventListener('DOMContentLoaded', function () {
-  setTimeout(() => {
+// 즉시 실행 (스크립트 로드 시점에 실행)
+(function () {
+  // DOM이 이미 로드되었는지 확인
+  if (document.readyState === 'loading') {
+    // DOM이 아직 로드 중이면 DOMContentLoaded 대기
+    document.addEventListener('DOMContentLoaded', function () {
+      // 즉시 실행 (지연 없이)
+      initStaticCardSorting();
+    });
+  } else {
+    // DOM이 이미 로드되었으면 즉시 실행
     initStaticCardSorting();
-  }, 100);
+  }
+})();
+
+// DOMContentLoaded에서도 실행 (안전장치)
+document.addEventListener('DOMContentLoaded', function () {
+  // 이미 정렬되었으면 건너뛰기
+  if (!staticCardsSorted) {
+    initStaticCardSorting();
+  }
 });
 
 // 테마 필터 초기화
