@@ -264,7 +264,7 @@ window.shopCardData = [
     id: 6,
     name: '바나나 홈케어',
     type: '출장마사지',
-    country: 'korea',
+    country: 'korea,Thailand,japan',
     region: '서울',
     district: '서울·경기·인천 전지역',
     address: '서울 경기 인천 전지역',

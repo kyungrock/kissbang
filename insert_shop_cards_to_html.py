@@ -683,11 +683,15 @@ def create_shop_card_html(shop):
     country = shop.get('country', 'korea')
     country_flags = []
     if 'korea' in country:
-        country_flags.append('<img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML=\'🇰🇷\'; this.style.fontSize=\'16px\'; this.style.display=\'flex\'; this.style.alignItems=\'center\'; this.style.justifyContent=\'center\'; this.style.height=\'100%\'; this.style.background=\'#f0f0f0\'; this.style.borderRadius=\'3px\';">')
+        country_flags.append('<img src="https://www.msg1000.com/images/한국.jpg" alt="한국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML=\'🇰🇷\'; this.style.fontSize=\'16px\'; this.style.display=\'flex\'; this.style.alignItems=\'center\'; this.style.justifyContent=\'center\'; this.style.height=\'100%\'; this.style.background=\'#f0f0f0\'; this.style.borderRadius=\'3px\';">')
+    if 'Thailand' in country:
+        country_flags.append('<img src="https://www.msg1000.com/images/태국.jpg" alt="태국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML=\'🇹🇭\'; this.style.fontSize=\'16px\'; this.style.display=\'flex\'; this.style.alignItems=\'center\'; this.style.justifyContent=\'center\'; this.style.height=\'100%\'; this.style.background=\'#f0f0f0\'; this.style.borderRadius=\'3px\';">')
     if 'japan' in country:
-        country_flags.append('<img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" alt="일본 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML=\'🇯🇵\'; this.style.fontSize=\'16px\'; this.style.display=\'flex\'; this.style.alignItems=\'center\'; this.style.justifyContent=\'center\'; this.style.height=\'100%\'; this.style.background=\'#f0f0f0\'; this.style.borderRadius=\'3px\';">')
+        country_flags.append('<img src="https://www.msg1000.com/images/일본.jpg" alt="일본 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML=\'🇯🇵\'; this.style.fontSize=\'16px\'; this.style.display=\'flex\'; this.style.alignItems=\'center\'; this.style.justifyContent=\'center\'; this.style.height=\'100%\'; this.style.background=\'#f0f0f0\'; this.style.borderRadius=\'3px\';">')
     if 'china' in country:
-        country_flags.append('<img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg" alt="중국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML=\'🇨🇳\'; this.style.fontSize=\'16px\'; this.style.display=\'flex\'; this.style.alignItems=\'center\'; this.style.justifyContent=\'center\'; this.style.height=\'100%\'; this.style.background=\'#f0f0f0\'; this.style.borderRadius=\'3px\';">')
+        country_flags.append('<img src="https://www.msg1000.com/images/중국.jpg" alt="중국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML=\'🇨🇳\'; this.style.fontSize=\'16px\'; this.style.display=\'flex\'; this.style.alignItems=\'center\'; this.style.justifyContent=\'center\'; this.style.height=\'100%\'; this.style.background=\'#f0f0f0\'; this.style.borderRadius=\'3px\';">')
+    if 'Russia' in country:
+        country_flags.append('<img src="https://www.msg1000.com/images/러시아.jpg" alt="러시아 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML=\'🇷🇺\'; this.style.fontSize=\'16px\'; this.style.display=\'flex\'; this.style.alignItems=\'center\'; this.style.justifyContent=\'center\'; this.style.height=\'100%\'; this.style.background=\'#f0f0f0\'; this.style.borderRadius=\'3px\';">')
     
     flags_html = '\n                                '.join(country_flags)
     
@@ -826,6 +830,160 @@ def insert_shop_cards_to_html(html_file, shops):
     if filename.startswith('company-'):
         return False
     
+    # ========== 기존 중복 요소 완전 제거 ==========
+    # 0. 모든 중첩된 주석 시작 제거 (/* /* /* 패턴)
+    while True:
+        old_content = content
+        # 중첩된 주석 시작 패턴 제거
+        content = re.sub(
+            r'/\*\s*/\*',
+            '/*',
+            content
+        )
+        # 연속된 주석 시작 제거
+        content = re.sub(
+            r'/\*\s*/\*\s*/\*',
+            '/*',
+            content
+        )
+        # 여러 개의 주석 시작 제거
+        while re.search(r'/\*\s*/\*', content):
+            content = re.sub(r'/\*\s*/\*', '/*', content)
+        if old_content == content:
+            break
+    
+    # 1. sortStaticCards 스크립트 중복 제거 (모든 패턴, 연속된 스크립트 포함)
+    # 더 정확한 패턴으로 여러 줄에 걸친 스크립트도 제거
+    # 먼저 모든 sortStaticCards 관련 내용을 찾아서 제거
+    while True:
+        old_content = content
+        # sortStaticCards가 포함된 모든 스크립트 블록 찾기 (더 넓은 범위)
+        # <script> 태그로 감싸진 경우
+        content = re.sub(
+            r'<script>[^<]*?sortStaticCards[^<]*?</script>',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        # 스크립트 태그 없이 함수만 있는 경우 (더 정확한 패턴)
+        # sortStaticCards가 포함된 함수 전체 찾기
+        content = re.sub(
+            r'\(function\(\)\s*\{[^}]*sortStaticCards[^}]*\}\)\(\);\s*',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        # 여러 줄에 걸친 경우
+        content = re.sub(
+            r'\(function\(\)\s*\{[\s\S]*?sortStaticCards[\s\S]*?\}\)\(\);\s*',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        # 연속된 </script><script> 패턴 제거
+        content = re.sub(
+            r'</script>\s*<script>',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        if old_content == content:
+            break
+    
+    # 2. 상세정보 모달 주석 중복 제거
+    while True:
+        old_content = content
+        content = re.sub(
+            r'<!--\s*상세정보\s*모달\s*-->',
+            '',
+            content,
+            flags=re.IGNORECASE
+        )
+        content = content.replace('<!-- 상세정보 모달 -->', '').replace('<!--상세정보 모달-->', '')
+        if old_content == content:
+            break
+    
+    # 3. 주석 처리된 동적 생성 비활성화 코드 중복 제거 (여러 줄 주석 포함)
+    while True:
+        old_content = content
+        # 여러 줄에 걸친 주석 패턴 (더 정확한 패턴)
+        content = re.sub(
+            r'/\*\s*//\s*정적\s*HTML이\s*이미\s*있으므로\s*동적\s*생성\s*비활성화[\s\S]*?\*/',
+            '',
+            content,
+            flags=re.DOTALL | re.IGNORECASE
+        )
+        # 단순한 주석 패턴도 제거
+        content = re.sub(
+            r'/\*\s*//\s*정적\s*HTML이\s*이미\s*있으므로\s*동적\s*생성\s*비활성화\s*\*/',
+            '',
+            content,
+            flags=re.IGNORECASE
+        )
+        # 주석 시작만 있고 끝이 없는 경우도 처리
+        content = re.sub(
+            r'/\*\s*//\s*정적\s*HTML이\s*이미\s*있으므로\s*동적\s*생성\s*비활성화[^*\n]*',
+            '',
+            content,
+            flags=re.IGNORECASE
+        )
+        # 중첩된 주석 시작 제거
+        content = re.sub(
+            r'/\*\s*/\*',
+            '/*',
+            content
+        )
+        if old_content == content:
+            break
+    
+    # 4. massageList 체크 코드 중복 제거 (여러 줄 포함)
+    while True:
+        old_content = content
+        # 여러 줄에 걸친 코드 블록 제거
+        content = re.sub(
+            r'//\s*massageList에\s*정적\s*HTML이\s*있으면\s*동적\s*생성\s*방지[^}]*\}',
+            '',
+            content,
+            flags=re.DOTALL | re.IGNORECASE
+        )
+        if old_content == content:
+            break
+    
+    # 5. 빈 주석 및 중첩 주석 제거
+    while True:
+        old_content = content
+        # 중첩된 주석 시작 제거 (/* /* /* 패턴)
+        content = re.sub(
+            r'/\*\s*/\*',
+            '/*',
+            content
+        )
+        # 연속된 주석 시작 제거
+        while re.search(r'/\*\s*/\*', content):
+            content = re.sub(r'/\*\s*/\*', '/*', content)
+        # 빈 주석 패턴 제거 (공백만 있는 주석)
+        content = re.sub(
+            r'\s*\*/\s*',
+            '',
+            content,
+            flags=re.MULTILINE
+        )
+        # 연속된 빈 주석 제거
+        content = re.sub(
+            r'\*/\s*\*/',
+            '',
+            content
+        )
+        # 주석 시작만 있고 끝이 없는 경우 제거
+        content = re.sub(
+            r'/\*\s*/\s*$',
+            '',
+            content,
+            flags=re.MULTILINE
+        )
+        if old_content == content:
+            break
+    
     # 파일명에서 지역, 세부지역, 필터 추출
     region, district, filter_type = extract_region_and_filter(filename)
     
@@ -904,6 +1062,34 @@ def insert_shop_cards_to_html(html_file, shops):
             
             # massageList 전체를 새로 생성 (기존 내용 완전 삭제)
             # 인라인 스크립트 추가: 렌더링 전 즉시 랜덤 정렬
+            # 삽입 전 마지막 중복 체크 - 해당 섹션의 모든 스크립트 제거
+            section_before = content[start_pos:end_pos]
+            # 모든 sortStaticCards 스크립트 제거
+            while True:
+                old_section = section_before
+                section_before = re.sub(
+                    r'<script>\s*\(function\(\)\s*\{[^{}]*(?:\{[^{}]*\}[^{}]*)*sortStaticCards[^{}]*(?:\{[^{}]*\}[^{}]*)*\}\)\(\);\s*</script>',
+                    '',
+                    section_before,
+                    flags=re.DOTALL
+                )
+                section_before = re.sub(
+                    r'\(function\(\)\s*\{[^{}]*(?:\{[^{}]*\}[^{}]*)*sortStaticCards[^{}]*(?:\{[^{}]*\}[^{}]*)*\}\)\(\);\s*',
+                    '',
+                    section_before,
+                    flags=re.DOTALL
+                )
+                section_before = re.sub(
+                    r'</script>\s*<script>',
+                    '',
+                    section_before,
+                    flags=re.DOTALL
+                )
+                if old_section == section_before:
+                    break
+            content = content[:start_pos] + section_before + content[end_pos:]
+            end_pos = start_pos + len(section_before)
+            
             inline_script = '''<script>
 (function() {
   if (typeof sortStaticCards === 'function') {
@@ -1001,7 +1187,7 @@ def insert_shop_cards_to_html(html_file, shops):
         if body_match:
             body_end = body_match.end()
             
-            # body 다음에 바로 massageList 삽입
+            # body 다음에 바로 massageList 삽입 (기존 스크립트는 이미 함수 시작 부분에서 제거됨)
             inline_script = '''<script>
 (function() {
   if (typeof sortStaticCards === 'function') {
@@ -1048,6 +1234,149 @@ def insert_shop_cards_to_html(html_file, shops):
     # JavaScript의 동적 카드 생성 코드 비활성화 (정적 HTML 사용)
     content = disable_dynamic_card_generation(content)
     
+    # ========== 최종 중복 제거 (파일 저장 전) ==========
+    # 0. 중첩된 주석 시작 최종 제거
+    while True:
+        old_content = content
+        # 중첩된 주석 시작 패턴 제거
+        content = re.sub(
+            r'/\*\s*/\*',
+            '/*',
+            content
+        )
+        # 여러 개의 주석 시작 제거
+        while re.search(r'/\*\s*/\*', content):
+            content = re.sub(r'/\*\s*/\*', '/*', content)
+        if old_content == content:
+            break
+    
+    # 1. sortStaticCards 스크립트 중복 최종 제거 (모든 패턴)
+    while True:
+        old_content = content
+        # sortStaticCards가 포함된 모든 스크립트 블록 찾기
+        # <script> 태그로 감싸진 경우
+        content = re.sub(
+            r'<script>[^<]*?sortStaticCards[^<]*?</script>',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        # 스크립트 태그 없이 함수만 있는 경우 (더 넓은 범위)
+        content = re.sub(
+            r'\(function\(\)\s*\{[\s\S]*?sortStaticCards[\s\S]*?\}\)\(\);\s*',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        # 연속된 </script><script> 제거
+        content = re.sub(
+            r'</script>\s*<script>',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        if old_content == content:
+            break
+    
+    # 2. 주석 중복 최종 제거
+    while True:
+        old_content = content
+        # 주석 처리된 동적 생성 비활성화 코드 (모든 패턴)
+        content = re.sub(
+            r'/\*\s*//\s*정적\s*HTML이\s*이미\s*있으므로\s*동적\s*생성\s*비활성화[\s\S]*?\*/',
+            '',
+            content,
+            flags=re.DOTALL | re.IGNORECASE
+        )
+        # 중첩된 주석 시작 제거
+        content = re.sub(
+            r'/\*\s*/\*',
+            '/*',
+            content
+        )
+        # 여러 개의 주석 시작 제거
+        while re.search(r'/\*\s*/\*', content):
+            content = re.sub(r'/\*\s*/\*', '/*', content)
+        # 빈 주석 제거
+        content = re.sub(
+            r'\s*\*/\s*\*/',
+            '',
+            content
+        )
+        content = re.sub(
+            r'\n\s*\*/\s*\n',
+            '\n',
+            content
+        )
+        # 주석 시작만 있고 끝이 없는 경우
+        content = re.sub(
+            r'/\*\s*//\s*정적\s*HTML이\s*이미\s*있으므로\s*동적\s*생성\s*비활성화[^*\n]*',
+            '',
+            content,
+            flags=re.IGNORECASE
+        )
+        if old_content == content:
+            break
+    
+    # 3. 상세정보 모달 주석 중복 최종 제거
+    while True:
+        old_content = content
+        content = re.sub(
+            r'<!--\s*상세정보\s*모달\s*-->',
+            '',
+            content,
+            flags=re.IGNORECASE
+        )
+        content = content.replace('<!-- 상세정보 모달 -->', '').replace('<!--상세정보 모달-->', '')
+        if old_content == content:
+            break
+    
+    # ========== 연속된 빈 줄 정리 (최종) ==========
+    # 3개 이상의 연속된 빈 줄을 2개로 제한
+    while True:
+        old_content = content
+        # 3개 이상의 연속된 빈 줄을 2개로 제한
+        content = re.sub(
+            r'\n\s*\n\s*\n\s*\n+',
+            '\n\n',
+            content
+        )
+        # 주석 제거 후 남은 빈 줄 정리
+        content = re.sub(
+            r'/\*\s*/\s*\n\s*\n+',
+            '',
+            content
+        )
+        # 주석 처리된 코드 제거 후 남은 빈 줄 정리
+        content = re.sub(
+            r'//\s*정적\s*HTML이\s*이미\s*있으므로\s*동적\s*생성\s*비활성화\s*\n\s*\n+',
+            '',
+            content,
+            flags=re.IGNORECASE
+        )
+        # detailsModal 제거 후 남은 빈 줄 정리 (</div> 다음에 많은 빈 줄)
+        content = re.sub(
+            r'</div>\s*\n\s*\n\s*\n\s*\n+',
+            '</div>\n\n',
+            content
+        )
+        # aboutModal 앞의 빈 줄 정리
+        content = re.sub(
+            r'\n\s*\n\s*\n\s*\n+\s*<div\s+id=["\']aboutModal["\']',
+            '\n\n    <div id="aboutModal"',
+            content,
+            flags=re.IGNORECASE
+        )
+        # hamburger-menu-container 앞의 빈 줄 정리
+        content = re.sub(
+            r'\n\s*\n\s*\n\s*\n+\s*<div\s+id=["\']hamburger-menu-container["\']',
+            '\n\n    <div id="hamburger-menu-container"',
+            content,
+            flags=re.IGNORECASE
+        )
+        if old_content == content:
+            break
+    
     if inserted:
         html_file.write_text(content, encoding='utf-8')
         print(f"  ✅ 업체 카드 {len(matching_shops)}개 삽입 완료")
@@ -1060,6 +1389,59 @@ def insert_shop_cards_to_html(html_file, shops):
 # JavaScript의 동적 카드 생성 코드 비활성화
 def disable_dynamic_card_generation(content):
     """JavaScript의 displayMassageShops 호출을 주석 처리하여 정적 HTML만 사용하도록 함"""
+    # ========== 기존 중복 완전 제거 ==========
+    # 1. 주석 처리된 동적 생성 비활성화 코드 중복 제거 (모든 패턴)
+    while True:
+        old_content = content
+        # 여러 줄에 걸친 주석 패턴
+        content = re.sub(
+            r'/\*\s*//\s*정적\s*HTML이\s*이미\s*있으므로\s*동적\s*생성\s*비활성화[^*]*\*/',
+            '',
+            content,
+            flags=re.DOTALL | re.IGNORECASE
+        )
+        # 단순한 주석 패턴도 제거
+        content = re.sub(
+            r'/\*\s*//\s*정적\s*HTML이\s*이미\s*있으므로\s*동적\s*생성\s*비활성화\s*\*/',
+            '',
+            content,
+            flags=re.IGNORECASE
+        )
+        if old_content == content:
+            break
+    
+    # 2. massageList 체크 코드 중복 제거 (모든 패턴)
+    while True:
+        old_content = content
+        # 여러 줄에 걸친 코드 블록 제거
+        content = re.sub(
+            r'//\s*massageList에\s*정적\s*HTML이\s*있으면\s*동적\s*생성\s*방지[^}]*\}',
+            '',
+            content,
+            flags=re.DOTALL | re.IGNORECASE
+        )
+        if old_content == content:
+            break
+    
+    # 3. 빈 주석 제거 ( */ 만 남은 경우)
+    while True:
+        old_content = content
+        # 빈 주석 패턴 제거 (공백만 있는 주석)
+        content = re.sub(
+            r'\s*\*/\s*',
+            '',
+            content,
+            flags=re.MULTILINE
+        )
+        # 연속된 빈 주석 제거
+        content = re.sub(
+            r'\*/\s*\*/',
+            '',
+            content
+        )
+        if old_content == content:
+            break
+    
     # displayMassageShops 호출 부분 주석 처리 (여러 패턴 시도)
     
     # 패턴 1: if (typeof displayMassageShops === 'function') { displayMassageShops(shops); }
@@ -1088,14 +1470,35 @@ def disable_dynamic_card_generation(content):
     
     # 패턴 4: displayFilteredResults() 호출 주석 처리 및 정적 HTML 체크 추가
     # 이미 주석 처리되지 않은 경우만 처리
-    if '/* displayFilteredResults()' not in content and 'displayFilteredResults()' in content:
+    if 'displayFilteredResults()' in content and '/* displayFilteredResults()' not in content:
         # 패턴: 들여쓰기 + if (typeof displayFilteredResults === 'function') { displayFilteredResults(); }
         pattern = r'(\s+)(if\s*\(typeof\s+displayFilteredResults\s*===\s*[\'"]function[\'"]\s*\)\s*\{[^}]*displayFilteredResults\(\)[^}]*\})'
         def replace_func(match):
             indent = match.group(1)
             original = match.group(2)
-            return f'{indent}// 정적 HTML이 이미 있으므로 동적 생성 비활성화\n{indent}/* {original} */\n{indent}\n{indent}// massageList에 정적 HTML이 있으면 동적 생성 방지\n{indent}const massageList = document.getElementById(\'massageList\');\n{indent}if (massageList && massageList.children.length > 0) {{\n{indent}  // 정적 HTML이 이미 있으므로 동적 생성 건너뛰기\n{indent}  console.log(\'정적 HTML이 이미 존재하므로 동적 생성 건너뜀\');\n{indent}}}'
+            return f'{indent}/* {original} */'
         content = re.sub(pattern, replace_func, content, flags=re.MULTILINE | re.DOTALL)
+    
+    # 주석 처리된 코드와 그 아래 빈 줄 제거
+    # "// 정적 HTML이 이미 있으므로 동적 생성 비활성화" 주석과 그 아래 빈 줄 제거
+    while True:
+        old_content = content
+        # 주석과 그 아래 빈 줄 제거
+        content = re.sub(
+            r'//\s*정적\s*HTML이\s*이미\s*있으므로\s*동적\s*생성\s*비활성화\s*\n\s*\n*',
+            '',
+            content,
+            flags=re.IGNORECASE
+        )
+        # massageList 체크 코드와 그 아래 빈 줄 제거
+        content = re.sub(
+            r'//\s*massageList에\s*정적\s*HTML이\s*있으면\s*동적\s*생성\s*방지[^}]*\}\s*\n\s*\n*',
+            '',
+            content,
+            flags=re.DOTALL | re.IGNORECASE
+        )
+        if old_content == content:
+            break
     
     # resultsTitle.textContent, resultsTitle.innerHTML 주석 처리 (이미 있지만 확실하게)
     content = re.sub(
@@ -1264,9 +1667,13 @@ def update_footer_link(content, region, district, filter_type, filename=''):
     
     # detailsModal 찾기 및 업데이트
     # 기존 detailsModal 전체 제거 (재귀적으로 중첩된 div 처리)
-    details_modal_start_pattern = r'<div[^>]*id=["\']detailsModal["\']'
-    details_modal_match_start = re.search(details_modal_start_pattern, content)
-    if details_modal_match_start:
+    # 모든 detailsModal 제거 (중복 방지)
+    while True:
+        details_modal_start_pattern = r'<div[^>]*id=["\']detailsModal["\']'
+        details_modal_match_start = re.search(details_modal_start_pattern, content)
+        if not details_modal_match_start:
+            break
+        
         start_pos = details_modal_match_start.start()
         # </div>를 찾아서 닫기 (중첩된 div 처리)
         remaining = content[start_pos:]
@@ -1298,29 +1705,20 @@ def update_footer_link(content, region, district, filter_type, filename=''):
         if end_pos > start_pos:
             # 기존 detailsModal 완전히 제거
             content = content[:start_pos] + content[end_pos:]
+            # detailsModal 제거 후 연속된 빈 줄 정리
+            content = re.sub(
+                r'\n\s*\n\s*\n\s*\n+',
+                '\n\n',
+                content
+            )
             print(f"  ✅ 기존 detailsModal 완전히 제거됨")
+        else:
+            break
     
-    # detailsModal 찾기 및 업데이트 (이제 없는 상태)
-    details_modal_pattern = r'(<div[^>]*id=["\']detailsModal["\'][^>]*>.*?<div[^>]*class=["\']modal-body["\'][^>]*>)(.*?)(</div>\s*</div>\s*</div>)'
-    details_modal_match = re.search(details_modal_pattern, content, re.DOTALL)
-    if details_modal_match:
-        # 기존 내용 완전히 제거하고 새 내용으로 교체
-        new_modal_body = f'''
-        <div class="terms-section">
-          <h3>서비스 필터 전체 보기</h3>
-          <div class="filter-links-container" style="margin-top: 20px;">
-            {filter_links_html}
-          </div>
-        </div>'''
-        content = re.sub(
-            details_modal_pattern,
-            r'\1' + new_modal_body + r'\3',
-            content,
-            count=1,
-            flags=re.DOTALL
-        )
-        print(f"  ✅ detailsModal 기존 내용 제거 후 필터 링크 {len(filters_to_show)}개 삽입 완료")
-    else:
+    # detailsModal이 이미 있는지 확인 (중복 방지)
+    details_modal_exists = re.search(r'<div[^>]*id=["\']detailsModal["\']', content)
+    
+    if not details_modal_exists:
         # detailsModal이 없으면 footer 다음에 추가
         footer_pattern = r'(</footer>)'
         footer_match = re.search(footer_pattern, content)
@@ -1345,6 +1743,26 @@ def update_footer_link(content, region, district, filter_type, filename=''):
     </div>'''
             content = re.sub(footer_pattern, r'\1' + details_modal_html, content, count=1)
             print(f"  ✅ detailsModal 생성 및 필터 링크 {len(filters_to_show)}개 삽입 완료")
+    else:
+        # detailsModal이 있으면 내용만 업데이트
+        details_modal_pattern = r'(<div[^>]*id=["\']detailsModal["\'][^>]*>.*?<div[^>]*class=["\']modal-body["\'][^>]*>)(.*?)(</div>\s*</div>\s*</div>)'
+        details_modal_match = re.search(details_modal_pattern, content, re.DOTALL)
+        if details_modal_match:
+            new_modal_body = f'''
+        <div class="terms-section">
+          <h3>서비스 필터 전체 보기</h3>
+          <div class="filter-links-container" style="margin-top: 20px;">
+            {filter_links_html}
+          </div>
+        </div>'''
+            content = re.sub(
+                details_modal_pattern,
+                r'\1' + new_modal_body + r'\3',
+                content,
+                count=1,
+                flags=re.DOTALL
+            )
+            print(f"  ✅ detailsModal 기존 내용 제거 후 필터 링크 {len(filters_to_show)}개 삽입 완료")
     
     return content
 
