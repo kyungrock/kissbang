@@ -139,6 +139,38 @@ window.shopCardData = [
       },
     ],
   },
+  {
+    id: 7,
+    name: '라인',
+    country: 'korea',
+    region: '서울',
+    district: '관악구',
+    address: '서울 관악구 신림동 신림역 인근',
+    detailAddress: '서울 신림역 5분거리, 상세주소 문의, 주차 가능',
+    phone: '0507-1859-6966',
+    rating: 4.8,
+    reviewCount: 15,
+    price: '110,000원~',
+    description:
+      '신림마사지 최고의 서비스를 보장하는 라인입니다. 아늑하고 포근한 공간에서 여러분의 몸과 마음을 힐링하시기 바랍니다. 찾아오시는 고객님 한분 한분을 최선을 다하여 관리해드리도록 항상 노력하겠습니다.',
+    image: 'https://msg1000.com/images/신림마사지_라인.jpg',
+    alt: '서울 관악구 신림역 인근 라인 마사지샵 - 신림역 5분거리, 힐링샵, 주차 가능',
+    services: ['스웨디시', '힐링마사지'],
+    operatingHours: '오전 11시 ~ 새벽 3시 (폰이 꺼진 경우: 마감, 랜덤 휴무)',
+    file: 'company-seoul-sillim-line.html',
+    showHealingShop: true,
+    greeting:
+      '신림마사지⭐■ 최고의 관리사 힐링마사지 많은 이용부탁드립니다 ■⭐',
+    reviews: [
+      {
+        author: '고객님',
+        rating: 5,
+        date: '2025-11-25',
+        review:
+          '신림역에서 가까워서 접근성 좋아요. 라인에서 기본 코스 받았는데 관리사분이 정말 꼼꼼하게 해주셔서 어깨와 허리 통증이 많이 나아졌어요. 힐링샵답게 분위기도 좋고 주차도 가능해서 편리했습니다.',
+      },
+    ],
+  },
   // showHealingShop: false 그룹 (하단 배치)
   {
     id: 3,
@@ -258,6 +290,37 @@ window.shopCardData = [
         date: '2025-11-25',
         review:
           '서울 집에서 출장마사지 받았는데 정말 만족스러웠어요. 바나나 홈케어 관리사분이 친절하게 와주셔서 편안하게 타이마사지 받을 수 있었습니다. 20대 관리사분들이라 분위기도 좋고 실력도 좋아서 다음에도 또 부를 예정이에요. 홈케어라 원하는 장소에서 받을 수 있어서 너무 편했어요.',
+      },
+    ],
+  },
+  {
+    id: 8,
+    name: '아만스웨디시',
+    country: 'korea',
+    region: '서울',
+    district: '강남구',
+    address: '서울 강남구 대치동 896-51',
+    detailAddress: '선릉역 1번출구 도보 5분, 무료 주차 (지상 주차장)',
+    phone: '0507-1859-6760',
+    rating: 4.9,
+    reviewCount: 22,
+    price: '110,000원~',
+    description:
+      '선릉역마사지 최고의 서비스를 보장하는 아만 스웨디시입니다. 건강마사지로 탄력과 왁싱 동시에 받고 건강도 찾아보세요. 정성스러운 관리를 통해 편안함을 넘어 최선을 다해 감동을 선사해 드리겠습니다.',
+    image: 'https://msg1000.com/images/대치동마사지_아만스웨디시.jpg',
+    alt: '서울 강남구 대치동 선릉역 인근 아만스웨디시 - 스웨디시, 무료 주차',
+    services: ['스웨디시'],
+    operatingHours: '오전 11시 ~ 새벽 3시 (폰이 꺼진 경우: 마감, 랜덤 휴무)',
+    file: 'company-seoul-daechi-amanswedish.html',
+    showHealingShop: false,
+    greeting: '스웨디시 ⭐ 고객님의 만족을 위해 최선을 다해 모시겠습니다. ⭐',
+    reviews: [
+      {
+        author: '고객님',
+        rating: 5,
+        date: '2025-11-25',
+        review:
+          '선릉역에서 가까워서 접근성 좋아요. 아만스웨디시에서 A코스 받았는데 스웨디시 받을 수 있어서 너무 좋았어요. 관리사분이 정성스럽게 해주셔서 몸이 한결 가벼워진 느낌이었습니다. 무료 주차도 가능해서 편리했어요.',
       },
     ],
   },

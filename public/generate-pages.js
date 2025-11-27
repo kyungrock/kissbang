@@ -382,27 +382,27 @@ function generateRegionPage(regionKor, regionData) {
                     <span class="country-name">전체</span>
                 </div>
                 <div class="country-box" data-country="korea">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/한국.jpg" alt="한국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">한국</span>
                 </div>
                 <div class="country-box" data-country="thai">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/태국.jpg" alt="태국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/태국.jpg" alt="태국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">태국</span>
                 </div>
                 <div class="country-box" data-country="china">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg" alt="중국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/중국.jpg" alt="중국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">중국</span>
                 </div>
                 <div class="country-box" data-country="russia">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/러시아-1.jpg" alt="러시아" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/러시아.jpg" alt="러시아" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">러시아</span>
                 </div>
                 <div class="country-box" data-country="japan">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" alt="일본" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/일본.jpg" alt="일본" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">일본</span>
                 </div>
@@ -419,27 +419,27 @@ function generateRegionPage(regionKor, regionData) {
                     <span class="country-name">전체</span>
                 </div>
                 <div class="country-box" data-country="korea">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/한국.jpg" alt="한국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">한국</span>
                 </div>
                 <div class="country-box" data-country="thai">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/태국.jpg" alt="태국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/태국.jpg" alt="태국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">태국</span>
                 </div>
                 <div class="country-box" data-country="china">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg" alt="중국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/중국.jpg" alt="중국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">중국</span>
                 </div>
                 <div class="country-box" data-country="russia">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/러시아-1.jpg" alt="러시아" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/러시아.jpg" alt="러시아" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">러시아</span>
                 </div>
                 <div class="country-box" data-country="japan">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" alt="일본" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/일본.jpg" alt="일본" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">일본</span>
                 </div>
@@ -635,27 +635,27 @@ function generateDistrictPage(regionKor, districtKor) {
                     <span class="country-name">전체</span>
                 </div>
                 <div class="country-box" data-country="korea">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/한국.jpg" alt="한국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">한국</span>
                 </div>
                 <div class="country-box" data-country="thai">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/태국.jpg" alt="태국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/태국.jpg" alt="태국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">태국</span>
                 </div>
                 <div class="country-box" data-country="china">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg" alt="중국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/중국.jpg" alt="중국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">중국</span>
                 </div>
                 <div class="country-box" data-country="russia">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/러시아-1.jpg" alt="러시아" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/러시아.jpg" alt="러시아" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">러시아</span>
                 </div>
                 <div class="country-box" data-country="japan">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" alt="일본" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/일본.jpg" alt="일본" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">일본</span>
                 </div>
@@ -672,27 +672,27 @@ function generateDistrictPage(regionKor, districtKor) {
                     <span class="country-name">전체</span>
                 </div>
                 <div class="country-box" data-country="korea">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" alt="한국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/한국.jpg" alt="한국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">한국</span>
                 </div>
                 <div class="country-box" data-country="thai">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/태국.jpg" alt="태국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/태국.jpg" alt="태국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">태국</span>
                 </div>
                 <div class="country-box" data-country="china">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg" alt="중국" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/중국.jpg" alt="중국" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">중국</span>
                 </div>
                 <div class="country-box" data-country="russia">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/러시아-1.jpg" alt="러시아" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/러시아.jpg" alt="러시아" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">러시아</span>
                 </div>
                 <div class="country-box" data-country="japan">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" alt="일본" class="country-flag" 
+                    <img src="https://www.msg1000.com/images/일본.jpg" alt="일본" class="country-flag" 
                          onerror="this.onerror=null; this.style.display='none';" loading="lazy">
                     <span class="country-name">일본</span>
                 </div>

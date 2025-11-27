@@ -1754,14 +1754,14 @@ function createShopCard(shop) {
                         <div class="shop-location-info">
                             <span class="shop-district">${locationInfo}</span>
                             <div class="location-flag">
-                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" 
+                                <img src="https://www.msg1000.com/images/한국.jpg" 
                                      alt="한국 국기" 
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
                                 ${
                                   shop.country && shop.country.includes('japan')
                                     ? `
-                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" 
+                                <img src="https://www.msg1000.com/images/일본.jpg" 
                                      alt="일본 국기" 
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇯🇵'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
@@ -1769,9 +1769,31 @@ function createShopCard(shop) {
                                     : ''
                                 }
                                 ${
+                                  shop.country &&
+                                  shop.country.includes('Thailand')
+                                    ? `
+                                <img src="https://www.msg1000.com/images/태국.jpg" 
+                                     alt="태국 국기" 
+                                     class="flag-image"
+                                     onerror="this.onerror=null; this.innerHTML='🇹🇭'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                                `
+                                    : ''
+                                }
+                                ${
+                                  shop.country &&
+                                  shop.country.includes('Russia')
+                                    ? `
+                                <img src="https://www.msg1000.com/images/러시아.jpg" 
+                                     alt="러시아 국기" 
+                                     class="flag-image"
+                                     onerror="this.onerror=null; this.innerHTML='🇷🇺'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                                `
+                                    : ''
+                                }
+                                ${
                                   shop.country && shop.country.includes('china')
                                     ? `
-                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/중국.jpg" 
+                                <img src="https://www.msg1000.com/images/중국.jpg" 
                                      alt="중국 국기" 
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇨🇳'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
