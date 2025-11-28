@@ -632,7 +632,8 @@ def create_shop_display_name(shop):
         if region and region in shop_name:
             shop_name = shop_name.replace(region, '').strip()
         
-        return f'{region} {shop_name}'.strip() if region else shop_name
+        # region 부분 제거하고 업체명만 반환
+        return shop_name
     
     # 일반 업체의 경우
     shop_name = shop.get('name', '')
@@ -678,6 +679,9 @@ def create_shop_card_html(shop):
     # 타입 이름 (힐링샵 여부)
     show_healing_shop = shop.get('showHealingShop', True)
     type_name = '힐링샵' if show_healing_shop else ''
+    
+    # 지역 정보
+    shop_region = shop.get('region', '')
     
     # 국가별 국기 이미지
     country = shop.get('country', 'korea')
@@ -737,7 +741,7 @@ def create_shop_card_html(shop):
     if shop_url:
         # <a> 태그로 감싸서 확실하게 링크 작동
         card_html = f'''        <a href="{html.escape(shop_url)}" style="text-decoration: none; color: inherit; display: block;">
-            <div class="massage-card" data-type="{html.escape(shop_type or '마사지')}" data-show-healing-shop="{str(show_healing_shop).lower()}" style="cursor: pointer;">
+            <div class="massage-card" data-type="{html.escape(shop_type or '마사지')}" data-region="{html.escape(shop_region)}" data-show-healing-shop="{str(show_healing_shop).lower()}" style="cursor: pointer;">
             <div class="card-image">
                 <img src="{html.escape(image)}" alt="{html.escape(alt)}" class="shop-image" 
                      onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
@@ -779,7 +783,7 @@ def create_shop_card_html(shop):
     else:
         # URL이 없으면 onclick 사용
         onclick_handler = f"goToDetail({shop.get('id', 0)})"
-        card_html = f'''        <div class="massage-card" data-type="{html.escape(shop_type or '마사지')}" data-show-healing-shop="{str(show_healing_shop).lower()}" onclick="{onclick_handler}" style="cursor: pointer;">
+        card_html = f'''        <div class="massage-card" data-type="{html.escape(shop_type or '마사지')}" data-region="{html.escape(shop_region)}" data-show-healing-shop="{str(show_healing_shop).lower()}" onclick="{onclick_handler}" style="cursor: pointer;">
             <div class="card-image">
                 <img src="{html.escape(image)}" alt="{html.escape(alt)}" class="shop-image" 
                      onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
@@ -995,20 +999,35 @@ def insert_shop_cards_to_html(html_file, shops):
     for shop in shops:
         shop_region = shop.get('region', '')
         shop_district = shop.get('district', '')
-        
-        # 지역 매칭
-        if region and shop_region != region:
-            continue
-        
-        # 구 매칭
         shop_type = shop.get('type', '')
         services = shop.get('services', [])
         if isinstance(services, str):
             services = [services]
         is_outcall = (shop_type == '출장마사지' or '출장마사지' in services)
         
+        # 지역 매칭
+        if region:
+            shop_region_str = str(shop_region).strip()
+            region_str = str(region).strip()
+            
+            # 출장마사지이고 region에 쉼표가 있으면 여러 지역 지원
+            if is_outcall and ',' in shop_region_str:
+                # 쉼표로 구분된 지역 목록
+                shop_regions = [r.strip() for r in shop_region_str.split(',')]
+                # 현재 페이지의 지역이 shop_regions에 포함되어 있는지 확인
+                if region_str not in shop_regions:
+                    continue
+            else:
+                # 일반적인 경우: 정확히 일치해야 함
+                if shop_region_str != region_str:
+                    continue
+        
+        # 구 매칭 (is_outcall은 이미 위에서 정의됨)
         if district:
-            if is_outcall and shop_region == '제주':
+            # 출장마사지이고 region에 쉼표가 있으면 여러 지역 지원 (district 체크 건너뛰기)
+            if is_outcall and ',' in str(shop_region):
+                pass  # 여러 지역을 지원하는 출장마사지는 district 체크 건너뛰기
+            elif is_outcall and str(shop_region) == '제주':
                 pass  # 제주 출장마사지는 모든 세부지역에 매칭
             else:
                 if shop_district != district:
