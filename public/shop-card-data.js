@@ -401,7 +401,7 @@ window.shopCardData = [
   },
   {
     id: 12,
-    name: 'VVIP 20대 여신 한국인홈케어',
+    name: '20대 여신 한국인홈케어',
     type: '출장마사지',
     country: 'korea',
     region: '서울,경기,인천',

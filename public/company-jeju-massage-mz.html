@@ -73,121 +73,121 @@
     <!-- 구조화된 데이터 (Local Business Schema) -->
     <!-- Breadcrumb Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "name": "연동 MZ",
+  "url": "https://msg1000.com/company-jeju-massage-mz.html",
+  "description": "제주 연동 최고의 서비스를 보장하는 MZ입니다. 깨끗하고 쾌적한 시설로 고객님의 지친일상에 활력과 행복으로 보답드리겠습니다.",
+  "telephone": "0507-1859-6671",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "연동 10",
+    "addressLocality": "제주시",
+    "addressRegion": "제주특별자치도",
+    "addressCountry": "KR"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "bestRating": "5",
+    "reviewCount": 3
+  },
+  "image": [
+    {
+      "@type": "ImageObject",
+      "url": "https://msg1000.com/images/제주마사지_mz.jpg",
+      "alt": "제주 연동 MZ 마사지샵 내부 - 24시간 영업, 20대 한국인 관리사, 힐링샵"
+    }
+  ],
+  "priceRange": "₩150000-₩250000",
+  "currenciesAccepted": "KRW",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
+    }
+  ],
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "주차 가능"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "주요 서비스",
+    "itemListElement": [
       {
-        "@context": "https://schema.org",
-        "@type": "HealthAndBeautyBusiness",
-        "name": "연동 MZ",
-        "url": "https://msg1000.com/company-jeju-massage-mz.html",
-        "description": "제주 연동 최고의 서비스를 보장하는 MZ입니다. 깨끗하고 쾌적한 시설로 고객님의 지친일상에 활력과 행복으로 보답드리겠습니다.",
-        "telephone": "0507-1859-6671",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "연동 10",
-          "addressLocality": "제주시",
-          "addressRegion": "제주특별자치도",
-          "addressCountry": "KR"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5",
-          "bestRating": "5",
-          "reviewCount": 3
-        },
-        "image": [
-          {
-            "@type": "ImageObject",
-            "url": "https://msg1000.com/images/제주마사지_mz.jpg",
-            "alt": "제주 연동 MZ 마사지샵 내부 - 24시간 영업, 20대 한국인 관리사, 힐링샵"
-          }
-        ],
-        "priceRange": "₩150000-₩250000",
-        "currenciesAccepted": "KRW",
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday"
-            ],
-            "opens": "00:00",
-            "closes": "23:59"
-          }
-        ],
-        "amenityFeature": [
-          {
-            "@type": "LocationFeatureSpecification",
-            "name": "주차 가능"
-          }
-        ],
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "주요 서비스",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "스웨디시 마사지"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "슈얼 마사지"
-              }
-            }
-          ]
-        },
-        "review": [
-          {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": "4"
-            },
-            "author": {
-              "@type": "Person",
-              "name": "가가님"
-            },
-            "datePublished": "2025-11-23",
-            "reviewBody": "슈얼마사지가 정말 끝내줬어요. mz 연동여기 완전 추천!"
-          },
-          {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": "4"
-            },
-            "author": {
-              "@type": "Person",
-              "name": "슈자인님"
-            },
-            "datePublished": "2025-11-23",
-            "reviewBody": "한번가보세요 돔나이트 부근인데 캬~ 주차도 편하고 좋습니다"
-          },
-          {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": "5"
-            },
-            "author": {
-              "@type": "Person",
-              "name": "로컬님"
-            },
-            "datePublished": "2025-11-25",
-            "reviewBody": "돔나이트 근처에 있어서 주차 걱정 없이 갔어요. 연동 MZ에서 슈얼마사지 받았는데 24시간 운영이라 늦은 시간에도 이용 가능해서 좋았습니다. 관리사분이 친절하시고 스웨디시도 받아봤는데 둘 다 만족스러웠어요. 힐링샵답게 분위기도 좋고요."
-          }
-        ]
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "스웨디시 마사지"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "슈얼 마사지"
+        }
       }
+    ]
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "4"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "가가님"
+      },
+      "datePublished": "2025-11-23",
+      "reviewBody": "슈얼마사지가 정말 끝내줬어요. mz 연동여기 완전 추천!"
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "4"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "슈자인님"
+      },
+      "datePublished": "2025-11-23",
+      "reviewBody": "한번가보세요 돔나이트 부근인데 캬~ 주차도 편하고 좋습니다"
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "로컬님"
+      },
+      "datePublished": "2025-11-25",
+      "reviewBody": "돔나이트 근처에 있어서 주차 걱정 없이 갔어요. 연동 MZ에서 슈얼마사지 받았는데 24시간 운영이라 늦은 시간에도 이용 가능해서 좋았습니다. 관리사분이 친절하시고 스웨디시도 받아봤는데 둘 다 만족스러웠어요. 힐링샵답게 분위기도 좋고요."
+    }
+  ]
+}
     </script>
-  </head>
+    </head>
   <body>
     <!-- 헤더 -->
     <header class="header">
