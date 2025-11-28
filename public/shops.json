@@ -746,16 +746,847 @@
         "왁싱",
         "건마시티"
       ]
+    },
+    {
+      "id": "seoul_instapretty_001",
+      "name": "20대 인스타이쁜이",
+      "type": "출장마사지",
+      "region": "서울",
+      "district": "서울·경기·인천 전지역",
+      "address": "서울 경기 인천 전지역",
+      "detailAddress": "홈타이 - 원하는 장소에서 받을 수 있어요",
+      "phone": "0507-1859-7033",
+      "price": "70,000원~",
+      "operatingHours": "24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)",
+      "rating": 4.9,
+      "reviewCount": 0,
+      "image": "images/20대인스타이쁜이.jpg",
+      "description": "서울.인천.경기 홈타이 최고의 서비스를 보장하는 20대 인스타이쁜이 입니다. 고객님께서 언제 어디에 계시든 연락만 주신다면 발빠르게 뛰어가 밝은 미소 친절상담과 더불어 최고의 힐링을 제공해 드리겠습니다. 전원 20대 실력파 여 관리사들이 꾹꾹 시원 스포츠, 감미로운 오일마사지, 감성힐링 스웨디시, VVIP 특급마사지 등 다양한 프로그램으로 최상의 힐링을 선사합니다.",
+      "services": [
+        "출장마사지",
+        "스포츠 마사지",
+        "오일 마사지",
+        "스웨디시",
+        "VVIP 마사지"
+      ],
+      "courses": [
+        {
+          "category": "꾹꾹 시원 스포츠",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "70,000원",
+              "duration": "60분",
+              "description": "꾹꾹 시원 스포츠"
+            },
+            {
+              "name": "B코스",
+              "price": "90,000원",
+              "duration": "90분",
+              "description": "꾹꾹 시원 스포츠"
+            },
+            {
+              "name": "C코스",
+              "price": "110,000원",
+              "duration": "120분",
+              "description": "꾹꾹 시원 스포츠"
+            }
+          ]
+        },
+        {
+          "category": "감미로운 오일마사지",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "80,000원",
+              "duration": "60분",
+              "description": "감미로운 오일마사지"
+            },
+            {
+              "name": "B코스",
+              "price": "100,000원",
+              "duration": "90분",
+              "description": "감미로운 오일마사지"
+            },
+            {
+              "name": "C코스",
+              "price": "120,000원",
+              "duration": "120분",
+              "description": "감미로운 오일마사지"
+            }
+          ]
+        },
+        {
+          "category": "감성힐링 스웨디시",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "90,000원",
+              "duration": "60분",
+              "description": "감성힐링 스웨디시"
+            },
+            {
+              "name": "B코스",
+              "price": "110,000원",
+              "duration": "90분",
+              "description": "감성힐링 스웨디시"
+            },
+            {
+              "name": "C코스",
+              "price": "130,000원",
+              "duration": "120분",
+              "description": "감성힐링 스웨디시"
+            },
+            {
+              "name": "D코스",
+              "price": "160,000원",
+              "duration": "150분",
+              "description": "감성힐링 스웨디시"
+            }
+          ]
+        },
+        {
+          "category": "VVIP 특급마사지",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "120,000원",
+              "duration": "60분",
+              "description": "VVIP 특급마사지"
+            },
+            {
+              "name": "B코스",
+              "price": "140,000원",
+              "duration": "90분",
+              "description": "VVIP 특급마사지"
+            },
+            {
+              "name": "C코스",
+              "price": "170,000원",
+              "duration": "120분",
+              "description": "VVIP 특급마사지"
+            },
+            {
+              "name": "D코스",
+              "price": "200,000원",
+              "duration": "150분",
+              "description": "VVIP 특급마사지"
+            }
+          ]
+        },
+        {
+          "category": "믹스 코스",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "130,000원",
+              "duration": "120분",
+              "description": "60분 꾹꾹 + 60분 힐링 (실장님 강력추천)"
+            },
+            {
+              "name": "A코스",
+              "price": "160,000원",
+              "duration": "150분",
+              "description": "60분 꾹꾹 + 60분 VVIP"
+            }
+          ]
+        },
+        {
+          "category": "한국인 스웨디시",
+          "items": [
+            {
+              "name": "a노말",
+              "price": "140,000원",
+              "duration": "60분",
+              "description": "한국인 스웨디시"
+            },
+            {
+              "name": "a노말",
+              "price": "180,000원",
+              "duration": "90분",
+              "description": "한국인 스웨디시"
+            },
+            {
+              "name": "aVVIP",
+              "price": "160,000원",
+              "duration": "60분",
+              "description": "한국인 스웨디시 VVIP"
+            },
+            {
+              "name": "aVVIP",
+              "price": "200,000원",
+              "duration": "90분",
+              "description": "한국인 스웨디시 VVIP"
+            }
+          ]
+        }
+      ],
+      "staffInfo": "전원 20대 실력파 여 쌤들 | 상기 종목 테라피 과정 수료 | 20대 미녀 | 만족 보장",
+      "reviews": [],
+      "features": [
+        "전원 20대 한국인 관리사",
+        "24시간 운영",
+        "출장비 없음",
+        "문제 발생시 A/S",
+        "건마시티 회원 할인",
+        "홈타이 서비스",
+        "천연 수용성 오일 사용",
+        "관리 시간은 입실부터 퇴실까지"
+      ],
+      "coordinates": {
+        "latitude": 37.5665,
+        "longitude": 126.978
+      },
+      "status": "active",
+      "createdAt": "2025-11-25T13:00:00Z",
+      "updatedAt": "2025-11-25T13:00:00Z",
+      "tags": [
+        "서울",
+        "경기",
+        "인천",
+        "출장마사지",
+        "홈타이",
+        "20대",
+        "스포츠마사지",
+        "오일마사지",
+        "스웨디시",
+        "VVIP",
+        "건마시티"
+      ]
+    },
+    {
+      "id": "seoul_korean_pretty_001",
+      "name": "한국 20대 이쁜이",
+      "type": "출장마사지",
+      "region": "서울",
+      "district": "서울·경기·인천 전지역",
+      "address": "서울 경기 인천 전지역",
+      "detailAddress": "홈타이 - 원하는 장소에서 받을 수 있어요",
+      "phone": "0507-1859-6753",
+      "price": "70,000원~",
+      "operatingHours": "24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)",
+      "rating": 4.9,
+      "reviewCount": 0,
+      "image": "images/한국20대이쁜이.jpg",
+      "description": "서울.인천.경기 홈타이 최고의 서비스를 보장하는 한국 20대 이쁜이 입니다. 고객님께서 언제 어디에 계시든 연락만 주신다면 발빠르게 뛰어가 밝은 미소 친절상담과 더불어 최고의 힐링을 제공해 드리겠습니다. 전원 20대 실력파 여 관리사들이 꾹꾹 시원 스포츠, 감미로운 오일마사지, 감성힐링 스웨디시, VVIP 특급마사지 등 다양한 프로그램으로 최상의 힐링을 선사합니다.",
+      "services": [
+        "출장마사지",
+        "스포츠 마사지",
+        "오일 마사지",
+        "스웨디시",
+        "VVIP 마사지"
+      ],
+      "courses": [
+        {
+          "category": "꾹꾹 시원 스포츠",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "70,000원",
+              "duration": "60분",
+              "description": "꾹꾹 시원 스포츠"
+            },
+            {
+              "name": "B코스",
+              "price": "90,000원",
+              "duration": "90분",
+              "description": "꾹꾹 시원 스포츠"
+            },
+            {
+              "name": "C코스",
+              "price": "110,000원",
+              "duration": "120분",
+              "description": "꾹꾹 시원 스포츠"
+            }
+          ]
+        },
+        {
+          "category": "감미로운 오일마사지",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "80,000원",
+              "duration": "60분",
+              "description": "감미로운 오일마사지"
+            },
+            {
+              "name": "B코스",
+              "price": "100,000원",
+              "duration": "90분",
+              "description": "감미로운 오일마사지"
+            },
+            {
+              "name": "C코스",
+              "price": "120,000원",
+              "duration": "120분",
+              "description": "감미로운 오일마사지"
+            }
+          ]
+        },
+        {
+          "category": "감성힐링 스웨디시",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "90,000원",
+              "duration": "60분",
+              "description": "감성힐링 스웨디시"
+            },
+            {
+              "name": "B코스",
+              "price": "110,000원",
+              "duration": "90분",
+              "description": "감성힐링 스웨디시"
+            },
+            {
+              "name": "C코스",
+              "price": "130,000원",
+              "duration": "120분",
+              "description": "감성힐링 스웨디시"
+            },
+            {
+              "name": "D코스",
+              "price": "160,000원",
+              "duration": "150분",
+              "description": "감성힐링 스웨디시"
+            }
+          ]
+        },
+        {
+          "category": "VVIP 특급마사지",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "120,000원",
+              "duration": "60분",
+              "description": "VVIP 특급마사지"
+            },
+            {
+              "name": "B코스",
+              "price": "140,000원",
+              "duration": "90분",
+              "description": "VVIP 특급마사지"
+            },
+            {
+              "name": "C코스",
+              "price": "170,000원",
+              "duration": "120분",
+              "description": "VVIP 특급마사지"
+            },
+            {
+              "name": "D코스",
+              "price": "200,000원",
+              "duration": "150분",
+              "description": "VVIP 특급마사지"
+            }
+          ]
+        },
+        {
+          "category": "믹스 코스",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "130,000원",
+              "duration": "120분",
+              "description": "60분 꾹꾹 + 60분 힐링 (실장님 강력추천)"
+            },
+            {
+              "name": "A코스",
+              "price": "160,000원",
+              "duration": "150분",
+              "description": "60분 꾹꾹 + 60분 VVIP"
+            }
+          ]
+        },
+        {
+          "category": "한국인 스웨디시",
+          "items": [
+            {
+              "name": "a노말",
+              "price": "140,000원",
+              "duration": "60분",
+              "description": "한국인 스웨디시"
+            },
+            {
+              "name": "a노말",
+              "price": "180,000원",
+              "duration": "90분",
+              "description": "한국인 스웨디시"
+            },
+            {
+              "name": "aVVIP",
+              "price": "160,000원",
+              "duration": "60분",
+              "description": "한국인 스웨디시 VVIP"
+            },
+            {
+              "name": "aVVIP",
+              "price": "200,000원",
+              "duration": "90분",
+              "description": "한국인 스웨디시 VVIP"
+            }
+          ]
+        }
+      ],
+      "staffInfo": "전원 20대 실력파 여 쌤들 | 상기 종목 테라피 과정 수료 | 20대 미녀 | 만족 보장",
+      "reviews": [],
+      "features": [
+        "전원 20대 한국인 관리사",
+        "24시간 운영",
+        "출장비 없음",
+        "문제 발생시 A/S",
+        "건마시티 회원 할인",
+        "홈타이 서비스",
+        "천연 수용성 오일 사용",
+        "관리 시간은 입실부터 퇴실까지"
+      ],
+      "coordinates": {
+        "latitude": 37.5665,
+        "longitude": 126.978
+      },
+      "status": "active",
+      "createdAt": "2025-11-25T14:00:00Z",
+      "updatedAt": "2025-11-25T14:00:00Z",
+      "tags": [
+        "서울",
+        "경기",
+        "인천",
+        "출장마사지",
+        "홈타이",
+        "20대",
+        "스포츠마사지",
+        "오일마사지",
+        "스웨디시",
+        "VVIP",
+        "건마시티"
+      ]
+    },
+    {
+      "id": "seoul_24hour_korean_japanese_001",
+      "name": "24시 한국일본혼혈",
+      "type": "출장마사지",
+      "region": "서울",
+      "district": "서울·경기·인천 전지역",
+      "address": "서울 경기 인천 전지역",
+      "detailAddress": "홈타이 - 원하는 장소에서 받을 수 있어요",
+      "phone": "0507-1859-6753",
+      "price": "70,000원~",
+      "operatingHours": "24시간 365일 연중무휴",
+      "rating": 4.9,
+      "reviewCount": 0,
+      "image": "images/24시한국일본혼혈.jpg",
+      "description": "서울.경기.인천 출장마사지 최고의 서비스를 보장하는 24시 한국일본혼혈출장 입니다. 최고의 마사지로 고객님께 보답하겠습니다. 20대 관리사 부드러운 손길로 최고의 대접을 선사하겠습니다. 전원 실력파 여 관리사들이 꾹꾹 시원 스포츠, 감미로운 오일마사지, 감성힐링 스웨디시, VVIP 특급마사지 등 다양한 프로그램으로 최상의 힐링을 선사합니다.",
+      "services": [
+        "출장마사지",
+        "스포츠 마사지",
+        "오일 마사지",
+        "스웨디시",
+        "VVIP 마사지"
+      ],
+      "courses": [
+        {
+          "category": "꾹꾹 시원 스포츠",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "70,000원",
+              "duration": "60분",
+              "description": "꾹꾹 시원 스포츠"
+            },
+            {
+              "name": "B코스",
+              "price": "90,000원",
+              "duration": "90분",
+              "description": "꾹꾹 시원 스포츠"
+            },
+            {
+              "name": "C코스",
+              "price": "110,000원",
+              "duration": "120분",
+              "description": "꾹꾹 시원 스포츠"
+            }
+          ]
+        },
+        {
+          "category": "감미로운 오일마사지",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "80,000원",
+              "duration": "60분",
+              "description": "감미로운 오일마사지"
+            },
+            {
+              "name": "B코스",
+              "price": "100,000원",
+              "duration": "90분",
+              "description": "감미로운 오일마사지"
+            },
+            {
+              "name": "C코스",
+              "price": "120,000원",
+              "duration": "120분",
+              "description": "감미로운 오일마사지"
+            }
+          ]
+        },
+        {
+          "category": "감성힐링 스웨디시",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "90,000원",
+              "duration": "60분",
+              "description": "감성힐링 스웨디시"
+            },
+            {
+              "name": "B코스",
+              "price": "110,000원",
+              "duration": "90분",
+              "description": "감성힐링 스웨디시"
+            },
+            {
+              "name": "C코스",
+              "price": "130,000원",
+              "duration": "120분",
+              "description": "감성힐링 스웨디시"
+            },
+            {
+              "name": "D코스",
+              "price": "160,000원",
+              "duration": "150분",
+              "description": "감성힐링 스웨디시"
+            }
+          ]
+        },
+        {
+          "category": "VVIP 특급마사지",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "120,000원",
+              "duration": "60분",
+              "description": "VVIP 특급마사지"
+            },
+            {
+              "name": "B코스",
+              "price": "140,000원",
+              "duration": "90분",
+              "description": "VVIP 특급마사지"
+            },
+            {
+              "name": "C코스",
+              "price": "170,000원",
+              "duration": "120분",
+              "description": "VVIP 특급마사지"
+            },
+            {
+              "name": "D코스",
+              "price": "200,000원",
+              "duration": "150분",
+              "description": "VVIP 특급마사지"
+            }
+          ]
+        },
+        {
+          "category": "믹스 코스",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "130,000원",
+              "duration": "120분",
+              "description": "60분 꾹꾹 + 60분 힐링 (실장님 강력추천)"
+            },
+            {
+              "name": "A코스",
+              "price": "160,000원",
+              "duration": "150분",
+              "description": "60분 꾹꾹 + 60분 VVIP"
+            }
+          ]
+        },
+        {
+          "category": "한국인 스웨디시",
+          "items": [
+            {
+              "name": "a노말",
+              "price": "140,000원",
+              "duration": "60분",
+              "description": "한국인 스웨디시"
+            },
+            {
+              "name": "a노말",
+              "price": "180,000원",
+              "duration": "90분",
+              "description": "한국인 스웨디시"
+            },
+            {
+              "name": "aVVIP",
+              "price": "160,000원",
+              "duration": "60분",
+              "description": "한국인 스웨디시 VVIP"
+            },
+            {
+              "name": "aVVIP",
+              "price": "200,000원",
+              "duration": "90분",
+              "description": "한국인 스웨디시 VVIP"
+            }
+          ]
+        }
+      ],
+      "staffInfo": "전원 실력파 여 쌤들 | 20대 & 힐링출장 | 상기 종목 테라피 과정 수료",
+      "reviews": [],
+      "features": [
+        "전원 20대~30대 혼혈 관리사",
+        "24시간 365일 연중무휴",
+        "출장비 없음",
+        "문제 발생시 A/S",
+        "건마시티 회원 할인",
+        "홈타이 서비스",
+        "천연 수용성 오일 사용",
+        "관리 시간은 입실부터 퇴실까지",
+        "현금/이체 결제 가능"
+      ],
+      "coordinates": {
+        "latitude": 37.5665,
+        "longitude": 126.978
+      },
+      "status": "active",
+      "createdAt": "2025-11-25T15:00:00Z",
+      "updatedAt": "2025-11-25T15:00:00Z",
+      "tags": [
+        "서울",
+        "경기",
+        "인천",
+        "출장마사지",
+        "홈타이",
+        "20대~30대",
+        "혼혈",
+        "스포츠마사지",
+        "오일마사지",
+        "스웨디시",
+        "VVIP",
+        "건마시티",
+        "24시간",
+        "365일"
+      ]
+    },
+    {
+      "id": "seoul_vvip_goddess_korean_001",
+      "name": "VVIP 20대 여신 한국인홈케어",
+      "type": "출장마사지",
+      "region": "서울",
+      "district": "서울·경기·인천 전지역",
+      "address": "서울 경기 인천 전지역",
+      "detailAddress": "출장샵 - 원하는 장소에서 받을 수 있어요",
+      "phone": "0507-1859-6946",
+      "price": "100,000원~",
+      "operatingHours": "24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)",
+      "rating": 4.9,
+      "reviewCount": 0,
+      "image": "images/VVIP20대여신한국인홈케어.jpg",
+      "description": "서울.인천.경기 출장샵 최고의 서비스를 보장하는 VVIP 20대 여신 한국인홈케어 입니다. 어디서나 고객님이 불러주시면 최대한 빠르게 달려가겠습니다. 부드러운 손길로 고객님께 힐링으로 보답하겠습니다. 전원 20대 한국인 여 관리사들이 VIP 스웨디시 프로그램으로 최상의 힐링을 선사합니다.",
+      "services": ["출장마사지", "VIP 스웨디시"],
+      "courses": [
+        {
+          "category": "VIP 스웨디시",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "130,000원",
+              "duration": "60분",
+              "description": "VIP 스웨디시"
+            },
+            {
+              "name": "B코스",
+              "price": "170,000원",
+              "duration": "90분",
+              "description": "VIP 스웨디시"
+            }
+          ]
+        }
+      ],
+      "staffInfo": "전원 한국인 여 쌤들 | 상기 종목 테라피 과정 수료 | 20대 & 힐링샵 | 만족 보장",
+      "reviews": [],
+      "features": [
+        "전원 20대 한국인 관리사",
+        "24시간 운영",
+        "출장비 없음",
+        "건마시티 회원 할인",
+        "출장샵 서비스",
+        "만족 보장"
+      ],
+      "coordinates": {
+        "latitude": 37.5665,
+        "longitude": 126.978
+      },
+      "status": "active",
+      "createdAt": "2025-11-25T16:00:00Z",
+      "updatedAt": "2025-11-25T16:00:00Z",
+      "tags": [
+        "서울",
+        "경기",
+        "인천",
+        "출장마사지",
+        "홈케어",
+        "20대",
+        "VVIP",
+        "스웨디시",
+        "건마시티"
+      ]
+    },
+    {
+      "id": "seoul_tpanty_callgirl_001",
+      "name": "T팬티 콜걸",
+      "type": "출장마사지",
+      "region": "서울",
+      "district": "서울·경기·인천 전지역",
+      "address": "서울 경기 인천 전지역",
+      "detailAddress": "홈타이 - 원하는 장소에서 받을 수 있어요",
+      "phone": "0507-1859-6585",
+      "price": "60,000원~",
+      "operatingHours": "24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)",
+      "rating": 4.9,
+      "reviewCount": 0,
+      "image": "images/T팬티콜걸.jpg",
+      "description": "서울 인천 경기 최고의 서비스를 보장하는 T팬티 콜걸 입니다. 단골이 많은곳은 이유가 있습니다! 전원 20대 미녀 최선을 다해 힐링을 도와드리겠습니다. 전원 20대 실력파 여 관리사들이 T팬티 예선전(건식테라피), T팬티 본선전(센슈얼스웨디시), T팬티 결승전(전신혼합 VVIP), T팬티 부비부비(센슈얼 스웨디시) 등 다양한 프로그램으로 최상의 힐링을 선사합니다.",
+      "services": ["출장마사지", "건식테라피", "센슈얼스웨디시", "VVIP 마사지"],
+      "courses": [
+        {
+          "category": "T팬티 예선전 - 건식테라피",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "60,000원",
+              "duration": "60분",
+              "description": "건식테라피"
+            },
+            {
+              "name": "B코스",
+              "price": "80,000원",
+              "duration": "90분",
+              "description": "건식테라피"
+            },
+            {
+              "name": "C코스",
+              "price": "90,000원",
+              "duration": "120분",
+              "description": "건식테라피"
+            }
+          ]
+        },
+        {
+          "category": "T팬티 본선전 - 센슈얼스웨디시",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "80,000원",
+              "duration": "60분",
+              "description": "센슈얼스웨디시"
+            },
+            {
+              "name": "B코스",
+              "price": "100,000원",
+              "duration": "90분",
+              "description": "센슈얼스웨디시"
+            },
+            {
+              "name": "C코스",
+              "price": "120,000원",
+              "duration": "120분",
+              "description": "센슈얼스웨디시"
+            }
+          ]
+        },
+        {
+          "category": "T팬티 결승전 - 전신혼합 VVIP",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "100,000원",
+              "duration": "60분",
+              "description": "전신혼합 VVIP"
+            },
+            {
+              "name": "B코스",
+              "price": "120,000원",
+              "duration": "90분",
+              "description": "전신혼합 VVIP"
+            },
+            {
+              "name": "C코스",
+              "price": "140,000원",
+              "duration": "120분",
+              "description": "전신혼합 VVIP"
+            },
+            {
+              "name": "D코스",
+              "price": "160,000원",
+              "duration": "150분",
+              "description": "전신혼합 VVIP"
+            }
+          ]
+        },
+        {
+          "category": "T팬티 부비부비 - 센슈얼 스웨디시",
+          "items": [
+            {
+              "name": "A코스",
+              "price": "140,000원",
+              "duration": "60분",
+              "description": "센슈얼 스웨디시 (한국인)"
+            },
+            {
+              "name": "B코스",
+              "price": "180,000원",
+              "duration": "90분",
+              "description": "센슈얼 스웨디시 (한국인)"
+            }
+          ]
+        }
+      ],
+      "staffInfo": "전원 20대 실력파 여 쌤들 | 상기 종목 테라피 과정 수료 | 미모 위주의 영입! | 마인드, 실력 20대 관리!",
+      "reviews": [],
+      "features": [
+        "전원 20대 한국인 관리사",
+        "24시간 운영",
+        "출장비 없음",
+        "건마시티 회원 할인",
+        "홈타이 서비스",
+        "천연 수용성 오일 사용",
+        "관리 시간은 입실부터 퇴실까지",
+        "할인은 현금가 기준"
+      ],
+      "coordinates": {
+        "latitude": 37.5665,
+        "longitude": 126.978
+      },
+      "status": "active",
+      "createdAt": "2025-11-25T17:00:00Z",
+      "updatedAt": "2025-11-25T17:00:00Z",
+      "tags": [
+        "서울",
+        "경기",
+        "인천",
+        "출장마사지",
+        "홈타이",
+        "20대",
+        "건식테라피",
+        "센슈얼스웨디시",
+        "VVIP",
+        "건마시티"
+      ]
     }
   ],
   "metadata": {
-    "totalShops": 8,
-    "lastUpdated": "2025-11-25T12:00:00Z",
+    "totalShops": 13,
+    "lastUpdated": "2025-11-25T17:00:00Z",
     "version": "1.0.0",
     "regions": ["제주", "서울"],
     "types": ["korean"],
     "statusCounts": {
-      "active": 4,
+      "active": 9,
       "inactive": 0,
       "pending": 0
     }
