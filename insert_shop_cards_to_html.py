@@ -824,6 +824,120 @@ def create_shop_card_html(shop):
     
     return card_html
 
+# 정적 header HTML 생성
+def create_static_header_html():
+    """정적 header HTML 생성"""
+    header_html = '''    <header class="header" id="mainHeader" role="banner">
+      <div class="header-content">
+        <div
+          class="logo"
+          onclick="window.location.href='index.html'"
+          style="cursor: pointer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="28" height="28" fill="#ffd700" style="display:inline-block;vertical-align:middle;"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 464c-114.7 0-208-93.3-208-208S141.3 48 256 48s208 93.3 208 208-93.3 208-208 208z"/><path d="M256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128-57.3-128-128-128zm0 208c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80z"/></svg>
+          마사지천국
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px">
+          <div id="userInfoSection" style="display: none">
+            <span
+              id="userName"
+              style="color: white; font-weight: 600; margin-right: 10px"
+            ></span>
+            <button
+              onclick="logout()"
+              type="button"
+              aria-label="로그아웃"
+              style="
+                background: rgba(255, 255, 255, 0.2);
+                color: white;
+                border: 1px solid white;
+                padding: 8px 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 600;
+              "
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"/></svg> 로그아웃
+            </button>
+          </div>
+          <!-- 검색 아이콘 버튼 -->
+          <button
+            class="header-search-btn"
+            id="header-search-btn"
+            type="button"
+            aria-label="검색 창 열기"
+            style="
+              background: rgba(255, 255, 255, 0.2);
+              color: white;
+              border: 1px solid white;
+              padding: 8px 12px;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.3s;
+            "
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+          </button>
+          <!-- 햄버거 메뉴 버튼 -->
+          <button
+            class="hamburger-btn"
+            onclick="toggleSideMenu()"
+            type="button"
+            id="hamburgerToggleBtn"
+            aria-label="전체 메뉴 열기"
+            aria-controls="sideMenu"
+            aria-expanded="false"
+            style="margin-left: 10px"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20" fill="currentColor" style="display:inline-block;vertical-align:middle;"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>'''
+    return header_html
+
+# header-container를 정적 HTML로 교체
+def insert_static_header(content):
+    """header-container를 정적 header HTML로 교체"""
+    # 이미 정적 header가 있는지 확인 (<header class="header" id="mainHeader">)
+    if re.search(r'<header\s+class=["\']header["\'][^>]*id=["\']mainHeader["\']', content, re.IGNORECASE):
+        # 이미 정적 header가 있으면 건너뛰기
+        return content
+    
+    header_html = create_static_header_html()
+    
+    # header-container 패턴 찾기 (여러 형식 지원)
+    # 주석이 포함된 경우도 처리
+    header_patterns = [
+        r'<!--\s*헤더\s*-->[\s\n]*<div\s+id=["\']header-container["\'][^>]*>\s*</div>',  # 주석 + 빈 div (줄바꿈 포함)
+        r'<div\s+id=["\']header-container["\'][^>]*>\s*</div>',  # 빈 div
+        r'<div\s+id=["\']header-container["\'][^>]*>.*?</div>',   # 내용이 있는 div
+    ]
+    
+    for pattern in header_patterns:
+        match = re.search(pattern, content, re.DOTALL | re.IGNORECASE)
+        if match:
+            content = re.sub(pattern, header_html, content, flags=re.DOTALL | re.IGNORECASE, count=1)
+            print(f"  ✅ 정적 header 삽입 완료")
+            return content
+    
+    # 패턴을 찾지 못한 경우 - 더 넓은 범위로 시도
+    # 주석과 div가 별도 줄에 있는 경우
+    wide_pattern = r'<!--\s*헤더\s*-->.*?<div\s+id=["\']header-container["\'][^>]*>\s*</div>'
+    match = re.search(wide_pattern, content, re.DOTALL | re.IGNORECASE)
+    if match:
+        content = re.sub(wide_pattern, header_html, content, flags=re.DOTALL | re.IGNORECASE, count=1)
+        print(f"  ✅ 정적 header 삽입 완료 (넓은 패턴)")
+        return content
+    
+    # 패턴을 찾지 못한 경우
+    print(f"  ⚠️ header-container를 찾을 수 없습니다.")
+    return content
+
 # HTML 파일에 업체 카드 삽입
 def insert_shop_cards_to_html(html_file, shops):
     """HTML 파일의 본문에 업체 카드 삽입"""
@@ -833,6 +947,9 @@ def insert_shop_cards_to_html(html_file, shops):
     # company- 파일은 건너뛰기 (업체 상세 페이지)
     if filename.startswith('company-'):
         return False
+    
+    # 정적 header 삽입
+    content = insert_static_header(content)
     
     # ========== 기존 중복 요소 완전 제거 ==========
     # 0. 모든 중첩된 주석 시작 제거 (/* /* /* 패턴)
@@ -1041,8 +1158,16 @@ def insert_shop_cards_to_html(html_file, shops):
     
     print(f"  매칭된 업체 수: {len(matching_shops)}")
     
+    # header가 삽입되었는지 확인
+    header_inserted = '<header class="header" id="mainHeader"' in content
+    
     if not matching_shops:
         print(f"  ⚠️ 매칭된 업체가 없습니다.")
+        # header가 삽입되었으면 파일 저장
+        if header_inserted:
+            html_file.write_text(content, encoding='utf-8')
+            print(f"  ✅ header만 업데이트 완료")
+            return True
         return False
     
     # showHealingShop 기준으로 정렬 및 랜덤화

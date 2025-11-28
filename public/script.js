@@ -633,6 +633,16 @@ function initializeRegionOptions() {
 
 // 앱 초기화
 function initializeApp() {
+  // header-search-btn 바인딩
+  bindHeaderSearchButton();
+
+  // filter-section과 filter-container를 header 아래에 고정
+  updateFilterStickyPosition();
+
+  // 스크롤 시 filter 위치 업데이트
+  window.addEventListener('scroll', updateFilterStickyPosition);
+  window.addEventListener('resize', updateFilterStickyPosition);
+
   // 지역 선택 옵션 동적 생성
   initializeRegionOptions();
 
@@ -732,25 +742,27 @@ function initializeApp() {
               const isFilterSticky = filterSectionRect.top <= 10;
 
               if (isFilterSticky) {
-                // 필터 섹션이 sticky로 고정되어 있으면: 헤더 높이(80px) + 필터 섹션 높이 - 여백 조정
-                const headerHeight = 80;
-                const topOffset = -60; // 위쪽 여백 줄이기
+                // 필터 섹션이 sticky로 고정되어 있으면: 헤더 높이 + 필터 섹션 높이
+                const header = document.getElementById('mainHeader');
+                const headerHeight = header ? header.offsetHeight : 80;
                 themeFilterSection.style.top = `${
-                  headerHeight + filterSectionHeight + topOffset
+                  headerHeight + filterSectionHeight
                 }px`;
               } else {
-                // 필터 섹션이 sticky가 아니면: 필터 섹션의 viewport 기준 bottom 위치 - 여백 조정
+                // 필터 섹션이 sticky가 아니면: 필터 섹션의 viewport 기준 bottom 위치
                 const filterSectionBottom =
                   filterSectionRect.top + filterSectionHeight;
-                const topOffset = -60; // 위쪽 여백 줄이기
-                themeFilterSection.style.top = `${
-                  filterSectionBottom + topOffset
-                }px`;
+                themeFilterSection.style.top = `${filterSectionBottom}px`;
               }
             }, 10);
           } else {
             // 필터 섹션을 찾을 수 없는 경우 기본값 사용 (여백 조정)
-            themeFilterSection.style.top = '80px';
+            const header = document.getElementById('mainHeader');
+            const headerHeight = header ? header.offsetHeight : 80;
+            const defaultFilterHeight = 60;
+            themeFilterSection.style.top = `${
+              headerHeight + defaultFilterHeight
+            }px`;
           }
         }
 
@@ -2415,7 +2427,14 @@ function updateFooterLinkText() {
     }
   } else {
     // 지역 정보가 없는 경우
-    if (themeNames[currentFilter]) {
+    // spa.html 같은 경우 파일명으로 확인
+    const fileName = window.location.pathname.split('/').pop();
+    if (
+      fileName === 'spa.html' &&
+      (!currentFilter || window.currentFilter === 'spa')
+    ) {
+      titleText = '스파정보';
+    } else if (themeNames[currentFilter]) {
       titleText = `${themeNames[currentFilter]}정보`;
     } else if (currentFilter === 'massage') {
       titleText = '마사지정보';
@@ -3570,6 +3589,7 @@ async function initializeApp() {
     'chinese.html': 'chinese',
     'foot.html': 'foot',
     'waxing.html': 'waxing',
+    'spa.html': 'spa',
   };
 
   if (themeFileMap[themeFileName]) {
@@ -3641,25 +3661,27 @@ function handleTypeFilterClick(e) {
           const isFilterSticky = filterSectionRect.top <= 10;
 
           if (isFilterSticky) {
-            // 필터 섹션이 sticky로 고정되어 있으면: 헤더 높이(80px) + 필터 섹션 높이 - 여백 조정
-            const headerHeight = 80;
-            const topOffset = -85; // 위쪽 여백 줄이기
+            // 필터 섹션이 sticky로 고정되어 있으면: 헤더 높이 + 필터 섹션 높이
+            const header = document.getElementById('mainHeader');
+            const headerHeight = header ? header.offsetHeight : 80;
             themeFilterSection.style.top = `${
-              headerHeight + filterSectionHeight + topOffset
+              headerHeight + filterSectionHeight
             }px`;
           } else {
-            // 필터 섹션이 sticky가 아니면: 필터 섹션의 viewport 기준 bottom 위치 - 여백 조정
+            // 필터 섹션이 sticky가 아니면: 필터 섹션의 viewport 기준 bottom 위치
             const filterSectionBottom =
               filterSectionRect.top + filterSectionHeight;
-            const topOffset = -85; // 위쪽 여백 줄이기
-            themeFilterSection.style.top = `${
-              filterSectionBottom + topOffset
-            }px`;
+            themeFilterSection.style.top = `${filterSectionBottom}px`;
           }
         }, 10);
       } else {
-        // 필터 섹션을 찾을 수 없는 경우 기본값 사용 (여백 조정)
-        themeFilterSection.style.top = '80px';
+        // 필터 섹션을 찾을 수 없는 경우 기본값 사용
+        const header = document.getElementById('mainHeader');
+        const headerHeight = header ? header.offsetHeight : 80;
+        const defaultFilterHeight = 60;
+        themeFilterSection.style.top = `${
+          headerHeight + defaultFilterHeight
+        }px`;
       }
     }
 
@@ -3935,7 +3957,20 @@ function updateResultsTitle() {
       window.location.pathname === '/' ||
       window.location.pathname === '';
 
-    if (currentDistrict) {
+    // spa.html 같은 경우 currentFilter가 설정되지 않았을 수 있으므로 파일명으로 확인
+    const fileName = window.location.pathname.split('/').pop();
+    if (fileName === 'spa.html') {
+      // window.currentFilter도 확인
+      if (window.currentFilter === 'spa' || !currentFilter) {
+        title = '스파';
+      } else if (currentDistrict) {
+        title = `${currentDistrict} 마사지사이트`;
+      } else if (currentRegion) {
+        title = `${currentRegion} 마사지사이트`;
+      } else {
+        title = '스파';
+      }
+    } else if (currentDistrict) {
       title = `${currentDistrict} 마사지사이트`;
     } else if (currentRegion) {
       title = `${currentRegion} 마사지사이트`;
@@ -4547,3 +4582,118 @@ function initializeSearchFunctionality() {
     });
   }
 }
+
+// header-search-btn 클릭 시 검색 박스로 스크롤 및 포커스
+function bindHeaderSearchButton() {
+  const button = document.getElementById('header-search-btn');
+  if (button) {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      scrollToSearchBox();
+    });
+  }
+}
+
+// 검색 박스로 스크롤하는 함수
+function scrollToSearchBox() {
+  const searchBox =
+    document.getElementById('text-search-box') ||
+    document.querySelector('.text-search-box');
+
+  if (searchBox) {
+    // 검색 박스 표시
+    searchBox.style.display =
+      getComputedStyle(searchBox).display === 'none' ? 'flex' : '';
+
+    const searchInput = document.getElementById('shopSearchInput');
+    if (searchInput) {
+      // 포커스 설정 (스크롤 방지 옵션)
+      const focusOptions = { preventScroll: true };
+      try {
+        searchInput.focus(focusOptions);
+      } catch (error) {
+        searchInput.focus();
+      }
+
+      // 커서를 입력 필드 끝으로 이동
+      if (typeof searchInput.setSelectionRange === 'function') {
+        const length = searchInput.value.length;
+        searchInput.setSelectionRange(length, length);
+      }
+    }
+
+    // 검색 박스 위치로 스크롤
+    requestAnimationFrame(() => {
+      const screenWidth = window.innerWidth;
+      let headerHeight = 0;
+      let searchBoxTop = 0;
+
+      if (screenWidth >= 2500) {
+        const header = document.getElementById('mainHeader');
+        if (header) {
+          headerHeight = header.offsetHeight;
+        }
+        const rect = searchBox.getBoundingClientRect();
+        searchBoxTop = rect.top;
+      }
+
+      requestAnimationFrame(() => {
+        if (screenWidth >= 2500) {
+          const targetTop =
+            window.pageYOffset + searchBoxTop - headerHeight - 20;
+          window.scrollTo({
+            top: targetTop > 0 ? targetTop : 0,
+            left: 0,
+            behavior: 'smooth',
+          });
+        } else {
+          searchBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+  }
+}
+
+// filter-section과 filter-container를 header 아래에 고정하는 함수
+function updateFilterStickyPosition() {
+  const header = document.getElementById('mainHeader');
+  const filterSection = document.querySelector('.filter-section');
+  const filterContainer = document.querySelector('.filter-container');
+
+  if (header) {
+    const headerHeight = header.offsetHeight;
+
+    // CSS 변수로 header 높이 설정
+    document.documentElement.style.setProperty(
+      '--header-height',
+      `${headerHeight}px`
+    );
+
+    // filter-section을 header 바로 아래에 고정
+    if (filterSection) {
+      filterSection.style.top = `${headerHeight}px`;
+
+      // filter-section 높이를 CSS 변수로 설정 (theme-filter-section 위치 계산용)
+      const filterSectionHeight = filterSection.offsetHeight;
+      document.documentElement.style.setProperty(
+        '--filter-section-height',
+        `${filterSectionHeight}px`
+      );
+    }
+
+    // filter-container를 header 바로 아래에 고정 (filter-section과 같은 위치)
+    if (filterContainer) {
+      filterContainer.style.top = `${headerHeight}px`;
+    }
+  }
+}
+
+// DOMContentLoaded 시 header-search-btn 바인딩 및 filter 위치 업데이트
+document.addEventListener('DOMContentLoaded', function () {
+  bindHeaderSearchButton();
+  updateFilterStickyPosition();
+
+  // 스크롤 및 리사이즈 시 filter 위치 업데이트
+  window.addEventListener('scroll', updateFilterStickyPosition);
+  window.addEventListener('resize', updateFilterStickyPosition);
+});
