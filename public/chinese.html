@@ -30,6 +30,140 @@
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
+  "name": "massageList",
+  "description": "마사지 업체 목록 - 총 1개 업체",
+  "numberOfItems": 1,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "HealthAndBeautyBusiness",
+        "name": "골드약손",
+        "url": "https://msg1000.com/company-seoul-yangcheon-goldhand.html",
+        "description": "목동마사지-신정동 골드약손입니다. 목동역 8번출구 도보1분 거리에 위치하여 접근성이 뛰어나며, 무료 주차가 가능합니다. 전원 30,40대 한국인&교포 여 쌤들로 구성되어 있으며, 상기 종목 경력 평균 5년 이상의 실력파 관리사들이 건식 & 스포츠, 아로마 & 경락, 스웨디시 코스, 산전 & 산후 관리 등 다양한 프로그램으로 최상의 힐링을 선사합니다. 1인실 & 커플실 완비되어 있습니다.",
+        "telephone": "0507-1859-6748",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "신정동 992-1",
+          "addressLocality": "양천구",
+          "addressRegion": "서울특별시",
+          "addressCountry": "KR"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "bestRating": "5",
+          "reviewCount": 1
+        },
+        "image": [
+          {
+            "@type": "ImageObject",
+            "url": "https://msg1000.com/images/양천구_신정동_골드약손.jpg",
+            "alt": "서울 양천구 신정동 골드약손 마사지샵 - 목동역 8번출구 도보1분, 무료 주차, 1인실 & 커플실"
+          }
+        ],
+        "priceRange": "₩50000-₩150000",
+        "currenciesAccepted": "KRW",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        ],
+        "amenityFeature": [
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "주차 가능"
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "프라이빗 1인실"
+          }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "주요 서비스",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "건식마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "스포츠마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "아로마 마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "경락 마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "스웨디시 마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "산전산후관리 마사지"
+              }
+            }
+          ]
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "바다바람님"
+            },
+            "datePublished": "2025-11-25",
+            "reviewBody": "목동역에서 가까워서 접근성 완벽해요. 골드약손에서 건식 & 스포츠 코스 받았는데 30,40대 한국인 관리사분이 정말 실력이 좋으셔서 어깨와 허리 통증이 많이 나아졌어요. 무료 주차도 가능해서 편리했고, 1인실에서 편안하게 받을 수 있어서 좋았습니다."
+          }
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
   "name": "마사지·출장안마 서비스 전체보기",
   "description": "출장마사지, 스웨디시, 타이마사지, 아로마, 발마사지 등 모든 마사지·안마 서비스",
   "numberOfItems": 8,
@@ -85,7 +219,7 @@
   ]
 }
     </script>
-    </head>
+</head>
   <body>
         <header class="header" id="mainHeader" role="banner">
       <div class="header-content">
@@ -320,8 +454,50 @@
 
       <!-- 업체 목록 -->
       <div class="massage-list" id="massageList">
-        <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
-      </div>
+        <a href="https://www.msg1000.com/company-seoul-yangcheon-goldhand.html" style="text-decoration: none; color: inherit; display: block;">
+            <div class="massage-card" data-type="마사지" data-region="서울" data-show-healing-shop="true" style="cursor: pointer;">
+            <div class="card-image">
+                <img src="https://msg1000.com/images/양천구_신정동_골드약손.jpg" alt="서울 양천구 신정동 골드약손 마사지샵 - 목동역 8번출구 도보1분, 무료 주차, 1인실 &amp; 커플실" class="shop-image" 
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
+                     loading="lazy">
+                <div class="image-overlay">
+                    <div class="shop-type">힐링샵</div>
+                </div>
+            </div>
+            
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="shop-name-container">
+                        <div class="shop-name">신정동 골드약손</div>
+                        <div class="shop-location-info">
+                            <span class="shop-district">양천구 신정동</span>
+                            <div class="location-flag">
+                                <img src="https://www.msg1000.com/images/한국.jpg" alt="한국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                                <img src="https://www.msg1000.com/images/중국.jpg" alt="중국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇨🇳'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-info">
+                    <div class="info-item greeting">
+                        <span>목동마사지-신정동⭐60분 5만 ❥컨디션회복 ❥ 행복.건강 ❥ 건식&amp;스포츠&amp;아로마&amp;스웨디시⭐</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; flex-wrap: nowrap; overflow: hidden;">
+                    <div class="price-container" style="display: flex; align-items: center; gap: 8px; overflow: hidden; width: 100%; flex: 1; min-width: 0;">
+                        <div class="price" style="flex-shrink: 0; white-space: nowrap;"><span class="price-label">최저가</span> 50,000원~</div>
+                    <div class="shop-address-info" style="font-size: 12px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;">
+                        목동역 8번출구 도보1분, (신정동 992-1) 보성팰리스 308호, 무료 주차 | 서울 양천구 신정동 992-1 | 0507-1859-6748
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </a>
+
+        </div>
     </main>
 
     <!-- 푸터 -->
@@ -359,6 +535,47 @@
         </div>
       </div>
     </footer>
+    
+    <div id="detailsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>서비스 필터 전체 보기</h2>
+          <button class="modal-close" onclick="closeModal('detailsModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>서비스 필터 전체 보기</h3>
+            <div class="filter-links-container" style="margin-top: 20px;">
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+        <a href="massage.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            마사지
+        </a>
+        <a href="outcall.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            출장마사지
+        </a>
+        <a href="swedish.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            스웨디시
+        </a>
+        <a href="thai.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            타이마사지
+        </a>
+        <a href="aroma.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            아로마마사지
+        </a>
+        <a href="waxing.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            왁싱
+        </a>
+        <a href="foot.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            발마사지
+        </a>
+        <a href="spa.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            스파
+        </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- 회사소개 모달 -->
     <div class="modal" id="aboutModal">
@@ -425,77 +642,6 @@
       </div>
     </div>
 
-    <div class="modal" id="detailsModal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>중국마사지 상세정보</h2>
-          <button class="modal-close" onclick="closeModal('detailsModal')">
-            &times;
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="info-highlight">
-            <h4>중국마사지 서비스 안내</h4>
-            <ul>
-              <li>전통 중국 의학 기반의 경락 마사지</li>
-              <li>경락과 혈자리를 통한 기 순환 촉진</li>
-              <li>몸의 균형 회복 및 자연 치유력 향상</li>
-              <li>개인 맞춤형 경락 치료</li>
-            </ul>
-          </div>
-
-          <div class="service-categories">
-            <h4>중국마사지 기법</h4>
-            <div class="service-grid">
-              <div class="service-item">
-                <i class="fas fa-hand-paper"></i>
-                <span>지압</span>
-              </div>
-              <div class="service-item">
-                <i class="fas fa-hand-paper"></i>
-                <span>경락마사지</span>
-              </div>
-              <div class="service-item">
-                <i class="fas fa-hand-paper"></i>
-                <span>혈자리자극</span>
-              </div>
-              <div class="service-item">
-                <i class="fas fa-hand-paper"></i>
-                <span>기순환</span>
-              </div>
-              <div class="service-item">
-                <i class="fas fa-hand-paper"></i>
-                <span>음양조화</span>
-              </div>
-              <div class="service-item">
-                <i class="fas fa-hand-paper"></i>
-                <span>오장육부</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="service-details">
-            <div class="service-detail-item">
-              <h5><i class="fas fa-hand-paper"></i> 중국마사지 효과</h5>
-              <p>
-                전통 중국 의학의 경락 이론을 바탕으로 몸의 경락과 혈자리를
-                자극하여 기(氣)의 순환을 촉진합니다. 몸의 균형을 회복하고 자연
-                치유력을 높여 전신의 건강을 증진시킵니다.
-              </p>
-            </div>
-
-            <div class="service-detail-item">
-              <h5><i class="fas fa-user-md"></i> 전문 관리사</h5>
-              <p>
-                중국 전통 의학을 수련한 전문 관리사가 고객님의 체질과 상태에
-                맞는 맞춤형 경락 치료를 제공합니다.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script src="common-components.min.js" defer></script>
     <script src="script.js" defer>
       // 중국마사지 페이지 전용 설정
@@ -508,16 +654,16 @@
         // 결과 제목 업데이트
         const resultsTitle = document.getElementById('resultsTitle');
         if (resultsTitle) {
-          resultsTitle.textContent = '중국마사지 추천 BEST 샵';
+          /* resultsTitle.textContent = '중국마사지 추천 BEST 샵'; */
         }
 
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {
             resultsH2.textContent = ' (2025년 11월 실시간 순위)';
           }// 필터링된 결과 표시
-        if (typeof displayFilteredResults === 'function') {
+        /* if (typeof displayFilteredResults === 'function') {
           displayFilteredResults();
-        }
+        } */
       }, 100);
     </script>
 
