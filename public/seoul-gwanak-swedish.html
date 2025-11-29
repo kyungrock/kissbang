@@ -40,6 +40,121 @@
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
+  "name": "massageList",
+  "description": "마사지 업체 목록 - 총 1개 업체",
+  "numberOfItems": 1,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "HealthAndBeautyBusiness",
+        "name": "라인",
+        "url": "https://msg1000.com/company-seoul-sillim-line.html",
+        "description": "신림마사지 최고의 서비스를 보장하는 라인입니다. 아늑하고 포근한 공간에서 여러분의 몸과 마음을 힐링하시기 바랍니다. 찾아오시는 고객님 한분 한분을 최선을 다하여 관리해드리도록 항상 노력하겠습니다.",
+        "telephone": "0507-1859-6966",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "서울  신림동 신림역 인근",
+          "addressLocality": "관악구",
+          "addressRegion": "서울특별시",
+          "addressCountry": "KR"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "bestRating": "5",
+          "reviewCount": 2
+        },
+        "image": [
+          {
+            "@type": "ImageObject",
+            "url": "https://msg1000.com/images/신림마사지_라인.jpg",
+            "alt": "서울 관악구 신림역 인근 라인 마사지샵 - 신림역 5분거리, 힐링샵, 주차 가능"
+          }
+        ],
+        "priceRange": "₩110000-₩210000",
+        "currenciesAccepted": "KRW",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "11:00",
+            "closes": "03:00"
+          }
+        ],
+        "amenityFeature": [
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "주차 가능"
+          }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "주요 서비스",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "스웨디시 마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "힐링마사지"
+              }
+            }
+          ]
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "서울 관악 고객님"
+            },
+            "datePublished": "2025-11-25",
+            "reviewBody": "신림역에서 가까워서 접근성 좋아요. 라인에서 기본 코스 받았는데 관리사분이 정말 꼼꼼하게 해주셔서 어깨와 허리 통증이 많이 나아졌어요. 힐링샵답게 분위기도 좋고 주차도 가능해서 편리했습니다."
+          },
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "4"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "서울 관악 커피한잔님"
+            },
+            "datePublished": "2025-11-25",
+            "reviewBody": "신림역 5분거리라서 자주 가는 곳이에요. 라인에서 힐링마사지 받았는데 관리사분이 정말 최고의 실력으로 해주셔서 몸이 한결 가벼워졌어요. 아늑하고 포근한 공간에서 편안하게 받을 수 있어서 좋았고, 주차도 가능해서 편리했습니다."
+          }
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
   "name": "서울 관악 마사지·출장안마 서비스 전체보기",
   "description": "서울 관악 지역에서 이용 가능한 출장마사지, 스웨디시, 타이마사지, 아로마, 발마사지 등 모든 마사지·안마 서비스",
   "numberOfItems": 8,
@@ -95,7 +210,7 @@
   ]
 }
     </script>
-    </head>
+</head>
   <body>
         <header class="header" id="mainHeader" role="banner">
       <div class="header-content">
@@ -680,22 +795,19 @@
 
         /* if (typeof displayFilteredResults === 'function') {
           displayFilteredResults();
-        } */ else if (Array.isArray(window.massageShops)) {
+        } */else if (Array.isArray(window.massageShops)) {
           const shops = massageShops.filter(
             (shop) => shop.region === '서울' && shop.district === '관악'
           );
           /* if (typeof displayMassageShops === 'function') {
-            /* displayMassageShops(shops); */
-          } */
-          if (typeof updateResultsHeader === 'function') {
+            /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
             updateResultsHeader('관악 스웨디시 추천 BEST 샵', shops.length);
           }
         }
 
         const resultsTitle = document.getElementById('resultsTitle');
         if (resultsTitle) {
-          /* resultsTitle.textContent = '관악 스웨디시 추천 BEST 샵'; */
-        }
+          /* resultsTitle.textContent = '관악 스웨디시 추천 BEST 샵'; */}
       
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {
