@@ -159,7 +159,7 @@
             },
             "author": {
               "@type": "Person",
-              "name": "서울 양천 바다바람님"
+              "name": "서울 양천 파도소리님"
             },
             "datePublished": "2025-11-25",
             "reviewBody": "목동역에서 가까워서 접근성 완벽해요. 골드약손에서 건식 & 스포츠 코스 받았는데 30,40대 한국인 관리사분이 정말 실력이 좋으셔서 어깨와 허리 통증이 많이 나아졌어요. 무료 주차도 가능해서 편리했고, 1인실에서 편안하게 받을 수 있어서 좋았습니다."
@@ -815,22 +815,19 @@
 
         /* if (typeof displayFilteredResults === 'function') {
           displayFilteredResults();
-        } */ else if (Array.isArray(window.massageShops)) {
+        } */else if (Array.isArray(window.massageShops)) {
           const shops = massageShops.filter(
             (shop) => shop.region === '서울' && shop.district === '양천'
           );
           /* if (typeof displayMassageShops === 'function') {
-            /* displayMassageShops(shops); */
-          } */
-          if (typeof updateResultsHeader === 'function') {
+            /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
             updateResultsHeader('양천 중국마사지 추천 BEST 샵', shops.length);
           }
         }
 
         const resultsTitle = document.getElementById('resultsTitle');
         if (resultsTitle) {
-          /* resultsTitle.textContent = '양천 중국마사지 추천 BEST 샵'; */
-        }
+          /* resultsTitle.textContent = '양천 중국마사지 추천 BEST 샵'; */}
       
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {
