@@ -30,6 +30,122 @@
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
+  "name": "massageList",
+  "description": "마사지 업체 목록 - 총 1개 업체",
+  "numberOfItems": 1,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "HealthAndBeautyBusiness",
+        "name": "예향전통마사지",
+        "url": "https://msg1000.com/company-seoul-gangdong-seongnae-yehyang.html",
+        "description": "성내동마사지 최고의 서비스를 보장하는 예향전통마사지 입니다. 친절하게 관리해 드리겠습니다. 편안하게 연락주세요. ❤ 전원 한국인 관리사로 구성되어 있으며, 상기종목 코스 수료한 실력파 관리사들이 정통 발 관리, 건식(스포츠) 관리, 아로마(오일) 관리, 스페셜 관리 등 다양한 프로그램으로 최상의 힐링을 선사합니다.",
+        "telephone": "0507-1859-6828",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "성내동 416-4",
+          "addressLocality": "강동구",
+          "addressRegion": "서울특별시",
+          "addressCountry": "KR"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "bestRating": "5",
+          "reviewCount": 1
+        },
+        "image": [
+          {
+            "@type": "ImageObject",
+            "url": "https://msg1000.com/images/서울_강동구_성내동_둔촌동역_예향전통마사지.jpg",
+            "alt": "서울 강동구 성내동 예향전통마사지 마사지샵 - 둔촌동역 4번출구 도보1분, 무료 주차, 정통발관리 건식 아로마 전문샵, 45,000원~"
+          }
+        ],
+        "priceRange": "₩45000-₩145000",
+        "currenciesAccepted": "KRW",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "11:00",
+            "closes": "02:00"
+          }
+        ],
+        "amenityFeature": [
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "주차 가능"
+          }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "주요 서비스",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "발마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "건식(스포츠) 관리 마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "아로마 마사지"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "스페셜 관리 마사지"
+              }
+            }
+          ]
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "편안한하루님"
+            },
+            "datePublished": "2025-12-03",
+            "reviewBody": "둔촌동역 4번출구에서 도보 1분거리라 접근하기 너무 편했어요. 예향전통마사지에서 정통 발 관리 A코스 받았는데 전원 한국인 관리사분들이 정말 친절하고 따뜻하게 해주셔서 몸과 마음이 동시에 힐링되었어요. 성내동마사지 최고의 서비스를 보장하는 샵이라 실력이 좋으셔서 만족스러웠고, 건물내 무료 주차도 가능해서 편리했습니다."
+          }
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
   "name": "마사지·출장안마 서비스 전체보기",
   "description": "출장마사지, 스웨디시, 타이마사지, 아로마, 발마사지 등 모든 마사지·안마 서비스",
   "numberOfItems": 8,
@@ -85,7 +201,7 @@
   ]
 }
     </script>
-    </head>
+</head>
   <body>
         <header class="header" id="mainHeader" role="banner">
       <div class="header-content">
@@ -319,8 +435,50 @@
 
       <!-- 업체 목록 -->
       <div class="massage-list" id="massageList">
-        <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
-      </div>
+        <a href="https://www.msg1000.com/company-seoul-gangdong-seongnae-yehyang.html" style="text-decoration: none; color: inherit; display: block;">
+            <div class="massage-card" data-type="힐링샵" data-region="서울" data-show-healing-shop="false" style="cursor: pointer;">
+            <div class="card-image">
+                <img src="https://msg1000.com/images/서울_강동구_성내동_둔촌동역_예향전통마사지.jpg" alt="서울 강동구 성내동 예향전통마사지 마사지샵 - 둔촌동역 4번출구 도보1분, 무료 주차, 정통발관리 건식 아로마 전문샵, 45,000원~" class="shop-image" 
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
+                     loading="lazy">
+                <div class="image-overlay">
+                    
+                </div>
+            </div>
+            
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="shop-name-container">
+                        <div class="shop-name">강동 예향전통마사지</div>
+                        <div class="shop-location-info">
+                            <span class="shop-district">강동구 강동</span>
+                            <div class="location-flag">
+                                <img src="https://www.msg1000.com/images/한국.jpg" alt="한국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                                <img src="https://www.msg1000.com/images/중국.jpg" alt="중국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇨🇳'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-info">
+                    <div class="info-item greeting">
+                        <span>둔촌동마사지 ✿✿ 스트레스를 날려버리고 몸의 힐링을 채워주세요. ❥❥❥ 건식 관리! 아로마 오일</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; flex-wrap: nowrap; overflow: hidden;">
+                    <div class="price-container" style="display: flex; align-items: center; gap: 8px; overflow: hidden; width: 100%; flex: 1; min-width: 0;">
+                        <div class="price" style="flex-shrink: 0; white-space: nowrap;"><span class="price-label">최저가</span> 45,000원~</div>
+                    <div class="shop-address-info" style="font-size: 12px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;">
+                        둔촌동역 4번출구 도보 1분거리 2층, 무료 주차 (건물내 주차) | 서울 강동구 성내동 416-4 | 0507-1859-6828
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </a>
+
+        </div>
     </main>
 
     <!-- 푸터 -->
@@ -358,6 +516,47 @@
         </div>
       </div>
     </footer>
+    
+    <div id="detailsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>서비스 필터 전체 보기</h2>
+          <button class="modal-close" onclick="closeModal('detailsModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>서비스 필터 전체 보기</h3>
+            <div class="filter-links-container" style="margin-top: 20px;">
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+        <a href="massage.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            마사지
+        </a>
+        <a href="outcall.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            출장마사지
+        </a>
+        <a href="swedish.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            스웨디시
+        </a>
+        <a href="thai.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            타이마사지
+        </a>
+        <a href="aroma.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            아로마마사지
+        </a>
+        <a href="waxing.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            왁싱
+        </a>
+        <a href="chinese.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            중국마사지
+        </a>
+        <a href="spa.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            스파
+        </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- 회사소개 모달 -->
     <div class="modal" id="aboutModal">
@@ -424,77 +623,6 @@
       </div>
     </div>
 
-    <div class="modal" id="detailsModal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>발마사지 상세정보</h2>
-          <button class="modal-close" onclick="closeModal('detailsModal')">
-            &times;
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="info-highlight">
-            <h4>발마사지 서비스 안내</h4>
-            <ul>
-              <li>발 반사구를 통한 전신 치료</li>
-              <li>혈액순환 촉진 및 피로 해소</li>
-              <li>스트레스 완화 및 면역력 향상</li>
-              <li>편안하고 깊은 휴식 제공</li>
-            </ul>
-          </div>
-
-          <div class="service-categories">
-            <h4>발마사지 종류</h4>
-            <div class="service-grid">
-              <div class="service-item">
-                <i class="fas fa-shoe-prints"></i>
-                <span>기본 발마사지</span>
-              </div>
-              <div class="service-item">
-                <i class="fas fa-shoe-prints"></i>
-                <span>반사구 마사지</span>
-              </div>
-              <div class="service-item">
-                <i class="fas fa-shoe-prints"></i>
-                <span>아로마 발마사지</span>
-              </div>
-              <div class="service-item">
-                <i class="fas fa-shoe-prints"></i>
-                <span>핫스톤 발마사지</span>
-              </div>
-              <div class="service-item">
-                <i class="fas fa-shoe-prints"></i>
-                <span>족욕 + 발마사지</span>
-              </div>
-              <div class="service-item">
-                <i class="fas fa-shoe-prints"></i>
-                <span>전신 + 발마사지</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="service-details">
-            <div class="service-detail-item">
-              <h5><i class="fas fa-shoe-prints"></i> 발마사지 효과</h5>
-              <p>
-                발의 반사구를 자극하여 전신의 혈액순환을 촉진하고 피로를
-                해소합니다. 발만 마사지해도 전신의 장기와 연결된 반사구를 통해
-                전신의 건강을 증진시킬 수 있습니다.
-              </p>
-            </div>
-
-            <div class="service-detail-item">
-              <h5><i class="fas fa-user-md"></i> 전문 관리사</h5>
-              <p>
-                발 반사구 전문 지식을 보유한 관리사가 고객님의 발 상태와 전신
-                건강을 고려한 맞춤형 발마사지를 제공합니다.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script src="common-components.min.js" defer></script>
     <script src="script.js" defer>
       // 발마사지 페이지 전용 설정
@@ -507,17 +635,15 @@
         // 결과 제목 업데이트
         const resultsTitle = document.getElementById('resultsTitle');
         if (resultsTitle) {
-          resultsTitle.textContent = '발마사지 추천 BEST 샵';
-        }
+          /* resultsTitle.textContent = '발마사지 추천 BEST 샵'; */}
 
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {
             resultsH2.textContent = ' (2025년 12월 실시간 순위)';
           }// 필터링된 결과 표시
-        if (typeof displayFilteredResults === 'function') {
+        /* if (typeof displayFilteredResults === 'function') {
           displayFilteredResults();
-        }
-      }, 100);
+        } */}, 100);
     </script>
 
     <!-- 햄버거 메뉴 -->

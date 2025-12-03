@@ -433,13 +433,13 @@
       </div>
       <div id="massageList" class="massage-list">
         <a href="https://www.msg1000.com/company-seoul-gangbuk-bundong-some-therapy.html" style="text-decoration: none; color: inherit; display: block;">
-            <div class="massage-card" data-type="힐링샵" data-region="서울" data-show-healing-shop="false" style="cursor: pointer;">
+            <div class="massage-card" data-type="힐링샵" data-region="서울" data-show-healing-shop="true" style="cursor: pointer;">
             <div class="card-image">
                 <img src="https://msg1000.com/images/강북_번동_수유역_썸테라피.jpg" alt="서울 강북구 번동 썸 테라피 마사지샵 - 수유역 4번출구 도보3분, 타이마사지, 아로마마사지, 스웨디시마사지 전문샵, 40,000원~" class="shop-image" 
                      onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
                      loading="lazy">
                 <div class="image-overlay">
-                    
+                    <div class="shop-type">힐링샵</div>
                 </div>
             </div>
             
@@ -789,22 +789,19 @@
 
         /* if (typeof displayFilteredResults === 'function') {
           displayFilteredResults();
-        } */ else if (Array.isArray(window.massageShops)) {
+        } */else if (Array.isArray(window.massageShops)) {
           const shops = massageShops.filter(
             (shop) => shop.region === '서울' && shop.district === '강북'
           );
           /* if (typeof displayMassageShops === 'function') {
-            /* displayMassageShops(shops); */
-          } */
-          if (typeof updateResultsHeader === 'function') {
+            /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
             updateResultsHeader('강북 스웨디시 추천 BEST 샵', shops.length);
           }
         }
 
         const resultsTitle = document.getElementById('resultsTitle');
         if (resultsTitle) {
-          /* resultsTitle.textContent = '강북 스웨디시 추천 BEST 샵'; */
-        }
+          /* resultsTitle.textContent = '강북 스웨디시 추천 BEST 샵'; */}
       
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {
