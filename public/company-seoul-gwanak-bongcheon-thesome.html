@@ -76,119 +76,154 @@
 
     <!-- 구조화된 데이터 (Local Business Schema) -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "name": "더썸테라피",
+  "url": "https://msg1000.com/company-seoul-gwanak-bongcheon-thesome.html",
+  "description": "서울대입구마사지 최고의 서비스를 보장하는 1인샵 더썸테라피 입니다. 최선을 다해 힐링을 도와드리겠습니다. 꼼꼼하게 관리를 해드립니다. 고객님을 더썸으로 모시겠습니다. 전원 한국인 여 관리사, 상기종목 코스 수료한 전문가가 감성, 스웨디시, 로미, 건식, 아로마 등 다양한 프로그램으로 스웨디시+로미+림프+오일테라피+바디스크럽 등 최상의 힐링 서비스를 제공합니다.",
+  "telephone": "0507-1859-6541",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "봉천동 856-5",
+    "addressLocality": "관악구",
+    "addressRegion": "서울특별시",
+    "addressCountry": "KR"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "bestRating": "5",
+    "reviewCount": 2
+  },
+  "image": [
+    {
+      "@type": "ImageObject",
+      "url": "https://msg1000.com/images/서울_관악_봉천동_서울대입구역_더썸테라피.jpg",
+      "alt": "서울 관악구 봉천동 더썸테라피 마사지샵 - 서울대입구역 2번출구, 무료 주차, 스웨디시·로미"
+    }
+  ],
+  "priceRange": "₩110000-₩210000",
+  "currenciesAccepted": "KRW",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "11:00",
+      "closes": "03:00"
+    }
+  ],
+  "amenityFeature": [
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "주차 가능"
+    },
+    {
+      "@type": "LocationFeatureSpecification",
+      "name": "프라이빗 1인실"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "주요 서비스",
+    "itemListElement": [
       {
-        "@context": "https://schema.org",
-        "@type": "HealthAndBeautyBusiness",
-        "name": "더썸테라피",
-        "url": "https://msg1000.com/company-seoul-gwanak-bongcheon-thesome.html",
-        "description": "서울대입구마사지 최고의 서비스를 보장하는 1인샵 더썸테라피 입니다. 최선을 다해 힐링을 도와드리겠습니다. 꼼꼼하게 관리를 해드립니다. 고객님을 더썸으로 모시겠습니다. 전원 한국인 여 관리사, 상기종목 코스 수료한 전문가가 감성, 스웨디시, 로미, 건식, 아로마 등 다양한 프로그램으로 스웨디시+로미+림프+오일테라피+바디스크럽 등 최상의 힐링 서비스를 제공합니다.",
-        "telephone": "0507-1859-6541",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "관악로 164 (봉천동 856-5)",
-          "addressLocality": "관악구",
-          "addressRegion": "서울특별시",
-          "addressCountry": "KR"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5",
-          "bestRating": "5",
-          "reviewCount": 2
-        },
-        "image": [
-          {
-            "@type": "ImageObject",
-            "url": "https://msg1000.com/images/서울_관악_봉천동_서울대입구역_더썸테라피.jpg",
-            "alt": "서울 관악구 봉천동 더썸테라피 마사지샵 - 서울대입구역 2번출구, 무료 주차, 스웨디시·로미, 110,000원~"
-          }
-        ],
-        "priceRange": "₩110000-₩170000",
-        "currenciesAccepted": "KRW",
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday"
-            ],
-            "opens": "11:00",
-            "closes": "03:00"
-          }
-        ],
-        "amenityFeature": [
-          {
-            "@type": "LocationFeatureSpecification",
-            "name": "무료 주차 (2시간 주차권 지급)"
-          },
-          {
-            "@type": "LocationFeatureSpecification",
-            "name": "주간 할인 이벤트"
-          }
-        ],
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "주요 서비스",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "감성스웨디시"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "로미로미"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "아로마"
-              }
-            }
-          ]
-        },
-        "review": [
-          {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": "5"
-            },
-            "author": {
-              "@type": "Person",
-              "name": "1인샵꼼꼼케어님"
-            },
-            "datePublished": "2025-12-05",
-            "reviewBody": "C코스 120분 주간할인으로 17만원 받았는데요! 스웨디시+로미+림프+오일테라피+바디스크럽 풀코스라 진짜 알차요~ 1인샵이라 꼼꼼하게 관리해주시고, \"고객님을 더썸으로 모시겠습니다\"는 말 그대로 정성 가득 느껴졌어요👍 서울대입구역 2번출구에 2시간 주차권 지급이라 주차 걱정 없어요!"
-          },
-          {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": "5"
-            },
-            "author": {
-              "@type": "Person",
-              "name": "주간할인1만원님"
-            },
-            "datePublished": "2025-12-05",
-            "reviewBody": "B코스 90분 받았습니다^^ 주간 할인 이벤트(오전11시~저녁7시) 1만원 할인 받아서 13만원 냈어요♥ 감성/스웨디시/로미/건식/아로마 다양하게 받을 수 있는데 전원 한국인 여 관리사라 편하고, 상기종목 코스 수료해서 실력 확실해요. 새벽3시까지 영업이라 퇴근 후에도 OK!"
-          }
-        ]
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "감성 마사지"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "스웨디시 마사지"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "로미로미"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "건식 마사지"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "아로마 마사지"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "림프 마사지"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "오일테라피 마사지"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "바디스크럽 마사지"
+        }
       }
+    ]
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "1인샵꼼꼼케어님"
+      },
+      "datePublished": "2025-12-05",
+      "reviewBody": "C코스 120분 주간할인으로 17만원 받았는데요! 스웨디시+로미+림프+오일테라피+바디스크럽 풀코스라 진짜 알차요~ 1인샵이라 꼼꼼하게 관리해주시고, \"고객님을 더썸으로 모시겠습니다\"는 말 그대로 정성 가득 느껴졌어요👍 서울대입구역 2번출구에 2시간 주차권 지급이라 주차 걱정 없어요!"
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "주간할인1만원님"
+      },
+      "datePublished": "2025-12-05",
+      "reviewBody": "B코스 90분 받았습니다^^ 주간 할인 이벤트(오전11시~저녁7시) 1만원 할인 받아서 13만원 냈어요♥ 감성/스웨디시/로미/건식/아로마 다양하게 받을 수 있는데 전원 한국인 여 관리사라 편하고, 상기종목 코스 수료해서 실력 확실해요. 새벽3시까지 영업이라 퇴근 후에도 OK!"
+    }
+  ]
+}
     </script>
-  </head>
+    </head>
   <body>
     <!-- 헤더 -->
     <header class="header">
