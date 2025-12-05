@@ -794,14 +794,12 @@
 
  /* if (typeof displayFilteredResults === 'function') {
  displayFilteredResults();
- } */ else if (Array.isArray(window.massageShops)) {
+ } */else if (Array.isArray(window.massageShops)) {
  const shops = massageShops.filter(
  (shop) => shop.region === '경기' && shop.district === '고양' && shop.type === 'massage'
  );
  /* if (typeof displayMassageShops === 'function') {
- /* displayMassageShops(shops); */
- } */
- if (typeof updateResultsHeader === 'function') {
+ /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
  updateResultsHeader('고양 마사지 추천 BEST 샵', shops.length);
  }
  }
@@ -809,8 +807,7 @@
  // resultsTitle을 "경기 고양 마사지 업체"로 업데이트
  const resultsTitle = document.getElementById('resultsTitle');
  if (resultsTitle) {
- /* resultsTitle.textContent = '고양 마사지 추천 BEST 샵'; */
- }
+ /* resultsTitle.textContent = '고양 마사지 추천 BEST 샵'; */}
  
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {
