@@ -43,6 +43,114 @@
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
+  "name": "massageList",
+  "description": "마사지 업체 목록 - 총 1개 업체",
+  "numberOfItems": 1,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "HealthAndBeautyBusiness",
+        "name": "더샵스웨디시",
+        "url": "https://msg1000.com/company-gyeonggi-anyang-gwanyang-deshops.html",
+        "description": "평촌마사지 최고의 서비스를 보장하는 더샵 스웨디시 입니다. 아늑하고 포근한 공간에서 여러분의 몸과 마음을 힐링하시기 바랍니다. 평촌역 부근",
+        "telephone": "0507-1859-7164",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "관양동 1601-3",
+          "addressLocality": "안양시",
+          "addressRegion": "경기도",
+          "addressCountry": "KR"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "bestRating": "5",
+          "reviewCount": 2
+        },
+        "image": [
+          {
+            "@type": "ImageObject",
+            "url": "https://msg1000.com/images/경기_안양_관양동_평촌역_더샵스웨디시.jpg",
+            "alt": "경기 안양시 동안구 관양동 더샵스웨디시 마사지샵 - 평촌역 2번출구, 스웨디시, 프라이빗 1:1 관리"
+          }
+        ],
+        "priceRange": "₩100000-₩200000",
+        "currenciesAccepted": "KRW",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "12:00",
+            "closes": "04:00"
+          }
+        ],
+        "amenityFeature": [
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "주차 가능"
+          }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "주요 서비스",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "스웨디시 마사지"
+              }
+            }
+          ]
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "경기 안양 프라이빗만족님"
+            },
+            "datePublished": "2025-12-08",
+            "reviewBody": "평촌역 1번 출구에서 도보로 2분 거리라 접근하기 편했어요. A 주간 코스 70분 10만원 받았는데, 1:1 프라이빗한 관리가 정말 좋았습니다. 룸별 1인1실 샤워실이 있어서 편안하게 이용할 수 있었어요."
+          },
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "경기 안양 아늑포근힐링님"
+            },
+            "datePublished": "2025-12-08",
+            "reviewBody": "B 야간 코스 60분 11만원 받았습니다. 아늑하고 포근한 공간에서 몸과 마음을 힐링할 수 있어서 만족스러웠어요. 관리사분들이 한분 한분 최선을 다해서 관리해주신다는 게 느껴졌습니다. 20대,30대 관리사분들이라 분위기도 좋고, 힐링샵이라 편안하게 받을 수 있었습니다. 유료 주차는 문의해서 이용했는데, 위치도 찾기 쉬웠어요."
+          }
+        ]
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
   "name": "경기 안양 마사지·출장안마 서비스 전체보기",
   "description": "경기 안양 지역에서 이용 가능한 출장마사지, 스웨디시, 타이마사지, 아로마, 발마사지 등 모든 마사지·안마 서비스",
   "numberOfItems": 8,
@@ -98,7 +206,7 @@
   ]
 }
     </script>
-    </head>
+</head>
  <body>
      <header class="header" id="mainHeader" role="banner">
       <div class="header-content">
@@ -327,8 +435,49 @@
  
  </div>
  <div id="massageList" class="massage-list">
- <!-- 업체 카드들이 여기에 동적으로 생성됩니다 -->
- </div>
+        <a href="https://www.msg1000.com/company-gyeonggi-anyang-gwanyang-deshops.html" style="text-decoration: none; color: inherit; display: block;">
+            <div class="massage-card" data-type="마사지" data-region="경기" data-show-healing-shop="false" style="cursor: pointer;">
+            <div class="card-image">
+                <img src="https://msg1000.com/images/경기_안양_관양동_평촌역_더샵스웨디시.jpg" alt="경기 안양시 동안구 관양동 더샵스웨디시 마사지샵 - 평촌역 2번출구, 스웨디시, 프라이빗 1:1 관리" class="shop-image" 
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
+                     loading="lazy">
+                <div class="image-overlay">
+                    
+                </div>
+            </div>
+            
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="shop-name-container">
+                        <div class="shop-name">관양동 더샵스웨디시</div>
+                        <div class="shop-location-info">
+                            <span class="shop-district">동안구 관양동</span>
+                            <div class="location-flag">
+                                <img src="https://www.msg1000.com/images/한국.jpg" alt="한국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-info">
+                    <div class="info-item greeting">
+                        <span>평촌역 부근</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; flex-wrap: nowrap; overflow: hidden;">
+                    <div class="price-container" style="display: flex; align-items: center; gap: 8px; overflow: hidden; width: 100%; flex: 1; min-width: 0;">
+                        <div class="price" style="flex-shrink: 0; white-space: nowrap;"><span class="price-label">최저가</span> 100,000원~</div>
+                    <div class="shop-address-info" style="font-size: 12px; color: #666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;">
+                        평촌역 1번 출구 2분, 경기 안양시 동안구 관양동 1601-3, 유료 주차 [문의주세요] | 경기 안양시 동안구 관양동 1601-3 | 0507-1859-7164
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </a>
+
+        </div>
  </main>
 
  <footer class="footer">
@@ -365,6 +514,47 @@
  </div>
  </div>
  </footer>
+    
+    <div id="detailsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>서비스 필터 전체 보기</h2>
+          <button class="modal-close" onclick="closeModal('detailsModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="terms-section">
+            <h3>서비스 필터 전체 보기</h3>
+            <div class="filter-links-container" style="margin-top: 20px;">
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+        <a href="gyeonggi-anyang-outcall.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            경기 안양 출장마사지
+        </a>
+        <a href="gyeonggi-anyang-swedish.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            경기 안양 스웨디시
+        </a>
+        <a href="gyeonggi-anyang-thai.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            경기 안양 타이마사지
+        </a>
+        <a href="gyeonggi-anyang-aroma.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            경기 안양 아로마마사지
+        </a>
+        <a href="gyeonggi-anyang-waxing.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            경기 안양 왁싱
+        </a>
+        <a href="gyeonggi-anyang-chinese.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            경기 안양 중국마사지
+        </a>
+        <a href="gyeonggi-anyang-foot.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            경기 안양 발마사지
+        </a>
+        <a href="gyeonggi-anyang-spa.html" style="display: block; padding: 12px; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; transition: background 0.2s;">
+            경기 안양 스파
+        </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
  <!-- 햄버거 메뉴 -->
  <div id="hamburger-menu-container"></div>
@@ -564,64 +754,6 @@
  </div>
  </div>
 
- <div id="detailsModal" class="modal">
- <div class="modal-content">
- <div class="modal-header">
- <h2>상세정보</h2>
- <button class="modal-close" onclick="closeModal('detailsModal')">
- &times;
- </button>
- </div>
- <div class="modal-body">
- <div class="terms-section">
- <h3>마사지사이트 마사지천국 - 전국 마사지 예약의 중심</h3>
- <p>
- 마사지천국는 최고의 <strong>마사지사이트</strong>로,
- <strong>서울마사지사이트</strong>,
- <strong>경기마사지사이트</strong>, 경기 등 전국 마사지 업체를
- 한눈에 볼 수 있는 예약 플랫폼입니다.
- <strong>아로마마사지</strong>, <strong>타이마사지</strong>,
- <strong>스웨디시</strong>, <strong>1인샵</strong>,
- <strong>왁싱</strong> 등 다양한 마사지 서비스를 지역별로 간편하게
- 예약할 수 있습니다.
- </p>
- <p>
- 마사지천국는 고객의 편의를 위해 엄선된 업체를 제공하며, 최저가
- 보장과 실시간 예약 시스템으로 편리함을 더합니다.
- <strong>서울마사지사이트</strong>에서는 프리미엄
- <strong>스웨디시</strong>와 <strong>아로마마사지</strong>를,
- <strong>경기마사지사이트</strong>에서는 전통
- <strong>타이마사지</strong>와 <strong>왁싱</strong> 서비스를
- 만나보세요. 영남권의 중심인 <strong>경기마사지사이트</strong>에서
- 특별한 <strong>1인샵</strong> 경험을 즐길 수 있습니다.
- </p>
- <p>
- 지금 마사지천국 <strong>마사지사이트</strong>에서 당신에게 맞는
- 마사지 서비스를 찾아 지역에 맞게 예약하세요.
- </p>
- </div>
-
- <div class="terms-section">
- <h3>휴식과 힐링</h3>
- <p>
- 바쁜 일상 속에서 <strong>마사지</strong>는 몸과 마음을 동시에
- 회복시키는 최적의 방법입니다. <strong>마사지사이트</strong>를 통해
- 서울, 경기, 경기 등 지역별 <strong>아로마마사지</strong>와
- <strong>스웨디시</strong>를 찾아 편안한 휴식을 즐겨보세요.
- </p>
- </div>
-
- <div class="terms-section">
- <h3>이용 안내</h3>
- <p>
- 본 서비스는 정보 제공 목적으로만 사용되며, 실제 서비스 이용 시에는
- 각 업소의 이용약관을 확인하시기 바랍니다.
- </p>
- </div>
- </div>
- </div>
- </div>
-
  <script src="common-components.min.js" defer></script>
  <script src="script.js" defer>
  document.addEventListener('DOMContentLoaded', function () {
@@ -660,15 +792,15 @@
  }
  window.currentFilter = 'massage';
 
- if (typeof displayFilteredResults === 'function') {
+ /* if (typeof displayFilteredResults === 'function') {
  displayFilteredResults();
- } else if (Array.isArray(window.massageShops)) {
+ } */ else if (Array.isArray(window.massageShops)) {
  const shops = massageShops.filter(
  (shop) => shop.region === '경기' && shop.district === '안양' && shop.type === 'massage'
  );
- if (typeof displayMassageShops === 'function') {
- displayMassageShops(shops);
- }
+ /* if (typeof displayMassageShops === 'function') {
+ /* displayMassageShops(shops); */
+ } */
  if (typeof updateResultsHeader === 'function') {
  updateResultsHeader('안양 마사지 추천 BEST 샵', shops.length);
  }
@@ -677,7 +809,7 @@
  // resultsTitle을 "경기 안양 마사지 업체"로 업데이트
  const resultsTitle = document.getElementById('resultsTitle');
  if (resultsTitle) {
- resultsTitle.textContent = '안양 마사지 추천 BEST 샵';
+ /* resultsTitle.textContent = '안양 마사지 추천 BEST 샵'; */
  }
  
           const resultsH2 = document.querySelector('h2.visually-hidden');
