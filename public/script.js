@@ -2153,7 +2153,7 @@ function sortStaticCards() {
     return;
   }
 
-  // 초기에 카드를 숨김 (렌더링 전 정렬을 위해)
+  // 초기에 카드를 숨김 (렌더링 전 정렬을 위해) - CSS에서 이미 숨김 처리됨
   massageList.style.opacity = '0';
   massageList.style.visibility = 'hidden';
 
@@ -2228,6 +2228,7 @@ function sortStaticCards() {
   staticCardsSorted = true;
 
   // 정렬 완료 후 카드 표시 (렌더링 전 정렬 완료)
+  massageList.classList.add('sorted');
   massageList.style.opacity = '1';
   massageList.style.visibility = 'visible';
 
@@ -4407,26 +4408,43 @@ function initStaticCardSorting() {
   }
 }
 
-// 즉시 실행 (스크립트 로드 시점에 실행)
+// 즉시 실행 (스크립트 로드 시점에 실행) - requestAnimationFrame으로 최대한 빠르게
 (function () {
-  // DOM이 이미 로드되었는지 확인
-  if (document.readyState === 'loading') {
-    // DOM이 아직 로드 중이면 DOMContentLoaded 대기
-    document.addEventListener('DOMContentLoaded', function () {
-      // 즉시 실행 (지연 없이)
+  function runSorting() {
+    if (document.readyState === 'loading') {
+      // DOM이 아직 로드 중이면 DOMContentLoaded 대기
+      document.addEventListener('DOMContentLoaded', function () {
+        // requestAnimationFrame으로 즉시 실행 (지연 없이)
+        requestAnimationFrame(function() {
+          initStaticCardSorting();
+        });
+      });
+    } else {
+      // DOM이 이미 로드되었으면 requestAnimationFrame으로 즉시 실행
+      requestAnimationFrame(function() {
+        initStaticCardSorting();
+      });
+    }
+  }
+  
+  // 스크립트 로드 즉시 실행 시도
+  runSorting();
+  
+  // DOMContentLoaded가 이미 발생했을 수 있으므로 즉시 실행도 시도
+  if (document.readyState !== 'loading') {
+    requestAnimationFrame(function() {
       initStaticCardSorting();
     });
-  } else {
-    // DOM이 이미 로드되었으면 즉시 실행
-    initStaticCardSorting();
   }
 })();
 
-// DOMContentLoaded에서도 실행 (안전장치)
+// DOMContentLoaded에서도 실행 (안전장치) - requestAnimationFrame 사용
 document.addEventListener('DOMContentLoaded', function () {
   // 이미 정렬되었으면 건너뛰기
   if (!staticCardsSorted) {
-    initStaticCardSorting();
+    requestAnimationFrame(function() {
+      initStaticCardSorting();
+    });
   }
 });
 

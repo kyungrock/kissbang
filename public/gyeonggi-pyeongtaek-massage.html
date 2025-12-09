@@ -12,9 +12,9 @@
      
     <link rel="canonical" href="https://msg1000.com/gyeonggi-pyeongtaek-massage.html" />
     <meta name="author" content="마사지천국" />
- <link rel="preload" href="style.min.css" as="style" />
+ <link rel="preload" href="style.css" as="style" />
 
- <link rel="stylesheet" href="style.min.css" />
+ <link rel="stylesheet" href="style.css" />
  
  <!-- Gmarket Sans 폰트 -->
  <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -467,7 +467,7 @@
                         <div class="shop-location-info">
                             <span class="shop-district">평택시 서정동</span>
                             <div class="location-flag">
-                                
+                                <img src="https://www.msg1000.com/images/태국.jpg" alt="태국 국기" class="flag-image" onerror="this.onerror=null; this.innerHTML='🇹🇭'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
                             </div>
                         </div>
                     </div>
@@ -808,14 +808,12 @@
 
  /* if (typeof displayFilteredResults === 'function') {
  displayFilteredResults();
- } */ else if (Array.isArray(window.massageShops)) {
+ } */else if (Array.isArray(window.massageShops)) {
  const shops = massageShops.filter(
  (shop) => shop.region === '경기' && shop.district === '평택' && shop.type === 'massage'
  );
  /* if (typeof displayMassageShops === 'function') {
- /* displayMassageShops(shops); */
- } */
- if (typeof updateResultsHeader === 'function') {
+ /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
  updateResultsHeader('평택 마사지 추천 BEST 샵', shops.length);
  }
  }
@@ -823,8 +821,7 @@
  // resultsTitle을 "경기 평택 마사지 업체"로 업데이트
  const resultsTitle = document.getElementById('resultsTitle');
  if (resultsTitle) {
- /* resultsTitle.textContent = '평택 마사지 추천 BEST 샵'; */
- }
+ /* resultsTitle.textContent = '평택 마사지 추천 BEST 샵'; */}
  
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {
@@ -841,3 +838,4 @@
  <div id="hamburger-menu-container"></div>
  </body>
 </html>
+/html>

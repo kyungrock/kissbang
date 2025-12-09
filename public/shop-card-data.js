@@ -368,8 +368,7 @@ window.shopCardData = [
     operatingHours: '24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-banana-outcall.html',
     showHealingShop: true,
-    greeting:
-      '20대 힐링관리 ⭐ 감미로운 손길로 감성힐링이 되는 최고의 출장샵입니다. ⭐',
+    greeting: '20대 힐링관리 ⭐ 감미로운 손길로 감성힐링이 되는 최고의 출장샵',
     reviews: [
       {
         author: '만족고객님',
@@ -407,7 +406,7 @@ window.shopCardData = [
     operatingHours: '오전 11시 ~ 새벽 3시 (폰이 꺼진 경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-daechi-amanswedish.html',
     showHealingShop: false,
-    greeting: '스웨디시 ⭐ 고객님의 만족을 위해 최선을 다해 모시겠습니다. ⭐',
+    greeting: '스웨디시 ⭐ 고객님의 만족을 위해 최선을 다해 모시겠습니다',
     reviews: [
       {
         author: '정기방문님',
@@ -446,8 +445,7 @@ window.shopCardData = [
     operatingHours: '24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-instapretty-outcall.html',
     showHealingShop: true,
-    greeting:
-      '출장마사지 ⭐ 20대 관리사 한국인!!! 편안하게 원하는 장소에서 부드러운 손길 마사지로 관리해 드리겠습니다 ⭐',
+    greeting: '출장마사지 ⭐ 20대 관리사 한국인!!! 편안하게 원하는 장소 문의',
     reviews: [
       {
         author: '히든게스트님',
@@ -486,8 +484,7 @@ window.shopCardData = [
     operatingHours: '24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-korean-pretty-outcall.html',
     showHealingShop: true,
-    greeting:
-      '20대 힐링관리 ⭐ 부드러운 감성 출장마사지 힐링 가득한 손길을 느껴보세요.⭐',
+    greeting: '20대 힐링관리 ⭐ 부드러운 감성 출장마사지 힐링 가득한 손길',
     reviews: [
       {
         author: '홈케어러버님',
@@ -526,8 +523,7 @@ window.shopCardData = [
     operatingHours: '24시간 365일 연중무휴',
     file: 'company-seoul-24hour-korean-japanese-outcall.html',
     showHealingShop: true,
-    greeting:
-      '20대~30대 힐링 출장홈타이 ⭐ 따뜻한 손길로 고객님의 힐링에 최선을 다하겠습니다. ^^⭐',
+    greeting: '20대~30대 힐링 출장홈타이 ⭐ 따뜻한 손길로 고객님의 힐링',
     reviews: [
       {
         author: '하루쉼표님',
@@ -547,7 +543,7 @@ window.shopCardData = [
   },
   {
     id: 12,
-    name: '20대 여신 한국인홈케어',
+    name: '20대 여신 한국인',
     type: '출장마사지',
     country: 'korea',
     region: '서울,경기,인천',
@@ -606,8 +602,7 @@ window.shopCardData = [
     operatingHours: '24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-tpanty-callgirl-outcall.html',
     showHealingShop: true,
-    greeting:
-      '출장마사지 ⭐ 짜릿한 손맛 ♥ 전원 20대 미녀 관리사 ♥ 최선을 다하겠습니다 !! ⭐',
+    greeting: '출장마사지 ⭐ 짜릿한 손맛 ♥ 전원 20대 미녀 관리사 ♥',
     reviews: [
       {
         author: '리프레시님',
@@ -646,8 +641,7 @@ window.shopCardData = [
     operatingHours: '24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-pretty-tangle-outcall.html',
     showHealingShop: true,
-    greeting:
-      '출장마사지 ⭐ 편안하게 원하는 장소에서 부드러운 손길 마사지로 관리해 드리겠습니다 ⭐',
+    greeting: '출장마사지 ⭐ 편안하게 원하는 장소에서 부드러운 손길 관리',
     reviews: [
       {
         author: '스파크님',
@@ -680,7 +674,7 @@ window.shopCardData = [
     file: 'company-seoul-ukraine-outcall.html',
     showHealingShop: true,
     greeting:
-      '서울출장마사지 ⭐ 편안하게 원하는 장소에서 부드러운 손길 마사지로 관리해 드리겠습니다 ⭐',
+      '서울출장마사지 ⭐ 편안하게 원하는 장소에서 부드러운 손길 마사지로 관리',
     reviews: [
       {
         author: '밤하늘별님',
@@ -713,7 +707,7 @@ window.shopCardData = [
     file: 'company-seoul-tokyo-hot-outcall.html',
     showHealingShop: true,
     greeting:
-      '출장마사지 ❤️미모의 혼혈 20대 관리사❤️ 최고의 라인업! ✨힐링받아 보세요 &^^!✨⭐',
+      '출장마사지 ❤️미모의 혼혈 20대 관리사❤️ 최고의 라인업! ✨힐링받아',
     reviews: [
       {
         author: '별빛밤님',
@@ -745,8 +739,7 @@ window.shopCardData = [
     operatingHours: '24시간 365일 연중무휴',
     file: 'company-seoul-wonjeong-outcall.html',
     showHealingShop: true,
-    greeting:
-      '출장마사지 ❤️힐링 전문! 20대 관리사❤️ 최고의 라인업! ✨힐링받아 보세요 &^^!✨⭐',
+    greeting: '출장마사지 ❤️힐링 전문! 20대 관리사❤️ 최고의 라인업! ✨힐링받아',
     reviews: [
       {
         author: '따뜻한차님',
@@ -778,8 +771,7 @@ window.shopCardData = [
     operatingHours: '24시간 (폰이 꺼진 경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-japan-mixed-outcall.html',
     showHealingShop: true,
-    greeting:
-      '출장마사지 ⭐ 예쁜여 20대 & 언제 어디서든 고객님의 부름에 달려가겠습니다.♥ ⭐',
+    greeting: '출장마사지 ⭐ 예쁜여 20대 & 언제 어디서든 문의주세요',
     reviews: [
       {
         author: '여유로운하루님',
@@ -818,8 +810,7 @@ window.shopCardData = [
     operatingHours: '24시간 영업 (폰이 꺼진 경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-yangcheon-goldhand.html',
     showHealingShop: false,
-    greeting:
-      '목동마사지-신정동⭐60분 5만 ❥컨디션회복 ❥ 행복.건강 ❥ 건식&스포츠&아로마&스웨디시⭐',
+    greeting: '목동마사지-신정동⭐60분 5만 ❥컨디션회복 ❥ 행복.건강 ❥ 건식&스포',
     reviews: [
       {
         author: '파도소리님',
@@ -954,7 +945,7 @@ window.shopCardData = [
     file: 'company-seoul-bikini-outcall.html',
     showHealingShop: true,
     greeting:
-      '출장마사지❤️20대 미녀 관리사 & 고객님께 힐링으로 보답하겠습니다.❤️',
+      '출장마사지❤️20대 미녀 관리사 & 고객님께 힐링으로 보답하겠습니다.❤',
     reviews: [
       {
         author: '야근족님',
@@ -967,7 +958,7 @@ window.shopCardData = [
   },
   {
     id: 24,
-    name: 'VIP 20대 힐링 한국홈케어',
+    name: 'VIP 20대 한국홈케어',
     type: '출장마사지',
     country: 'korea',
     region: '서울,인천,경기',
@@ -987,8 +978,7 @@ window.shopCardData = [
     operatingHours: '24시간 연중무휴 (폰이꺼진경우: 마감OR랜덤휴무)',
     file: 'company-seoul-vip-20s-healing-korean-homecare-outcall.html',
     showHealingShop: true,
-    greeting:
-      '출장마사지 ⭐ 20대 관라사 짜릿한 힐링 ♥ 언제나 힐링을 도와 드립니다.♥ 최선을 다하겠습니다 !! ⭐',
+    greeting: '출장마사지 ⭐ 20대 관라사 짜릿한 힐링 ♥ 언제나 힐링',
     reviews: [
       {
         author: '홈파티호스트님',
@@ -1021,8 +1011,7 @@ window.shopCardData = [
     operatingHours: '오후 8시 ~ 아침 06시 (폰OFF시: 마감OR랜덤휴무)',
     file: 'company-seoul-sohot-outcall.html',
     showHealingShop: true,
-    greeting:
-      '출장마사지⭐ 언제나 고객님 한 분 한 분께 정성을 다하여 관리해드리겠습니다 ⭐',
+    greeting: '출장마사지⭐ 언제나 고객님 한 분 한 분께 정성을 다하여 관리',
     reviews: [
       {
         author: '밤샘러버님',
@@ -1056,7 +1045,7 @@ window.shopCardData = [
     file: 'company-seoul-24hour-sexy-outcall.html',
     showHealingShop: true,
     greeting:
-      '출장마사지 ⭐ 편안하게 원하는 장소에서 부드러운 손길 마사지로 관리해 드리겠습니다 ⭐',
+      '출장마사지 ⭐ 편안하게 원하는 장소에서 부드러운 손길 마사지로 관리 ',
     reviews: [
       {
         author: '사랑의님',
@@ -1088,8 +1077,7 @@ window.shopCardData = [
     operatingHours: '낮 12시 ~ 새벽 4시 (365일 연중무휴)',
     file: 'company-seoul-songpa-munjeong-bodybody.html',
     showHealingShop: true,
-    greeting:
-      '장지역 20대,30대 힐링샵 ⭐[바디바디] | 스웨디시&아로마 | 편안한 휴식처⭐',
+    greeting: '장지역 20대,30대 힐링샵 ⭐[바디바디] | 스웨디시&아로마 | 편안',
     reviews: [
       {
         author: '편안한하루님',
@@ -1122,7 +1110,7 @@ window.shopCardData = [
     file: 'company-seoul-gangnam-gangnam-class.html',
     showHealingShop: true,
     greeting:
-      '20대 힐링 관리사-아로마마사지 | ☀️ 강남역 인근 강남최고의매니져님들 ☀️',
+      '20대 힐링 관리사-아로마마사지 | ☀️ 강남역 인근 강남최고의매니져님',
     reviews: [
       {
         author: '편안한하루님',
@@ -1155,7 +1143,7 @@ window.shopCardData = [
     file: 'company-seoul-gangbuk-bundong-some-therapy.html',
     showHealingShop: true,
     greeting:
-      '수유동마사지_수유역건마⭐실력파 원장님!! ​_​​ღ 지친 심신을 힐링해보세요⭐',
+      '수유동마사지_수유역건마⭐실력파 원장님!! ​_​​ღ 지친 심신을 힐링해',
     reviews: [
       {
         author: '편안한하루님',
@@ -1203,7 +1191,7 @@ window.shopCardData = [
     id: 31,
     name: 'BJ 발정난 색끼년 출장',
     type: '출장마사지',
-    country: 'korea,thailand',
+    country: 'korea,Thailand',
     region: '서울,경기,인천',
     district: '서울·경기·인천 전지역',
     address: '서울.경기.인천 전지역',
@@ -1236,10 +1224,10 @@ window.shopCardData = [
     id: 32,
     name: '쿤타이',
     type: '힐링샵',
-    country: 'thailand',
+    country: 'Thailand',
     region: '서울',
     district: '성북',
-    address: '서울 성북구 동소문로 119-1',
+    address: '서울특별시 성북구 동선동4가 107-1',
     detailAddress: '성신여대입구역 7번출구 도보3분, 주차 문의',
     phone: '0507-1859-6918',
     rating: 4.9,
@@ -1254,7 +1242,7 @@ window.shopCardData = [
     file: 'company-seoul-seongbuk-dongseon-kuntai.html',
     showHealingShop: true,
     greeting:
-      '성신여대마사지_20대 힐링샵⭐황후테라피 ❤️고객님의 피로를 정성을 다해 풀어드리겠습니다.❤️ 전문 ⭐',
+      '성신여대마사지_20대 힐링샵⭐황후테라피 ❤️고객님의 피로를 정성을 다해',
     reviews: [
       {
         author: '편안한하루님',
@@ -1269,7 +1257,7 @@ window.shopCardData = [
     id: 33,
     name: '란제리 구멍 출장',
     type: '출장마사지',
-    country: 'korea,thailand',
+    country: 'korea,Thailand',
     region: '서울,경기,인천',
     district: '서울·경기·인천 전지역',
     address: '서울 . 경기 . 인천 전지역',
@@ -1321,7 +1309,7 @@ window.shopCardData = [
     file: 'company-seoul-gangnam-yeoksam-angel.html',
     showHealingShop: true,
     greeting:
-      '강남스웨디시-스웨디시⭐강남최고의 20대 관리사 부드러운 손길로 스웨디시 아로마를 선사해드리겠습니다⭐',
+      '강남스웨디시-스웨디시⭐강남최고의 20대 관리사 부드러운 손길로 스웨디시',
     reviews: [
       {
         author: '편안한하루님',
@@ -1353,7 +1341,7 @@ window.shopCardData = [
     operatingHours: '24시간 (휴무일: 랜덤휴무 or 폰OFF)',
     file: 'company-seoul-gangnam-nonhyeon-appleten.html',
     showHealingShop: false,
-    greeting: '잠원동마사지 ❤️ 부드러운 힐링 마사지로 모시겠습니다. ❤️',
+    greeting: '20대,30대 ❤️ 부드러운 힐링 마사지로 모시겠습니다. ❤️',
     reviews: [
       {
         author: '편안한하루님',
@@ -1386,8 +1374,7 @@ window.shopCardData = [
     operatingHours: '24시간 영업 (365일 연중 무휴)',
     file: 'company-seoul-seocho-seochoDong-royal-swedish.html',
     showHealingShop: false,
-    greeting:
-      '교대건마-20대 힐링샵⭐❤️ 재방문 1위 ❤ 최고의 감성 스웨디시 ❤ 무색 무취 수용성 오일 ❤️⭐',
+    greeting: '교대건마-20대 힐링샵⭐❤️ 재방문 1위 ❤ 최고의 감성 스웨디시 ❤ ',
     reviews: [
       {
         author: '편안한하루님',
@@ -1421,7 +1408,7 @@ window.shopCardData = [
     file: 'company-seoul-songpa-jamsil-botanic-swedish.html',
     showHealingShop: false,
     greeting:
-      '잠실새내역마사지-스웨디시⭐ 부드러운 손길로 고객님께 ❤️최고의실력❤️ 최고의미모!! 확실한케어!!',
+      '잠실새내역마사지-스웨디시⭐ 부드러운 손길로 고객님께 ❤️최고의실력❤️ ',
     reviews: [
       {
         author: '편안한하루님',
@@ -1460,7 +1447,7 @@ window.shopCardData = [
     file: 'company-seoul-gangdong-seongnae-yehyang.html',
     showHealingShop: false,
     greeting:
-      '둔촌동마사지 ✿✿ 스트레스를 날려버리고 몸의 힐링을 채워주세요. ❥❥❥ 건식 관리! 아로마 오일',
+      '둔촌동마사지 ✿✿ 스트레스를 날려버리고 몸의 힐링을 채워주세요. ❥❥❥',
     reviews: [
       {
         author: '편안한하루님',
@@ -1493,7 +1480,7 @@ window.shopCardData = [
     file: 'company-seoul-seongdong-yongdap-apple.html',
     showHealingShop: false,
     greeting:
-      '성동구건마-스웨디시⭐쾌적하고 편안한 공간에서 힐링~ 정성껏 모시겠습니다❤체계적인 교육⭐',
+      '성동구건마-스웨디시⭐쾌적하고 편안한 공간에서 힐링~ 정성껏 모시겠습니다',
     reviews: [
       {
         author: '힐링마스터님',
@@ -1547,7 +1534,7 @@ window.shopCardData = [
     file: 'company-seoul-gangseo-magok-lonia.html',
     showHealingShop: false,
     greeting:
-      '마곡역마사지 스웨디시⭐스웨&로미◆각룸 샤워실❤한국쌤❤카드❤샵실사(럭셔리)❤개인실 완비⭐',
+      '마곡역마사지 스웨디시⭐스웨&로미◆각룸 샤워실❤한국쌤❤카드❤샵실사(럭셔리',
     reviews: [
       {
         author: '럭셔리힐링님',
@@ -1601,7 +1588,7 @@ window.shopCardData = [
     file: 'company-seoul-dongdaemun-sinseol-gahee.html',
     showHealingShop: false,
     greeting:
-      '동대문마사⭐[ 언제나 힐링을 위해 ] 친절과 마인드로 고객님의 힐릉을 도와드리겠습니다. ⭐',
+      '동대문마사⭐[ 언제나 힐링을 위해 ] 친절과 마인드로 고객님의 힐릉을 ',
     reviews: [
       {
         author: '1인샵전문님',
@@ -1639,8 +1626,7 @@ window.shopCardData = [
     operatingHours: '오전 11시 ~ 새벽 3시 (폰꺼질시: 마감 OR 랜덤휴무)',
     file: 'company-seoul-mapo-hongdae-thequeen.html',
     showHealingShop: false,
-    greeting:
-      '홍대마사지-스웨디시 ⭐ 20대 & 힐링 샵 입니다. 항상 최선을 다해 모시겠습니다. ⭐',
+    greeting: '홍대마사지-스웨디시 ⭐ 20대 & 힐링 샵 입니다. 항상 최선을 다해 ',
     reviews: [
       {
         author: '힐링중독님',
@@ -1718,7 +1704,7 @@ window.shopCardData = [
     file: 'company-seoul-gangnam-nonhyeon-milkspa.html',
     showHealingShop: false,
     greeting:
-      '논현역건마-논현스파 ⭐[ 우유스파 ] ★손끝에날개를달다★「섬세한 스킬」 우유마사지 및 소프트 힐링⭐',
+      '논현역건마-논현스파 ⭐[ 우유스파 ] ★손끝에날개를달다★「섬세한 스킬」',
     reviews: [
       {
         author: '초감각체험님',
@@ -1837,7 +1823,7 @@ window.shopCardData = [
     file: 'company-seoul-guro-digital-swedish.html',
     showHealingShop: false,
     greeting:
-      '구로디지털단지역마사지-스웨디시 ⭐스웨디시 마사지 ❤️감성힐링맛집❤️ 확실한테라피! 감동케어! 재방문1위!⭐',
+      '구로디지털단지역마사지-스웨디시 ⭐스웨디시 마사지 ❤️감성힐링맛집❤️',
     reviews: [
       {
         author: '테라피전문가님',
@@ -1915,7 +1901,7 @@ window.shopCardData = [
     file: 'company-seoul-geumcheon-gasan-jiyoon.html',
     showHealingShop: false,
     greeting:
-      '가산동마사지 ⭐ ♥♥ 정성가득한 마인드로 고객님께 힐링으로 보답하겠습니다. ♥♥⭐',
+      '가산동마사지 ⭐ ♥♥ 정성가득한 마인드로 고객님께 힐링으로 보답합니다.',
     reviews: [
       {
         author: '1인샵추천왕님',
@@ -1959,8 +1945,7 @@ window.shopCardData = [
     operatingHours: '낮 12시 ~ 새벽 1시 (폰이꺼진경우: 마감 OR 랜덤휴무)',
     file: 'company-seoul-songpa-munjeong-reina.html',
     showHealingShop: false,
-    greeting:
-      '문정동왁싱_20대 힐링샵⭐1인샵 레이나 ❤️ 정성을 다하겠습니다.❤️ 전문 ⭐',
+    greeting: '문정동왁싱_20대 힐링샵⭐1인샵 레이나 ❤️ 정성을 다하겠습니다.❤️ ',
     reviews: [
       {
         author: '왁싱완전정복님',
@@ -2101,8 +2086,7 @@ window.shopCardData = [
     operatingHours: '오전 11시 ~ 오후 11시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-junggu-myeongdong-korea.html',
     showHealingShop: false,
-    greeting:
-      '을지로마사지-피부관리 ⭐ ❤️ 섬세한 케어로 보답하겠습니다. 위생과 청결을 길본으로 하고있습니다 ^^⭐',
+    greeting: '을지로마사지-피부관리 ⭐ ❤️ 섬세한 케어로 보답하겠습니다.',
     reviews: [
       {
         author: '15년노하우실화님',
@@ -2151,7 +2135,7 @@ window.shopCardData = [
     file: 'company-seoul-junggu-myeongdong-waxing.html',
     showHealingShop: false,
     greeting:
-      '을지로왁싱 ⭐ ❤️ 섬세한 케어로 보답하겠습니다. 더욱 꼼꼼한서비스와 차별화된 시스템⭐',
+      '을지로왁싱 ⭐ ❤️ 섬세한 케어로 보답하겠습니다. 더욱 꼼꼼한서비스 ',
     reviews: [
       {
         author: '브라질리언꿀팁님',
@@ -2172,7 +2156,7 @@ window.shopCardData = [
   {
     id: 56,
     name: '쿤타이',
-    country: 'thailand',
+    country: 'Thailand',
     region: '서울',
     district: '강북',
     address: '서울 강북구 수유동 189-35',
@@ -2189,8 +2173,7 @@ window.shopCardData = [
     operatingHours: '오후 12시 ~ 새벽 5시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-gangbuk-suyu-kunthai.html',
     showHealingShop: false,
-    greeting:
-      '수유동마사지 ◆ 모든 관리사 최고의 힐링 관리사분들이 항시 대기 중입니다. 감사합니다. ◆',
+    greeting: '수유동마사지 ◆ 모든 관리사 최고의 힐링 관리사분들이 항시 대기',
     reviews: [
       {
         author: '타이스트레칭최애님',
@@ -2211,7 +2194,7 @@ window.shopCardData = [
   {
     id: 57,
     name: '블루타이테라피',
-    country: 'thailand',
+    country: 'Thailand',
     region: '서울',
     district: '강북',
     address: '서울 강북구 덕릉로 98 (미아동)',
@@ -2230,7 +2213,7 @@ window.shopCardData = [
     file: 'company-seoul-gangbuk-mia-bluethai.html',
     showHealingShop: false,
     greeting:
-      '미아동마사지 ◆ 힐링샵 고객님에게 힐링을 드리고자 최선을 다하겠습니다 ◆',
+      '미아동마사지 ◆ 힐링샵 고객님에게 힐링을 드리고자 최선을 다하겠습니다 ',
     reviews: [
       {
         author: '크림로미로미신세계님',
@@ -2269,8 +2252,7 @@ window.shopCardData = [
     operatingHours: '오후 12시 ~ 새벽 4시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-seoul-gangbuk-suyu-dawon.html',
     showHealingShop: false,
-    greeting:
-      '수유동마사지 ◆ 30대 힐링샵 고객님에게 힐링을 드리고자 최선을 다하겠습니다 ◆',
+    greeting: '수유동마사지 ◆ 30대 힐링샵 고객님에게 힐링을 드리고자 최선',
     reviews: [
       {
         author: '바디각질신공님',
@@ -2290,7 +2272,7 @@ window.shopCardData = [
   },
   {
     id: 59,
-    name: '중국정통 청룡 발관리',
+    name: '청룡 발관리',
     country: 'china',
     region: '서울',
     district: '관악',
@@ -2313,6 +2295,7 @@ window.shopCardData = [
       '스포츠관리',
       '아로마관리',
       '전신관리',
+      '중국마사지',
     ],
     operatingHours: '24시간 영업 (폰 OFF: 마감, 랜덤 휴무)',
     file: 'company-seoul-gwanak-bongcheon-cheongryong.html',
@@ -2338,7 +2321,7 @@ window.shopCardData = [
   {
     id: 60,
     name: '휴테라피',
-    country: 'korea,thailand',
+    country: 'korea,Thailand',
     region: '서울',
     district: '관악',
     address: '서울 관악구 신림동 1432-81',
@@ -2351,21 +2334,11 @@ window.shopCardData = [
       '관악건마 휴테라피 입니다. 관악 최강마사지 최강라인업 전문샵으로 일상에 지친몸과 마음의 힐링을 위하여 최선을 다하겠습니다. 그동안 쌓인 피로와 스트레스를 훌훌 털어버리세요~!!!! 전원 실력파 여 쌤들, 20대~30대 힐링샵으로 상기종목 테라피 수료한 전문 관리사들이 아로마, 건식 테라피, 국내 최초 타이디시 코스, 로션, 스페셜VIP, 스웨디시(한국인관리사) 등 다양한 프로그램으로 친절과 정성을다해 관리해 드리겠습니다.',
     image: 'https://msg1000.com/images/서울_관악_신림동_신림역_휴테라피.jpg',
     alt: '서울 관악구 신림동 휴테라피 마사지샵 - 신림역 6번 출구 도보5분, 주차 가능, 아로마·타이디시·스웨디시 전문',
-    services: [
-      '아로마관리',
-      '건식테라피',
-      '타이디시',
-      '로션관리',
-      '스페셜VIP관리',
-      '스웨디시',
-      '경락케어',
-      '두피관리',
-    ],
+    services: ['아로마관리', '타이마사지', '스웨디시'],
     operatingHours: '오전 11시 ~ 새벽 5시 (주말에도 영업)',
     file: 'company-seoul-gwanak-sillim-hyu.html',
     showHealingShop: false,
-    greeting:
-      '관악구마사지 ⭐ 테라피&왁싱 ❤ 60분에 3만 ❤ 한국인 관리쌤 : 문의환영 ⭐',
+    greeting: '관악구마사지 ⭐ 테라피&왁싱 ❤ 20대,30대 ❤ 한국인 관리쌤',
     reviews: [
       {
         author: '타이디시국내최초님',
@@ -2386,7 +2359,7 @@ window.shopCardData = [
   {
     id: 61,
     name: '베스트아로마',
-    country: 'thailand',
+    country: 'Thailand',
     region: '서울',
     district: '송파',
     address: '서울 송파구 삼전동 7-7',
@@ -2404,8 +2377,7 @@ window.shopCardData = [
     operatingHours: '오후 12시 ~ 새벽 5시 (365일 연중무휴 - 주말에도 영업)',
     file: 'company-seoul-songpa-samjeon-bestaroma.html',
     showHealingShop: false,
-    greeting:
-      '삼전동마사지-타이마사지 ⭐삼전동 깨끗하고 착한가격 ^^ 타이 아로마 스웨디시 잘하는 집 ⭐',
+    greeting: '⭐삼전동 깨끗하고 착한가격 ^^ 타이 아로마 스웨디시',
     reviews: [
       {
         author: '착한가격인정님',
@@ -2444,7 +2416,7 @@ window.shopCardData = [
     file: 'company-seoul-dongjak-sadang-goldmoon.html',
     showHealingShop: false,
     greeting:
-      '사당마사지-스웨디시⭐ 사당 최고의 감성스웨디시 로미로미 전문샵 ⭐ 후회하지 않는 선택',
+      '사당마사지-스웨디시⭐ 사당 최고의 감성스웨디시 로미로미 전문샵 ⭐',
     reviews: [
       {
         author: '감성스웨디시홀릭님',
@@ -2483,7 +2455,7 @@ window.shopCardData = [
     file: 'company-seoul-gwanak-sillim-relax.html',
     showHealingShop: false,
     greeting:
-      '신림역마사지 ⭐◆ 힐링을 도와드리는 최고의 샵이 되도록 노력하겠습니다.◆⭐',
+      '신림역마사지 ⭐◆ 힐링을 도와드리는 최고의 샵이 되도록 노력하겠습니다.',
     reviews: [
       {
         author: 'C코스120분득템님',
@@ -2523,7 +2495,7 @@ window.shopCardData = [
     file: 'company-seoul-dongdaemun-yongdu-rantherapy.html',
     showHealingShop: false,
     greeting:
-      '제기동역마사지⭐️최고의 마사지로 고객님께 힐링을 선사해 드리겠습니다. ❥ 아늑한 힐링공간 ❥⭐️',
+      '제기동역마사지⭐️최고의 마사지로 고객님께 힐링을 선사해 드리겠습니다. ',
     reviews: [
       {
         author: '80분B코스찐님',
@@ -2601,7 +2573,7 @@ window.shopCardData = [
     file: 'company-seoul-gangdong-seongnae-benthai.html',
     showHealingShop: false,
     greeting:
-      '성내동건마 ⭐족욕은 관리시간 포함되지 않습니다. ^^ ♥ 편안한 힐링 공간 ♥⭐',
+      '성내동건마 ⭐족욕은 관리시간 포함되지 않습니다. ^^ ♥ 편안한 힐링 ',
     reviews: [
       {
         author: '족욕서비스굿님',
@@ -2701,7 +2673,7 @@ window.shopCardData = [
   {
     id: 69,
     name: '휴테라피&스웨디시',
-    country: 'korea,thailand',
+    country: 'korea,Thailand',
     region: '서울',
     district: '관악',
     address: '서울특별시 관악구 신림로 (신림동)',
@@ -2719,8 +2691,7 @@ window.shopCardData = [
     operatingHours: '오전 11시 ~ 새벽 5시 (폰 OFF: 마감, 랜덤 휴무)',
     file: 'company-seoul-gwanak-sillim-hyuswedish.html',
     showHealingShop: false,
-    greeting:
-      '신림동마사지⭐️[20대~30대] 테라피 ❤❤ 아로마&타이&미세전류 ❤❤ 에너지 릴렉싱테라피 ❤❤⭐️',
+    greeting: '신림동마사지⭐️[20대~30대] 테라피 ❤❤ 아로마&타이&미세전류 ❤❤',
     reviews: [
       {
         author: '국내최초타이디시님',
@@ -2846,7 +2817,7 @@ window.shopCardData = [
     file: 'company-seoul-jongno-inui-perfect.html',
     showHealingShop: false,
     greeting:
-      '스웨디시⭐감성 스웨디시 마사지 ⭐️비교불가⭐️ 여태껏 경험해보지 못한 최고의 힐링 에스테틱!⭐',
+      '스웨디시⭐감성 스웨디시 마사지 ⭐️비교불가⭐️ 최고의 경험을 선사 ',
     reviews: [
       {
         author: '비교불가힐링님',
@@ -2887,7 +2858,7 @@ window.shopCardData = [
     file: 'company-seoul-gangnam-samsung-redswedish.html',
     showHealingShop: false,
     greeting:
-      '스웨디시⭐ 스웨디시 감성 림프 마사지 ❤️전원한국인❤️ 확실한 힐링케어! 친절마인드! 내상제로!⭐',
+      '스웨디시⭐ 스웨디시 감성 림프 마사지 ❤️전원한국인❤️ 확실한 힐링케어',
     reviews: [
       {
         author: '내상제로확실님',
@@ -2927,7 +2898,7 @@ window.shopCardData = [
     file: 'company-seoul-yeongdeungpo-yeouido-maesthetic.html',
     showHealingShop: false,
     greeting:
-      '영등포마사지-스웨디시⭐[엠에스테틱] ❤ 스웨디시&로미로미 전문샵입니다 ❤⭐',
+      '영등포마사지-스웨디시⭐[엠에스테틱] ❤ 스웨디시&로미로미 전문샵입니다 ',
     reviews: [
       {
         author: 'M스페셜교육인정님',
@@ -3008,7 +2979,7 @@ window.shopCardData = [
     file: 'company-seoul-gangseo-magok-sutherapy.html',
     showHealingShop: false,
     greeting:
-      '마곡나루역마사지⭐️편안함을 전달하는 부드러운 손길! 고객님께 힐링을 선사해 드리겠습니다. ⭐️',
+      '마곡나루역마사지⭐️편안함을 전달하는 부드러운 손길! 고객님께 힐링',
     reviews: [
       {
         author: '재방문율높은곳님',
@@ -3058,7 +3029,7 @@ window.shopCardData = [
     file: 'company-seoul-gwanak-bongcheon-thesome.html',
     showHealingShop: false,
     greeting:
-      '스웨디시⭐️[유라] 왁싱&테라피 ❀❀ 감성/스웨디시/로미/건식/아로마 ❀❀ 정성가득 테라피 ❀❀⭐️',
+      '스웨디시⭐️[유라] 왁싱&테라피 ❀❀ 감성/스웨디시/로미/건식/아로마 ',
     reviews: [
       {
         author: '1인샵꼼꼼케어님',
@@ -3098,8 +3069,7 @@ window.shopCardData = [
     operatingHours: '오전 11시 ~ 새벽 6시 (폰 OFF: 마감, 랜덤 휴무)',
     file: 'company-seoul-gwanak-bongcheon-bluemoon.html',
     showHealingShop: false,
-    greeting:
-      '봉천역마사지⭐️[림프순환] ❤❤ 꼼꼼+정성+재방1등 ❤❤ 건강하게 힐링해드립니다⭐️',
+    greeting: '봉천역마사지⭐️[림프순환] ❤❤ 꼼꼼+정성+재방1등 ❤❤ 건강하게 힐링',
     reviews: [
       {
         author: '재방1등인정님',
@@ -3140,7 +3110,7 @@ window.shopCardData = [
     file: 'company-gyeonggi-yongin-sanghyeon-queentherapy.html',
     showHealingShop: true,
     greeting:
-      '용인 상현역[퀸스웨디시]❤️재방의이유❤️절대내상방지❤️광교1번퀸테라피❤️젊은한국인관리사❤️NF대거영입❤️용인.수지.기흥구청❤️',
+      '용인 상현역[퀸스웨디시]❤️재방의이유❤️절대내상방지❤️광교1번퀸테라피❤',
     reviews: [
       {
         author: '관리사16명최대보유님',
@@ -3200,11 +3170,11 @@ window.shopCardData = [
   },
   {
     id: 81,
-    name: '20대 꽃미녀 스웨디시',
+    name: '20대 꽃미녀 스웨',
     country: 'korea,japan',
     region: '경기',
     district: '광명',
-    address: '경기 광명시 소하로 86',
+    address: '경기도 광명시 소하동 1341-2',
     detailAddress: '제일프라자 3층, 무료 주차',
     phone: '0507-1859-6490',
     rating: 5.0,
@@ -3219,7 +3189,7 @@ window.shopCardData = [
     file: 'company-gwangmyeong-soha-flower.html',
     showHealingShop: true,
     greeting:
-      '광명마사지-철산스웨디시&로미로미 전원한국인 20대 꽃미녀 관리사대거 영입으로 내상제로로 보답해드리겠습니다.',
+      '광명마사지-철산스웨디시&로미로미 전원한국인 20대 꽃미녀 관리사대거',
     reviews: [
       {
         author: '10명관리사최고님',
@@ -3258,7 +3228,7 @@ window.shopCardData = [
     file: 'company-gyeonggi-suwon-yeongtong-view.html',
     showHealingShop: true,
     greeting:
-      '❤수원최대규모실력있는20대전원한국인관리사❤ ⎝⎝감성 스웨디시 테라피⎠⎠ 인계동 광교 매탄동 동탄 용인 기흥 화성 병점 오산',
+      '❤수원최대규모실력있는20대전원한국인관리사❤ ⎝⎝감성 스웨디시 테라피⎠⎠',
     reviews: [
       {
         author: '5가지할인이벤트님',
@@ -3278,7 +3248,7 @@ window.shopCardData = [
   },
   {
     id: 83,
-    name: '1번스웨디시1인샵',
+    name: '1번스웨디시',
     country: 'korea',
     region: '경기',
     district: '남양주',
@@ -3297,8 +3267,7 @@ window.shopCardData = [
     operatingHours: '오전 11시 ~ 새벽 5시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-namyangju-dasan-first.html',
     showHealingShop: true,
-    greeting:
-      '남양주.다산 1번 스웨디시입니다. 꼼꼼하고 섬세한 관리 최선을 다해 케어해드리겠습니다 위생과 청결은 기본으로 만족을 드릴게요~',
+    greeting: '남양주.다산 1번 스웨디시입니다. 꼼꼼하고 섬세한 관리',
     reviews: [
       {
         author: '1인샵전문케어님',
@@ -3337,8 +3306,7 @@ window.shopCardData = [
     operatingHours: '24시간 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-bucheon-simgok-daon.html',
     showHealingShop: true,
-    greeting:
-      '부천 부근 1:1 프라이빗한 관리를 더샵에서 느껴보세요! 룸별 1인1실 샤워실 구비로 보다 편안한 케어를 만날 수 있습니다.',
+    greeting: ' 다온 부천더샵에서 느껴보세요! 룸별 1인1실',
     reviews: [
       {
         author: '1인1실프라이빗님',
@@ -3378,8 +3346,7 @@ window.shopCardData = [
       '오전 10시 ~ 새벽 5시 (폰OFF시:마감OR랜덤휴무, 365일 연중무휴)',
     file: 'company-gyeonggi-suwon-maetan-today.html',
     showHealingShop: true,
-    greeting:
-      '경기 수원시 매탄동 1262인근에 위치하고 있으며 건마시티와 제휴를 통해 건전하고 고품격의 전문샵 한국인관리사 신규최신인테리어 로드샵 카페이벤트 인계동 수원시청 인근',
+    greeting: '미모와 실력있는 마사지 한번 받아보세요.',
     reviews: [
       {
         author: '프라이빗공간최고님',
@@ -3413,7 +3380,7 @@ window.shopCardData = [
       '광명마사지 최고의 서비스를 보장하는 제인바디샵 입니다. 최고의 마사지를 선사하는 중국전통 마사지입니다. 힐링이 무엇인지 보여드리겠습니다. 감사합니다. ❤ 부드러운 중국마사지로 힐링으로 보답하겠습니다. 전원 중국인 여 쌤들, 20대 & 힐링샵, 상기 종목 코스 수료. 주간/야간 시간대별 가격 차이 (주간: 오후 12시~오후 7시 / 야간: 오후 7시~다음날 오후 12시). 아로마 및 스웨디시 관리 전문.',
     image: 'https://msg1000.com/images/경기_광명_일직동_광명역_제인바디샵.jpg',
     alt: '경기 광명시 일직동 제인바디샵 마사지샵 - 광명역 1번출구, 중국전통마사지, 아로마, 스웨디시',
-    services: ['아로마', '스웨디시'],
+    services: ['아로마마사지', '스웨디시', '중국마사지'],
     operatingHours: '24시간 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-gwangmyeong-iljik-jane.html',
     showHealingShop: false,
@@ -3457,8 +3424,7 @@ window.shopCardData = [
     operatingHours: '오전 10시 ~ 새벽 4시 (365일 연중무휴)',
     file: 'company-gyeonggi-suwon-ingye-abell.html',
     showHealingShop: false,
-    greeting:
-      '수원마사지-20대,30대 관리사⭐ ♥ 수원 인계동 ♥ 젊은 테라피스트 대거영입 ⭐',
+    greeting: '수원마사지-20대,30대 관리사⭐ ♥ 수원 인계동 ♥ 젊은 테라피스트 ',
     reviews: [
       {
         author: '젊은테라피스트최고님',
@@ -3497,8 +3463,7 @@ window.shopCardData = [
     operatingHours: '오전 10시 ~ 새벽 5시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-suwon-geumgok-shop.html',
     showHealingShop: false,
-    greeting:
-      '❤️❤️수원 샾테라피꧁▂▅서수원 홈플러스 인근▅▂꧂내상제로 *‥*재방문 1위',
+    greeting: '❤️❤️수원 샾테라피꧁▂▅서수원 홈플러스 인근▅▂꧂내상제로 *‥*재방문',
     reviews: [
       {
         author: '재방문1위인정님',
@@ -3615,7 +3580,7 @@ window.shopCardData = [
     file: 'company-gyeonggi-hwaseong-byeongjeom-stherapy.html',
     showHealingShop: false,
     greeting:
-      '젊은 관리사님들도 많으시고 최고의 실력자로 힐링을 선사하는 마사지샵 입니다.',
+      '젊은 관리사님들도 많으시고 최고의 실력자로 힐링을 선사하는 마사지샵',
     reviews: [
       {
         author: '최상급오일최고님',
@@ -3694,8 +3659,7 @@ window.shopCardData = [
     operatingHours: '오후 12시 ~ 새벽 4시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-suwon-yeonghwa-7therapy.html',
     showHealingShop: false,
-    greeting:
-      '영화동마사지 ⭐20대 ~30대관리사 & 확실한 힐링 내상제로! 완벽한케어로 고객님께 행복을 전달해드리겠습니다.',
+    greeting: '영화동마사지 ⭐20대 ~30대관리사 & 확실한 힐링 내상제로! 완벽',
     reviews: [
       {
         author: '확실한힐링내상님',
@@ -3735,7 +3699,7 @@ window.shopCardData = [
     file: 'company-gyeonggi-seongnam-sujin-thegoodswedish.html',
     showHealingShop: false,
     greeting:
-      '수진동건마-힐링마사지⭐️감성마사지 ★★ 부드러운 손길로 최고의 힐링을 선사하는 마사지샵이 되겠습니다.⭐️',
+      '수진동건마-힐링마사지⭐️감성마사지 ★★ 부드러운 손길로 최고의 힐링 ',
     reviews: [
       {
         author: '부드러운손길최고님',
@@ -3756,7 +3720,7 @@ window.shopCardData = [
   {
     id: 95,
     name: '나나 스웨디시',
-    country: 'korea,thailand',
+    country: 'korea,Thailand',
     region: '경기',
     district: '의정부',
     address: '경기 의정부시 의정부동 181-4',
@@ -3813,7 +3777,7 @@ window.shopCardData = [
     file: 'company-gyeonggi-goyang-madu-chaeah.html',
     showHealingShop: false,
     greeting:
-      '마두역⭐[채아]❤카드환영❤오랜 경력으로 스웨디시❤아로마 최고의 테라피를 선사해드립니다⭐',
+      '마두역⭐[채아]❤카드환영❤오랜 경력으로 스웨디시❤아로마 최고의 테라피',
     reviews: [
       {
         author: '천연오일최고님',
@@ -3834,7 +3798,7 @@ window.shopCardData = [
   {
     id: 97,
     name: '타이앤타이',
-    country: 'thailand',
+    country: 'Thailand',
     region: '경기',
     district: '평택',
     address: '경기 평택시 서정동 813-5',
@@ -3891,8 +3855,7 @@ window.shopCardData = [
     operatingHours: '오전 10시 ~ 새벽 3시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-gimpo-gurae-allin.html',
     showHealingShop: false,
-    greeting:
-      '양촌역,구래역 ⭐젊은 한국인 쌤들!❤️감각적 관리❤️프라이빗하고 안락한 분위기에서! 여힐러님, 남힐러님 대기중!',
+    greeting: '양촌역,구래역 ⭐젊은 한국인 쌤들!❤️감각적 관리❤️프라이빗',
     reviews: [
       {
         author: '프리미엄오일최고님',
@@ -3932,8 +3895,7 @@ window.shopCardData = [
     operatingHours: '오후 12시 ~ 새벽 4시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-anyang-gwanyang-deshops.html',
     showHealingShop: false,
-    greeting:
-      '평촌역 부근 1:1 프라이빗한 관리를 더샵에서 느껴보세요! 룸별 1인1실 샤워실 구비로 보다 편안한 케어를 만날 수 있습니다.',
+    greeting: '평촌역 부근 1:1 관리를 더샵에서 느껴보세요! 룸별 1인1실',
     reviews: [
       {
         author: '프라이빗만족님',
@@ -3972,8 +3934,7 @@ window.shopCardData = [
     operatingHours: '오전 10시 ~ 새벽 4시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-suwon-eui-bon.html',
     showHealingShop: false,
-    greeting:
-      '수원건마⭐️[ 20대 관리사 ] ❤️❤️수원광교 본테라피 왁싱&스웨디시 언제나 힐링을 주는 샵이 되겠습니다. ❤️❤️⭐️',
+    greeting: '수원건마⭐️[ 20대 관리사 ] ❤️❤️수원광교 본테라피 왁싱&스웨디시',
     reviews: [
       {
         author: '왁싱스웨디시만족님',
@@ -3994,7 +3955,7 @@ window.shopCardData = [
   {
     id: 102,
     name: '나움테라피',
-    country: 'thailand',
+    country: 'Thailand',
     region: '경기',
     district: '파주',
     address: '경기 파주시 야당동 1074-1',
@@ -4051,8 +4012,7 @@ window.shopCardData = [
     operatingHours: '낮 12시 ~ 새벽 4시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-guri-galmae-bibi.html',
     showHealingShop: false,
-    greeting:
-      '갈매동건마-스웨디시⭐ ♥ 힐링공간 ♥ 몸과 마음 모두 힐링 가능한 저희 샵에 빠져보세요.⭐',
+    greeting: '갈매동건마-스웨디시⭐ ♥ 힐링공간 ♥ 몸과 마음 모두 힐링 가능',
     reviews: [
       {
         author: '힐링공간만족님',
@@ -4091,8 +4051,7 @@ window.shopCardData = [
     operatingHours: '오전 10시 ~ 새벽 6시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-guri-gyomun-debody.html',
     showHealingShop: true,
-    greeting:
-      '교문동마사지 ⭐️지친 몸과 마음을 정성가득한 마사지 ♣ ❤️❤️ 최고의 샵 ❤️ 고객만족도1등',
+    greeting: '교문동마사지 ⭐️지친 몸과 마음을 정성가득한 마사지 ♣ ❤️❤️',
     reviews: [
       {
         author: '정성가득만족님',

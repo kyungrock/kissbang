@@ -253,15 +253,28 @@ body {
 .search-section {
   background: white;
   padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+  max-width: 520px;
+  margin: 0 auto;
+  overflow: visible;
   position: relative;
+  box-sizing: border-box;
+}
+
+/* search-section 좌우 전체 너비 흰색 배경 */
+.search-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(-50vw + 50%);
+  width: 100vw;
+  height: 100%;
+  background: white;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .search-container {
-  max-width: 540px;
+  max-width: 520px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -830,9 +843,9 @@ body {
 
 /* 메인 콘텐츠 */
 .main-content {
-  max-width: 540px;
+  max-width: 480px;
   margin: 0 auto;
-  padding: 15px;
+  padding: 20px;
   position: relative;
   z-index: 1;
 }
@@ -860,6 +873,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.massage-list.sorted {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .massage-card {
@@ -972,6 +993,8 @@ body {
   align-items: flex-start;
   gap: 12px;
   margin-bottom: -1px;
+  max-width: 355px;
+  overflow: hidden;
 }
 
 .card-info {
@@ -981,7 +1004,7 @@ body {
 
 .card-info .info-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 6px;
   margin-bottom: 6px;
   font-size: 0.9rem;
@@ -1060,6 +1083,10 @@ body {
   text-align: left !important;
   display: block;
   width: 100%;
+  max-width: 343.38px;
+  overflow: hidden;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .info-item.greeting {
@@ -1074,8 +1101,27 @@ body {
   font-style: normal;
   color: #666;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
+  width: 100%;
+  max-width: 350px;
+  box-sizing: border-box;
+  overflow: hidden;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.info-item.greeting span {
+  width: 100% !important;
+  max-width: 250px !important;
+  display: block;
+  overflow: hidden;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  box-sizing: border-box;
+  line-height: 1.5;
+  padding-top: 5px;
 }
 
 .info-item.greeting i {
@@ -1464,7 +1510,7 @@ body {
 
 @media (min-width: 1024px) {
   .main-content {
-    max-width: 540px;
+    max-width: 480px;
   }
 
   .search-container {
@@ -1524,7 +1570,7 @@ body {
   }
 
   .main-content {
-    max-width: 540px;
+    max-width: 480px;
     padding: 15px;
     font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       Roboto, sans-serif;
@@ -1561,6 +1607,8 @@ body {
     align-items: flex-start;
     gap: 12px;
     margin-bottom: 12px;
+    max-width: 355px;
+    overflow: hidden;
   }
 
   .card-info {
@@ -3273,8 +3321,27 @@ body {
     margin-bottom: -20px;
     padding-top: 10px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
+    width: 100%;
+    max-width: 250px;
+    box-sizing: border-box;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .info-item.greeting span {
+    width: 100% !important;
+    max-width: 250px !important;
+    display: block;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    box-sizing: border-box;
+    line-height: 1.5;
+    padding-top: 5px;
   }
 
   .info-item i {

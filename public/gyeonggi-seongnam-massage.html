@@ -12,9 +12,9 @@
      
     <link rel="canonical" href="https://msg1000.com/gyeonggi-seongnam-massage.html" />
     <meta name="author" content="마사지천국" />
- <link rel="preload" href="style.min.css" as="style" />
+ <link rel="preload" href="style.css" as="style" />
 
- <link rel="stylesheet" href="style.min.css" />
+ <link rel="stylesheet" href="style.css" />
  
  <!-- Gmarket Sans 폰트 -->
  <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -461,7 +461,7 @@
                 
                 <div class="card-info">
                     <div class="info-item greeting">
-                        <span>수진동건마-힐링마사지⭐️감성마사지 ★★ 부드러운 손길로 최고의 힐링을 선사하는 마사지샵이 되겠습니다.⭐️</span>
+                        <span>수진동건마-힐링마사지⭐️감성마사지 ★★ 부드러운 손길로 최고의 힐링 </span>
                     </div>
                 </div>
                 
@@ -794,14 +794,12 @@
 
  /* if (typeof displayFilteredResults === 'function') {
  displayFilteredResults();
- } */ else if (Array.isArray(window.massageShops)) {
+ } */else if (Array.isArray(window.massageShops)) {
  const shops = massageShops.filter(
  (shop) => shop.region === '경기' && shop.district === '성남' && shop.type === 'massage'
  );
  /* if (typeof displayMassageShops === 'function') {
- /* displayMassageShops(shops); */
- } */
- if (typeof updateResultsHeader === 'function') {
+ /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
  updateResultsHeader('성남 마사지 추천 BEST 샵', shops.length);
  }
  }
@@ -809,8 +807,7 @@
  // resultsTitle을 "경기 성남 마사지 업체"로 업데이트
  const resultsTitle = document.getElementById('resultsTitle');
  if (resultsTitle) {
- /* resultsTitle.textContent = '성남 마사지 추천 BEST 샵'; */
- }
+ /* resultsTitle.textContent = '성남 마사지 추천 BEST 샵'; */}
  
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {
@@ -827,3 +824,4 @@
  <div id="hamburger-menu-container"></div>
  </body>
 </html>
+/html>

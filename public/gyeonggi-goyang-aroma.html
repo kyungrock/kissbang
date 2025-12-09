@@ -12,9 +12,9 @@
      
     <link rel="canonical" href="https://msg1000.com/gyeonggi-goyang-aroma.html" />
     <meta name="author" content="마사지천국" />
- <link rel="preload" href="style.min.css" as="style" />
+ <link rel="preload" href="style.css" as="style" />
 
- <link rel="stylesheet" href="style.min.css" />
+ <link rel="stylesheet" href="style.css" />
  
  <link rel="preconnect" href="https://fonts.googleapis.com" />
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -459,7 +459,7 @@
                 
                 <div class="card-info">
                     <div class="info-item greeting">
-                        <span>마두역⭐[채아]❤카드환영❤오랜 경력으로 스웨디시❤아로마 최고의 테라피를 선사해드립니다⭐</span>
+                        <span>마두역⭐[채아]❤카드환영❤오랜 경력으로 스웨디시❤아로마 최고의 테라피</span>
                     </div>
                 </div>
                 
@@ -790,22 +790,19 @@
 
  /* if (typeof displayFilteredResults === 'function') {
  displayFilteredResults();
- } */ else if (Array.isArray(window.massageShops)) {
+ } */else if (Array.isArray(window.massageShops)) {
  const shops = massageShops.filter(
  (shop) => shop.region === '경기' && shop.district === '고양'
  );
  /* if (typeof displayMassageShops === 'function') {
- /* displayMassageShops(shops); */
- } */
- if (typeof updateResultsHeader === 'function') {
+ /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
  updateResultsHeader('고양 아로마마사지 추천 BEST 샵', shops.length);
  }
  }
 
  const resultsTitle = document.getElementById('resultsTitle');
  if (resultsTitle) {
- /* resultsTitle.textContent = '고양 아로마마사지 추천 BEST 샵'; */
- }
+ /* resultsTitle.textContent = '고양 아로마마사지 추천 BEST 샵'; */}
  
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {
@@ -941,3 +938,4 @@
  </div>
  </body>
 </html>
+/html>
