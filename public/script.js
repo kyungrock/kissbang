@@ -5,19 +5,146 @@ window.districtMap = {
     regionName: '제주',
     regionEng: 'jeju',
     districts: {
-      si: '제주시',
-      seogwipo: '서귀포',
+      si: {
+        districtsname: '제주시',
+        districtseng: 'jeju-si',
+        dongStations: {
+          'geonip-dong': '건입동',
+          'nohyeong-dong': '노형동',
+          'dodu-dong': '도두동',
+          'bonggae-dong': '봉개동',
+          'samdo1-dong': '삼도1동',
+          'samdo2-dong': '삼도2동',
+          'samyang-dong': '삼양동',
+          'ara-dong': '아라동',
+          'yeon-dong': '연동',
+          'ora-dong': '오라동',
+          'oedo-dong': '외도동',
+          'yongdam1-dong': '용담1동',
+          'yongdam2-dong': '용담2동',
+          'yongdam3-dong': '용담3동',
+          'ido1-dong': '이도1동',
+          'ido2-dong': '이도2동',
+          'ildo1-dong': '일도1동',
+          'ildo2-dong': '일도2동',
+          'jocheon-eup': '조천읍',
+          'chuja-myeon': '추자면',
+          'hangyeong-myeon': '한경면',
+          'hallim-eup': '한림읍',
+          'hwabuk-dong': '화북동',
+          'hoecheon-dong': '회천동',
+        },
+      },
+      seogwipo: {
+        districtsname: '서귀포',
+        districtseng: 'jeju-seogwipo',
+        dongStations: {
+          'daejeong-eup': '대정읍',
+          'donghong-dong': '동홍동',
+          'seohong-dong': '서홍동',
+          'seongsan-eup': '성산읍',
+          'andeok-myeon': '안덕면',
+          'yeongcheon-dong': '영천동',
+          'jungmun-dong': '중문동',
+          'jungang-dong': '중앙동',
+          'pyoseon-myeon': '표선면',
+          'hyodon-dong': '효돈동',
+        },
+      },
     },
   },
   ulsan: {
     regionName: '울산',
     regionEng: 'ulsan',
     districts: {
-      junggu: '중구',
-      namgu: '남구',
-      donggu: '동구',
-      bukgu: '북구',
-      ulju: '울주',
+      junggu: {
+        districtsname: '중구',
+        districtseng: 'ulsan-junggu',
+        dongStations: {
+          'seongnam-dong': '성남동',
+          'haksung-dong': '학성동',
+          'ujeong-dong': '우정동',
+          'daehyeon-dong': '대현동',
+          'bangeojin-dong': '방어진동',
+          'jwa-dong': '좌동',
+          'jungang-dong': '중앙동',
+          'namsan-dong': '남산동',
+          'dal-dong': '달동',
+          'muryong-dong': '무룡동',
+          'sangnam-dong': '상남동',
+          'seongnam1-dong': '성남1동',
+          'seongnam2-dong': '성남2동',
+          'okpo-dong': '옥포동',
+          'taehwa-dong': '태화동',
+        },
+      },
+      namgu: {
+        districtsname: '남구',
+        districtseng: 'ulsan-namgu',
+        dongStations: {
+          'sinjeong-dong': '신정동',
+          'ok-dong': '옥동',
+          'dal-dong': '달동',
+          'samnam-dong': '삼남동',
+          'munhwa-dong': '문현동',
+          'samsan-dong': '삼산동',
+          'yongjeong-dong': '용정동',
+          'sangbuk-dong': '상북동',
+          'jungang-dong': '중앙동',
+          'hwasan-dong': '화산동',
+          'yeongnam-dong': '영남동',
+          'unam-dong': '운암동',
+        },
+      },
+      donggu: {
+        districtsname: '동구',
+        districtseng: 'ulsan-donggu',
+        dongStations: {
+          'jeonha-dong': '전하동',
+          'ilsan-dong': '일산동',
+          'hwajeong-dong': '화정동',
+          'bangojin-dong': '방어진동',
+          'dongbu-dong': '동부동',
+          'nam-gu-dong': '남구동',
+          'seobu-dong': '서부동',
+          'jungang-dong': '중앙동',
+          'hyomun-dong': '효문동',
+          'sangbuk-dong': '상북동',
+        },
+      },
+      bukgu: {
+        districtsname: '북구',
+        districtseng: 'ulsan-bukgu',
+        dongStations: {
+          'jinjang-dong': '진장동',
+          'nongso-dong': '농소동',
+          'songjeong-dong': '송정동',
+          'yeompo-dong': '염포동',
+          'yangjeong-dong': '양정동',
+          'gonghang-dong': '공항동',
+          'hwasan-dong': '화산동',
+          'sangbuk-dong': '상북동',
+          'jungang-dong': '중앙동',
+          'dongbu-dong': '동부동',
+          'seobu-dong': '서부동',
+        },
+      },
+      ulju: {
+        districtsname: '울주',
+        districtseng: 'ulsan-ulju',
+        dongStations: {
+          'beomseo-eup': '범서읍',
+          'eonyang-eup': '언양읍',
+          'onyang-eup': '온양읍',
+          'unjang-eup': '운장읍',
+          'jangan-eup': '장안읍',
+          'sangbuk-myeon': '상북면',
+          'samnam-myeon': '삼남면',
+          'seosaeng-myeon': '서생면',
+          'wondong-myeon': '원동면',
+          'jungdong-myeon': '중동면',
+        },
+      },
     },
   },
   // 추가 지역들 (필요시 확장)
@@ -25,168 +152,1543 @@ window.districtMap = {
     regionName: '서울',
     regionEng: 'seoul',
     districts: {
-      gangnam: '강남',
-      gangdong: '강동',
-      gangbuk: '강북',
-      gangseo: '강서',
-      gwanak: '관악',
-      gwangjin: '광진',
-      guro: '구로',
-      geumcheon: '금천',
-      nowon: '노원',
-      dobong: '도봉',
-      dongdaemun: '동대문',
-      dongjak: '동작',
-      mapo: '마포',
-      seodaemun: '서대문',
-      seocho: '서초',
-      seongdong: '성동',
-      seongbuk: '성북',
-      songpa: '송파',
-      yangcheon: '양천',
-      yeongdeungpo: '영등포',
-      yongsan: '용산',
-      eunpyeong: '은평',
-      jongno: '종로',
-      junggu: '중구',
-      jungnang: '중랑',
+      gangnam: {
+        districtsname: '강남',
+        districtseng: 'seoul-gangnam',
+        dongStations: {
+          'yeoksam-dong': '역삼동',
+          'nonhyeon-dong': '논현동',
+          'sinsa-dong': '신사동',
+          'apgujeong-dong': '압구정동',
+          'cheongdam-dong': '청담동',
+          'samseong-dong': '삼성동',
+          'daechi-dong': '대치동',
+          'dokok-dong': '도곡동',
+          'gaepo-dong': '개포동',
+          'ilwon-dong': '일원동',
+          'suseo-dong': '수서동',
+          'segyeok-dong': '세곡동',
+          'gangnam-station': '강남역',
+          'yeoksam-station': '역삼역',
+          'seolleung-station': '선릉역',
+          'samseong-station': '삼성역',
+          'sports-complex-station': '종합운동장역',
+          'olympic-park-station': '올림픽공원역',
+          'gaepo-station': '개포동역',
+          'daechi-station': '대치역',
+          'dokok-station': '도곡역',
+          'hanti-station': '한티역',
+          'guryong-station': '구룡역',
+        },
+      },
+      gangdong: {
+        districtsname: '강동',
+        districtseng: 'seoul-gangdong',
+        dongStations: {
+          'gildong-dong': '길동',
+          'gwangjang-dong': '광장동',
+          'gubeundong-dong': '구반동',
+          'godeok-dong': '고덕동',
+          'dunchon-dong': '둔촌동',
+          'myeongil-dong': '명일동',
+          'sangil-dong': '상일동',
+          'seongnae-dong': '성내동',
+          'amseo-dong': '암서동',
+          'cheonho-dong': '천호동',
+          'pungnap-dong': '풍납동',
+          'gildong-station': '길동역',
+          'gwangjang-station': '광장역',
+          'godeok-station': '고덕역',
+          'dunchon-station': '둔촌동역',
+          'myeongil-station': '명일역',
+          'sangil-station': '상일동역',
+          'cheonho-station': '천호역',
+          'pungnap-station': '풍납토성역',
+        },
+      },
+      gangbuk: {
+        districtsname: '강북',
+        districtseng: 'seoul-gangbuk',
+        dongStations: {
+          'miari-dong': '미아동',
+          'suyu-dong': '수유동',
+          'beon-dong': '번동',
+          'samseon-dong': '삼선동',
+          'sungsan-dong': '성산동',
+          'ui-dong': '우이동',
+          'inheon-dong': '인헌동',
+          'miari-station': '미아역',
+          'suyu-station': '수유역',
+          'beon-station': '번동역',
+          'samsong-station': '삼송역',
+        },
+      },
+      gangseo: {
+        districtsname: '강서',
+        districtseng: 'seoul-gangseo',
+        dongStations: {
+          'gayang-dong': '가양동',
+          'gonghang-dong': '공항동',
+          'gwahae-dong': '과해동',
+          'deungchon-dong': '등촌동',
+          'magok-dong': '마곡동',
+          'banghwa-dong': '방화동',
+          'songjeong-dong': '송정동',
+          'ujung-dong': '우장동',
+          'hwagok-dong': '화곡동',
+          'gayang-station': '가양역',
+          'gonghang-station': '김포공항역',
+          'magok-station': '마곡나루역',
+          'banghwa-station': '방화역',
+          'songjeong-station': '송정역',
+          'hwagok-station': '화곡역',
+        },
+      },
+      gwanak: {
+        districtsname: '관악',
+        districtseng: 'seoul-gwanak',
+        dongStations: {
+          'nakseongdae-dong': '낙성대동',
+          'nangok-dong': '난곡동',
+          'daehak-dong': '대학동',
+          'miseong-dong': '미성동',
+          'bongcheon-dong': '봉천동',
+          'sangdo-dong': '상도동',
+          'seorim-dong': '서림동',
+          'seowon-dong': '서원동',
+          'sinlim-dong': '신림동',
+          'euncheon-dong': '은천동',
+          'inheon-dong': '인헌동',
+          'jeongneung-dong': '정릉동',
+          'cheongnyangni-station': '청량리역',
+          'nakseongdae-station': '낙성대역',
+          'seoul-nat-univ-station': '서울대입구역',
+          'bongcheon-station': '봉천역',
+          'sangdo-station': '상도역',
+          'sinlim-station': '신림역',
+        },
+      },
+      gwangjin: {
+        districtsname: '광진',
+        districtseng: 'seoul-gwangjin',
+        dongStations: {
+          'gwangjang-dong': '광장동',
+          'gujung-dong': '구의동',
+          'gunja-dong': '군자동',
+          'neung-dong': '능동',
+          'jayang-dong': '자양동',
+          'hwayang-dong': '화양동',
+          'gwangjang-station': '광장역',
+          'gujung-station': '구의역',
+          'gunja-station': '군자역',
+          'neung-station': '어린이대공원역',
+          'jayang-station': '자양역',
+          'hwayang-station': '화양역',
+        },
+      },
+      guro: {
+        districtsname: '구로',
+        districtseng: 'seoul-guro',
+        dongStations: {
+          'guro-dong': '구로동',
+          'gaebong-dong': '개봉동',
+          'gasan-dong': '가산동',
+          'oryu-dong': '오류동',
+          'cheolsan-dong': '철산동',
+          'guro-station': '구로역',
+          'gaebong-station': '개봉역',
+          'gasan-digital-station': '가산디지털단지역',
+          'oryu-station': '오류동역',
+          'cheolsan-station': '철산역',
+        },
+      },
+      geumcheon: {
+        districtsname: '금천',
+        districtseng: 'seoul-geumcheon',
+        dongStations: {
+          'gaebong-dong': '개봉동',
+          'gasan-dong': '가산동',
+          'siheung-dong': '시흥동',
+          'yeongdeung-dong': '영등동',
+          'gasan-digital-station': '가산디지털단지역',
+          'siheung-station': '시흥역',
+          'geumcheon-gu-office-station': '금천구청역',
+        },
+      },
+      nowon: {
+        districtsname: '노원',
+        districtseng: 'seoul-nowon',
+        dongStations: {
+          'gongneung-dong': '공릉동',
+          'danggogae-dong': '당고개동',
+          'dangjung-dong': '당중동',
+          'maebong-dong': '매봉동',
+          'sanggye-dong': '상계동',
+          'wolgok-dong': '월계동',
+          'junggye-dong': '중계동',
+          'haengdang-dong': '행당동',
+          'gongneung-station': '공릉역',
+          'danggogae-station': '당고개역',
+          'sanggye-station': '상계역',
+          'wolgok-station': '월계역',
+          'junggye-station': '중계역',
+        },
+      },
+      dobong: {
+        districtsname: '도봉',
+        districtseng: 'seoul-dobong',
+        dongStations: {
+          'banghak-dong': '방학동',
+          'sanggye-dong': '상계동',
+          'dobong-dong': '도봉동',
+          'chang-dong': '창동',
+          'banghak-station': '방학역',
+          'dobong-station': '도봉역',
+          'chang-dong-station': '창동역',
+        },
+      },
+      dongdaemun: {
+        districtsname: '동대문',
+        districtseng: 'seoul-dongdaemun',
+        dongStations: {
+          'jegi-dong': '제기동',
+          'jeonnong-dong': '전농동',
+          'dapsimni-dong': '답십리동',
+          'yongdu-dong': '용두동',
+          'imun-dong': '이문동',
+          'hoegi-dong': '회기동',
+          'jegi-station': '제기동역',
+          'jeonnong-station': '전농역',
+          'dapsimni-station': '답십리역',
+          'yongdu-station': '용두역',
+          'imun-station': '이문역',
+          'hoegi-station': '회기역',
+        },
+      },
+      dongjak: {
+        districtsname: '동작',
+        districtseng: 'seoul-dongjak',
+        dongStations: {
+          'noryangjin-dong': '노량진동',
+          'sangdo-dong': '상도동',
+          'sadang-dong': '사당동',
+          'heukseok-dong': '흑석동',
+          'noryangjin-station': '노량진역',
+          'sangdo-station': '상도역',
+          'sadang-station': '사당역',
+          'heukseok-station': '흑석역',
+        },
+      },
+      mapo: {
+        districtsname: '마포',
+        districtseng: 'seoul-mapo',
+        dongStations: {
+          'gongdeok-dong': '공덕동',
+          'dohwa-dong': '도화동',
+          'mangwon-dong': '망원동',
+          'seogyo-dong': '서교동',
+          'seongmisan-dong': '성미산동',
+          'ahyeon-dong': '아현동',
+          'yeonnam-dong': '연남동',
+          'yongsan-dong': '용산동',
+          'hapjeong-dong': '합정동',
+          'hongdae-dong': '홍대동',
+          'gongdeok-station': '공덕역',
+          'mangwon-station': '망원역',
+          'seogyo-station': '서강대역',
+          'ahyeon-station': '아현역',
+          'hapjeong-station': '합정역',
+          'hongik-univ-station': '홍대입구역',
+        },
+      },
+      seodaemun: {
+        districtsname: '서대문',
+        districtseng: 'seoul-seodaemun',
+        dongStations: {
+          'gongdeok-dong': '공덕동',
+          'dohwa-dong': '도화동',
+          'mangwon-dong': '망원동',
+          'seogyo-dong': '서교동',
+          'ahyeon-dong': '아현동',
+          'yeonhui-dong': '연희동',
+          'euljiro-dong': '을지로동',
+          'chungjeongno-dong': '충정로동',
+          'hongje-dong': '홍제동',
+          'gongdeok-station': '공덕역',
+          'ahyeon-station': '아현역',
+          'chungjeongno-station': '충정로역',
+          'hongje-station': '홍제역',
+        },
+      },
+      seocho: {
+        districtsname: '서초',
+        districtseng: 'seoul-seocho',
+        dongStations: {
+          'bangbae-dong': '방배동',
+          'seorae-dong': '서래동',
+          'seocho-dong': '서초동',
+          'yangjae-dong': '양재동',
+          'yeoksam-dong': '역삼동',
+          'jamwon-dong': '잠원동',
+          'bangbae-station': '방배역',
+          'seocho-station': '서초역',
+          'yangjae-station': '양재역',
+          'yeoksam-station': '역삼역',
+          'jamwon-station': '잠원역',
+        },
+      },
+      seongdong: {
+        districtsname: '성동',
+        districtseng: 'seoul-seongdong',
+        dongStations: {
+          'wangsimni-dong': '왕십리동',
+          'seongsu-dong': '성수동',
+          'sangwangsimni-dong': '상왕십리동',
+          'haengdang-dong': '행당동',
+          'hongik-dong': '홍익동',
+          'wangsimni-station': '왕십리역',
+          'seongsu-station': '성수역',
+          'haengdang-station': '행당역',
+        },
+      },
+      seongbuk: {
+        districtsname: '성북',
+        districtseng: 'seoul-seongbuk',
+        dongStations: {
+          'ansan-dong': '안암동',
+          'jeongneung-dong': '정릉동',
+          'samseon-dong': '삼선동',
+          'seongbuk-dong': '성북동',
+          'sungsan-dong': '성산동',
+          'ansan-station': '안암역',
+          'jeongneung-station': '정릉역',
+          'seongbuk-station': '성신여대입구역',
+        },
+      },
+      songpa: {
+        districtsname: '송파',
+        districtseng: 'seoul-songpa',
+        dongStations: {
+          'bang-i-dong': '방이동',
+          'gasan-dong': '가산동',
+          'geoyeo-dong': '거여동',
+          'macheon-dong': '마천동',
+          'munjeong-dong': '문정동',
+          'sangok-dong': '상옥동',
+          'seokchon-dong': '석촌동',
+          'songpa-dong': '송파동',
+          'jangji-dong': '장지동',
+          'jamsil-dong': '잠실동',
+          'bang-i-station': '방이역',
+          'geoyeo-station': '거여역',
+          'macheon-station': '마천역',
+          'munjeong-station': '문정역',
+          'seokchon-station': '석촌역',
+          'songpa-station': '송파역',
+          'jangji-station': '장지역',
+          'jamsil-station': '잠실역',
+          'sports-complex-station': '종합운동장역',
+        },
+      },
+      yangcheon: {
+        districtsname: '양천',
+        districtseng: 'seoul-yangcheon',
+        dongStations: {
+          'mok-dong': '목동',
+          'sinjeong-dong': '신정동',
+          'yeomchang-dong': '염창동',
+          'mok-dong-station': '목동역',
+          'sinjeong-station': '신정역',
+          'yeomchang-station': '염창역',
+        },
+      },
+      yeongdeungpo: {
+        districtsname: '영등포',
+        districtseng: 'seoul-yeongdeungpo',
+        dongStations: {
+          'yeongdeungpo-dong': '영등포동',
+          'yeouido-dong': '여의도동',
+          'dangsan-dong': '당산동',
+          'mullae-dong': '문래동',
+          'singil-dong': '신길동',
+          'yeongdeungpo-station': '영등포역',
+          'yeouido-station': '여의도역',
+          'dangsan-station': '당산역',
+          'mullae-station': '문래역',
+          'singil-station': '신길역',
+        },
+      },
+      yongsan: {
+        districtsname: '용산',
+        districtseng: 'seoul-yongsan',
+        dongStations: {
+          'yongsan-dong': '용산동',
+          'hannam-dong': '한남동',
+          'itawon-dong': '이태원동',
+          'seobinggo-dong': '서빙고동',
+          'wonhyoro-dong': '원효로동',
+          'yongsan-station': '용산역',
+          'hannam-station': '한남역',
+          'itawon-station': '이태원역',
+          'seobinggo-station': '서빙고역',
+          'wonhyoro-station': '원효로역',
+        },
+      },
+      eunpyeong: {
+        districtsname: '은평',
+        districtseng: 'seoul-eunpyeong',
+        dongStations: {
+          'bulgwang-dong': '불광동',
+          'eungam-dong': '응암동',
+          'jinhwa-dong': '진흥동',
+          'bulgwang-station': '불광역',
+          'eungam-station': '응암역',
+          'jinhwa-station': '진흥역',
+        },
+      },
+      jongno: {
+        districtsname: '종로',
+        districtseng: 'seoul-jongno',
+        dongStations: {
+          'gwanghwamun-dong': '광화문동',
+          'jongno-dong': '종로동',
+          'myeong-dong': '명동',
+          'samcheong-dong': '삼청동',
+          'sejongno-dong': '세종로동',
+          'anguk-dong': '안국동',
+          'insa-dong': '인사동',
+          'jonggak-dong': '종각동',
+          'gwanghwamun-station': '광화문역',
+          'jongno-3ga-station': '종로3가역',
+          'jongno-5ga-station': '종로5가역',
+          'myeong-dong-station': '명동역',
+          'anguk-station': '안국역',
+          'jonggak-station': '종각역',
+        },
+      },
+      junggu: {
+        districtsname: '중구',
+        districtseng: 'seoul-junggu',
+        dongStations: {
+          'myeong-dong': '명동',
+          'euljiro-dong': '을지로동',
+          'jung-dong': '중동',
+          'hwanghak-dong': '황학동',
+          'pil-dong': '필동',
+          'myeong-dong-station': '명동역',
+          'euljiro-1ga-station': '을지로입구역',
+          'euljiro-3ga-station': '을지로3가역',
+          'euljiro-4ga-station': '을지로4가역',
+          'dongdaemun-station': '동대문역',
+          'hwanghak-station': '황학역',
+        },
+      },
+      jungnang: {
+        districtsname: '중랑',
+        districtseng: 'seoul-jungnang',
+        dongStations: {
+          'mangu-dong': '면목동',
+          'sangbong-dong': '상봉동',
+          'jungnang-dong': '중랑동',
+          'mangu-station': '면목역',
+          'sangbong-station': '상봉역',
+          'jungnang-station': '중랑역',
+        },
+      },
     },
   },
   busan: {
     regionName: '부산',
     regionEng: 'busan',
     districts: {
-      junggu: '중구',
-      seogu: '서구',
-      donggu: '동구',
-      yeongdo: '영도',
-      busanjin: '부산진',
-      dongnae: '동래',
-      namgu: '남구',
-      bukgu: '북구',
-      haeundae: '해운대',
-      saha: '사하',
-      geumjeong: '금정',
-      gangseo: '강서',
-      yeonje: '연제',
-      suyeong: '수영',
-      sasang: '사상',
-      gijang: '기장',
+      junggu: {
+        districtsname: '중구',
+        districtseng: 'busan-junggu',
+        dongStations: {
+          'jungang-dong': '중앙동',
+          'donggwang-dong': '동광동',
+          'daesin-dong': '대신동',
+          'bosu-dong': '보수동',
+          'bupyeong-dong': '부평동',
+          'nampo-dong': '남포동',
+          'yeongju-dong': '영주동',
+          'jungang-station': '중앙역',
+          'nampo-dong-station': '남포역',
+          'bupyeong-station': '부평역',
+        },
+      },
+      seogu: {
+        districtsname: '서구',
+        districtseng: 'busan-seogu',
+        dongStations: {
+          'amnam-dong': '암남동',
+          'amgok-dong': '암곡동',
+          'chungmu-dong': '충무동',
+          'dongam-dong': '동암동',
+          'saha-dong': '사하동',
+          'seo-dong': '서동',
+          'amnam-station': '암남역',
+          'chungmu-station': '충무역',
+        },
+      },
+      donggu: {
+        districtsname: '동구',
+        districtseng: 'busan-donggu',
+        dongStations: {
+          'choryang-dong': '초량동',
+          'suam-dong': '수암동',
+          'jwa-dong': '좌천동',
+          'jungang-dong': '중앙동',
+          'choryang-station': '초량역',
+          'busan-station': '부산역',
+        },
+      },
+      yeongdo: {
+        districtsname: '영도',
+        districtseng: 'busan-yeongdo',
+        dongStations: {
+          'yeongseon-dong': '영선동',
+          'dongsam-dong': '동삼동',
+          'bongrae-dong': '봉래동',
+          'taejong-dong': '태종동',
+          'cheonghak-dong': '청학동',
+          'yeongseon-station': '영선역',
+        },
+      },
+      busanjin: {
+        districtsname: '부산진',
+        districtseng: 'busan-busanjin',
+        dongStations: {
+          'yangjeong-dong': '양정동',
+          'jeonpo-dong': '전포동',
+          'bujeon-dong': '부전동',
+          'gaegeum-dong': '개금동',
+          'gaya-dong': '가야동',
+          'danggam-dong': '당감동',
+          'yangjeong-station': '양정역',
+          'jeonpo-station': '전포역',
+          'bujeon-station': '부전역',
+          'gaegeum-station': '개금역',
+          'gaya-station': '가야역',
+        },
+      },
+      dongnae: {
+        districtsname: '동래',
+        districtseng: 'busan-dongnae',
+        dongStations: {
+          'myeongnyun-dong': '명륜동',
+          'oncheon-dong': '온천동',
+          'sajeong-dong': '사직동',
+          'ansan-dong': '안산동',
+          'chungnyeol-dong': '충렬동',
+          'myeongnyun-station': '명륜역',
+          'oncheon-station': '온천역',
+          'sajeong-station': '사직역',
+          'dongnae-station': '동래역',
+        },
+      },
+      namgu: {
+        districtsname: '남구',
+        districtseng: 'busan-namgu',
+        dongStations: {
+          'daeyeon-dong': '대연동',
+          'yongho-dong': '용호동',
+          'yongdang-dong': '용당동',
+          'gamman-dong': '감만동',
+          'uam-dong': '우암동',
+          'munhyeon-dong': '문현동',
+          'daeyeon-station': '대연역',
+          'yongho-station': '용호역',
+          'gamman-station': '감만역',
+          'munhyeon-station': '문현역',
+        },
+      },
+      bukgu: {
+        districtsname: '북구',
+        districtseng: 'busan-bukgu',
+        dongStations: {
+          'gupo-dong': '구포동',
+          'deokcheon-dong': '덕천동',
+          'hwaam-dong': '화명동',
+          'geumgok-dong': '금곡동',
+          'gupo-station': '구포역',
+          'deokcheon-station': '덕천역',
+          'hwaam-station': '화명역',
+          'geumgok-station': '금곡역',
+        },
+      },
+      haeundae: {
+        districtsname: '해운대',
+        districtseng: 'busan-haeundae',
+        dongStations: {
+          'jung-dong': '중동',
+          'seongjeong-dong': '송정동',
+          'jwa-dong': '좌동',
+          'u-dong': '우동',
+          'jangsan-dong': '장산동',
+          'banyeo-dong': '반여동',
+          'haeundae-station': '해운대역',
+          'dongbaek-station': '동백역',
+          'seongjeong-station': '송정역',
+          'jangsan-station': '장산역',
+          'banyeo-station': '반여역',
+        },
+      },
+      saha: {
+        districtsname: '사하',
+        districtseng: 'busan-saha',
+        dongStations: {
+          'gudok-dong': '구덕동',
+          'hadan-dong': '하단동',
+          'dangni-dong': '당리동',
+          'sinpyeong-dong': '신평동',
+          'jangnim-dong': '장림동',
+          'gudok-station': '구덕역',
+          'hadan-station': '하단역',
+          'dangni-station': '당리역',
+          'sinpyeong-station': '신평역',
+        },
+      },
+      geumjeong: {
+        districtsname: '금정',
+        districtseng: 'busan-geumjeong',
+        dongStations: {
+          'seomyeon-dong': '서면동',
+          'geumjeong-dong': '금정동',
+          'durae-dong': '두구동',
+          'namsan-dong': '남산동',
+          'seomyeon-station': '서면역',
+          'geumjeong-station': '금정역',
+          'durae-station': '두구역',
+        },
+      },
+      gangseo: {
+        districtsname: '강서',
+        districtseng: 'busan-gangseo',
+        dongStations: {
+          'myeongji-dong': '명지동',
+          'gadeok-dong': '가덕동',
+          'jinhae-dong': '진해동',
+          'myeongji-station': '명지역',
+          'gadeok-station': '가덕역',
+        },
+      },
+      yeonje: {
+        districtsname: '연제',
+        districtseng: 'busan-yeonje',
+        dongStations: {
+          'yeonsan-dong': '연산동',
+          'munhyeon-dong': '문현동',
+          'yeonsan-station': '연산역',
+          'munhyeon-station': '문현역',
+        },
+      },
+      suyeong: {
+        districtsname: '수영',
+        districtseng: 'busan-suyeong',
+        dongStations: {
+          'suyeong-dong': '수영동',
+          'mangmi-dong': '망미동',
+          'gwangan-dong': '광안동',
+          'namcheon-dong': '남천동',
+          'suyeong-station': '수영역',
+          'mangmi-station': '망미역',
+          'gwangan-station': '광안역',
+          'namcheon-station': '남천역',
+        },
+      },
+      sasang: {
+        districtsname: '사상',
+        districtseng: 'busan-sasang',
+        dongStations: {
+          'sasang-dong': '사상동',
+          'gupo-dong': '구포동',
+          'deokcheon-dong': '덕천동',
+          'sasang-station': '사상역',
+          'gupo-station': '구포역',
+          'deokcheon-station': '덕천역',
+        },
+      },
+      gijang: {
+        districtsname: '기장',
+        districtseng: 'busan-gijang',
+        dongStations: {
+          'gijang-eup': '기장읍',
+          'jangan-eup': '장안읍',
+          'ilgwang-myeon': '일광면',
+          'jeonggwan-myeon': '정관면',
+          'songjeong-myeon': '송정면',
+          'gijang-station': '기장역',
+          'jangan-station': '장안역',
+          'ilgwang-station': '일광역',
+        },
+      },
     },
   },
   daegu: {
     regionName: '대구',
     regionEng: 'daegu',
     districts: {
-      junggu: '중구',
-      donggu: '동구',
-      seogu: '서구',
-      namgu: '남구',
-      bukgu: '북구',
-      suseong: '수성구',
-      dalseo: '달서구',
-      dalsung: '달성군',
+      junggu: {
+        districtsname: '중구',
+        districtseng: 'daegu-junggu',
+        dongStations: {
+          'dongseongno-dong': '동성로동',
+          'jungang-dong': '중앙동',
+          'namseong-dong': '남성로동',
+          'seomun-dong': '서문동',
+          'dongseongno-station': '동성로역',
+          'jungangno-station': '중앙로역',
+          'seomun-market-station': '서문시장역',
+        },
+      },
+      donggu: {
+        districtsname: '동구',
+        districtseng: 'daegu-donggu',
+        dongStations: {
+          'dongchon-dong': '동촌동',
+          'bangchon-dong': '방촌동',
+          'haean-dong': '해안동',
+          'sinam-dong': '신암동',
+          'dongchon-station': '동촌역',
+          'bangchon-station': '방촌역',
+          'haean-station': '해안역',
+        },
+      },
+      seogu: {
+        districtsname: '서구',
+        districtseng: 'daegu-seogu',
+        dongStations: {
+          'naedang-dong': '내당동',
+          'pyeongni-dong': '평리동',
+          'isan-dong': '이현동',
+          'seongdang-dong': '성당동',
+          'naedang-station': '내당역',
+          'pyeongni-station': '평리역',
+          'isan-station': '이현역',
+        },
+      },
+      namgu: {
+        districtsname: '남구',
+        districtseng: 'daegu-namgu',
+        dongStations: {
+          'daemyeong-dong': '대명동',
+          'eunhye-dong': '은해동',
+          'sangin-dong': '상인동',
+          'yongji-dong': '용지동',
+          'daemyeong-station': '대명역',
+          'eunhye-station': '은해역',
+          'sangin-station': '상인역',
+          'yongji-station': '용지역',
+        },
+      },
+      bukgu: {
+        districtsname: '북구',
+        districtseng: 'daegu-bukgu',
+        dongStations: {
+          'gongpyeong-dong': '공평동',
+          'gwaneum-dong': '관음동',
+          'dongbu-dong': '동부동',
+          'taejeon-dong': '태전동',
+          'gongpyeong-station': '공평역',
+          'gwaneum-station': '관음역',
+          'taejeon-station': '태전역',
+        },
+      },
+      suseong: {
+        districtsname: '수성구',
+        districtseng: 'daegu-suseong',
+        dongStations: {
+          'manchon-dong': '만촌동',
+          'hwawon-dong': '화원동',
+          'jisan-dong': '지산동',
+          'rangeum-dong': '범어동',
+          'manchon-station': '만촌역',
+          'hwawon-station': '화원역',
+          'jisan-station': '지산역',
+          'rangeum-station': '범어역',
+        },
+      },
+      dalseo: {
+        districtsname: '달서구',
+        districtseng: 'daegu-dalseo',
+        dongStations: {
+          'wolseong-dong': '월성동',
+          'seongseo-dong': '성서동',
+          'yongsan-dong': '용산동',
+          'ipyeong-dong': '이평동',
+          'wolseong-station': '월성역',
+          'seongseo-station': '성서역',
+          'yongsan-station': '용산역',
+        },
+      },
+      dalsung: {
+        districtsname: '달성군',
+        districtseng: 'daegu-dalsung',
+        dongStations: {
+          'hyeonpung-eup': '현풍읍',
+          'gachang-myeon': '가창면',
+          'habin-myeon': '하빈면',
+          'yonggye-myeon': '옥계면',
+          'hyeonpung-station': '현풍역',
+          'gachang-station': '가창역',
+        },
+      },
     },
   },
   incheon: {
     regionName: '인천',
     regionEng: 'incheon',
     districts: {
-      junggu: '중구',
-      donggu: '동구',
-      michuhol: '미추홀',
-      yeonsu: '연수',
-      namdong: '남동',
-      bupyeong: '부평',
-      gyeyang: '계양',
-      seogu: '서구',
-      ganghwa: '강화',
-      ongjin: '옹진',
+      junggu: {
+        districtsname: '중구',
+        districtseng: 'incheon-junggu',
+        dongStations: {
+          'sinpo-dong': '신포동',
+          'yonghyeon-dong': '용현동',
+          'dohwa-dong': '도화동',
+          'jungang-dong': '중앙동',
+          'sinpo-station': '신포역',
+          'yonghyeon-station': '용현역',
+          'dohwa-station': '도화역',
+        },
+      },
+      donggu: {
+        districtsname: '동구',
+        districtseng: 'incheon-donggu',
+        dongStations: {
+          'songhyeon-dong': '송현동',
+          'wolmi-dong': '월미동',
+          'hwasu-dong': '화수동',
+          'songhyeon-station': '송현역',
+          'wolmi-station': '월미역',
+          'hwasu-station': '화수역',
+        },
+      },
+      michuhol: {
+        districtsname: '미추홀',
+        districtseng: 'incheon-michuhol',
+        dongStations: {
+          'munhak-dong': '문학동',
+          'gongchon-dong': '공촌동',
+          'galsan-dong': '갈산동',
+          'yonghyeon-dong': '용현동',
+          'munhak-station': '문학역',
+          'gongchon-station': '공촌역',
+          'galsan-station': '갈산역',
+        },
+      },
+      yeonsu: {
+        districtsname: '연수',
+        districtseng: 'incheon-yeonsu',
+        dongStations: {
+          'songdo-dong': '송도동',
+          'yeonsu-dong': '연수동',
+          'dongchun-dong': '동춘동',
+          'songdo-station': '송도역',
+          'yeonsu-station': '연수역',
+          'dongchun-station': '동춘역',
+          'incheon-grand-park-station': '인천대공원역',
+        },
+      },
+      namdong: {
+        districtsname: '남동',
+        districtseng: 'incheon-namdong',
+        dongStations: {
+          'guyeong-dong': '구영동',
+          'namdong-dong': '남동동',
+          'nonhyeon-dong': '논현동',
+          'mansu-dong': '만수동',
+          'guyeong-station': '구영역',
+          'namdong-station': '남동역',
+          'nonhyeon-station': '논현역',
+          'mansu-station': '만수역',
+        },
+      },
+      bupyeong: {
+        districtsname: '부평',
+        districtseng: 'incheon-bupyeong',
+        dongStations: {
+          'bupyeong-dong': '부평동',
+          'galsan-dong': '갈산동',
+          'samsan-dong': '삼산동',
+          'cheongna-dong': '청라동',
+          'bupyeong-station': '부평역',
+          'galsan-station': '갈산역',
+          'samsan-station': '삼산역',
+          'cheongna-station': '청라역',
+        },
+      },
+      gyeyang: {
+        districtsname: '계양',
+        districtseng: 'incheon-gyeyang',
+        dongStations: {
+          'gyeyang-dong': '계양동',
+          'galsan-dong': '갈산동',
+          'bupyeong-dong': '부평동',
+          'gyeyang-station': '계양역',
+          'galsan-station': '갈산역',
+          'bupyeong-station': '부평역',
+        },
+      },
+      seogu: {
+        districtsname: '서구',
+        districtseng: 'incheon-seogu',
+        dongStations: {
+          'geomsan-dong': '검산동',
+          'gajeong-dong': '가정동',
+          'seoknam-dong': '석남동',
+          'geomsan-station': '검산역',
+          'gajeong-station': '가정역',
+          'seoknam-station': '석남역',
+        },
+      },
+      ganghwa: {
+        districtsname: '강화',
+        districtseng: 'incheon-ganghwa',
+        dongStations: {
+          'ganghwa-eup': '강화읍',
+          'gyodong-myeon': '교동면',
+          'samsan-myeon': '삼산면',
+          'seonwon-myeon': '선원면',
+          'ganghwa-station': '강화역',
+        },
+      },
+      ongjin: {
+        districtsname: '옹진',
+        districtseng: 'incheon-ongjin',
+        dongStations: {
+          'yeongheung-myeon': '영흥면',
+          'baengnyeong-myeon': '백령면',
+          'deokjeok-myeon': '덕적면',
+          'yeongheung-station': '영흥역',
+        },
+      },
     },
   },
   gwangju: {
     regionName: '광주',
     regionEng: 'gwangju',
     districts: {
-      donggu: '동구',
-      seogu: '서구',
-      namgu: '남구',
-      bukgu: '북구',
-      gwangsan: '광산',
+      donggu: {
+        districtsname: '동구',
+        districtseng: 'gwangju-donggu',
+        dongStations: {
+          'jisan-dong': '지산동',
+          'daein-dong': '대인동',
+          'janggyo-dong': '장교동',
+          'yongbong-dong': '용봉동',
+          'jisan-station': '지산역',
+          'daein-station': '대인역',
+          'janggyo-station': '장교역',
+        },
+      },
+      seogu: {
+        districtsname: '서구',
+        districtseng: 'gwangju-seogu',
+        dongStations: {
+          'yangrim-dong': '양림동',
+          'pungam-dong': '풍암동',
+          'sangmu-dong': '상무동',
+          'gwangsan-dong': '광산동',
+          'yangrim-station': '양림역',
+          'pungam-station': '풍암역',
+          'sangmu-station': '상무역',
+        },
+      },
+      namgu: {
+        districtsname: '남구',
+        districtseng: 'gwangju-namgu',
+        dongStations: {
+          'chungjang-dong': '충장동',
+          'geumnam-dong': '금남동',
+          'yangdong-dong': '양동',
+          'bongseon-dong': '봉선동',
+          'chungjang-station': '충장역',
+          'geumnam-station': '금남역',
+          'yangdong-station': '양동역',
+        },
+      },
+      bukgu: {
+        districtsname: '북구',
+        districtseng: 'gwangju-bukgu',
+        dongStations: {
+          'munheung-dong': '문흥동',
+          'yongbong-dong': '용봉동',
+          'ilgok-dong': '일곡동',
+          'imdong-dong': '임동',
+          'munheung-station': '문흥역',
+          'yongbong-station': '용봉역',
+          'ilgok-station': '일곡역',
+        },
+      },
+      gwangsan: {
+        districtsname: '광산',
+        districtseng: 'gwangju-gwangsan',
+        dongStations: {
+          'gwangsan-dong': '광산동',
+          'songjeong-dong': '송정동',
+          'nokdong-dong': '녹동',
+          'suwan-dong': '수완동',
+          'gwangsan-station': '광산역',
+          'songjeong-station': '송정역',
+          'nokdong-station': '녹동역',
+          'suwan-station': '수완역',
+        },
+      },
     },
   },
   daejeon: {
     regionName: '대전',
     regionEng: 'daejeon',
     districts: {
-      donggu: '동구',
-      junggu: '중구',
-      seogu: '서구',
-      yuseong: '유성',
-      daedeok: '대덕',
+      donggu: {
+        districtsname: '동구',
+        districtseng: 'daejeon-donggu',
+        dongStations: {
+          'panam-dong': '판암동',
+          'sindae-dong': '신대동',
+          'jangan-dong': '장안동',
+          'yongun-dong': '용운동',
+          'panam-station': '판암역',
+          'sindae-station': '신대역',
+          'jangan-station': '장안역',
+        },
+      },
+      junggu: {
+        districtsname: '중구',
+        districtseng: 'daejeon-junggu',
+        dongStations: {
+          'jungang-dong': '중앙동',
+          'daeseong-dong': '대성동',
+          'inheon-dong': '인헌동',
+          'seonhwa-dong': '선화동',
+          'jungang-station': '중앙역',
+          'daeseong-station': '대성역',
+          'inheon-station': '인헌역',
+        },
+      },
+      seogu: {
+        districtsname: '서구',
+        districtseng: 'daejeon-seogu',
+        dongStations: {
+          'tanbang-dong': '탄방동',
+          'gwanpyeong-dong': '관평동',
+          'dunsan-dong': '둔산동',
+          'jeonmin-dong': '전민동',
+          'tanbang-station': '탄방역',
+          'gwanpyeong-station': '관평역',
+          'dunsan-station': '둔산역',
+          'jeonmin-station': '전민역',
+        },
+      },
+      yuseong: {
+        districtsname: '유성',
+        districtseng: 'daejeon-yuseong',
+        dongStations: {
+          'yuseong-dong': '유성동',
+          'jijeong-dong': '지정동',
+          'noeun-dong': '노은동',
+          'guseong-dong': '구성동',
+          'yuseong-station': '유성역',
+          'jijeong-station': '지정역',
+          'noeun-station': '노은역',
+          'guseong-station': '구성역',
+        },
+      },
+      daedeok: {
+        districtsname: '대덕',
+        districtseng: 'daejeon-daedeok',
+        dongStations: {
+          'daedeok-dong': '대덕동',
+          'hoedeok-dong': '회덕동',
+          'songjeong-dong': '송정동',
+          'jangdae-dong': '장대동',
+          'daedeok-station': '대덕역',
+          'hoedeok-station': '회덕역',
+          'songjeong-station': '송정역',
+        },
+      },
     },
   },
   sejong: {
     regionName: '세종',
     regionEng: 'sejong',
     districts: {
-      sejong: '세종특별자치시',
+      sejong: {
+        districtsname: '세종특별자치시',
+        districtseng: 'sejong',
+        dongStations: {
+          'jochiwon-eup': '조치원읍',
+          'sejong-dong': '세종동',
+          'boram-dong': '보람동',
+          'areum-dong': '아름동',
+          'goun-dong': '고운동',
+          'dodam-dong': '도담동',
+          'hanbat-dong': '한밭동',
+          'jochiwon-station': '조치원역',
+          'sejong-station': '세종역',
+          'boram-station': '보람역',
+          'areum-station': '아름역',
+        },
+      },
     },
   },
   gyeonggi: {
     regionName: '경기',
     regionEng: 'gyeonggi',
     districts: {
-      suwon: '수원',
-      seongnam: '성남',
-      uijeongbu: '의정부',
-      anyang: '안양',
-      bucheon: '부천',
-      gwangmyeong: '광명',
-      pyeongtaek: '평택',
-      gwacheon: '과천',
-      osan: '오산',
-      siheung: '시흥',
-      gunpo: '군포',
-      uiwang: '의왕',
-      hanam: '하남',
-      yongin: '용인',
-      paju: '파주',
-      icheon: '이천',
-      anseong: '안성',
-      gimpo: '김포',
-      hwaseong: '화성',
-      gwangju: '광주',
-      yeoju: '여주',
-      yangpyeong: '양평',
-      goyang: '고양',
-      dongducheon: '동두천',
-      gapyeong: '가평',
-      yeoncheon: '연천',
+      suwon: {
+        districtsname: '수원',
+        districtseng: 'gyeonggi-suwon',
+        dongStations: {
+          'paldal-dong': '팔달동',
+          'yeongtong-dong': '영통동',
+          'gwonseon-dong': '권선동',
+          'ingye-dong': '인계동',
+          'maetan-dong': '매탄동',
+          'paldal-station': '팔달역',
+          'yeongtong-station': '영통역',
+          'gwonseon-station': '권선역',
+          'maetan-station': '매탄역',
+        },
+      },
+      seongnam: {
+        districtsname: '성남',
+        districtseng: 'gyeonggi-seongnam',
+        dongStations: {
+          'bundang-dong': '분당동',
+          'jungja-dong': '정자동',
+          'pangyo-dong': '판교동',
+          'seohyeon-dong': '서현동',
+          'bundang-station': '분당역',
+          'jungja-station': '정자역',
+          'pangyo-station': '판교역',
+          'seohyeon-station': '서현역',
+        },
+      },
+      uijeongbu: {
+        districtsname: '의정부',
+        districtseng: 'gyeonggi-uijeongbu',
+        dongStations: {
+          'uijeongbu-dong': '의정부동',
+          'howon-dong': '호원동',
+          'jangam-dong': '장암동',
+          'uijeongbu-station': '의정부역',
+          'howon-station': '호원역',
+          'jangam-station': '장암역',
+        },
+      },
+      anyang: {
+        districtsname: '안양',
+        districtseng: 'gyeonggi-anyang',
+        dongStations: {
+          'manan-dong': '만안동',
+          'dongan-dong': '동안동',
+          'bisan-dong': '비산동',
+          'anyang-station': '안양역',
+          'manan-station': '만안역',
+          'bisan-station': '비산역',
+        },
+      },
+      bucheon: {
+        districtsname: '부천',
+        districtseng: 'gyeonggi-bucheon',
+        dongStations: {
+          'sosa-dong': '소사동',
+          'oyeon-dong': '오정동',
+          'wongok-dong': '원곡동',
+          'sosa-station': '소사역',
+          'oyeon-station': '오정역',
+          'wongok-station': '원곡역',
+        },
+      },
+      gwangmyeong: {
+        districtsname: '광명',
+        districtseng: 'gyeonggi-gwangmyeong',
+        dongStations: {
+          'gwangmyeong-dong': '광명동',
+          'cheolsan-dong': '철산동',
+          'haeryong-dong': '해룡동',
+          'gwangmyeong-station': '광명역',
+          'cheolsan-station': '철산역',
+        },
+      },
+      pyeongtaek: {
+        districtsname: '평택',
+        districtseng: 'gyeonggi-pyeongtaek',
+        dongStations: {
+          'pyeongtaek-dong': '평택동',
+          'songtan-dong': '송탄동',
+          'jijeong-dong': '지정동',
+          'pyeongtaek-station': '평택역',
+          'songtan-station': '송탄역',
+        },
+      },
+      gwacheon: {
+        districtsname: '과천',
+        districtseng: 'gyeonggi-gwacheon',
+        dongStations: {
+          'gwacheon-dong': '과천동',
+          'munwon-dong': '문원동',
+          'gwacheon-station': '과천역',
+          'munwon-station': '문원역',
+        },
+      },
+      osan: {
+        districtsname: '오산',
+        districtseng: 'gyeonggi-osan',
+        dongStations: {
+          'osan-dong': '오산동',
+          'seongnam-dong': '성남동',
+          'osan-station': '오산역',
+          'seongnam-station': '성남역',
+        },
+      },
+      siheung: {
+        districtsname: '시흥',
+        districtseng: 'gyeonggi-siheung',
+        dongStations: {
+          'siheung-dong': '시흥동',
+          'jeongwang-dong': '정왕동',
+          'daeya-dong': '대야동',
+          'siheung-station': '시흥역',
+          'jeongwang-station': '정왕역',
+        },
+      },
+      gunpo: {
+        districtsname: '군포',
+        districtseng: 'gyeonggi-gunpo',
+        dongStations: {
+          'gunpo-dong': '군포동',
+          'sanbon-dong': '산본동',
+          'gunpo-station': '군포역',
+          'sanbon-station': '산본역',
+        },
+      },
+      uiwang: {
+        districtsname: '의왕',
+        districtseng: 'gyeonggi-uiwang',
+        dongStations: {
+          'uiwang-dong': '의왕동',
+          'poil-dong': '포일동',
+          'uiwang-station': '의왕역',
+        },
+      },
+      hanam: {
+        districtsname: '하남',
+        districtseng: 'gyeonggi-hanam',
+        dongStations: {
+          'hanam-dong': '하남동',
+          'chunghyeon-dong': '중현동',
+          'hanam-station': '하남역',
+        },
+      },
+      yongin: {
+        districtsname: '용인',
+        districtseng: 'gyeonggi-yongin',
+        dongStations: {
+          'giheung-dong': '기흥동',
+          'suji-dong': '수지동',
+          'cheoin-dong': '처인동',
+          'giheung-station': '기흥역',
+          'suji-station': '수지역',
+          'cheoin-station': '처인역',
+        },
+      },
+      paju: {
+        districtsname: '파주',
+        districtseng: 'gyeonggi-paju',
+        dongStations: {
+          'munsan-eup': '문산읍',
+          'jeokseong-myeon': '적성면',
+          'tanhyeon-myeon': '탄현면',
+          'munsan-station': '문산역',
+        },
+      },
+      icheon: {
+        districtsname: '이천',
+        districtseng: 'gyeonggi-icheon',
+        dongStations: {
+          'icheon-dong': '이천동',
+          'buk-myeon': '북면',
+          'icheon-station': '이천역',
+        },
+      },
+      anseong: {
+        districtsname: '안성',
+        districtseng: 'gyeonggi-anseong',
+        dongStations: {
+          'anseong-dong': '안성동',
+          'gongdo-myeon': '공도면',
+          'anseong-station': '안성역',
+        },
+      },
+      gimpo: {
+        districtsname: '김포',
+        districtseng: 'gyeonggi-gimpo',
+        dongStations: {
+          'gimpo-dong': '김포동',
+          'tongjin-eup': '통진읍',
+          'gimpo-station': '김포역',
+          'tongjin-station': '통진역',
+        },
+      },
+      hwaseong: {
+        districtsname: '화성',
+        districtseng: 'gyeonggi-hwaseong',
+        dongStations: {
+          'hwaseong-dong': '화성동',
+          'bongdam-eup': '봉담읍',
+          'hwaseong-station': '화성역',
+          'bongdam-station': '봉담역',
+        },
+      },
+      gwangju: {
+        districtsname: '광주',
+        districtseng: 'gyeonggi-gwangju',
+        dongStations: {
+          'gwangju-dong': '광주동',
+          'ochang-eup': '오창읍',
+          'gwangju-station': '광주역',
+        },
+      },
+      yeoju: {
+        districtsname: '여주',
+        districtseng: 'gyeonggi-yeoju',
+        dongStations: {
+          'yeoju-eup': '여주읍',
+          'gangcheon-myeon': '강천면',
+          'yeoju-station': '여주역',
+        },
+      },
+      yangpyeong: {
+        districtsname: '양평',
+        districtseng: 'gyeonggi-yangpyeong',
+        dongStations: {
+          'yangpyeong-eup': '양평읍',
+          'yongmun-myeon': '용문면',
+          'yangpyeong-station': '양평역',
+        },
+      },
+      goyang: {
+        districtsname: '고양',
+        districtseng: 'gyeonggi-goyang',
+        dongStations: {
+          'ilsan-dong': '일산동',
+          'wondang-dong': '원당동',
+          'deokyang-dong': '덕양동',
+          'ilsan-station': '일산역',
+          'wondang-station': '원당역',
+          'deokyang-station': '덕양역',
+        },
+      },
+      dongducheon: {
+        districtsname: '동두천',
+        districtseng: 'gyeonggi-dongducheon',
+        dongStations: {
+          'dongducheon-dong': '동두천동',
+          'sangbong-dong': '상봉동',
+          'dongducheon-station': '동두천역',
+        },
+      },
+      gapyeong: {
+        districtsname: '가평',
+        districtseng: 'gyeonggi-gapyeong',
+        dongStations: {
+          'gapyeong-eup': '가평읍',
+          'cheongpyeong-myeon': '청평면',
+          'gapyeong-station': '가평역',
+        },
+      },
+      yeoncheon: {
+        districtsname: '연천',
+        districtseng: 'gyeonggi-yeoncheon',
+        dongStations: {
+          'yeoncheon-eup': '연천읍',
+          'jeongok-myeon': '전곡면',
+          'yeoncheon-station': '연천역',
+        },
+      },
     },
   },
   gangwon: {
     regionName: '강원',
     regionEng: 'gangwon',
     districts: {
-      chuncheon: '춘천',
-      wonju: '원주',
-      gangneung: '강릉',
-      donghae: '동해',
-      taebaek: '태백',
-      sokcho: '속초',
-      samcheok: '삼척',
-      hongcheon: '홍천',
-      hoengseong: '횡성',
-      yeongwol: '영월',
-      pyeongchang: '평창',
-      jeongseon: '정선',
-      cheorwon: '철원',
-      hwacheon: '화천',
-      yanggu: '양구',
-      inje: '인제',
-      goseong: '고성',
-      yangyang: '양양',
+      chuncheon: {
+        districtsname: '춘천',
+        districtseng: 'gangwon-chuncheon',
+        dongStations: {
+          'chuncheon-dong': '춘천동',
+          'seoksa-dong': '석사동',
+          'sinbuk-dong': '신북동',
+          'chuncheon-station': '춘천역',
+          'seoksa-station': '석사역',
+          'sinbuk-station': '신북역',
+        },
+      },
+      wonju: {
+        districtsname: '원주',
+        districtseng: 'gangwon-wonju',
+        dongStations: {
+          'wonju-dong': '원주동',
+          'pyeonghwa-dong': '평화동',
+          'munmak-dong': '문막동',
+          'wonju-station': '원주역',
+          'pyeonghwa-station': '평화역',
+        },
+      },
+      gangneung: {
+        districtsname: '강릉',
+        districtseng: 'gangwon-gangneung',
+        dongStations: {
+          'gangneung-dong': '강릉동',
+          'okgye-dong': '옥계동',
+          'jangsan-dong': '장산동',
+          'gangneung-station': '강릉역',
+          'okgye-station': '옥계역',
+        },
+      },
+      donghae: {
+        districtsname: '동해',
+        districtseng: 'gangwon-donghae',
+        dongStations: {
+          'donghae-dong': '동해동',
+          'mukho-dong': '묵호동',
+          'donghae-station': '동해역',
+          'mukho-station': '묵호역',
+        },
+      },
+      taebaek: {
+        districtsname: '태백',
+        districtseng: 'gangwon-taebaek',
+        dongStations: {
+          'taebaek-dong': '태백동',
+          'hambaeksan-dong': '함백산동',
+          'taebaek-station': '태백역',
+        },
+      },
+      sokcho: {
+        districtsname: '속초',
+        districtseng: 'gangwon-sokcho',
+        dongStations: {
+          'sokcho-dong': '속초동',
+          'yeongnang-dong': '영랑동',
+          'daecheong-dong': '대청동',
+          'sokcho-station': '속초역',
+          'yeongnang-station': '영랑역',
+        },
+      },
+      samcheok: {
+        districtsname: '삼척',
+        districtseng: 'gangwon-samcheok',
+        dongStations: {
+          'samcheok-dong': '삼척동',
+          'dogye-dong': '도계동',
+          'samcheok-station': '삼척역',
+          'dogye-station': '도계역',
+        },
+      },
+      hongcheon: {
+        districtsname: '홍천',
+        districtseng: 'gangwon-hongcheon',
+        dongStations: {
+          'hongcheon-eup': '홍천읍',
+          'nam-myeon': '남면',
+          'hongcheon-station': '홍천역',
+        },
+      },
+      hoengseong: {
+        districtsname: '횡성',
+        districtseng: 'gangwon-hoengseong',
+        dongStations: {
+          'hoengseong-eup': '횡성읍',
+          'woenam-myeon': '원남면',
+          'hoengseong-station': '횡성역',
+        },
+      },
+      yeongwol: {
+        districtsname: '영월',
+        districtseng: 'gangwon-yeongwol',
+        dongStations: {
+          'yeongwol-eup': '영월읍',
+          'sangdong-myeon': '상동면',
+          'yeongwol-station': '영월역',
+        },
+      },
+      pyeongchang: {
+        districtsname: '평창',
+        districtseng: 'gangwon-pyeongchang',
+        dongStations: {
+          'pyeongchang-eup': '평창읍',
+          'daegwallyeong-myeon': '대관령면',
+          'pyeongchang-station': '평창역',
+        },
+      },
+      jeongseon: {
+        districtsname: '정선',
+        districtseng: 'gangwon-jeongseon',
+        dongStations: {
+          'jeongseon-eup': '정선읍',
+          'gohan-myeon': '고한면',
+          'jeongseon-station': '정선역',
+        },
+      },
+      cheorwon: {
+        districtsname: '철원',
+        districtseng: 'gangwon-cheorwon',
+        dongStations: {
+          'cheorwon-eup': '철원읍',
+          'gimhwa-eup': '김화읍',
+          'cheorwon-station': '철원역',
+        },
+      },
+      hwacheon: {
+        districtsname: '화천',
+        districtseng: 'gangwon-hwacheon',
+        dongStations: {
+          'hwacheon-eup': '화천읍',
+          'sangnam-myeon': '상남면',
+          'hwacheon-station': '화천역',
+        },
+      },
+      yanggu: {
+        districtsname: '양구',
+        districtseng: 'gangwon-yanggu',
+        dongStations: {
+          'yanggu-eup': '양구읍',
+          'dong-myeon': '동면',
+          'yanggu-station': '양구역',
+        },
+      },
+      inje: {
+        districtsname: '인제',
+        districtseng: 'gangwon-inje',
+        dongStations: {
+          'inje-eup': '인제읍',
+          'sangnam-myeon': '상남면',
+          'inje-station': '인제역',
+        },
+      },
+      goseong: {
+        districtsname: '고성',
+        districtseng: 'gangwon-goseong',
+        dongStations: {
+          'goseong-eup': '고성읍',
+          'tongcheon-myeon': '통천면',
+          'goseong-station': '고성역',
+        },
+      },
+      yangyang: {
+        districtsname: '양양',
+        districtseng: 'gangwon-yangyang',
+        dongStations: {
+          'yangyang-eup': '양양읍',
+          'seohwa-myeon': '서화면',
+          'yangyang-station': '양양역',
+        },
+      },
     },
   },
   chungbuk: {
@@ -337,7 +1839,18 @@ function getDistrictData() {
 
   for (const [key, value] of Object.entries(districtMap)) {
     if (value.regionName && value.districts) {
-      districtData[value.regionName] = Object.values(value.districts);
+      // 새 구조 (객체) 또는 기존 구조 (문자열) 처리
+      const districtNames = Object.values(value.districts).map((district) => {
+        if (typeof district === 'string') {
+          // 기존 구조 (하위 호환성)
+          return district;
+        } else if (district && district.districtsname) {
+          // 새 구조
+          return district.districtsname;
+        }
+        return district;
+      });
+      districtData[value.regionName] = districtNames;
     }
   }
 
@@ -667,12 +2180,19 @@ function initializeApp() {
       currentFilter = detectedInfo.filter;
     }
 
-    // 구 선택 활성화 (세부지역이 있는 경우)
+    // 구 선택 활성화 및 동/역 옵션 업데이트 (세부지역이 있는 경우)
     if (detectedInfo.district) {
       const districtSelect = document.getElementById('districtSelect');
       if (districtSelect) {
         districtSelect.disabled = false;
         districtSelect.style.opacity = '1';
+
+        // regionSelect와 districtSelect 값 설정
+        if (regionSelect) {
+          regionSelect.value = detectedInfo.region;
+          // updateDistrictOptions에 선택된 값도 전달
+          updateDistrictOptions(detectedInfo.region, detectedInfo.district);
+        }
       }
     }
   }
@@ -700,9 +2220,24 @@ function initializeApp() {
 
       const selectedTheme = this.dataset.type;
 
+      // 현재 선택된 지역과 세부지역 가져오기 (선택 박스 우선)
+      const regionSelect = document.getElementById('regionSelect');
+      const districtSelect = document.getElementById('districtSelect');
+
+      let region = currentRegion;
+      let district = currentDistrict;
+
+      // 선택 박스에서 값 가져오기 (우선순위)
+      if (regionSelect && regionSelect.value) {
+        region = regionSelect.value;
+      }
+      if (districtSelect && districtSelect.value) {
+        district = districtSelect.value;
+      }
+
       // 중앙화된 함수로 테마 페이지 URL 생성
       const targetPage = window.getThemePageUrl
-        ? window.getThemePageUrl(selectedTheme, currentRegion, currentDistrict)
+        ? window.getThemePageUrl(selectedTheme, region, district)
         : null;
       if (targetPage) {
         window.location.href = targetPage;
@@ -835,10 +2370,25 @@ function initializeApp() {
 
       // 중앙화된 함수로 테마 페이지 URL 생성
       if (selectedTheme !== 'all' && window.getThemePageUrl) {
+        // 현재 선택된 지역과 세부지역 가져오기 (선택 박스 우선)
+        const regionSelect = document.getElementById('regionSelect');
+        const districtSelect = document.getElementById('districtSelect');
+
+        let region = currentRegion;
+        let district = currentDistrict;
+
+        // 선택 박스에서 값 가져오기 (우선순위)
+        if (regionSelect && regionSelect.value) {
+          region = regionSelect.value;
+        }
+        if (districtSelect && districtSelect.value) {
+          district = districtSelect.value;
+        }
+
         const targetPage = window.getThemePageUrl(
           selectedTheme,
-          currentRegion,
-          currentDistrict
+          region,
+          district
         );
         if (targetPage) {
           window.location.href = targetPage;
@@ -997,8 +2547,13 @@ function initializeApp() {
 }
 
 // 구 옵션 업데이트
-function updateDistrictOptions(region) {
-  console.log('updateDistrictOptions called with region:', region);
+function updateDistrictOptions(region, selectedDistrictValue = null) {
+  console.log(
+    'updateDistrictOptions called with region:',
+    region,
+    'selectedDistrictValue:',
+    selectedDistrictValue
+  );
 
   // 현재 값 저장
   const currentValue = districtSelect.value;
@@ -1010,15 +2565,94 @@ function updateDistrictOptions(region) {
   if (region && districtData[region]) {
     console.log('District data for', region, ':', districtData[region]);
     districtData[region].forEach((district) => {
+      // district가 객체인 경우 문자열로 변환
+      const districtStr =
+        typeof district === 'string'
+          ? district
+          : district?.districtsname || district || '';
+
       const option = document.createElement('option');
-      option.value = district;
-      option.textContent = district;
+      option.value = districtStr;
+      option.textContent = districtStr;
       districtSelect.appendChild(option);
-      console.log('Added district option:', district);
+      console.log('Added district option:', districtStr);
       console.log('Option value:', option.value);
       console.log('Option text:', option.textContent);
       console.log('Option element:', option);
     });
+
+    // 옵션 추가 완료 후 선택된 값 설정
+    if (selectedDistrictValue) {
+      // 값 설정 함수
+      const setValue = () => {
+        const optionExists = Array.from(districtSelect.options).some(
+          (option) => option.value === selectedDistrictValue
+        );
+        if (optionExists) {
+          districtSelect.value = selectedDistrictValue;
+          console.log(
+            'District value set to:',
+            selectedDistrictValue,
+            'current value:',
+            districtSelect.value
+          );
+
+          // 동/역 옵션 업데이트
+          const regionSelect = document.getElementById('regionSelect');
+          if (regionSelect && regionSelect.value) {
+            updateDongStationOptions(regionSelect.value, selectedDistrictValue);
+          }
+          return true;
+        }
+        return false;
+      };
+
+      // 1. 옵션 추가 직후 바로 시도
+      if (!setValue()) {
+        // 2. requestAnimationFrame으로 재시도
+        requestAnimationFrame(() => {
+          if (!setValue()) {
+            // 3. 짧은 지연 후 재시도
+            setTimeout(() => {
+              if (!setValue()) {
+                // 4. 더 긴 지연 후 재시도
+                setTimeout(() => {
+                  setValue();
+                }, 200);
+              }
+            }, 50);
+          }
+        });
+      }
+
+      // 5. 추가 보장: 여러 번 재시도 (다른 코드가 덮어쓸 수 있으므로)
+      let retryCount = 0;
+      const maxRetries = 10;
+      const ensureValue = () => {
+        if (districtSelect.value !== selectedDistrictValue) {
+          const optionExists = Array.from(districtSelect.options).some(
+            (option) => option.value === selectedDistrictValue
+          );
+          if (optionExists) {
+            districtSelect.value = selectedDistrictValue;
+            console.log('District value re-set to:', selectedDistrictValue);
+            // 값이 설정되면 동/역 옵션도 업데이트
+            const regionSelect = document.getElementById('regionSelect');
+            if (regionSelect && regionSelect.value) {
+              updateDongStationOptions(
+                regionSelect.value,
+                selectedDistrictValue
+              );
+            }
+          }
+        }
+        retryCount++;
+        if (retryCount < maxRetries) {
+          setTimeout(ensureValue, 100 * retryCount);
+        }
+      };
+      setTimeout(ensureValue, 100);
+    }
   } else {
     console.log('No district data found for region:', region);
   }
@@ -1033,6 +2667,59 @@ function updateDistrictOptions(region) {
       icon.style.opacity = '1';
     }
   }
+}
+
+// 동/역 옵션 업데이트 함수
+function updateDongStationOptions(region, district) {
+  const dongStationSelect = document.getElementById('dongStationSelect');
+  if (!dongStationSelect) return;
+
+  // 옵션 초기화
+  dongStationSelect.innerHTML = '<option value="">동, 역 선택</option>';
+
+  if (!region || !district) {
+    dongStationSelect.disabled = true;
+    dongStationSelect.style.opacity = '0.5';
+    return;
+  }
+
+  // districtMap에서 동/역 데이터 찾기
+  for (const [regionKey, regionData] of Object.entries(districtMap)) {
+    if (regionData.regionName === region) {
+      for (const [districtKey, districtData] of Object.entries(
+        regionData.districts
+      )) {
+        // 새 구조 (객체) 또는 기존 구조 (문자열) 처리
+        const districtName =
+          typeof districtData === 'string'
+            ? districtData
+            : districtData.districtsname;
+
+        if (districtName === district) {
+          // 새 구조인 경우 dongStations 사용
+          if (typeof districtData === 'object' && districtData.dongStations) {
+            for (const [dongKey, dongName] of Object.entries(
+              districtData.dongStations
+            )) {
+              const option = document.createElement('option');
+              option.value = dongKey;
+              option.textContent = dongName;
+              dongStationSelect.appendChild(option);
+            }
+            // 동/역 선택 활성화
+            dongStationSelect.disabled = false;
+            dongStationSelect.style.opacity = '1';
+            return;
+          }
+        }
+      }
+      break;
+    }
+  }
+
+  // 동/역 데이터가 없으면 비활성화
+  dongStationSelect.disabled = true;
+  dongStationSelect.style.opacity = '0.5';
 }
 
 // 지역별 검색 수행 (즉각 반응용)
@@ -2484,7 +4171,12 @@ function detectRegionAndDistrictFromFilename(filename) {
       if (parts.length >= 2) {
         if (regionData.districts[parts[1]]) {
           // 세부지역인 경우
-          result.district = regionData.districts[parts[1]];
+          const districtData = regionData.districts[parts[1]];
+          // 새 구조 (객체) 또는 기존 구조 (문자열) 처리
+          result.district =
+            typeof districtData === 'string'
+              ? districtData
+              : districtData.districtsname || districtData;
 
           // 세 번째 부분이 필터인지 확인
           if (parts.length >= 3 && filterKeywords.includes(parts[2])) {
@@ -3139,7 +4831,11 @@ async function initializeApp() {
 
         // 세부지역이 있으면 세부지역 키도 찾기
         if (district && district !== '' && district !== '전체') {
-          for (const [dKey, dName] of Object.entries(value.districts)) {
+          for (const [dKey, dData] of Object.entries(value.districts)) {
+            // 새 구조 (객체) 또는 기존 구조 (문자열) 처리
+            const dName =
+              typeof dData === 'string' ? dData : dData.districtsname || dData;
+
             if (dName === district) {
               districtKey = dKey;
               break;
@@ -3237,6 +4933,17 @@ async function initializeApp() {
       const selectedRegion = regionSelect.value;
       const selectedDistrict = districtSelect.value;
 
+      if (!selectedRegion || !selectedDistrict) {
+        return;
+      }
+
+      // 동/역 옵션 업데이트
+      updateDongStationOptions(selectedRegion, selectedDistrict);
+
+      // currentRegion과 currentDistrict 업데이트
+      currentRegion = selectedRegion;
+      currentDistrict = selectedDistrict;
+
       // 현재 페이지 파일명 가져오기
       const currentPath = window.location.pathname;
       const currentFileName = currentPath.split('/').pop();
@@ -3245,9 +4952,15 @@ async function initializeApp() {
       for (const [regionKey, regionData] of Object.entries(districtMap)) {
         if (regionData.regionName === selectedRegion) {
           // 구 키 찾기
-          for (const [districtKey, districtName] of Object.entries(
+          for (const [districtKey, districtData] of Object.entries(
             regionData.districts
           )) {
+            // 새 구조 (객체) 또는 기존 구조 (문자열) 처리
+            const districtName =
+              typeof districtData === 'string'
+                ? districtData
+                : districtData.districtsname;
+
             if (districtName === selectedDistrict) {
               // 이동할 페이지 결정
               let targetPage = '';
@@ -3299,6 +5012,51 @@ async function initializeApp() {
     });
   }
 
+  // 동/역 선택 이벤트 리스너
+  const dongStationSelect = document.getElementById('dongStationSelect');
+  if (dongStationSelect) {
+    dongStationSelect.addEventListener('change', function () {
+      const selectedRegion = regionSelect ? regionSelect.value : '';
+      const selectedDistrict = districtSelect ? districtSelect.value : '';
+      const selectedDongStation = dongStationSelect.value;
+
+      if (!selectedRegion || !selectedDistrict || !selectedDongStation) {
+        return;
+      }
+
+      // districtMap에서 지역, 구, 동 키 찾기
+      for (const [regionKey, regionData] of Object.entries(districtMap)) {
+        if (regionData.regionName === selectedRegion) {
+          for (const [districtKey, districtData] of Object.entries(
+            regionData.districts
+          )) {
+            // 새 구조 (객체) 또는 기존 구조 (문자열) 처리
+            const districtName =
+              typeof districtData === 'string'
+                ? districtData
+                : districtData.districtsname;
+
+            if (districtName === selectedDistrict) {
+              // 새 구조이고 dongStations가 있는 경우
+              if (
+                typeof districtData === 'object' &&
+                districtData.dongStations
+              ) {
+                if (districtData.dongStations[selectedDongStation]) {
+                  // HTML 파일로 이동: 예) jeju-si-nohyeong-dong.html
+                  const targetPage = `${regionKey}-${districtKey}-${selectedDongStation}.html`;
+                  window.location.href = targetPage;
+                  return;
+                }
+              }
+            }
+          }
+          break;
+        }
+      }
+    });
+  }
+
   // 필터 버튼 이벤트 리스너 추가 (페이지 이동)
   const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
   filterButtons.forEach((btn) => {
@@ -3314,16 +5072,37 @@ async function initializeApp() {
           .replace('.html', '');
         const parts = currentFileName.split('-');
 
+        // 현재 선택된 지역과 세부지역 가져오기 (선택 박스 우선)
+        const regionSelect = document.getElementById('regionSelect');
+        const districtSelect = document.getElementById('districtSelect');
+
+        let region = currentRegion;
+        let district = currentDistrict;
+
+        // 선택 박스에서 값 가져오기 (우선순위)
+        if (regionSelect && regionSelect.value) {
+          region = regionSelect.value;
+        }
+        if (districtSelect && districtSelect.value) {
+          district = districtSelect.value;
+        }
+
         // districtMap에서 현재 지역과 구 찾기
         let regionKey = '';
         let districtKey = '';
 
         for (const [key, value] of Object.entries(districtMap)) {
-          if (value.regionName === currentRegion) {
+          if (value.regionName === region) {
             regionKey = key;
             // 구 찾기
-            for (const [dKey, dName] of Object.entries(value.districts)) {
-              if (dName === currentDistrict) {
+            for (const [dKey, dData] of Object.entries(value.districts)) {
+              // 새 구조 (객체) 또는 기존 구조 (문자열) 처리
+              const dName =
+                typeof dData === 'string'
+                  ? dData
+                  : dData.districtsname || dData;
+
+              if (dName === district) {
                 districtKey = dKey;
                 break;
               }
@@ -3357,7 +5136,7 @@ async function initializeApp() {
           ) {
             // 중앙화된 함수로 테마 페이지 URL 생성
             const targetThemePage = window.getThemePageUrl
-              ? window.getThemePageUrl(filter, currentRegion, currentDistrict)
+              ? window.getThemePageUrl(filter, region, district)
               : null;
             if (targetThemePage) {
               window.location.href = targetThemePage;
@@ -3389,9 +5168,24 @@ async function initializeApp() {
             filter === 'waxing' ||
             filter === 'spa'
           ) {
+            // 현재 선택된 지역과 세부지역 가져오기 (선택 박스 우선)
+            const regionSelect = document.getElementById('regionSelect');
+            const districtSelect = document.getElementById('districtSelect');
+
+            let region = currentRegion;
+            let district = currentDistrict;
+
+            // 선택 박스에서 값 가져오기 (우선순위)
+            if (regionSelect && regionSelect.value) {
+              region = regionSelect.value;
+            }
+            if (districtSelect && districtSelect.value) {
+              district = districtSelect.value;
+            }
+
             // 중앙화된 함수로 테마 페이지 URL 생성
             const targetThemePage = window.getThemePageUrl
-              ? window.getThemePageUrl(filter, currentRegion, currentDistrict)
+              ? window.getThemePageUrl(filter, region, district)
               : null;
             if (targetThemePage) {
               window.location.href = targetThemePage;
@@ -3484,7 +5278,12 @@ async function initializeApp() {
     console.log('Parts length:', parts.length);
 
     // 구 설정 (파일명에서)
-    currentDistrict = regionData.districts[parts[1]] || '';
+    const districtData = regionData.districts[parts[1]];
+    // 새 구조 (객체) 또는 기존 구조 (문자열) 처리
+    currentDistrict =
+      typeof districtData === 'string'
+        ? districtData
+        : districtData?.districtsname || districtData || '';
 
     // URL 파라미터에서 district 읽기 (표시용)
     // 출장마사지 페이지인 경우에는 district를 필터링에 사용하지 않음
@@ -3566,10 +5365,26 @@ async function initializeApp() {
           Array.from(options).map((opt) => opt.value)
         );
 
-        districtSelect.value = currentDistrict;
-        districtSelect.disabled = false;
-        districtSelect.style.opacity = '1';
-        console.log('District select updated to:', districtSelect.value);
+        // currentDistrict가 객체인 경우 문자열로 변환
+        const districtStr =
+          typeof currentDistrict === 'string'
+            ? currentDistrict
+            : currentDistrict?.districtsname || currentDistrict || '';
+
+        const optionExists = Array.from(districtSelect.options).some(
+          (option) => option.value === districtStr
+        );
+        if (optionExists) {
+          districtSelect.value = districtStr;
+          districtSelect.disabled = false;
+          districtSelect.style.opacity = '1';
+          console.log('District select updated to:', districtSelect.value);
+
+          // 동/역 옵션 업데이트
+          if (regionSelect && regionSelect.value) {
+            updateDongStationOptions(regionSelect.value, districtStr);
+          }
+        }
       }
     }, 300);
   }
@@ -4030,13 +5845,24 @@ function initializeThemeFilter() {
 
         // 테마별 페이지로 이동 (전체 제외)
         if (selectedTheme !== 'all') {
+          // 현재 선택된 지역과 세부지역 가져오기 (선택 박스 우선)
+          const regionSelect = document.getElementById('regionSelect');
+          const districtSelect = document.getElementById('districtSelect');
+
+          let region = currentRegion;
+          let district = currentDistrict;
+
+          // 선택 박스에서 값 가져오기 (우선순위)
+          if (regionSelect && regionSelect.value) {
+            region = regionSelect.value;
+          }
+          if (districtSelect && districtSelect.value) {
+            district = districtSelect.value;
+          }
+
           // 중앙화된 함수로 테마 페이지 URL 생성
           const targetPage = window.getThemePageUrl
-            ? window.getThemePageUrl(
-                selectedTheme,
-                currentRegion,
-                currentDistrict
-              )
+            ? window.getThemePageUrl(selectedTheme, region, district)
             : null;
           if (targetPage) {
             window.location.href = targetPage;
@@ -4415,24 +6241,24 @@ function initStaticCardSorting() {
       // DOM이 아직 로드 중이면 DOMContentLoaded 대기
       document.addEventListener('DOMContentLoaded', function () {
         // requestAnimationFrame으로 즉시 실행 (지연 없이)
-        requestAnimationFrame(function() {
+        requestAnimationFrame(function () {
           initStaticCardSorting();
         });
       });
     } else {
       // DOM이 이미 로드되었으면 requestAnimationFrame으로 즉시 실행
-      requestAnimationFrame(function() {
+      requestAnimationFrame(function () {
         initStaticCardSorting();
       });
     }
   }
-  
+
   // 스크립트 로드 즉시 실행 시도
   runSorting();
-  
+
   // DOMContentLoaded가 이미 발생했을 수 있으므로 즉시 실행도 시도
   if (document.readyState !== 'loading') {
-    requestAnimationFrame(function() {
+    requestAnimationFrame(function () {
       initStaticCardSorting();
     });
   }
@@ -4442,7 +6268,7 @@ function initStaticCardSorting() {
 document.addEventListener('DOMContentLoaded', function () {
   // 이미 정렬되었으면 건너뛰기
   if (!staticCardsSorted) {
-    requestAnimationFrame(function() {
+    requestAnimationFrame(function () {
       initStaticCardSorting();
     });
   }
