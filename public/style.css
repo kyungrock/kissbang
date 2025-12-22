@@ -1702,8 +1702,15 @@ body {
   }
 
   .district-dong-wrapper {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     gap: 8px;
+    align-items: stretch;
+  }
+
+  .district-dong-wrapper .search-box {
+    flex: 1;
+    min-width: 0;
   }
 
   .search-box {

@@ -5506,9 +5506,11 @@ function initializeApp() {
       // 현재 선택된 지역과 세부지역 가져오기 (선택 박스 우선)
       const regionSelect = document.getElementById('regionSelect');
       const districtSelect = document.getElementById('districtSelect');
+      const dongStationSelect = document.getElementById('dongStationSelect');
 
       let region = currentRegion;
       let district = currentDistrict;
+      let dongStationKey = '';
 
       // 선택 박스에서 값 가져오기 (우선순위)
       if (regionSelect && regionSelect.value) {
@@ -5517,10 +5519,49 @@ function initializeApp() {
       if (districtSelect && districtSelect.value) {
         district = districtSelect.value;
       }
+      // 동/역 선택값 가져오기
+      if (dongStationSelect && dongStationSelect.value) {
+        dongStationKey = dongStationSelect.value;
+      } else {
+        // 파일명에서 동/역 키 추출 (백업용)
+        const currentPath = window.location.pathname;
+        const currentFileName = currentPath
+          .split('/')
+          .pop()
+          .replace('.html', '');
+        const parts = currentFileName.split('-');
+        const filterKeywords = [
+          'massage',
+          'outcall',
+          'swedish',
+          'thai',
+          'aroma',
+          'waxing',
+          'chinese',
+          'foot',
+          'spa',
+        ];
+
+        let dongParts = [];
+        for (let i = 2; i < parts.length; i++) {
+          if (filterKeywords.includes(parts[i])) {
+            break;
+          }
+          dongParts.push(parts[i]);
+        }
+        if (dongParts.length > 0) {
+          dongStationKey = dongParts.join('-');
+        }
+      }
 
       // 중앙화된 함수로 테마 페이지 URL 생성
       const targetPage = window.getThemePageUrl
-        ? window.getThemePageUrl(selectedTheme, region, district)
+        ? window.getThemePageUrl(
+            selectedTheme,
+            region,
+            district,
+            dongStationKey
+          )
         : null;
       if (targetPage) {
         window.location.href = targetPage;
@@ -5656,9 +5697,11 @@ function initializeApp() {
         // 현재 선택된 지역과 세부지역 가져오기 (선택 박스 우선)
         const regionSelect = document.getElementById('regionSelect');
         const districtSelect = document.getElementById('districtSelect');
+        const dongStationSelect = document.getElementById('dongStationSelect');
 
         let region = currentRegion;
         let district = currentDistrict;
+        let dongStationKey = '';
 
         // 선택 박스에서 값 가져오기 (우선순위)
         if (regionSelect && regionSelect.value) {
@@ -5667,11 +5710,46 @@ function initializeApp() {
         if (districtSelect && districtSelect.value) {
           district = districtSelect.value;
         }
+        // 동/역 선택값 가져오기
+        if (dongStationSelect && dongStationSelect.value) {
+          dongStationKey = dongStationSelect.value;
+        } else {
+          // 파일명에서 동/역 키 추출 (백업용)
+          const currentPath = window.location.pathname;
+          const currentFileName = currentPath
+            .split('/')
+            .pop()
+            .replace('.html', '');
+          const parts = currentFileName.split('-');
+          const filterKeywords = [
+            'massage',
+            'outcall',
+            'swedish',
+            'thai',
+            'aroma',
+            'waxing',
+            'chinese',
+            'foot',
+            'spa',
+          ];
+
+          let dongParts = [];
+          for (let i = 2; i < parts.length; i++) {
+            if (filterKeywords.includes(parts[i])) {
+              break;
+            }
+            dongParts.push(parts[i]);
+          }
+          if (dongParts.length > 0) {
+            dongStationKey = dongParts.join('-');
+          }
+        }
 
         const targetPage = window.getThemePageUrl(
           selectedTheme,
           region,
-          district
+          district,
+          dongStationKey
         );
         if (targetPage) {
           window.location.href = targetPage;
@@ -7363,6 +7441,45 @@ function updateFooterLinkText() {
 
   let titleText = '상세정보';
 
+  // 파일명에서 지역, 세부지역, 동/역 정보 추출
+  const currentFileName = window.location.pathname.split('/').pop();
+  const detectedInfo = detectRegionAndDistrictFromFilename(currentFileName);
+
+  // 동/역 선택값 확인 (우선순위: 감지된 정보 > 선택 박스)
+  let dongStation = detectedInfo.dongStation || '';
+  const dongStationSelect = document.getElementById('dongStationSelect');
+  if (!dongStation && dongStationSelect && dongStationSelect.value) {
+    // districtMap에서 동/역 이름 찾기
+    const districtMap = window.districtMap || {};
+    const regionData =
+      districtMap[
+        detectedInfo.region
+          ? Object.keys(districtMap).find(
+              (k) => districtMap[k].regionName === detectedInfo.region
+            )
+          : ''
+      ];
+    if (regionData && detectedInfo.district) {
+      const districtKey = Object.keys(regionData.districts).find((k) => {
+        const d = regionData.districts[k];
+        return (
+          (typeof d === 'string' ? d : d.districtsname) ===
+          detectedInfo.district
+        );
+      });
+      if (
+        districtKey &&
+        regionData.districts[districtKey] &&
+        typeof regionData.districts[districtKey] === 'object'
+      ) {
+        dongStation =
+          regionData.districts[districtKey].dongStations?.[
+            dongStationSelect.value
+          ] || '';
+      }
+    }
+  }
+
   // currentRegion, currentDistrict, currentFilter 변수 활용
   const themeNames = {
     swedish: '스웨디시',
@@ -7374,25 +7491,37 @@ function updateFooterLinkText() {
     spa: '스파',
   };
 
-  if (currentRegion) {
+  let region =
+    detectedInfo.region ||
+    (typeof currentRegion !== 'undefined' ? currentRegion : '');
+  let district =
+    detectedInfo.district ||
+    (typeof currentDistrict !== 'undefined' ? currentDistrict : '');
+  let filter =
+    detectedInfo.filter ||
+    (typeof currentFilter !== 'undefined' ? currentFilter : 'all');
+
+  if (region) {
     let filterType = '마사지사이트';
 
     // 테마 필터 확인
-    if (themeNames[currentFilter]) {
-      filterType = themeNames[currentFilter];
-    } else if (currentFilter === 'massage') {
+    if (themeNames[filter]) {
+      filterType = themeNames[filter];
+    } else if (filter === 'massage') {
       filterType = '마사지';
-    } else if (currentFilter === 'outcall') {
+    } else if (filter === 'outcall') {
       filterType = '출장마사지';
     }
 
-    // 지역과 구가 모두 있으면 "지역 구" 형식으로 표시, 구만 있으면 "지역 구" 형식, 지역만 있으면 "지역" 형식
-    if (currentRegion && currentDistrict) {
-      titleText = `${currentRegion} ${currentDistrict}${filterType}정보`;
-    } else if (currentDistrict) {
-      titleText = `${currentDistrict} ${filterType}정보`;
-    } else if (currentRegion) {
-      titleText = `${currentRegion} ${filterType}정보`;
+    // 동/역이 있으면 "세부지역 동/역" 형식, 없으면 기존 형식
+    if (dongStation && district) {
+      titleText = `${district} ${dongStation}${filterType}정보`;
+    } else if (region && district) {
+      titleText = `${region} ${district}${filterType}정보`;
+    } else if (district) {
+      titleText = `${district} ${filterType}정보`;
+    } else if (region) {
+      titleText = `${region} ${filterType}정보`;
     } else {
       titleText = `${filterType}정보`;
     }
@@ -7402,14 +7531,14 @@ function updateFooterLinkText() {
     const fileName = window.location.pathname.split('/').pop();
     if (
       fileName === 'spa.html' &&
-      (!currentFilter || window.currentFilter === 'spa')
+      (!filter || window.currentFilter === 'spa')
     ) {
       titleText = '스파정보';
-    } else if (themeNames[currentFilter]) {
-      titleText = `${themeNames[currentFilter]}정보`;
-    } else if (currentFilter === 'massage') {
+    } else if (themeNames[filter]) {
+      titleText = `${themeNames[filter]}정보`;
+    } else if (filter === 'massage') {
       titleText = '마사지정보';
-    } else if (currentFilter === 'outcall') {
+    } else if (filter === 'outcall') {
       titleText = '출장마사지정보';
     } else {
       titleText = '마사지사이트정보';
@@ -7419,10 +7548,16 @@ function updateFooterLinkText() {
   footerLink.textContent = titleText;
 }
 
-// 파일명에서 지역, 세부지역, 필터 자동 감지 함수
+// 파일명에서 지역, 세부지역, 동/역, 필터 자동 감지 함수
 function detectRegionAndDistrictFromFilename(filename) {
   try {
-    const result = { region: '', district: '', filter: '' };
+    const result = {
+      region: '',
+      district: '',
+      dongStation: '',
+      dongStationKey: '',
+      filter: '',
+    };
 
     if (!filename) return result;
 
@@ -7462,13 +7597,30 @@ function detectRegionAndDistrictFromFilename(filename) {
               ? districtData
               : districtData.districtsname || districtData;
 
-          // 세 번째 부분부터 필터 찾기 (동/역이 포함될 수 있음)
+          // 세 번째 부분부터 동/역 키 추출
           // 예: seoul-gangnam-yeoksam-dong-massage.html
           // parts[0]=seoul, parts[1]=gangnam, parts[2]=yeoksam, parts[3]=dong, parts[4]=massage
+          let dongParts = [];
+          let filterIndex = -1;
+
           for (let i = 2; i < parts.length; i++) {
             if (filterKeywords.includes(parts[i])) {
+              filterIndex = i;
               result.filter = parts[i];
               break;
+            } else {
+              dongParts.push(parts[i]);
+            }
+          }
+
+          // 동/역 키와 이름 추출
+          if (dongParts.length > 0) {
+            result.dongStationKey = dongParts.join('-');
+
+            // districtMap에서 동/역 이름 찾기
+            if (typeof districtData === 'object' && districtData.dongStations) {
+              result.dongStation =
+                districtData.dongStations[result.dongStationKey] || '';
             }
           }
         } else if (filterKeywords.includes(parts[1])) {
@@ -7486,7 +7638,13 @@ function detectRegionAndDistrictFromFilename(filename) {
     return result;
   } catch (error) {
     console.error('detectRegionAndDistrictFromFilename 오류:', error);
-    return { region: '', district: '', filter: '' };
+    return {
+      region: '',
+      district: '',
+      dongStation: '',
+      dongStationKey: '',
+      filter: '',
+    };
   }
 }
 
@@ -7559,6 +7717,7 @@ function openDetailsModal(event) {
 
     const regionSelect = document.getElementById('regionSelect');
     const districtSelect = document.getElementById('districtSelect');
+    const dongStationSelect = document.getElementById('dongStationSelect');
 
     // 감지된 정보가 없으면 선택 박스에서 가져오기
     if (!region && regionSelect) {
@@ -7576,6 +7735,39 @@ function openDetailsModal(event) {
       if (district === '세부 지역을 선택하세요') district = '';
     }
 
+    // 동/역 정보 가져오기
+    let dongStation = detectedInfo.dongStation || '';
+    let dongStationKey = detectedInfo.dongStationKey || '';
+
+    if (!dongStation && dongStationSelect && dongStationSelect.value) {
+      dongStationKey = dongStationSelect.value;
+      // districtMap에서 동/역 이름 찾기
+      const districtMap = window.districtMap || {};
+      if (region && district) {
+        const regionKey = Object.keys(districtMap).find(
+          (k) => districtMap[k].regionName === region
+        );
+        if (regionKey && districtMap[regionKey].districts) {
+          const districtKey = Object.keys(
+            districtMap[regionKey].districts
+          ).find((k) => {
+            const d = districtMap[regionKey].districts[k];
+            return (typeof d === 'string' ? d : d.districtsname) === district;
+          });
+          if (
+            districtKey &&
+            districtMap[regionKey].districts[districtKey] &&
+            typeof districtMap[regionKey].districts[districtKey] === 'object'
+          ) {
+            dongStation =
+              districtMap[regionKey].districts[districtKey].dongStations?.[
+                dongStationKey
+              ] || '';
+          }
+        }
+      }
+    }
+
     // 감지된 필터가 있으면 사용
     if (detectedInfo.filter) {
       currentFilter = detectedInfo.filter;
@@ -7591,7 +7783,13 @@ function openDetailsModal(event) {
     let filterLinks = '';
     try {
       if (typeof generateFilterLinks === 'function') {
-        filterLinks = generateFilterLinks(currentFilter, region, district);
+        filterLinks = generateFilterLinks(
+          currentFilter,
+          region,
+          district,
+          dongStation,
+          dongStationKey
+        );
       } else {
         console.error('generateFilterLinks 함수를 찾을 수 없습니다.');
         filterLinks = '<p>필터 링크를 생성할 수 없습니다.</p>';
@@ -7647,7 +7845,13 @@ if (typeof window !== 'undefined') {
 }
 
 // 필터 링크 생성 함수
-function generateFilterLinks(excludeFilter, region, district) {
+function generateFilterLinks(
+  excludeFilter,
+  region,
+  district,
+  dongStation = '',
+  dongStationKey = ''
+) {
   try {
     // 모든 필터 정의 (총 8개)
     const allFilters = [
@@ -7684,7 +7888,12 @@ function generateFilterLinks(excludeFilter, region, district) {
       let url = '#';
       try {
         if (typeof generateFilterLinkUrl === 'function') {
-          url = generateFilterLinkUrl(filter.key, region, district);
+          url = generateFilterLinkUrl(
+            filter.key,
+            region,
+            district,
+            dongStationKey
+          );
         } else {
           // generateFilterLinkUrl 함수가 없으면 기본 URL 생성
           if (filter.key === 'massage') {
@@ -7726,7 +7935,10 @@ function generateFilterLinks(excludeFilter, region, district) {
       // 지역과 세부지역 정보를 앞에 붙이기 (기본 페이지가 아닐 때만)
       let displayName = filter.name;
       if (!isBasePage && region) {
-        if (district) {
+        if (dongStation && district) {
+          // 동/역이 있는 경우: "통영 명정동 마사지" (지역 제거)
+          displayName = `${district} ${dongStation} ${filter.name}`;
+        } else if (district) {
           // 세부지역까지 있는 경우: "제주 제주시 마사지"
           displayName = `${region} ${district} ${filter.name}`;
         } else {
@@ -7761,7 +7973,7 @@ function generateFilterLinks(excludeFilter, region, district) {
 }
 
 // 필터 링크 URL 생성 함수
-function generateFilterLinkUrl(filter, region, district) {
+function generateFilterLinkUrl(filter, region, district, dongStationKey = '') {
   try {
     // 기본 페이지 목록 (지역/세부지역 정보 없음)
     const basePages = [
@@ -7793,8 +8005,8 @@ function generateFilterLinkUrl(filter, region, district) {
     // window.districtMap 사용 (중앙화된 지역 매핑)
     const districtMap = window.districtMap || {};
 
-    // 지역과 세부지역이 모두 있는 경우
-    if (region && district) {
+    // 동/역이 있는 경우
+    if (region && district && dongStationKey) {
       // districtMap에서 지역 키 찾기
       let regionKey = '';
       let districtKey = '';
@@ -7803,7 +8015,9 @@ function generateFilterLinkUrl(filter, region, district) {
         if (value.regionName === region) {
           regionKey = key;
           // 구 찾기
-          for (const [dKey, dName] of Object.entries(value.districts)) {
+          for (const [dKey, dData] of Object.entries(value.districts)) {
+            const dName =
+              typeof dData === 'string' ? dData : dData.districtsname;
             if (dName === district) {
               districtKey = dKey;
               break;
@@ -7821,7 +8035,62 @@ function generateFilterLinkUrl(filter, region, district) {
           filter === 'aroma' ||
           filter === 'chinese' ||
           filter === 'foot' ||
-          filter === 'waxing'
+          filter === 'waxing' ||
+          filter === 'spa'
+        ) {
+          if (
+            window.getThemePageUrl &&
+            typeof window.getThemePageUrl === 'function'
+          ) {
+            const themePage = window.getThemePageUrl(
+              filter,
+              region,
+              district,
+              dongStationKey
+            );
+            if (themePage) return themePage;
+          }
+          return `${regionKey}-${districtKey}-${dongStationKey}-${filter}.html`;
+        } else if (filter === 'massage') {
+          return `${regionKey}-${districtKey}-${dongStationKey}-massage.html`;
+        } else if (filter === 'outcall') {
+          return `${regionKey}-${districtKey}-${dongStationKey}-outcall.html`;
+        }
+      }
+    }
+
+    // 지역과 세부지역이 모두 있는 경우 (동/역 없음)
+    if (region && district && !dongStationKey) {
+      // districtMap에서 지역 키 찾기
+      let regionKey = '';
+      let districtKey = '';
+
+      for (const [key, value] of Object.entries(districtMap)) {
+        if (value.regionName === region) {
+          regionKey = key;
+          // 구 찾기
+          for (const [dKey, dData] of Object.entries(value.districts)) {
+            const dName =
+              typeof dData === 'string' ? dData : dData.districtsname;
+            if (dName === district) {
+              districtKey = dKey;
+              break;
+            }
+          }
+          break;
+        }
+      }
+
+      if (regionKey && districtKey) {
+        // 테마 필터인 경우
+        if (
+          filter === 'swedish' ||
+          filter === 'thai' ||
+          filter === 'aroma' ||
+          filter === 'chinese' ||
+          filter === 'foot' ||
+          filter === 'waxing' ||
+          filter === 'spa'
         ) {
           if (
             window.getThemePageUrl &&
@@ -8093,7 +8362,7 @@ async function initializeApp() {
   const districtMap = window.districtMap || {};
 
   // 지역별 테마 페이지 URL 생성 함수 (중앙화) - initializeApp 내부로 통합
-  function getThemePageUrl(theme, region, district) {
+  function getThemePageUrl(theme, region, district, dongStationKey = '') {
     // 기본 테마 페이지 매핑
     const baseThemePages = {
       swedish: 'swedish.html',
@@ -8133,6 +8402,11 @@ async function initializeApp() {
         }
         break;
       }
+    }
+
+    // 동/역이 있는 경우: region-district-dongStation-theme.html
+    if (regionKey && districtKey && dongStationKey) {
+      return `${regionKey}-${districtKey}-${dongStationKey}-${theme}.html`;
     }
 
     // 지역과 세부지역이 모두 있는 경우
@@ -8370,7 +8644,7 @@ async function initializeApp() {
                     currentFileNameWithoutExt !==
                     targetPage.replace('.html', '')
                   ) {
-                    window.location.href = targetPage;
+                  window.location.href = targetPage;
                   } else {
                     // 같은 페이지면 필터만 업데이트
                     if (typeof displayFilteredResults === 'function') {
@@ -8442,16 +8716,50 @@ async function initializeApp() {
           }
         }
 
+        // 동/역 키 추출 (현재 선택된 동/역 또는 파일명에서)
+        let dongStationKey = '';
+        const dongStationSelect = document.getElementById('dongStationSelect');
+        if (dongStationSelect && dongStationSelect.value) {
+          dongStationKey = dongStationSelect.value;
+        } else {
+          // 파일명에서 동/역 키 추출
+          const filterKeywords = [
+            'massage',
+            'outcall',
+            'swedish',
+            'thai',
+            'aroma',
+            'waxing',
+            'chinese',
+            'foot',
+            'spa',
+          ];
+          let dongParts = [];
+          for (let i = 2; i < parts.length; i++) {
+            if (filterKeywords.includes(parts[i])) {
+              break;
+            }
+            dongParts.push(parts[i]);
+          }
+          if (dongParts.length > 0) {
+            dongStationKey = dongParts.join('-');
+          }
+        }
+
         // 필터에 따른 페이지 이동
         if (regionKey) {
           if (filter === 'all') {
-            if (districtKey) {
+            if (dongStationKey && districtKey) {
+              window.location.href = `${regionKey}-${districtKey}-${dongStationKey}.html`;
+            } else if (districtKey) {
               window.location.href = `${regionKey}-${districtKey}.html`;
             } else {
               window.location.href = `${regionKey}.html`;
             }
           } else if (filter === 'massage' || filter === 'outcall') {
-            if (districtKey) {
+            if (dongStationKey && districtKey) {
+              window.location.href = `${regionKey}-${districtKey}-${dongStationKey}-${filter}.html`;
+            } else if (districtKey) {
               window.location.href = `${regionKey}-${districtKey}-${filter}.html`;
             } else {
               window.location.href = `${regionKey}-${filter}.html`;
@@ -8465,6 +8773,10 @@ async function initializeApp() {
             filter === 'waxing' ||
             filter === 'spa'
           ) {
+            // 동/역이 있는 경우 동/역을 포함한 URL 생성
+            if (dongStationKey && districtKey) {
+              window.location.href = `${regionKey}-${districtKey}-${dongStationKey}-${filter}.html`;
+            } else {
             // 중앙화된 함수로 테마 페이지 URL 생성
             const targetThemePage = window.getThemePageUrl
               ? window.getThemePageUrl(filter, region, district)
@@ -8478,6 +8790,7 @@ async function initializeApp() {
               window.location.href = `${regionKey}-${districtKey}-${filter}.html`;
             } else {
               window.location.href = `${regionKey}-${filter}.html`;
+              }
             }
           }
         } else {
@@ -8635,36 +8948,30 @@ async function initializeApp() {
 
     console.log('Current district set to:', currentDistrict || '(empty)');
 
-    // 필터 감지 (공통 로직)
+    // 필터 감지 (공통 로직) - 동/역이 포함된 파일명도 처리
+    // 예: seoul-gangnam-yeoksam-dong-massage.html
+    // parts[0]=seoul, parts[1]=gangnam, parts[2]=yeoksam, parts[3]=dong, parts[4]=massage
     let detectedFilter = 'all';
-    if (parts.length >= 2) {
-      if (
-        parts[1] === 'massage' ||
-        parts[1] === 'outcall' ||
-        parts[1] === 'swedish' ||
-        parts[1] === 'thai' ||
-        parts[1] === 'aroma' ||
-        parts[1] === 'chinese' ||
-        parts[1] === 'foot' ||
-        parts[1] === 'waxing' ||
-        parts[1] === 'spa'
-      ) {
-        detectedFilter = parts[1];
-      } else if (
-        parts.length >= 3 &&
-        (parts[2] === 'massage' ||
-          parts[2] === 'outcall' ||
-          parts[2] === 'swedish' ||
-          parts[2] === 'thai' ||
-          parts[2] === 'aroma' ||
-          parts[2] === 'chinese' ||
-          parts[2] === 'foot' ||
-          parts[2] === 'waxing' ||
-          parts[2] === 'spa')
-      ) {
-        detectedFilter = parts[2];
+    const filterKeywords = [
+      'massage',
+      'outcall',
+      'swedish',
+      'thai',
+      'aroma',
+      'waxing',
+      'chinese',
+      'foot',
+      'spa',
+    ];
+
+    // parts 배열에서 필터 키워드 찾기 (동/역 이후에 올 수 있음)
+    for (let i = 0; i < parts.length; i++) {
+      if (filterKeywords.includes(parts[i])) {
+        detectedFilter = parts[i];
+        break;
       }
     }
+
     currentFilter = detectedFilter;
 
     // 출장마사지 페이지인 경우 currentDistrict는 표시용으로만 사용 (필터링에는 사용 안 함)
@@ -8714,6 +9021,67 @@ async function initializeApp() {
           // 동/역 옵션 업데이트
           if (regionSelect && regionSelect.value) {
             updateDongStationOptions(regionSelect.value, districtStr);
+
+            // 파일명에서 동/역 키 추출 및 선택값 설정
+            // 예: seoul-gangnam-yeoksam-dong.html -> yeoksam-dong
+            // 예: seoul-gangnam-yeoksam-dong-massage.html -> yeoksam-dong
+            // 예: seoul-gangnam-yeoksam-station.html -> yeoksam-station
+            let detectedDongKey = null;
+            const filterKeywords = [
+              'massage',
+              'outcall',
+              'swedish',
+              'thai',
+              'aroma',
+              'waxing',
+              'chinese',
+              'foot',
+              'spa',
+            ];
+
+            // parts[2]부터 동/역 키 찾기 (parts[0]=지역, parts[1]=세부지역)
+            if (parts.length >= 3) {
+              // parts[2]가 필터 키워드가 아니면 동/역 키로 간주
+              if (!filterKeywords.includes(parts[2])) {
+                // parts[2]와 parts[3]을 조합 (예: yeoksam-dong, yeoksam-station)
+                if (parts.length >= 4 && !filterKeywords.includes(parts[3])) {
+                  // parts[3]이 필터 키워드가 아니면 parts[2]-parts[3] 조합
+                  detectedDongKey = `${parts[2]}-${parts[3]}`;
+                } else {
+                  // parts[3]이 없거나 필터 키워드면 parts[2]만 사용
+                  detectedDongKey = parts[2];
+                }
+              }
+            }
+
+            // 동/역 선택값 설정 (약간의 지연 후)
+            if (detectedDongKey) {
+              setTimeout(() => {
+                const dongStationSelect =
+                  document.getElementById('dongStationSelect');
+                if (dongStationSelect) {
+                  // 옵션이 로드될 때까지 대기
+                  const checkOption = setInterval(() => {
+                    const optionExists = Array.from(
+                      dongStationSelect.options
+                    ).some((option) => option.value === detectedDongKey);
+                    if (optionExists) {
+                      dongStationSelect.value = detectedDongKey;
+                      dongStationSelect.disabled = false;
+                      dongStationSelect.style.opacity = '1';
+                      console.log(
+                        'Dong/Station select updated to:',
+                        detectedDongKey
+                      );
+                      clearInterval(checkOption);
+                    }
+                  }, 50);
+
+                  // 최대 2초 대기
+                  setTimeout(() => clearInterval(checkOption), 2000);
+                }
+              }, 400);
+            }
           }
         }
       }
@@ -8722,6 +9090,44 @@ async function initializeApp() {
 
   // 필터 버튼 자동 링크 생성 및 활성화
   setupFilterButtons();
+
+  // 파일명에서 타입 추출하여 필터 버튼 활성화
+  const detectedInfo = detectRegionAndDistrictFromFilename(currentFileName);
+  if (detectedInfo.filter) {
+    currentFilter = detectedInfo.filter;
+    window.currentFilter = detectedInfo.filter;
+
+    // 해당 필터 버튼 활성화
+    setTimeout(() => {
+      const filterButtons = document.querySelectorAll(
+        '.filter-btn[data-filter]'
+      );
+      filterButtons.forEach((btn) => {
+        btn.classList.remove('active');
+        if (btn.dataset.filter === detectedInfo.filter) {
+          btn.classList.add('active');
+          console.log('Filter button activated:', detectedInfo.filter);
+        }
+      });
+    }, 100);
+  } else if (!detectedInfo.filter && parts.length >= 3) {
+    // 동/역이 있는데 타입이 없으면 'all' 필터 활성화
+    currentFilter = 'all';
+    window.currentFilter = 'all';
+
+    setTimeout(() => {
+      const allFilterBtn = document.querySelector(
+        '.filter-btn[data-filter="all"]'
+      );
+      if (allFilterBtn) {
+        document.querySelectorAll('.filter-btn').forEach((btn) => {
+          btn.classList.remove('active');
+        });
+        allFilterBtn.classList.add('active');
+        console.log('All filter button activated');
+      }
+    }, 100);
+  }
 
   // 결과 제목 업데이트
   updateResultsTitle();
@@ -8910,39 +9316,74 @@ function generateFilterLink(filter) {
     }
   }
 
-  // 기본 구조: [region]-[district]-[filter]
+  // 필터 키워드 목록
+  const filterKeywords = [
+    'massage',
+    'outcall',
+    'swedish',
+    'thai',
+    'aroma',
+    'waxing',
+    'chinese',
+    'foot',
+    'spa',
+  ];
+
+  // 기본 구조: [region]-[district]-[dongStation]-[filter]
   let region = parts[0] || '';
   let district = parts[1] || '';
+  let dongStation = '';
+
+  // 동/역 키 추출 (parts[2]부터 필터 키워드 이전까지)
+  // 예: seoul-gangnam-yeoksam-dong.html -> yeoksam-dong
+  // 예: seoul-gangnam-yeoksam-dong-massage.html -> yeoksam-dong
+  if (parts.length >= 3) {
+    let dongParts = [];
+    for (let i = 2; i < parts.length; i++) {
+      if (filterKeywords.includes(parts[i])) {
+        // 필터 키워드를 만나면 중단
+        break;
+      }
+      dongParts.push(parts[i]);
+    }
+    if (dongParts.length > 0) {
+      dongStation = dongParts.join('-');
+    }
+  }
 
   // district가 filter와 같은 경우 (예: jeju-massage에서 massage는 district가 아님)
-  if (
-    district === 'massage' ||
-    district === 'outcall' ||
-    district === 'swedish' ||
-    district === 'thai' ||
-    district === 'aroma' ||
-    district === 'chinese' ||
-    district === 'foot' ||
-    district === 'waxing' ||
-    district === 'spa'
-  ) {
+  if (filterKeywords.includes(district)) {
     district = '';
   }
 
-  console.log('Region:', region, 'District:', district);
+  console.log(
+    'Region:',
+    region,
+    'District:',
+    district,
+    'DongStation:',
+    dongStation
+  );
 
+  // URL 생성
   if (filter === 'all') {
-    // 전체: region-district 또는 region
-    const result = district ? `${region}-${district}.html` : `${region}.html`;
-    console.log('Generated link (all):', result);
-    return result;
+    // 전체: region-district-dongStation 또는 region-district 또는 region
+    if (dongStation && district) {
+      return `${region}-${district}-${dongStation}.html`;
+    } else if (district) {
+      return `${region}-${district}.html`;
   } else {
-    // 마사지/출장마사지: region-district-filter 또는 region-filter
-    const result = district
-      ? `${region}-${district}-${filter}.html`
-      : `${region}-${filter}.html`;
-    console.log('Generated link (filter):', result);
-    return result;
+      return `${region}.html`;
+    }
+  } else {
+    // 필터가 있는 경우: region-district-dongStation-filter 또는 region-district-filter 또는 region-filter
+    if (dongStation && district) {
+      return `${region}-${district}-${dongStation}-${filter}.html`;
+    } else if (district) {
+      return `${region}-${district}-${filter}.html`;
+    } else {
+      return `${region}-${filter}.html`;
+    }
   }
 }
 
@@ -9051,11 +9492,54 @@ function updateResultsTitle() {
     spa: '스파',
   };
 
+  // 동/역 정보 가져오기
+  let dongStation = '';
+  const dongStationSelect = document.getElementById('dongStationSelect');
+  if (dongStationSelect && dongStationSelect.value) {
+    const dongStationKey = dongStationSelect.value;
+    const districtMap = window.districtMap || {};
+
+    // 파일명에서 동/역 정보 추출 시도
+    const currentFileName = window.location.pathname.split('/').pop();
+    const detectedInfo = detectRegionAndDistrictFromFilename(currentFileName);
+
+    if (detectedInfo.dongStation) {
+      dongStation = detectedInfo.dongStation;
+    } else if (currentRegion && currentDistrict) {
+      // districtMap에서 동/역 이름 찾기
+      const regionKey = Object.keys(districtMap).find(
+        (k) => districtMap[k].regionName === currentRegion
+      );
+      if (regionKey && districtMap[regionKey].districts) {
+        const districtKey = Object.keys(districtMap[regionKey].districts).find(
+          (k) => {
+            const d = districtMap[regionKey].districts[k];
+            return (
+              (typeof d === 'string' ? d : d.districtsname) === currentDistrict
+            );
+          }
+        );
+        if (
+          districtKey &&
+          districtMap[regionKey].districts[districtKey] &&
+          typeof districtMap[regionKey].districts[districtKey] === 'object'
+        ) {
+          dongStation =
+            districtMap[regionKey].districts[districtKey].dongStations?.[
+              dongStationKey
+            ] || '';
+        }
+      }
+    }
+  }
+
   if (currentFilter && themeNames[currentFilter]) {
     // 테마 필터인 경우 지역/구 정보 포함
     const themeName = themeNames[currentFilter];
-    // 구가 있으면 구만 표시, 없으면 지역 표시
-    if (currentDistrict) {
+    // 동/역이 있으면 세부지역 + 동/역, 없으면 구만 표시
+    if (dongStation && currentDistrict) {
+      title = `${currentDistrict} ${dongStation} ${themeName}`;
+    } else if (currentDistrict) {
       title = `${currentDistrict} ${themeName}`;
     } else if (currentRegion) {
       title = `${currentRegion} ${themeName}`;
@@ -9077,25 +9561,15 @@ function updateResultsTitle() {
     };
     const filterName = filterNames[currentFilter] || currentFilter;
 
-    // 출장마사지는 구를 표시하되 필터링에는 사용하지 않음 (표시용)
-    if (currentFilter === 'outcall') {
-      // 출장마사지: 상세지역이 있으면 상세지역만 표시, 없으면 지역만 표시
-      if (currentDistrict) {
+    // 동/역이 있으면 세부지역 + 동/역 형식으로 표시
+    if (dongStation && currentDistrict) {
+      title = `${currentDistrict} ${dongStation} ${filterName}`;
+    } else if (currentDistrict) {
         title = `${currentDistrict} ${filterName}`;
       } else if (currentRegion) {
         title = `${currentRegion} ${filterName}`;
       } else {
         title = filterName;
-      }
-    } else {
-      // 일반 마사지: 구가 있으면 구만 표시, 없으면 지역 표시
-      if (currentDistrict) {
-        title = `${currentDistrict} ${filterName}`;
-      } else if (currentRegion) {
-        title = `${currentRegion} ${filterName}`;
-      } else {
-        title = filterName;
-      }
     }
   } else {
     // 전체인 경우
@@ -9110,6 +9584,8 @@ function updateResultsTitle() {
       // window.currentFilter도 확인
       if (window.currentFilter === 'spa' || !currentFilter) {
         title = '스파';
+      } else if (dongStation && currentDistrict) {
+        title = `${currentDistrict} ${dongStation} 마사지사이트`;
       } else if (currentDistrict) {
         title = `${currentDistrict} 마사지사이트`;
       } else if (currentRegion) {
@@ -9117,6 +9593,8 @@ function updateResultsTitle() {
       } else {
         title = '스파';
       }
+    } else if (dongStation && currentDistrict) {
+      title = `${currentDistrict} ${dongStation} 마사지사이트`;
     } else if (currentDistrict) {
       title = `${currentDistrict} 마사지사이트`;
     } else if (currentRegion) {
@@ -9179,9 +9657,12 @@ function initializeThemeFilter() {
           // 현재 선택된 지역과 세부지역 가져오기 (선택 박스 우선)
           const regionSelect = document.getElementById('regionSelect');
           const districtSelect = document.getElementById('districtSelect');
+          const dongStationSelect =
+            document.getElementById('dongStationSelect');
 
           let region = currentRegion;
           let district = currentDistrict;
+          let dongStationKey = '';
 
           // 선택 박스에서 값 가져오기 (우선순위)
           if (regionSelect && regionSelect.value) {
@@ -9190,10 +9671,49 @@ function initializeThemeFilter() {
           if (districtSelect && districtSelect.value) {
             district = districtSelect.value;
           }
+          // 동/역 선택값 가져오기
+          if (dongStationSelect && dongStationSelect.value) {
+            dongStationKey = dongStationSelect.value;
+          } else {
+            // 파일명에서 동/역 키 추출 (백업용)
+            const currentPath = window.location.pathname;
+            const currentFileName = currentPath
+              .split('/')
+              .pop()
+              .replace('.html', '');
+            const parts = currentFileName.split('-');
+            const filterKeywords = [
+              'massage',
+              'outcall',
+              'swedish',
+              'thai',
+              'aroma',
+              'waxing',
+              'chinese',
+              'foot',
+              'spa',
+            ];
+
+            let dongParts = [];
+            for (let i = 2; i < parts.length; i++) {
+              if (filterKeywords.includes(parts[i])) {
+                break;
+              }
+              dongParts.push(parts[i]);
+            }
+            if (dongParts.length > 0) {
+              dongStationKey = dongParts.join('-');
+            }
+          }
 
           // 중앙화된 함수로 테마 페이지 URL 생성
           const targetPage = window.getThemePageUrl
-            ? window.getThemePageUrl(selectedTheme, region, district)
+            ? window.getThemePageUrl(
+                selectedTheme,
+                region,
+                district,
+                dongStationKey
+              )
             : null;
           if (targetPage) {
             window.location.href = targetPage;

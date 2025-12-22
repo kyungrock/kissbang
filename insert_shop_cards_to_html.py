@@ -457,36 +457,145 @@ DISTRICT_MAP = {
 # 필터 키워드
 FILTER_KEYWORDS = ['massage', 'outcall', 'swedish', 'thai', 'aroma', 'waxing', 'chinese', 'foot', 'spa']
 
-# 파일명에서 지역, 세부지역, 필터 추출
+# script.js에서 districtMap 읽어서 동/역 키를 한글 이름으로 변환
+def get_dong_station_name(region_key, district_key, dong_station_key):
+    """동/역 키를 한글 이름으로 변환"""
+    script_file = SCRIPT_DIR / 'public' / 'script.js'
+    if not script_file.exists():
+        return None
+    
+    content = script_file.read_text(encoding='utf-8')
+    
+    # window.districtMap = { 시작 위치 찾기
+    start_pattern = r'window\.districtMap\s*=\s*\{'
+    match = re.search(start_pattern, content)
+    if not match:
+        return None
+    
+    start_pos = match.end() - 1  # '{' 위치
+    
+    # 중괄호 매칭으로 districtMap 끝 찾기
+    brace_count = 0
+    i = start_pos
+    while i < len(content):
+        if content[i] == '{':
+            brace_count += 1
+        elif content[i] == '}':
+            brace_count -= 1
+            if brace_count == 0:
+                end_pos = i + 1
+                break
+        i += 1
+    else:
+        return None
+    
+    district_map_str = content[start_pos:end_pos]
+    
+    # 라인별로 파싱하여 동/역 이름 찾기
+    lines = district_map_str.split('\n')
+    current_region = None
+    current_district = None
+    in_dong_stations = False
+    
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        
+        # 지역 키 찾기
+        region_match = re.search(r'(\w+):\s*\{', line)
+        if region_match and 'regionName' in lines[i+1:i+10]:
+            current_region = region_match.group(1)
+            if current_region == region_key:
+                i += 1
+                continue
+            else:
+                current_region = None
+                i += 1
+                continue
+        
+        # 세부지역 키 찾기
+        if current_region == region_key:
+            district_match = re.search(r'(\w+):\s*\{', line)
+            if district_match and 'districtsname' in lines[i+1:i+10]:
+                current_district = district_match.group(1)
+                if current_district == district_key:
+                    i += 1
+                    continue
+                else:
+                    current_district = None
+                    i += 1
+                    continue
+            
+            # dongStations 시작
+            if current_district == district_key and 'dongStations:' in line:
+                in_dong_stations = True
+                i += 1
+                while i < len(lines):
+                    dong_line = lines[i].strip()
+                    
+                    # 동/역 항목 (예: 'sujin-dong': '수진동',)
+                    dong_match = re.search(r"['\"]([\w-]+)['\"]:\s*['\"]([^'\"]+)['\"]", dong_line)
+                    if dong_match:
+                        dong_key = dong_match.group(1)
+                        dong_name = dong_match.group(2)
+                        if dong_key == dong_station_key:
+                            return dong_name
+                    elif '},' in dong_line or (dong_line == '}' and i < len(lines) - 1):
+                        # dongStations 끝
+                        break
+                    i += 1
+                continue
+        
+        i += 1
+    
+    return None
+
+# 파일명에서 지역, 세부지역, 동/역, 필터 추출
 def extract_region_and_filter(filename):
-    """파일명에서 지역, 세부지역, 필터 추출"""
+    """파일명에서 지역, 세부지역, 동/역, 필터 추출"""
     name = filename.replace('.html', '')
     parts = name.split('-')
     
     region = None
     district = None
+    dong_station_key = None  # 동/역 키 (예: 'sujin-dong')
     filter_type = None
     
     if parts[0] in REGION_MAP:
         region = REGION_MAP[parts[0]]
+        region_key = parts[0]
         
         if len(parts) >= 2:
             if parts[1] in FILTER_KEYWORDS:
                 filter_type = parts[1]
             else:
-                region_key = parts[0]
                 if region_key in DISTRICT_MAP and parts[1] in DISTRICT_MAP[region_key]:
                     district = DISTRICT_MAP[region_key][parts[1]]
+                    district_key = parts[1]
                 else:
                     district = parts[1]
+                    district_key = parts[1]
                 
-                if len(parts) >= 3 and parts[2] in FILTER_KEYWORDS:
-                    filter_type = parts[2]
+                # 동/역 정보 추출 (parts[2]부터 필터 키워드 이전까지)
+                if len(parts) >= 3:
+                    dong_parts = []
+                    filter_index = -1
+                    
+                    for i in range(2, len(parts)):
+                        if parts[i] in FILTER_KEYWORDS:
+                            filter_index = i
+                            filter_type = parts[i]
+                            break
+                        else:
+                            dong_parts.append(parts[i])
+                    
+                    if dong_parts:
+                        dong_station_key = '-'.join(dong_parts)
     else:
         if parts[0] in FILTER_KEYWORDS:
             filter_type = parts[0]
     
-    return region, district, filter_type
+    return region, district, dong_station_key, filter_type
 
 # 필터 키워드 매핑 (add_jsonld_to_html.py와 동일)
 FILTER_KEYWORDS_MAP = {
@@ -507,56 +616,62 @@ def matches_filter(shop, filter_type):
     if not filter_type or filter_type == 'all':
         return True
     
-    # type 필드 확인 (출장마사지인지 먼저 확인)
+    # 출장마사지인지 먼저 확인
     shop_type = shop.get('type', '')
-    
-    # massage 필터일 때는 출장마사지 제외
-    if filter_type == 'massage':
-        if shop_type == '출장마사지':
-            return False
-        # services에 '출장마사지'가 포함되어 있으면 제외
-        services = shop.get('services', [])
-        if isinstance(services, str):
-            services = [services]
-        for service in services:
-            if '출장마사지' in str(service):
-                return False
-    
-    # outcall 필터일 때는 출장마사지만 포함
-    if filter_type == 'outcall':
-        if shop_type == '출장마사지':
-            return True
-        services = shop.get('services', [])
-        if isinstance(services, str):
-            services = [services]
-        for service in services:
-            if '출장마사지' in str(service):
-                return True
-        return False
-    
     services = shop.get('services', [])
     if isinstance(services, str):
         services = [services]
     
-    keywords = FILTER_KEYWORDS_MAP.get(filter_type, [])
-    if not keywords:
-        return True
+    is_outcall = (shop_type == '출장마사지' or any('출장마사지' in str(s) for s in services))
     
-    # services에 키워드가 포함되어 있는지 확인
-    for service in services:
-        service_lower = str(service).lower()
-        for keyword in keywords:
-            if keyword.lower() in service_lower:
-                return True
+    # 필터 타입별 처리
+    if filter_type == 'massage':
+        # 마사지 필터: 출장마사지는 제외
+        if is_outcall:
+            return False
+        
+        # 마사지 키워드 확인
+        keywords = FILTER_KEYWORDS_MAP.get('massage', [])
+        for service in services:
+            service_lower = str(service).lower()
+            for keyword in keywords:
+                if keyword.lower() in service_lower and '출장' not in service_lower:
+                    return True
+        
+        # type 필드 확인 (출장마사지 제외)
+        if shop_type and '출장' not in shop_type:
+            shop_type_lower = str(shop_type).lower()
+            for keyword in keywords:
+                if keyword.lower() in shop_type_lower:
+                    return True
+        
+        return False
     
-    # type 필드 확인
-    if shop_type:
-        shop_type_lower = str(shop_type).lower()
-        for keyword in keywords:
-            if keyword.lower() in shop_type_lower:
-                return True
+    elif filter_type == 'outcall':
+        # 출장마사지 필터: 출장마사지만 포함
+        return is_outcall
     
-    return False
+    else:
+        # 기타 필터 (swedish, thai, aroma 등)
+        keywords = FILTER_KEYWORDS_MAP.get(filter_type, [])
+        if not keywords:
+            return True
+        
+        # services에 키워드가 포함되어 있는지 확인
+        for service in services:
+            service_lower = str(service).lower()
+            for keyword in keywords:
+                if keyword.lower() in service_lower:
+                    return True
+        
+        # type 필드 확인
+        if shop_type:
+            shop_type_lower = str(shop_type).lower()
+            for keyword in keywords:
+                if keyword.lower() in shop_type_lower:
+                    return True
+        
+        return False
 
 # 주소에서 동 이름 추출
 def extract_dong_from_address(address, detail_address):
@@ -647,15 +762,54 @@ def create_shop_display_name(shop):
     return shop_name
 
 # 업체 정렬 함수 (showHealingShop 기준으로 정렬하고 각 그룹 내에서 랜덤화)
-def sort_shops(shops):
-    """showHealingShop: true인 항목을 상단에, false인 항목을 하단에 배치하고 각 그룹 내에서 랜덤 정렬"""
+def sort_shops(shops, dong_station_name=None):
+    """showHealingShop: true인 항목을 상단에, false인 항목을 하단에 배치하고 각 그룹 내에서 랜덤 정렬
+    동/역 이름이 있으면 해당 동/역이 포함된 카드를 각 그룹의 최상단에 배치"""
     # showHealingShop 값에 따라 그룹 분리
     healing_shops = [shop for shop in shops if shop.get('showHealingShop') is True]
     non_healing_shops = [shop for shop in shops if shop.get('showHealingShop') is not True]
     
-    # 각 그룹 내에서 랜덤 정렬
-    random.shuffle(healing_shops)
-    random.shuffle(non_healing_shops)
+    # 동/역 이름이 있는 경우 각 그룹 내에서 동/역 포함 카드를 최상단에 배치
+    if dong_station_name:
+        # healing_shops 그룹 처리
+        healing_with_dong = []
+        healing_without_dong = []
+        for shop in healing_shops:
+            shop_address = shop.get('address', '')
+            shop_detail_address = shop.get('detailAddress', '')
+            # 주소에서 동 이름 추출
+            shop_dong = extract_dong_from_address(shop_address, shop_detail_address)
+            # 동 이름이 정확히 일치하거나 주소에 포함되어 있는지 확인
+            if shop_dong == dong_station_name or dong_station_name in shop_dong or dong_station_name in f"{shop_address} {shop_detail_address}":
+                healing_with_dong.append(shop)
+            else:
+                healing_without_dong.append(shop)
+        # 동/역 포함 카드를 먼저, 나머지는 랜덤 정렬
+        random.shuffle(healing_with_dong)
+        random.shuffle(healing_without_dong)
+        healing_shops = healing_with_dong + healing_without_dong
+        
+        # non_healing_shops 그룹 처리
+        non_healing_with_dong = []
+        non_healing_without_dong = []
+        for shop in non_healing_shops:
+            shop_address = shop.get('address', '')
+            shop_detail_address = shop.get('detailAddress', '')
+            # 주소에서 동 이름 추출
+            shop_dong = extract_dong_from_address(shop_address, shop_detail_address)
+            # 동 이름이 정확히 일치하거나 주소에 포함되어 있는지 확인
+            if shop_dong == dong_station_name or dong_station_name in shop_dong or dong_station_name in f"{shop_address} {shop_detail_address}":
+                non_healing_with_dong.append(shop)
+            else:
+                non_healing_without_dong.append(shop)
+        # 동/역 포함 카드를 먼저, 나머지는 랜덤 정렬
+        random.shuffle(non_healing_with_dong)
+        random.shuffle(non_healing_without_dong)
+        non_healing_shops = non_healing_with_dong + non_healing_without_dong
+    else:
+        # 동/역 이름이 없으면 기존처럼 랜덤 정렬
+        random.shuffle(healing_shops)
+        random.shuffle(non_healing_shops)
     
     # true 그룹을 상단에, false 그룹을 하단에 배치
     return healing_shops + non_healing_shops
@@ -1105,11 +1259,30 @@ def insert_shop_cards_to_html(html_file, shops):
         if old_content == content:
             break
     
-    # 파일명에서 지역, 세부지역, 필터 추출
-    region, district, filter_type = extract_region_and_filter(filename)
+    # 파일명에서 지역, 세부지역, 동/역, 필터 추출
+    region, district, dong_station_key, filter_type = extract_region_and_filter(filename)
+    
+    # 동/역 키가 있으면 한글 이름으로 변환
+    dong_station_name = None
+    if dong_station_key and region and district:
+        # region_key와 district_key 찾기
+        region_key = None
+        district_key = None
+        for key, value in REGION_MAP.items():
+            if value == region:
+                region_key = key
+                break
+        if region_key and region_key in DISTRICT_MAP:
+            for key, value in DISTRICT_MAP[region_key].items():
+                if value == district:
+                    district_key = key
+                    break
+        
+        if region_key and district_key:
+            dong_station_name = get_dong_station_name(region_key, district_key, dong_station_key)
     
     print(f"\n처리 중: {filename}")
-    print(f"  지역: {region}, 구: {district}, 필터: {filter_type}")
+    print(f"  지역: {region}, 구: {district}, 동/역 키: {dong_station_key}, 동/역 이름: {dong_station_name}, 필터: {filter_type}")
     
     # 조건에 맞는 업체 필터링
     matching_shops = []
@@ -1150,6 +1323,21 @@ def insert_shop_cards_to_html(html_file, shops):
                 if shop_district != district:
                     continue
         
+        # 동/역 매칭 (동/역 키가 있는 경우에만 정확히 일치해야 함)
+        if dong_station_key and dong_station_name:
+            # 업체 주소에서 동/역 추출
+            shop_address = shop.get('address', '')
+            shop_detail_address = shop.get('detailAddress', '')
+            
+            # 주소 전체 텍스트
+            address_text = f"{shop_address} {shop_detail_address}".strip()
+            
+            # 동/역 이름이 주소에 정확히 포함되어 있는지 확인
+            # 예: dong_station_name = '수진동'이면 주소에 '수진동'이 포함되어야 함
+            if dong_station_name not in address_text:
+                # 주소에 동/역 이름이 없으면 제외
+                continue
+        
         # 필터 매칭
         if not matches_filter(shop, filter_type):
             continue
@@ -1171,7 +1359,8 @@ def insert_shop_cards_to_html(html_file, shops):
         return False
     
     # showHealingShop 기준으로 정렬 및 랜덤화
-    sorted_shops = sort_shops(matching_shops)
+    # 동/역 이름이 있으면 해당 동/역이 포함된 카드를 각 그룹의 최상단에 배치
+    sorted_shops = sort_shops(matching_shops, dong_station_name)
     
     # 업체 카드 HTML 생성
     cards_html = '\n'.join([create_shop_card_html(shop) for shop in sorted_shops])
@@ -1660,6 +1849,31 @@ def disable_dynamic_card_generation(content):
         flags=re.MULTILINE
     )
     
+    # sortStaticCards() 함수 호출 제거 (정적 정렬 방지)
+    # 패턴 1: if (typeof sortStaticCards === 'function') { sortStaticCards(); }
+    content = re.sub(
+        r'if\s*\(typeof\s+sortStaticCards\s*===\s*[\'"]function[\'"]\s*\)\s*\{[^}]*sortStaticCards\(\)[^}]*\}',
+        lambda m: f'/* {m.group(0)} */',
+        content,
+        flags=re.MULTILINE | re.DOTALL
+    )
+    
+    # 패턴 2: sortStaticCards(); 단독 호출
+    content = re.sub(
+        r'sortStaticCards\(\);',
+        lambda m: f'/* {m.group(0)} */',
+        content,
+        flags=re.MULTILINE
+    )
+    
+    # 패턴 3: (function() { ... sortStaticCards() ... })() 즉시 실행 함수 제거
+    content = re.sub(
+        r'\(function\(\)\s*\{[^{}]*sortStaticCards[^{}]*(?:\{[^{}]*\}[^{}]*)*\}\)\(\);',
+        lambda m: f'/* {m.group(0)} */',
+        content,
+        flags=re.DOTALL
+    )
+    
     return content
 
 # 필터 링크 URL 생성
@@ -1961,4 +2175,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
