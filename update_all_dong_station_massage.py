@@ -512,6 +512,14 @@ def update_dong_station_massage_file(html_file):
     
     content = new_content
     
+    # 기존 절대 경로를 상대 경로로 변경 (이미 생성된 파일의 링크 수정)
+    # https://www.msg1000.com/company-*.html -> company-*.html
+    content = re.sub(
+        r'href=["\']https://www\.msg1000\.com/(company-[^"\']+\.html)["\']',
+        r'href="\1"',
+        content
+    )
+    
     # footer-link 업데이트
     content = update_footer_link(content, region, district, filter_type, filename)
     

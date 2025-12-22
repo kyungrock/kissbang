@@ -1263,7 +1263,7 @@
         
       </div>
       <div id="massageList" class="massage-list">
-        <a href="https://www.msg1000.com/company-seoul-songpa-labotte.html" style="text-decoration: none; color: inherit; display: block;">
+        <a href="company-seoul-songpa-labotte.html" style="text-decoration: none; color: inherit; display: block;">
             <div class="massage-card" data-type="마사지" data-region="서울" data-show-healing-shop="true" style="cursor: pointer;">
             <div class="card-image">
                 <img src="https://msg1000.com/images/서울_송파_문정동_라보떼.jpg" alt="서울 송파구 문정동 라보떼 마사지샵 - 문정역 3번출구 도보10분, 무료 주차, 프라이빗 샤워실, 호텔식 인테리어" class="shop-image" 
@@ -1305,7 +1305,7 @@
             </div>
         </a>
 
-        <a href="https://www.msg1000.com/company-seoul-songpa-munjeong-reina.html" style="text-decoration: none; color: inherit; display: block;">
+        <a href="company-seoul-songpa-munjeong-reina.html" style="text-decoration: none; color: inherit; display: block;">
             <div class="massage-card" data-type="마사지" data-region="서울" data-show-healing-shop="false" style="cursor: pointer;">
             <div class="card-image">
                 <img src="https://msg1000.com/images/서울_송파_문정동_문정역_1인샵레이나.jpg" alt="서울 송파구 문정동 1인샵레이나 마사지샵 - 문정역 3번 출구 도보5분, 무료 주차, 왁싱·딥티슈 전문" class="shop-image" 
@@ -1347,34 +1347,7 @@
             </div>
         </a>
 
-        </div><script>
-(function() {
-  /* /* /* /* /* /* /* /* if (typeof sortStaticCards === 'function') {
-    /* /* /* /* /* /* /* /* sortStaticCards(); */} */else {
-    document.addEventListener('DOMContentLoaded', function() {
-      /* /* /* /* /* /* /* /* if (typeof sortStaticCards === 'function') {
-        /* /* /* /* /* /* /* /* sortStaticCards(); */} */});
-  }
-})();
-</script><script>
-(function() {
-  /* /* /* /* /* /* /* /* if (typeof sortStaticCards === 'function') {
-    /* /* /* /* /* /* /* /* sortStaticCards(); */} */else {
-    document.addEventListener('DOMContentLoaded', function() {
-      /* /* /* /* /* /* /* /* if (typeof sortStaticCards === 'function') {
-        /* /* /* /* /* /* /* /* sortStaticCards(); */} */});
-  }
-})();
-</script><script>
-(function() {
-  /* /* /* /* /* /* /* /* if (typeof sortStaticCards === 'function') {
-    /* /* /* /* /* /* /* /* sortStaticCards(); */} */else {
-    document.addEventListener('DOMContentLoaded', function() {
-      /* /* /* /* /* /* /* /* if (typeof sortStaticCards === 'function') {
-        /* /* /* /* /* /* /* /* sortStaticCards(); */} */});
-  }
-})();
-</script>
+        </div>
     </main>
 
     <footer class="footer">
@@ -1411,7 +1384,7 @@
         </div>
       </div>
     </footer>
-    <!-- 상세정보 모달 -->
+    
     <div id="detailsModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -1452,26 +1425,6 @@
         </div>
       </div>
     </div>
-    <!-- 상세정보 모달 -->
-    
-    <!-- 상세정보 모달 -->
-    
-    <!-- 상세정보 모달 -->
-    
-    <!-- 상세정보 모달 -->
-    
-    <!-- 상세정보 모달 -->
-    
-    <!-- 상세정보 모달 -->
-    
-    <!-- 상세정보 모달 -->
-    
-    <!-- 상세정보 모달 -->
-    
-    <!-- 상세정보 모달 -->
-    
-    <!-- 상세정보 모달 -->
-    
 
     <!-- 햄버거 메뉴 -->
     <div id="hamburger-menu-container"></div>
@@ -1673,15 +1626,7 @@
 
     <script src="common-components.min.js" defer></script>
 
-        <script>
-      // sortStaticCards 함수 오버라이드하여 비활성화
-      window.sortStaticCards = function() {
-        // 정적 HTML이 이미 정렬되어 있으므로 아무것도 하지 않음
-        return;
-      };
-      // staticCardsSorted 플래그도 true로 설정
-      window.staticCardsSorted = true;
-    </script>
+        
     <script src="script.js" defer>
       document.addEventListener('DOMContentLoaded', function () {
         if (typeof currentRegion !== 'undefined') {
@@ -1733,14 +1678,14 @@
           }
           window.currentFilter = 'massage';
 
-          /* /* /* /* /* /* /* /* /* /* /* /* if (typeof displayFilteredResults === 'function') {
+          /* if (typeof displayFilteredResults === 'function') {
             displayFilteredResults();
           } */else if (Array.isArray(window.massageShops)) {
             const shops = massageShops.filter(
               (shop) => shop.region === '서울' && shop.district === '강남' && shop.type === 'massage'
             );
-            /* /* /* /* /* /* /* /* /* /* /* /* if (typeof displayMassageShops === 'function') {
-              /* /* /* /* /* /* /* /* /* /* /* /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
+            /* if (typeof displayMassageShops === 'function') {
+              /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
               updateResultsHeader('강남 마사지 추천 BEST 샵', shops.length);
             }
           }
@@ -1748,7 +1693,7 @@
           // resultsTitle을 "서울 강남 마사지 업체"로 업데이트
           const resultsTitle = document.getElementById('resultsTitle');
           if (resultsTitle) {
-            /* /* /* /* /* /* /* /* /* /* /* /* resultsTitle.textContent = '강남 마사지 추천 BEST 샵'; */}
+            /* resultsTitle.textContent = '강남 마사지 추천 BEST 샵'; */}
         
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {

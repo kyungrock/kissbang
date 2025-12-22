@@ -863,9 +863,10 @@ def create_shop_card_html(shop):
     image = shop.get('image', '')
     alt = shop.get('alt', display_name)
     
-    # 업체 URL 생성 (https://www.msg1000.com/ + file)
+    # 업체 URL 생성 (상대 경로 사용)
     file_name = shop.get('file', '')
-    shop_url = f'https://www.msg1000.com/{file_name}' if file_name else ''
+    # file 필드가 있으면 상대 경로로 사용, 없으면 빈 문자열
+    shop_url = file_name if file_name else ''
     
     # 주소, 상세주소, 전화번호를 한 줄로 합치기
     address = shop.get('address', '')
@@ -1100,6 +1101,13 @@ def insert_shop_cards_to_html(html_file, shops):
     
     # company- 파일은 건너뛰기 (업체 상세 페이지)
     if filename.startswith('company-'):
+        return False
+    
+    # 동/역 파일은 건너뛰기 (update_all_dong_station_massage.py에서 처리)
+    if (filename.endswith('-dong-massage.html') or 
+        filename.endswith('-station-massage.html') or 
+        filename.endswith('-dong.html') or 
+        filename.endswith('-station.html')):
         return False
     
     # 정적 header 삽입

@@ -1263,7 +1263,7 @@
         
       </div>
       <div id="massageList" class="massage-list">
-        <a href="https://www.msg1000.com/company-gyeonggi-bucheon-simgok-daon.html" style="text-decoration: none; color: inherit; display: block;">
+        <a href="company-gyeonggi-bucheon-simgok-daon.html" style="text-decoration: none; color: inherit; display: block;">
             <div class="massage-card" data-type="마사지" data-region="경기" data-show-healing-shop="true" style="cursor: pointer;">
             <div class="card-image">
                 <img src="https://msg1000.com/images/경기_부천_심곡동_부천역_다온약손마사지.jpg" alt="경기 부천시 원미구 심곡동 다온약손마사지 마사지샵 - 부천역 3번 출구, 1:1 프라이빗, 1인1실 샤워실" class="shop-image" 
@@ -1304,6 +1304,9 @@
                 </div>
             </div>
             </div>
+        </a>
+
+      
         </a>
 
       
@@ -1396,6 +1399,8 @@
         </div>
       </div>
     </div>
+    <!-- 상세정보 모달 -->
+    
     <!-- 상세정보 모달 -->
     
     <!-- 상세정보 모달 -->
@@ -1606,6 +1611,7 @@
     <script src="common-components.min.js" defer></script>
 
         
+        
         <script>
       // 까치울역 카드 순서 보호 + 그룹2/그룹4 랜덤 재정렬
       (function() {
@@ -1811,14 +1817,14 @@
           }
           window.currentFilter = 'massage';
 
-          /* /* /* /* /* /* if (typeof displayFilteredResults === 'function') {
+          /* /* /* /* /* /* /* if (typeof displayFilteredResults === 'function') {
             displayFilteredResults();
           } */else if (Array.isArray(window.massageShops)) {
             const shops = massageShops.filter(
               (shop) => shop.region === '서울' && shop.district === '강남' && shop.type === 'massage'
             );
-            /* /* /* /* /* /* if (typeof displayMassageShops === 'function') {
-              /* /* /* /* /* /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
+            /* /* /* /* /* /* /* if (typeof displayMassageShops === 'function') {
+              /* /* /* /* /* /* /* displayMassageShops(shops); */} */if (typeof updateResultsHeader === 'function') {
               updateResultsHeader('강남 마사지 추천 BEST 샵', shops.length);
             }
           }
@@ -1826,7 +1832,7 @@
           // resultsTitle을 "서울 강남 마사지 업체"로 업데이트
           const resultsTitle = document.getElementById('resultsTitle');
           if (resultsTitle) {
-            /* /* /* /* /* /* resultsTitle.textContent = '강남 마사지 추천 BEST 샵'; */}
+            /* /* /* /* /* /* /* resultsTitle.textContent = '강남 마사지 추천 BEST 샵'; */}
         
           const resultsH2 = document.querySelector('h2.visually-hidden');
           if (resultsH2) {
