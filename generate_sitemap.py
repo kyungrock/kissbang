@@ -173,6 +173,9 @@ def indent(element: ET.Element, level: int = 0) -> None:
 def write_sitemap(tree: ET.ElementTree) -> None:
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     indent(tree.getroot())
+    
+    # XML 선언과 네임스페이스를 올바르게 포함하여 작성
+    # ElementTree의 write 메서드는 기본 네임스페이스를 올바르게 처리합니다
     tree.write(OUTPUT_FILE, encoding="utf-8", xml_declaration=True)
 
 
