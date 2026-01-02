@@ -1103,12 +1103,12 @@ def insert_shop_cards_to_html(html_file, shops):
     if filename.startswith('company-'):
         return False
     
-    # 동/역 파일은 건너뛰기 (update_all_dong_station_massage.py에서 처리)
-    if (filename.endswith('-dong-massage.html') or 
-        filename.endswith('-station-massage.html') or 
-        filename.endswith('-dong.html') or 
-        filename.endswith('-station.html')):
-        return False
+    # 동/역 파일도 처리하도록 변경 (massage-card 삽입)
+    # if (filename.endswith('-dong-massage.html') or 
+    #     filename.endswith('-station-massage.html') or 
+    #     filename.endswith('-dong.html') or 
+    #     filename.endswith('-station.html')):
+    #     return False
     
     # 정적 header 삽입
     content = insert_static_header(content)

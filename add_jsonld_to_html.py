@@ -1026,9 +1026,17 @@ def create_jsonld(shop, page_region=None, page_district=None):
         review_region = page_region if page_region is not None else ''
         review_district = page_district if page_district is not None else ''
         
+        # itemReviewed 객체 생성 (리뷰가 평가하는 항목)
+        item_reviewed = {
+            "@type": "HealthAndBeautyBusiness",
+            "name": name,
+            "url": url
+        }
+        
         jsonld["review"] = [
             {
                 "@type": "Review",
+                "itemReviewed": item_reviewed,
                 "reviewRating": {
                     "@type": "Rating",
                     "ratingValue": str(int(review.get('rating', 0)))

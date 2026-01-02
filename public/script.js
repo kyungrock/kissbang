@@ -7221,7 +7221,55 @@ function sortStaticCards() {
 
   console.log(`sortStaticCards: ${cards.length}개 카드 발견`);
 
-  // 각 카드의 showHealingShop 값 확인
+  // 파일명에서 동/역 이름 추출
+  const currentFileName = window.location.pathname.split('/').pop();
+  const detectedInfo = detectRegionAndDistrictFromFilename(currentFileName);
+  const targetDongStation = detectedInfo.dongStation || '';
+  
+  console.log(`sortStaticCards: 파일명에서 추출한 동/역: ${targetDongStation}`);
+
+  // 카드에서 동 이름 추출 함수
+  function extractDongFromCard(card) {
+    const massageCard = card.classList.contains('massage-card')
+      ? card
+      : card.querySelector('.massage-card');
+    
+    if (!massageCard) return '';
+
+    // shop-name에서 추출 (예: "논현동 5월스파")
+    const shopNameEl = massageCard.querySelector('.shop-name');
+    if (shopNameEl) {
+      const shopName = shopNameEl.textContent.trim();
+      const dongMatch = shopName.match(/([가-힣]+동)/);
+      if (dongMatch) {
+        return dongMatch[1];
+      }
+    }
+
+    // shop-district에서 추출 (예: "강남구 논현동")
+    const shopDistrictEl = massageCard.querySelector('.shop-district');
+    if (shopDistrictEl) {
+      const shopDistrict = shopDistrictEl.textContent.trim();
+      const dongMatch = shopDistrict.match(/([가-힣]+동)/);
+      if (dongMatch) {
+        return dongMatch[1];
+      }
+    }
+
+    // shop-address-info에서 추출 (예: "서울 강남구 논현동 279-67")
+    const shopAddressEl = massageCard.querySelector('.shop-address-info');
+    if (shopAddressEl) {
+      const shopAddress = shopAddressEl.textContent.trim();
+      const dongMatch = shopAddress.match(/([가-힣]+동)/);
+      if (dongMatch) {
+        return dongMatch[1];
+      }
+    }
+
+    return '';
+  }
+
+  // 각 카드의 showHealingShop 값과 동 이름 확인
   const cardData = cards.map((card) => {
     // massage-card 요소 찾기
     const massageCard = card.classList.contains('massage-card')
@@ -7230,7 +7278,7 @@ function sortStaticCards() {
 
     if (!massageCard) {
       console.log('sortStaticCards: massage-card 요소를 찾을 수 없음', card);
-      return { card, showHealingShop: false };
+      return { card, showHealingShop: false, dong: '' };
     }
 
     // data-show-healing-shop 속성에서 값 확인 (우선순위 1)
@@ -7246,43 +7294,106 @@ function sortStaticCards() {
         shopTypeElement.textContent.trim().includes('힐링샵');
     }
 
-    return { card, showHealingShop: isHealingShop };
+    // 카드에서 동 이름 추출
+    const cardDong = extractDongFromCard(card);
+
+    return { card, showHealingShop: isHealingShop, dong: cardDong };
   });
 
-  // showHealingShop: true인 항목과 false인 항목 분리
-  const healingCards = cardData.filter((item) => item.showHealingShop === true);
-  const nonHealingCards = cardData.filter(
-    (item) => item.showHealingShop !== true
-  );
+  // 동/역 이름이 있고 카드에서 추출된 동 이름과 매칭되는 경우
+  if (targetDongStation) {
+    // 논현동 카드와 나머지 카드 분리
+    const cardsWithDong = cardData.filter((item) => item.dong === targetDongStation);
+    const cardsWithoutDong = cardData.filter((item) => item.dong !== targetDongStation);
 
-  console.log(
-    `sortStaticCards: 힐링샵 ${healingCards.length}개, 일반 ${nonHealingCards.length}개`
-  );
+    console.log(
+      `sortStaticCards: ${targetDongStation} 매칭: ${cardsWithDong.length}개, 나머지: ${cardsWithoutDong.length}개`
+    );
 
-  // 각 그룹 내에서 랜덤 정렬 (새 배열 반환)
-  const shuffledHealing = shuffleArray(healingCards);
-  const shuffledNonHealing = shuffleArray(nonHealingCards);
+    // 논현동 카드 내에서 힐링샵/일반 분리
+    const healingWithDong = cardsWithDong.filter((item) => item.showHealingShop === true);
+    const nonHealingWithDong = cardsWithDong.filter((item) => item.showHealingShop !== true);
 
-  // 카드 제거
-  cards.forEach((card) => card.remove());
+    // 나머지 카드 내에서 힐링샵/일반 분리
+    const healingWithoutDong = cardsWithoutDong.filter((item) => item.showHealingShop === true);
+    const nonHealingWithoutDong = cardsWithoutDong.filter((item) => item.showHealingShop !== true);
 
-  // 정렬된 순서로 다시 추가 (true 그룹 먼저, false 그룹 나중)
-  const sortedCards = [...shuffledHealing, ...shuffledNonHealing];
-  sortedCards.forEach((item) => {
-    massageList.appendChild(item.card);
-  });
+    console.log(
+      `sortStaticCards: ${targetDongStation} - 힐링샵: ${healingWithDong.length}개, 일반: ${nonHealingWithDong.length}개`
+    );
+    console.log(
+      `sortStaticCards: 나머지 - 힐링샵: ${healingWithoutDong.length}개, 일반: ${nonHealingWithoutDong.length}개`
+    );
 
-  // 정렬 완료 플래그 설정
-  staticCardsSorted = true;
+    // 각 그룹 내에서 랜덤 정렬
+    const shuffledHealingWithDong = shuffleArray(healingWithDong);
+    const shuffledNonHealingWithDong = shuffleArray(nonHealingWithDong);
+    const shuffledHealingWithoutDong = shuffleArray(healingWithoutDong);
+    const shuffledNonHealingWithoutDong = shuffleArray(nonHealingWithoutDong);
 
-  // 정렬 완료 후 카드 표시 (렌더링 전 정렬 완료)
-  massageList.classList.add('sorted');
-  massageList.style.opacity = '1';
-  massageList.style.visibility = 'visible';
+    // 카드 제거
+    cards.forEach((card) => card.remove());
 
-  console.log(
-    `✅ 정적 HTML 카드 ${sortedCards.length}개 재정렬 완료 (힐링샵: ${healingCards.length}개, 일반: ${nonHealingCards.length}개)`
-  );
+    // 정렬 순서: 논현동+힐링샵 → 나머지+힐링샵 → 논현동+일반 → 나머지+일반
+    const sortedCards = [
+      ...shuffledHealingWithDong,
+      ...shuffledHealingWithoutDong,
+      ...shuffledNonHealingWithDong,
+      ...shuffledNonHealingWithoutDong,
+    ];
+
+    sortedCards.forEach((item) => {
+      massageList.appendChild(item.card);
+    });
+
+    // 정렬 완료 플래그 설정
+    staticCardsSorted = true;
+
+    // 정렬 완료 후 카드 표시 (렌더링 전 정렬 완료)
+    massageList.classList.add('sorted');
+    massageList.style.opacity = '1';
+    massageList.style.visibility = 'visible';
+
+    console.log(
+      `✅ 정적 HTML 카드 ${sortedCards.length}개 재정렬 완료 (${targetDongStation}: ${cardsWithDong.length}개 최상단)`
+    );
+  } else {
+    // 동/역 이름이 없으면 기존 로직 (showHealingShop 기준만)
+    // showHealingShop: true인 항목과 false인 항목 분리
+    const healingCards = cardData.filter((item) => item.showHealingShop === true);
+    const nonHealingCards = cardData.filter(
+      (item) => item.showHealingShop !== true
+    );
+
+    console.log(
+      `sortStaticCards: 힐링샵 ${healingCards.length}개, 일반 ${nonHealingCards.length}개`
+    );
+
+    // 각 그룹 내에서 랜덤 정렬 (새 배열 반환)
+    const shuffledHealing = shuffleArray(healingCards);
+    const shuffledNonHealing = shuffleArray(nonHealingCards);
+
+    // 카드 제거
+    cards.forEach((card) => card.remove());
+
+    // 정렬된 순서로 다시 추가 (true 그룹 먼저, false 그룹 나중)
+    const sortedCards = [...shuffledHealing, ...shuffledNonHealing];
+    sortedCards.forEach((item) => {
+      massageList.appendChild(item.card);
+    });
+
+    // 정렬 완료 플래그 설정
+    staticCardsSorted = true;
+
+    // 정렬 완료 후 카드 표시 (렌더링 전 정렬 완료)
+    massageList.classList.add('sorted');
+    massageList.style.opacity = '1';
+    massageList.style.visibility = 'visible';
+
+    console.log(
+      `✅ 정적 HTML 카드 ${sortedCards.length}개 재정렬 완료 (힐링샵: ${healingCards.length}개, 일반: ${nonHealingCards.length}개)`
+    );
+  }
 }
 
 // 정적 HTML 카드 검색 필터링 함수

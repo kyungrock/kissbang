@@ -88,13 +88,36 @@ def insert_protection_script(content, dong_station_name):
         print("  ⚠️ script.js를 찾을 수 없습니다.")
         return content
     
-    # 이미 보호 코드가 있는지 확인
+    # 이미 보호 코드가 있는지 확인 및 모든 중복 제거
     before_script = content[:script_js_match.start()]
-    if '카드 순서 보호' in before_script or 'shuffleNonhyeonGroups' in before_script:
-        print("  ℹ️ 보호 코드가 이미 존재합니다. 업데이트합니다.")
-        # 기존 보호 코드 제거
-        protection_pattern = r'<script>\s*//.*?카드 순서 보호.*?</script>'
-        content = re.sub(protection_pattern, '', content, flags=re.DOTALL | re.IGNORECASE)
+    if '카드 순서 보호' in before_script or 'shuffleDongStationGroups' in before_script or 'shuffleNonhyeonGroups' in before_script:
+        print("  ℹ️ 보호 코드가 이미 존재합니다. 모든 중복 제거 후 업데이트합니다.")
+        # 모든 보호 코드 패턴 제거 (더 넓은 범위)
+        # 패턴 1: 카드 순서 보호가 포함된 스크립트
+        protection_patterns = [
+            r'<script>\s*//.*?카드 순서 보호.*?</script>',
+            r'<script>[\s\S]*?카드 순서 보호[\s\S]*?</script>',
+            r'<script>[\s\S]*?shuffleDongStationGroups[\s\S]*?</script>',
+            r'<script>[\s\S]*?shuffleNonhyeonGroups[\s\S]*?</script>',
+            r'<script>[\s\S]*?DONG_STATION_NAME[\s\S]*?</script>',
+        ]
+        for pattern in protection_patterns:
+            while True:
+                old_content = content
+                content = re.sub(pattern, '', content, flags=re.DOTALL | re.IGNORECASE)
+                if old_content == content:
+                    break
+        # 연속된 </script><script> 패턴 제거
+        while True:
+            old_content = content
+            content = re.sub(
+                r'</script>\s*<script>',
+                '',
+                content,
+                flags=re.DOTALL
+            )
+            if old_content == content:
+                break
         # 다시 script.js 위치 찾기
         script_js_match = re.search(script_js_pattern, content, re.IGNORECASE)
         if not script_js_match:
@@ -346,6 +369,123 @@ def update_dong_station_massage_file(html_file):
     # 파일 읽기
     content = html_file.read_text(encoding='utf-8')
     
+    # ========== 기존 중복 요소 완전 제거 ==========
+    # 0. 모든 중첩된 주석 시작 제거 (/* /* /* 패턴)
+    while True:
+        old_content = content
+        # 중첩된 주석 시작 패턴 제거
+        content = re.sub(
+            r'/\*\s*/\*',
+            '/*',
+            content
+        )
+        # 연속된 주석 시작 제거
+        content = re.sub(
+            r'/\*\s*/\*\s*/\*',
+            '/*',
+            content
+        )
+        # 여러 개의 주석 시작 제거
+        while re.search(r'/\*\s*/\*', content):
+            content = re.sub(r'/\*\s*/\*', '/*', content)
+        if old_content == content:
+            break
+    
+    # 1. sortStaticCards 스크립트 중복 제거 (모든 패턴, 연속된 스크립트 포함)
+    while True:
+        old_content = content
+        # sortStaticCards가 포함된 모든 스크립트 블록 찾기
+        content = re.sub(
+            r'<script>[^<]*?sortStaticCards[^<]*?</script>',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        # 스크립트 태그 없이 함수만 있는 경우
+        content = re.sub(
+            r'\(function\(\)\s*\{[^}]*sortStaticCards[^}]*\}\)\(\);\s*',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        # 여러 줄에 걸친 경우
+        content = re.sub(
+            r'\(function\(\)\s*\{[\s\S]*?sortStaticCards[\s\S]*?\}\)\(\);\s*',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        # 연속된 </script><script> 패턴 제거
+        content = re.sub(
+            r'</script>\s*<script>',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        if old_content == content:
+            break
+    
+    # 2. 상세정보 모달 주석 중복 제거
+    while True:
+        old_content = content
+        content = re.sub(
+            r'<!--\s*상세정보\s*모달\s*-->',
+            '',
+            content,
+            flags=re.IGNORECASE
+        )
+        content = content.replace('<!-- 상세정보 모달 -->', '').replace('<!--상세정보 모달-->', '')
+        if old_content == content:
+            break
+    
+    # 3. 연속된 </a> 태그 제거 (빈 줄만 있는 경우)
+    while True:
+        old_content = content
+        # 연속된 </a> 태그와 빈 줄 패턴 제거
+        content = re.sub(
+            r'</a>\s*\n\s*\n\s*</a>',
+            '</a>',
+            content,
+            flags=re.MULTILINE
+        )
+        # 여러 개의 연속된 </a> 태그 제거
+        content = re.sub(
+            r'(</a>\s*\n\s*){2,}',
+            '</a>\n',
+            content,
+            flags=re.MULTILINE
+        )
+        if old_content == content:
+            break
+    
+    # 4. 빈 주석 및 중첩 주석 제거
+    while True:
+        old_content = content
+        # 중첩된 주석 시작 제거
+        content = re.sub(
+            r'/\*\s*/\*',
+            '/*',
+            content
+        )
+        # 연속된 주석 시작 제거
+        while re.search(r'/\*\s*/\*', content):
+            content = re.sub(r'/\*\s*/\*', '/*', content)
+        # 빈 주석 패턴 제거
+        content = re.sub(
+            r'\s*\*/\s*',
+            '',
+            content,
+            flags=re.MULTILINE
+        )
+        # 연속된 빈 주석 제거
+        content = re.sub(
+            r'\*/\s*\*/',
+            '',
+            content
+        )
+        if old_content == content:
+            break
+    
     # dongStationSelect의 value 추출
     dong_station_key = extract_dong_station_from_html(content)
     if not dong_station_key:
@@ -503,6 +643,23 @@ def update_dong_station_massage_file(html_file):
     
     end_pos = start_tag_end + last_close_div + 6
     
+    # 기존 섹션에서 모든 스크립트 태그 제거 (중복 방지)
+    section_to_replace = content[start_tag_end:end_pos]
+    # 스크립트 태그 제거
+    section_to_replace = re.sub(
+        r'<script>.*?</script>',
+        '',
+        section_to_replace,
+        flags=re.DOTALL | re.IGNORECASE
+    )
+    # 연속된 </a> 태그 제거
+    section_to_replace = re.sub(
+        r'(</a>\s*\n\s*){2,}',
+        '</a>\n',
+        section_to_replace,
+        flags=re.MULTILINE
+    )
+    
     # 기존 내용 완전 제거하고 새 카드만 삽입
     new_content = (
         content[:start_tag_end] + 
@@ -523,8 +680,122 @@ def update_dong_station_massage_file(html_file):
     # footer-link 업데이트
     content = update_footer_link(content, region, district, filter_type, filename)
     
+    # update_footer_link 후 중복 모달 제거
+    # detailsModal 중복 제거 (여러 개가 있을 수 있음)
+    details_modal_pattern = r'<div[^>]*id=["\']detailsModal["\']'
+    details_modal_matches = list(re.finditer(details_modal_pattern, content))
+    if len(details_modal_matches) > 1:
+        print(f"  ℹ️ detailsModal 중복 {len(details_modal_matches)}개 발견, 첫 번째만 유지")
+        # 첫 번째를 제외한 나머지 모두 제거
+        for i, match in enumerate(details_modal_matches[1:], 1):
+            start_pos = match.start()
+            remaining = content[start_pos:]
+            div_count = 0
+            j = 0
+            end_pos = -1
+            
+            while j < len(remaining):
+                if j + 4 <= len(remaining) and remaining[j:j+4] == '<div':
+                    tag_end = remaining.find('>', j)
+                    if tag_end > j and remaining[tag_end-1] != '/':
+                        div_count += 1
+                    j = tag_end + 1
+                elif j + 6 <= len(remaining) and remaining[j:j+6] == '</div>':
+                    div_count -= 1
+                    if div_count == 0:
+                        end_pos = start_pos + j + 6
+                        break
+                    j += 6
+                else:
+                    j += 1
+            
+            if end_pos > start_pos:
+                content = content[:start_pos] + content[end_pos:]
+                # 다음 매치 위치 조정
+                details_modal_matches = list(re.finditer(details_modal_pattern, content))
+    
     # JavaScript 보호 코드 삽입
     content = insert_protection_script(content, dong_station_name)
+    
+    # ========== 최종 중복 제거 (파일 저장 전) ==========
+    # 0. 중첩된 주석 시작 최종 제거
+    while True:
+        old_content = content
+        content = re.sub(
+            r'/\*\s*/\*',
+            '/*',
+            content
+        )
+        while re.search(r'/\*\s*/\*', content):
+            content = re.sub(r'/\*\s*/\*', '/*', content)
+        if old_content == content:
+            break
+    
+    # 1. sortStaticCards 스크립트 중복 최종 제거
+    while True:
+        old_content = content
+        content = re.sub(
+            r'<script>[^<]*?sortStaticCards[^<]*?</script>',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        content = re.sub(
+            r'\(function\(\)\s*\{[\s\S]*?sortStaticCards[\s\S]*?\}\)\(\);\s*',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        content = re.sub(
+            r'</script>\s*<script>',
+            '',
+            content,
+            flags=re.DOTALL
+        )
+        if old_content == content:
+            break
+    
+    # 2. 상세정보 모달 주석 중복 최종 제거
+    while True:
+        old_content = content
+        content = re.sub(
+            r'<!--\s*상세정보\s*모달\s*-->',
+            '',
+            content,
+            flags=re.IGNORECASE
+        )
+        content = content.replace('<!-- 상세정보 모달 -->', '').replace('<!--상세정보 모달-->', '')
+        if old_content == content:
+            break
+    
+    # 3. 연속된 </a> 태그 최종 제거
+    while True:
+        old_content = content
+        content = re.sub(
+            r'</a>\s*\n\s*\n\s*</a>',
+            '</a>',
+            content,
+            flags=re.MULTILINE
+        )
+        content = re.sub(
+            r'(</a>\s*\n\s*){2,}',
+            '</a>\n',
+            content,
+            flags=re.MULTILINE
+        )
+        if old_content == content:
+            break
+    
+    # 4. 연속된 빈 줄 정리 (3개 이상을 2개로 제한)
+    while True:
+        old_content = content
+        content = re.sub(
+            r'\n\s*\n\s*\n\s*\n+',
+            '\n\n',
+            content
+        )
+        if old_content == content:
+            break
     
     # 파일 저장
     html_file.write_text(content, encoding='utf-8')
