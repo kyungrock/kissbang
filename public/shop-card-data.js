@@ -4491,22 +4491,22 @@ window.shopCardData = [
     services: ['스웨디시', '아로마마사지', '타이마사지'],
     operatingHours: '오후 1시 ~ 새벽 4시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-dongducheon-jihaeng-more-cheongdam-swedish.html',
-    showHealingShop: true,
-    greeting: '지행역마사지⭐❤️ 아로마&타이 재방문 1위 최고의 감성 스웨디시',
+    showHealingShop: false,
+    greeting: '지행역마사지⭐❤️ 아로마마사지 & 타이 ❤ 재방문 1위 ❤ 최고의 감성 스웨디시 ❤ 무색무취 수용성오일 ❤️',
     reviews: [
       {
-        author: '별빛하늘님',
+        author: '달빛소리님',
         rating: 5,
         date: '2025-12-29',
         review:
-          '실력파 관리사분들이 정말 좋으셨어요. 재방문 예정입니다.',
+          'A코스 90분 받았는데 시간 가는 줄 몰랐어요. 관리사분들이 너무 섬세하게 해주셔서 몸이 한결 가벼워졌습니다.',
       },
       {
-        author: '구름물결님',
-        rating: 4.5,
+        author: '별바람님',
+        rating: 4.8,
         date: '2025-12-29',
         review:
-          '지행역에서 가까워서 찾기 쉬웠고, 스웨디시 A코스로 받았는데 정말 만족스러웠습니다. 20대~30대 실력파 관리사분들이 정성스럽게 케어해주셔서 몸의 피로가 확실히 풀렸어요. 무색 무취 수용성 오일을 사용하셔서 더욱 좋았고, 재방문 1위라는 말이 괜히 나온 게 아니네요. 지하 주차장이 있어서 차로 오시는 분들께도 편리할 것 같아요. 다음에도 또 방문할 예정입니다.',
+          '오일 냄새가 전혀 안 나서 좋았어요. 실력파 분들이 계시니 재방문 1위라는 게 이해가 가네요. 주차도 편하고 접근성도 괜찮습니다.',
       },
     ],
   },
@@ -4530,7 +4530,7 @@ window.shopCardData = [
     services: ['타이마사지', '아로마마사지', '크림마사지'],
     operatingHours: '24시간 / 연중무휴 (주말에도 영업)',
     file: 'company-gyeonggi-seongnam-seohyeon-watpho.html',
-    showHealingShop: true,
+    showHealingShop: false,
     greeting: '서현역마사지⭐️[서현왓포] ✿ 70분 2.5만 ✿ 수면가능⭐️',
     reviews: [
       {
@@ -4569,7 +4569,7 @@ window.shopCardData = [
     services: ['타이마사지', '아로마마사지'],
     operatingHours: '오전 10시 ~ 새벽 5시 (폰이꺼진경우: 마감, 랜덤 휴무)',
     file: 'company-gyeonggi-namyangju-jingeop-geumgok-chodang-thai.html',
-    showHealingShop: true,
+    showHealingShop: false,
     greeting: '남양주마사지-타이마사지⭐■ 피로사라지도록 한분한분 정성껏 모시겠습니다 ■⭐',
     reviews: [
       {
@@ -4585,6 +4585,162 @@ window.shopCardData = [
         date: '2025-12-29',
         review:
           '대진플러스몰딩 인근이라 찾기 쉬웠고, 타이마사지 090분 코스로 주간 시간에 받았는데 정말 만족스러웠습니다. 태국인 관리사분들이 정성스럽게 케어해주셔서 몸의 피로가 확실히 사라졌어요. 편안하고 깔끔한 분위기에서 따뜻한 손길로 관리해주셔서 더욱 좋았고, 주간과 야간 가격이 달라서 시간대를 선택할 수 있어서 좋았습니다. 무료 주차도 있어서 차로 오시는 분들께도 편리할 것 같아요. 다음에도 또 방문할 예정입니다.',
+      },
+    ],
+  },
+  {
+    id: 116,
+    name: '훼미리마사지',
+    country: 'china',
+    region: '경기',
+    district: '광주',
+    dong: '곤지암읍',
+    address: '경기 광주시 곤지암읍 삼리 24',
+    detailAddress: '곤지암역 1번 출구, 경기 광주시 곤지암읍 경충대로 661',
+    phone: '0507-1859-6948',
+    rating: 4.8,
+    reviewCount: 2,
+    price: '회원가 40,000원~',
+    description:
+      '광주마사지 최고의 서비스를 보장하는 훼미리마사지 입니다. 편안하고 아늑한 공간에서 힐링하고 가세요. 바쁘고 숨찬 일상속에서 잠시나마 피로를 풀고 싶으신분~ 힐링을 드릴수 있드록 노력하겠습니다.',
+    image: 'https://msg1000.com/images/곤지암마사지_훼미리마사지.jpg',
+    alt: '경기 광주시 곤지암읍 훼미리마사지 마사지샵 - 곤지암역 1번 출구, 스포츠마사지&전신아로마, 회원가 40,000원~',
+    services: ['스포츠마사지', '전신아로마'],
+    operatingHours: '24시간 (폰이꺼진경우: 마감, 랜덤 휴무)',
+    file: 'company-gyeonggi-gwangju-gonjiam-family-massage.html',
+    showHealingShop: false,
+    greeting: '경기광주마사지-아로마마사지 ■ 제대로된 마사지샵으로 잊지못할 순간을 만들어 드리겠습니다. ■',
+    reviews: [
+      {
+        author: '별하늘님',
+        rating: 5,
+        date: '2026-01-02',
+        review:
+          'B코스 90분 받았는데 효과 좋았어요. 중국인 관리사분들 실력 정말 만족스러웠습니다.',
+      },
+      {
+        author: '달빛님',
+        rating: 4.7,
+        date: '2026-01-02',
+        review:
+          '아로마 C코스로 150분 받았어요. 24시간 운영이라 늦은 시간에도 이용할 수 있어서 편리했습니다. 무료 주차가 있어서 차로 오시는 분들께도 좋을 것 같아요. 편안한 공간에서 피로가 확실히 풀렸습니다.',
+      },
+    ],
+  },
+  {
+    id: 117,
+    name: '아리수마사지',
+    country: 'china',
+    region: '경기',
+    district: '광주',
+    dong: '곤지암읍',
+    address: '경기 광주시 곤지암읍 경충대로 738',
+    detailAddress: '부자집국수 인근',
+    phone: '0507-1859-6309',
+    rating: 4.8,
+    reviewCount: 2,
+    price: '회원가 40,000원~',
+    description:
+      '광주마사지 최고의 서비스를 보장하는 아리수마사지 입니다. 고객님의 건강을 최우선으로 하며 정성껏 모시겠습니다.',
+    image: 'https://msg1000.com/images/곤지암마사지_아리수마사지.jpg',
+    alt: '경기 광주시 곤지암읍 아리수마사지 마사지샵 - 부자집국수 인근, 스포츠마사지&아로마마사지, 회원가 40,000원~',
+    services: ['스포츠마사지', '아로마마사지'],
+    operatingHours: '24시간 (폰이꺼진경우: 마감, 랜덤 휴무)',
+    file: 'company-gyeonggi-gwangju-gonjiam-arisu-massage.html',
+    showHealingShop: false,
+    greeting: '경기광주마사지-아로마마사지⭐★ 10년 경력의 실력있는 관리사님 있어요 ^^ ★⭐',
+    reviews: [
+      {
+        author: '하늘별님',
+        rating: 5,
+        date: '2026-01-02',
+        review:
+          '스포츠마사지 B코스 90분으로 받았는데 정말 좋았습니다. 10년 경력 관리사분의 실력이 느껴져요.',
+      },
+      {
+        author: '바람소리님',
+        rating: 4.9,
+        date: '2026-01-02',
+        review:
+          '아로마마사지 C코스로 120분 받았어요. 부자집국수 근처에 있어서 찾기 쉬웠고, 24시간 운영이라 시간대 선택이 자유로워서 좋았습니다. 실력 있는 관리사분들이 계셔서 몸의 긴장이 확실히 풀렸네요. 무료 주차도 가능해서 편리했습니다.',
+      },
+    ],
+  },
+  {
+    id: 118,
+    name: '웰빙수타이',
+    country: 'thailand',
+    region: '경기',
+    district: '구리',
+    dong: '갈매동',
+    address: '경기 구리시 갈매중앙로 89-5',
+    detailAddress: '갈매역 1번 출구',
+    phone: '0507-1859-6976',
+    rating: 4.8,
+    reviewCount: 2,
+    price: '회원가 35,000원~',
+    description:
+      '구리마사지 최고의 서비스를 보장하는 웰빙 수타이 입니다. 지쳐있는 심신 모두 치유되는 편안한 마사지샵 감동있는 마사지로 관리해드립니다. 언제나 고객님을 친절과 정성으로 관리해 드립니다.',
+    image: 'https://msg1000.com/images/구리마사지_웰빙수타이.jpg',
+    alt: '경기 구리시 갈매동 웰빙수타이 마사지샵 - 갈매역 1번 출구, 타이마사지&아로마마사지, 회원가 35,000원~',
+    services: ['타이마사지', '아로마마사지'],
+    operatingHours: '24시간 (폰이꺼진경우: 마감, 랜덤 휴무)',
+    file: 'company-gyeonggi-guri-galmae-wellbeing-thai.html',
+    showHealingShop: false,
+    greeting: '구리마사지-타이마사지 ■ 뭉친근육과 피로를 말끔하게 풀어드립니다. ■',
+    reviews: [
+      {
+        author: '평온한하루님',
+        rating: 5,
+        date: '2026-01-02',
+        review:
+          '갈매역에서 가까워서 찾기 편했어요. 타이마사지 받았는데 뭉친 근육이 확실히 풀렸습니다.',
+      },
+      {
+        author: '힐링타임님',
+        rating: 4.8,
+        date: '2026-01-02',
+        review:
+          '야간 시간대에 아로마마사지 B코스 90분 받았어요. 태국인 관리사분의 전문적인 테크닉에 감동했고, 24시간 운영이라 시간 제약 없이 이용할 수 있어서 좋았습니다. 수면 가능하다고 하셔서 더 편안하게 받을 수 있었고, 무료 주차도 가능해서 만족스러웠어요.',
+      },
+    ],
+  },
+  {
+    id: 119,
+    name: '뷰가론',
+    country: 'korea',
+    region: '경기',
+    district: '광주',
+    dong: '벼루개로',
+    address: '경기 광주시 벼루개로 36',
+    detailAddress: '서원프라자 3차 905호',
+    phone: '0507-1859-6696',
+    rating: 4.8,
+    reviewCount: 2,
+    price: '회원가 35,000원~',
+    description:
+      '광주마사지 최고의 서비스를 보장하는 뷰가론 입니다. 정성을 다하는 마사지샵 경기 광주입니다. 예약하고 오시기 바랍니다.',
+    image: 'https://msg1000.com/images/광주마사지_뷰가론.jpg',
+    alt: '경기 광주시 벼루개로 뷰가론 마사지샵 - 서원프라자 3차 905호, 스킨&바디관리, 회원가 35,000원~',
+    services: ['왁싱', '스킨&바디관리'],
+    operatingHours: '오전 9시 ~ 오후 10시 (폰이꺼진경우: 마감, 랜덤 휴무)',
+    file: 'company-gyeonggi-gwangju-byeorugae-view-garon.html',
+    showHealingShop: false,
+    greeting: '경기광주마사지-아로마마사지⭐■ 언제나 고객님과 함께하는 마사지샵이 되도록 노력하겠습니다. ■⭐',
+    reviews: [
+      {
+        author: '편안함찾는이님',
+        rating: 5,
+        date: '2026-01-02',
+        review:
+          '서원프라자 3차 905호에 있어서 찾기 쉬웠어요. 스킨&바디관리 받았는데 정말 만족스러웠습니다.',
+      },
+      {
+        author: '아름다운하루님',
+        rating: 4.9,
+        date: '2026-01-02',
+        review:
+          '한국인 관리사분이 정성스럽게 케어해주셔서 좋았어요. 오전 9시부터 오후 10시까지 운영이라 시간대 선택이 가능하고, 예약제로 운영되어 대기 시간 없이 편리하게 이용할 수 있었습니다. 서원프라자 3차 건물이라 접근도 좋고, 주차 문의 가능해서 차로 오시는 분들께도 편리할 것 같아요.',
       },
     ],
   },
