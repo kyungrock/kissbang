@@ -752,7 +752,12 @@ def create_shop_display_name(shop):
     
     # 일반 업체의 경우
     shop_name = shop.get('name', '')
-    dong_name = extract_dong_from_address(shop.get('address', ''), shop.get('detailAddress', ''))
+    # shop.dong 필드가 있으면 우선 사용
+    dong_name = shop.get('dong', '')
+    
+    # shop.dong이 없으면 주소에서 추출
+    if not dong_name:
+        dong_name = extract_dong_from_address(shop.get('address', ''), shop.get('detailAddress', ''))
     
     if dong_name and dong_name not in shop_name:
         # 기존 업체명에서 "제주마사지", "제주도마사지" 등을 제거
@@ -828,7 +833,15 @@ def create_shop_card_html(shop):
     if shop_type == '출장마사지':
         location_info = detail_address.split()[0] if detail_address else shop.get('region', '출장마사지')
     else:
-        location_info = extract_location_info(address, detail_address)
+        # shop.district와 shop.dong 필드가 있으면 우선 사용
+        district = shop.get('district', '')
+        dong = shop.get('dong', '')
+        if district and dong:
+            location_info = f'{district} {dong}'
+        elif district:
+            location_info = district
+        else:
+            location_info = extract_location_info(address, detail_address)
     
     # 타입 이름 (힐링샵 여부)
     show_healing_shop = shop.get('showHealingShop', True)

@@ -6748,8 +6748,15 @@ function createShopDisplayName(shop) {
     return `${region} ${shopName}`;
   }
 
+  // shop.dong 필드가 있으면 우선 사용
+  let dongName = shop.dong;
+  
+  // shop.dong이 없으면 주소에서 추출
+  if (!dongName) {
+    dongName = extractDongFromAddress(shop.address, shop.detailAddress);
+  }
+  
   // 동 이름이 있고 업체명에 포함되지 않은 경우 동 이름 추가
-  const dongName = extractDongFromAddress(shop.address, shop.detailAddress);
   if (dongName && !shop.name.includes(dongName)) {
     // 기존 업체명에서 "제주마사지", "제주도마사지" 등을 제거하고 간단하게
     let simpleName = shop.name
@@ -6766,12 +6773,22 @@ function createShopDisplayName(shop) {
 function createShopCard(shop) {
   const displayName = createShopDisplayName(shop);
   // 출장마사지의 경우 지역명만 표시
-  const locationInfo =
-    shop.type === '출장마사지'
-      ? extractDongFromAddress(shop.address, shop.detailAddress) ||
-        shop.region ||
-        '출장마사지'
-      : extractLocationInfo(shop.address, shop.detailAddress);
+  let locationInfo;
+  if (shop.type === '출장마사지') {
+    locationInfo =
+      extractDongFromAddress(shop.address, shop.detailAddress) ||
+      shop.region ||
+      '출장마사지';
+  } else {
+    // shop.district와 shop.dong 필드가 있으면 우선 사용
+    if (shop.district && shop.dong) {
+      locationInfo = `${shop.district} ${shop.dong}`;
+    } else if (shop.district) {
+      locationInfo = shop.district;
+    } else {
+      locationInfo = extractLocationInfo(shop.address, shop.detailAddress);
+    }
+  }
   const distance = generateRandomDistance();
 
   // 주소, 상세주소, 전화번호를 한 줄로 합치기
@@ -6970,7 +6987,7 @@ function filterByType(selectedType) {
 // 인사말 반환 (업체별 동적 생성)
 function getGreeting(shop) {
   // shop-card-data.js에서 greeting 필드가 있으면 우선 사용
-  if (shop.greeting) {
+  if (shop.greeting && shop.greeting.trim() !== '') {
     return shop.greeting;
   }
   // 관리사 나이 정보 추출

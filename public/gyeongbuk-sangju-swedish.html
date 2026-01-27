@@ -4,11 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="./" />
-    <title>상주 스웨디시 추천 BEST 샵｜스웨디시·힐링 1위샵 가격·후기</title>
-        <meta
-      name="description"
-      content="상주 스웨디시 BEST 샵 실시간 순위★ 시내·역세권 스웨디시, 전신마사지, 힐링마사지 가격 비교. 검증된 1위 샵만 골라서 0507 전화로 바로 예약 가능. 실제 후기 100+ 확인하세요!"
-    />
+    <title>best 샵 | sangju 스웨디시 추천 BEST 샵</title>
+        <meta name="description" content="sangju 경북 스웨디시 BEST 샵 실시간 순위. sangju 경북 스웨디시 마사지 가격 비교 및 후기 확인." />
         
     <link rel="canonical" href="https://msg1000.com/gyeongbuk-sangju-swedish.html" />
     <meta name="author" content="마사지천국" />
@@ -224,7 +221,9 @@
           </div>
         </div>
         
-      </div>
+              <button class="filter-btn" id="relatedInfoBtn" style="cursor: pointer;">
+          관련정보
+        </button></div>
     </section>
 
     <section
@@ -682,6 +681,94 @@
           }});
     </script>
 
+      <!-- 관련정보 모달 -->
+    <div id="relatedInfoModal" class="modal" role="dialog" aria-labelledby="relatedInfoModalTitle" aria-hidden="true">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="relatedInfoModalTitle">sangju 스웨디시 관련정보</h2>
+          <button class="modal-close" onclick="closeModal('relatedInfoModal')" aria-label="닫기">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="info-section">
+            <h3>📍 sangju 스웨디시 업체별 서비스 안내</h3>
+          </div>
+
+          <div class="info-section">
+            <h3>⭐ sangju 스웨디시 후기</h3>
+            <p>
+              sangju 스웨디시을(를) 이용한 고객들은 편리한 접근성과 전문적인 서비스에 만족한다는 후기가 많습니다. 
+              특히 주변 지역으로 빠른 방문 서비스를 제공받을 수 있어 비즈니스 여행객들과 주민들에게 인기가 높습니다.
+            </p>
+            <p>
+              많은 고객들이 전문 관리사들의 친절한 서비스와 깔끔한 시설에 대해 긍정적인 평가를 남기고 있으며, 
+              특히 다양한 서비스를 통해 원하는 장소에서 편안하게 마사지를 받을 수 있다는 점이 큰 장점으로 꼽힙니다.
+            </p>
+          </div>
+
+          <div class="info-section">
+            <h3>🗺️ 주변 지역 소개</h3>
+            <p>
+              sangju 스웨디시 주변은 주요 상업지역으로, 다양한 문화시설이 위치해 있습니다. 
+              역세권의 편리한 접근성과 함께 전역으로 빠른 방문 서비스를 제공받을 수 있어 매우 편리합니다.
+            </p>
+            <p>
+              주변 지역은 교통이 발달되어 있어 전지역으로 서비스를 제공하는 업체들이 많습니다. 
+              특히 이 지역을 중심으로 한 지역은 서비스의 주요 수요 지역 중 하나로, 24시간 서비스를 제공하는 업체들이 활발히 운영하고 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <script>
+      // 관련정보 버튼 클릭 이벤트 리스너
+      document.addEventListener('DOMContentLoaded', function() {
+        const relatedInfoBtn = document.getElementById('relatedInfoBtn');
+        if (relatedInfoBtn) {
+          relatedInfoBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const modal = document.getElementById('relatedInfoModal');
+            if (modal) {
+              modal.classList.add('active');
+              modal.style.display = 'flex';
+              modal.style.alignItems = 'flex-start';
+              modal.style.justifyContent = 'center';
+              modal.style.padding = '20px';
+              modal.style.position = 'fixed';
+              modal.style.top = '0';
+              modal.style.left = '0';
+              modal.style.width = '100%';
+              modal.style.height = '100%';
+              modal.style.background = 'rgba(0, 0, 0, 0.6)';
+              modal.style.zIndex = '1000';
+              document.body.style.overflow = 'hidden';
+            }
+          });
+        }
+      });
+
+      // 모달 닫기 함수
+      function closeModal(modalId) {
+        try {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.classList.remove('active');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+        } catch (error) {
+          console.error('closeModal 오류:', error);
+        }
+      }
+
+      if (typeof window !== 'undefined') {
+        window.closeModal = closeModal;
+      }
+    </script>
   </body>
 </html>
 /html>

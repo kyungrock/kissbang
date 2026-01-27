@@ -4,11 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="./" />
-    <title>충남 출장마사지 추천 BEST 샵｜출장·방문 1위샵 가격·후기</title>
-        <meta
-      name="description"
-      content="충남 출장마사지 BEST 샵 실시간 순위★ 출장·방문 안마, 전신마사지 가격 비교. 검증된 1위 샵만 골라서 0507 전화로 바로 예약 가능. 실제 후기 100+ 확인하세요!"
-    />
+    <title>best 샵 | 충남 출장마사지 추천 BEST 샵</title>
+        <meta name="description" content="충남 출장마사지 BEST 샵 실시간 순위. 충남 출장마사지 마사지 가격 비교 및 후기 확인." />
         
     <link rel="canonical" href="https://msg1000.com/chungnam-outcall.html" />
     <meta name="author" content="마사지천국" />
@@ -224,7 +221,9 @@
           </div>
         </div>
         
-      </div>
+              <button class="filter-btn" id="relatedInfoBtn" style="cursor: pointer;">
+          관련정보
+        </button></div>
     </section>
 
     <section
@@ -1384,6 +1383,53 @@
         </div>
       </div>
     </div>
+      <script>
+      // 관련정보 버튼 클릭 이벤트 리스너
+      document.addEventListener('DOMContentLoaded', function() {
+        const relatedInfoBtn = document.getElementById('relatedInfoBtn');
+        if (relatedInfoBtn) {
+          relatedInfoBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const modal = document.getElementById('relatedInfoModal');
+            if (modal) {
+              modal.classList.add('active');
+              modal.style.display = 'flex';
+              modal.style.alignItems = 'flex-start';
+              modal.style.justifyContent = 'center';
+              modal.style.padding = '20px';
+              modal.style.position = 'fixed';
+              modal.style.top = '0';
+              modal.style.left = '0';
+              modal.style.width = '100%';
+              modal.style.height = '100%';
+              modal.style.background = 'rgba(0, 0, 0, 0.6)';
+              modal.style.zIndex = '1000';
+              document.body.style.overflow = 'hidden';
+            }
+          });
+        }
+      });
+
+      // 모달 닫기 함수
+      function closeModal(modalId) {
+        try {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.classList.remove('active');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+        } catch (error) {
+          console.error('closeModal 오류:', error);
+        }
+      }
+
+      if (typeof window !== 'undefined') {
+        window.closeModal = closeModal;
+      }
+    </script>
   </body>
 </html>
 /html>
