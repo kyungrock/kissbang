@@ -397,10 +397,15 @@
             <button
               class="map-btn"
               onclick="openMap()"
-              aria-label="지도에서 보기"
+              aria-label="지도에서 위치 보기"
             >
               지도 보기
             </button>
+            <div class="nearby-shops-title" id="nearbyShopsTitleClickable">
+              <div class="nearby-title-line2">
+                <span>다른샵보기</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -450,6 +455,40 @@
           });
         }
       }
+
+            function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.classList.remove('active');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      }
+
+
+      function openDetailsModal(event) {
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        const modal = document.getElementById('detailsModal');
+        if (!modal) {
+          console.error('detailsModal을 찾을 수 없습니다.');
+          alert('모달을 찾을 수 없습니다. 페이지를 새로고침해주세요.');
+          return;
+        }
+
+        if (typeof window.openDetailsModal === 'function' && window.openDetailsModal !== openDetailsModal) {
+          window.openDetailsModal(event);
+          return;
+        }
+
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
     </script>
   </body>
 </html>
