@@ -6750,12 +6750,12 @@ function createShopDisplayName(shop) {
 
   // shop.dong 필드가 있으면 우선 사용
   let dongName = shop.dong;
-  
+
   // shop.dong이 없으면 주소에서 추출
   if (!dongName) {
     dongName = extractDongFromAddress(shop.address, shop.detailAddress);
   }
-  
+
   // 동 이름이 있고 업체명에 포함되지 않은 경우 동 이름 추가
   if (dongName && !shop.name.includes(dongName)) {
     // 기존 업체명에서 "제주마사지", "제주도마사지" 등을 제거하고 간단하게
@@ -6812,7 +6812,7 @@ function createShopCard(shop) {
             <div class="card-image">
                 <img src="${
                   shop.image
-                }" alt="${displayName}" class="shop-image" 
+                }" alt="${displayName}" class="shop-image"
                      onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
                      loading="lazy">
                 <div class="image-overlay">
@@ -6823,7 +6823,7 @@ function createShopCard(shop) {
                     }
                 </div>
             </div>
-            
+
             <div class="card-content">
                 <div class="card-header">
                     <div class="shop-name-container">
@@ -6831,15 +6831,15 @@ function createShopCard(shop) {
                         <div class="shop-location-info">
                             <span class="shop-district">${locationInfo}</span>
                             <div class="location-flag">
-                                <img src="https://www.msg1000.com/images/한국.jpg" 
-                                     alt="한국 국기" 
+                                <img src="https://www.msg1000.com/images/한국.jpg"
+                                     alt="한국 국기"
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
                                 ${
                                   shop.country && shop.country.includes('japan')
                                     ? `
-                                <img src="https://www.msg1000.com/images/일본.jpg" 
-                                     alt="일본 국기" 
+                                <img src="https://www.msg1000.com/images/일본.jpg"
+                                     alt="일본 국기"
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇯🇵'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
                                 `
@@ -6849,8 +6849,8 @@ function createShopCard(shop) {
                                   shop.country &&
                                   shop.country.includes('Thailand')
                                     ? `
-                                <img src="https://www.msg1000.com/images/태국.jpg" 
-                                     alt="태국 국기" 
+                                <img src="https://www.msg1000.com/images/태국.jpg"
+                                     alt="태국 국기"
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇹🇭'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
                                 `
@@ -6860,8 +6860,8 @@ function createShopCard(shop) {
                                   shop.country &&
                                   shop.country.includes('Russia')
                                     ? `
-                                <img src="https://www.msg1000.com/images/러시아.jpg" 
-                                     alt="러시아 국기" 
+                                <img src="https://www.msg1000.com/images/러시아.jpg"
+                                     alt="러시아 국기"
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇷🇺'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
                                 `
@@ -6870,8 +6870,8 @@ function createShopCard(shop) {
                                 ${
                                   shop.country && shop.country.includes('china')
                                     ? `
-                                <img src="https://www.msg1000.com/images/중국.jpg" 
-                                     alt="중국 국기" 
+                                <img src="https://www.msg1000.com/images/중국.jpg"
+                                     alt="중국 국기"
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇨🇳'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
                                 `
@@ -6881,13 +6881,13 @@ function createShopCard(shop) {
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-info">
                     <div class="info-item greeting">
                         <span>${getGreeting(shop)}</span>
                     </div>
                 </div>
-                
+
                 <div class="card-footer" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; flex-wrap: nowrap; overflow: hidden;">
                     <div class="price-container" style="display: flex; align-items: center; gap: 8px; overflow: hidden; width: 100%; flex: 1; min-width: 0;">
                         <div class="price" style="flex-shrink: 0; white-space: nowrap;"><span class="price-label">최저가</span> ${
@@ -7242,7 +7242,7 @@ function sortStaticCards() {
   const currentFileName = window.location.pathname.split('/').pop();
   const detectedInfo = detectRegionAndDistrictFromFilename(currentFileName);
   const targetDongStation = detectedInfo.dongStation || '';
-  
+
   console.log(`sortStaticCards: 파일명에서 추출한 동/역: ${targetDongStation}`);
 
   // 카드에서 동 이름 추출 함수
@@ -7250,7 +7250,7 @@ function sortStaticCards() {
     const massageCard = card.classList.contains('massage-card')
       ? card
       : card.querySelector('.massage-card');
-    
+
     if (!massageCard) return '';
 
     // shop-name에서 추출 (예: "논현동 5월스파")
@@ -8085,7 +8085,7 @@ function generateFilterLinks(
           color: #333;
           font-weight: 500;
           transition: all 0.3s ease;
-        " onmouseover="this.style.backgroundColor='#e0e0e0'; this.style.color='#007bff';" 
+        " onmouseover="this.style.backgroundColor='#e0e0e0'; this.style.color='#007bff';"
            onmouseout="this.style.backgroundColor='#f5f5f5'; this.style.color='#333';">
           ${displayName}
         </a>
@@ -8790,21 +8790,13 @@ async function initializeApp() {
     });
   }
 
-  // 필터 버튼 이벤트 리스너 추가 (페이지 이동)
+  // 필터 버튼 이벤트 리스너 추가 (페이지 이동 및 인페이지 필터링)
   const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
   filterButtons.forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const filter = btn.getAttribute('data-filter');
       if (filter) {
-        // 현재 페이지 분석
-        const currentPath = window.location.pathname;
-        const currentFileName = currentPath
-          .split('/')
-          .pop()
-          .replace('.html', '');
-        const parts = currentFileName.split('-');
-
         // 현재 선택된 지역과 세부지역 가져오기 (선택 박스 우선)
         const regionSelect = document.getElementById('regionSelect');
         const districtSelect = document.getElementById('districtSelect');
@@ -8819,6 +8811,54 @@ async function initializeApp() {
         if (districtSelect && districtSelect.value) {
           district = districtSelect.value;
         }
+
+        // 지역이 선택되지 않은 경우: 현재 페이지 내에서 필터만 변경
+        if (!region || region === '' || region === '지역을 선택하세요') {
+          window.currentFilter = filter;
+
+          // 버튼 active 상태 업데이트
+          document
+            .querySelectorAll('.filter-btn[data-filter]')
+            .forEach((b) => b.classList.remove('active'));
+          const targetBtn = document.querySelector(
+            `.filter-btn[data-filter="${filter}"]`
+          );
+          if (targetBtn) {
+            targetBtn.classList.add('active');
+          }
+
+          if (typeof displayFilteredResults === 'function') {
+            displayFilteredResults();
+          }
+          return;
+        }
+
+        // ------------------------------
+        // 여기부터는 지역이 선택된 경우: 페이지 이동
+        // ------------------------------
+
+        // 현재 페이지 분석 (폴더 기반 URL 대응)
+        const currentPath = window.location.pathname;
+        const pathSegments = currentPath.split('/').filter(Boolean);
+        let currentFileName = '';
+
+        if (pathSegments.length === 0) {
+          currentFileName = 'index';
+        } else {
+          const lastSegment = pathSegments[pathSegments.length - 1];
+          if (lastSegment.endsWith('.html')) {
+            if (lastSegment === 'index.html' && pathSegments.length > 1) {
+              currentFileName = pathSegments
+                .slice(0, pathSegments.length - 1)
+                .join('-');
+            } else {
+              currentFileName = lastSegment.replace('.html', '');
+            }
+          } else {
+            currentFileName = pathSegments.join('-');
+          }
+        }
+        const parts = currentFileName.split('-');
 
         // districtMap에서 현재 지역과 구 찾기
         let regionKey = '';
