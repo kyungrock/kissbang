@@ -20,16 +20,16 @@ print(f"찾은 company- 파일: {len(company_files)}개\n")
 
 for company_file in company_files[:10]:  # 처음 10개만 확인
     print(f"파일: {company_file.name}")
-    
+
     # 파일명에서 company- 제거하고 실제 경로 찾기
     name_without_company = company_file.name.replace('company-', '')
     name_without_ext = name_without_company.replace('.html', '')
-    
+
     # 여러 가능한 경로 확인
     possible_paths = [
         f"/{name_without_ext}/",
         f"/seoul/{name_without_ext}/",
     ]
-    
+
     print(f"  가능한 경로: {possible_paths}")
     print()
