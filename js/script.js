@@ -8986,9 +8986,35 @@ async function initializeApp() {
     updateFooterLinkText();
   }
 
-  // 파일명 분석
+  // 파일명/경로 분석 (폴더 기반 URL 대응)
   const currentPath = window.location.pathname;
-  const currentFileName = currentPath.split('/').pop().replace('.html', '');
+  const pathSegments = currentPath.split('/').filter(Boolean); // 빈 문자열 제거
+
+  let currentFileName = '';
+
+  if (pathSegments.length === 0) {
+    // 루트(/)인 경우 index로 간주
+    currentFileName = 'index';
+  } else {
+    const lastSegment = pathSegments[pathSegments.length - 1];
+
+    if (lastSegment.endsWith('.html')) {
+      // 파일 기반 URL
+      if (lastSegment === 'index.html' && pathSegments.length > 1) {
+        // .../region/district/.../index.html → region-district-... 형태로 복원
+        currentFileName = pathSegments
+          .slice(0, pathSegments.length - 1)
+          .join('-');
+      } else {
+        // 일반적인 xxx.html
+        currentFileName = lastSegment.replace('.html', '');
+      }
+    } else {
+      // 폴더 기반 URL (예: /seoul/, /seoul/gangnam/)
+      currentFileName = pathSegments.join('-');
+    }
+  }
+
   const parts = currentFileName.split('-');
 
   // index.html, massage.html, outcall.html 처리
