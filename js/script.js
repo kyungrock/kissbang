@@ -9065,6 +9065,30 @@ async function initializeApp() {
 
   const parts = currentFileName.split('-');
 
+  // URL 쿼리스트링에서 filter 파라미터 감지 (예: ?filter=outcall)
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlFilter = urlParams.get('filter');
+    const allowedFilters = [
+      'all',
+      'massage',
+      'outcall',
+      'swedish',
+      'thai',
+      'aroma',
+      'chinese',
+      'foot',
+      'waxing',
+      'spa',
+    ];
+    if (urlFilter && allowedFilters.includes(urlFilter)) {
+      currentFilter = urlFilter;
+      window.currentFilter = urlFilter;
+    }
+  } catch (e) {
+    console.warn('URL filter parsing error:', e);
+  }
+
   // index.html, massage.html, outcall.html 처리
   if (
     currentFileName === 'index' ||
