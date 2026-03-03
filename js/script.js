@@ -8880,6 +8880,14 @@ async function initializeApp() {
                 break;
               }
             }
+
+            // 구를 선택하지 않았지만, 해당 지역에 구가 1개뿐이면 기본 구로 사용
+            if (!districtKey) {
+              const districtKeys = Object.keys(value.districts || {});
+              if (districtKeys.length === 1) {
+                districtKey = districtKeys[0];
+              }
+            }
             break;
           }
         }
