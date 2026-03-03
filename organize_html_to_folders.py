@@ -19,12 +19,12 @@ script_path = Path(__file__).resolve()
 BASE_DIR = script_path.parent
 PUBLIC_DIR = BASE_DIR / "public"
 
-print(f"📂 BASE_DIR: {BASE_DIR}")
-print(f"📂 PUBLIC_DIR: {PUBLIC_DIR} (exists: {PUBLIC_DIR.exists()})")
+print(f"BASE_DIR: {BASE_DIR}")
+print(f"PUBLIC_DIR: {PUBLIC_DIR} (exists: {PUBLIC_DIR.exists()})")
 print()
 
 if not PUBLIC_DIR.exists():
-    print(f"❌ 오류: {PUBLIC_DIR} 폴더를 찾을 수 없습니다.")
+    print(f"오류: {PUBLIC_DIR} 폴더를 찾을 수 없습니다.")
     exit(1)
 
 # 지역 매핑 (한글 → 영문)
@@ -56,6 +56,10 @@ def parse_filename(filename):
     # 특수 파일 제외
     if name in ['index', 'admin', 'aroma']:
         return None
+
+    # company- 접두사 제거
+    if name.startswith('company-'):
+        name = name.replace('company-', '', 1)
 
     # 하이픈으로 분리
     parts = name.split('-')
@@ -131,7 +135,7 @@ def update_html_paths(file_path, depth, new_url_path):
 
 def organize_html_files():
     """public/ 폴더의 모든 HTML 파일을 지역별 폴더 구조로 변환"""
-    print("🚀 HTML 파일 구조화 시작\n")
+    print("HTML 파일 구조화 시작\n")
 
     html_files = list(PUBLIC_DIR.glob("*.html"))
 
@@ -139,7 +143,7 @@ def organize_html_files():
     exclude_files = ['index.html', 'admin.html']
     html_files = [f for f in html_files if f.name not in exclude_files]
 
-    print(f"📋 처리할 HTML 파일: {len(html_files)}개\n")
+    print(f"처리할 HTML 파일: {len(html_files)}개\n")
 
     moved_count = 0
     skipped_count = 0
@@ -153,7 +157,7 @@ def organize_html_files():
             if not parsed:
                 skipped_count += 1
                 if skipped_count <= 10:  # 처음 10개만 출력
-                    print(f"  ⏭️  {html_file.name} - 건너뜀")
+                    print(f"  {html_file.name} - 건너뜀")
                 continue
 
             # 폴더 경로 생성
@@ -187,7 +191,7 @@ def organize_html_files():
                     if target_mtime >= source_mtime:
                         already_exists_count += 1
                         if already_exists_count <= 10:  # 처음 10개만 출력
-                            print(f"  ✓ {html_file.name} - 이미 처리됨")
+                            print(f"  {html_file.name} - 이미 처리됨")
                         continue
                     else:
                         # 소스가 더 최신이면 백업 후 업데이트
@@ -205,23 +209,23 @@ def organize_html_files():
 
             moved_count += 1
             if moved_count % 100 == 0:
-                print(f"  ✅ {moved_count}개 처리 완료... (이미 존재: {already_exists_count}개)")
+                print(f"  {moved_count}개 처리 완료... (이미 존재: {already_exists_count}개)")
 
         except Exception as e:
             error_count += 1
-            print(f"  ❌ {html_file.name} - 오류: {e}")
+            print(f"  오류: {html_file.name} - {e}")
 
-    print(f"\n📊 처리 결과:")
-    print(f"  ✅ 새로 이동: {moved_count}개")
-    print(f"  ✓ 이미 존재: {already_exists_count}개")
-    print(f"  ⏭️  건너뜀: {skipped_count}개")
-    print(f"  ❌ 오류: {error_count}개")
+    print(f"\n처리 결과:")
+    print(f"  새로 이동: {moved_count}개")
+    print(f"  이미 존재: {already_exists_count}개")
+    print(f"  건너뜀: {skipped_count}개")
+    print(f"  오류: {error_count}개")
 
-    print(f"\n✅ 모든 작업 완료!")
-    print(f"📁 파일들이 지역별 폴더 구조로 이동되었습니다.")
+    print(f"\n모든 작업 완료!")
+    print(f"파일들이 지역별 폴더 구조로 이동되었습니다.")
 
     if already_exists_count > 10:
-        print(f"\n💡 팁: {already_exists_count}개 파일이 이미 처리되어 건너뛰었습니다.")
+        print(f"\n팁: {already_exists_count}개 파일이 이미 처리되어 건너뛰었습니다.")
         print(f"   재실행 시 이미 처리된 파일은 자동으로 건너뜁니다.")
 
 if __name__ == "__main__":
