@@ -487,11 +487,17 @@
             >
               지도보기
             </button>
-            <div class="nearby-shops-title" id="nearbyShopsTitleClickable">
+            <a
+              class="nearby-shops-title"
+              id="nearbyShopsTitleClickable"
+              href="chungbuk-outcall.html"
+              aria-label="다른샵보기"
+              style="text-decoration: none; color: inherit; cursor: pointer;"
+            >
               <div class="nearby-title-line2">
                 <span>다른샵보기</span>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -1180,6 +1186,24 @@
             }
           }, 100);
         }
+
+        // 다른샵보기: 충북 출장 목록으로 고정
+        (function bindNearbyToChungbukOutcall() {
+          const el =
+            document.getElementById('nearbyShopsTitleClickable') ||
+            document.querySelector('.nearby-shops-title');
+          if (!el) return;
+          const go = function (e) {
+            if (e) e.preventDefault();
+            window.location.href = 'chungbuk-outcall.html';
+          };
+          el.removeAttribute('onclick');
+          el.onclick = go;
+          el.addEventListener('click', go);
+          if (el.tagName === 'A') {
+            el.setAttribute('href', 'chungbuk-outcall.html');
+          }
+        })();
       });
     </script>
   </body>
