@@ -440,7 +440,7 @@ window.shopCardData = [
  district: '서울·경기·인천 전지역',
  address: '서울 경기 인천 전지역',
  detailAddress: '홈타이 - 원하는 장소에서 받을 수 있어요',
- phone: '0507-1859-6753',
+ phone: '0503-6982-7266',
  rating: 4.9,
  reviewCount: 0,
  price: '70,000원~',
